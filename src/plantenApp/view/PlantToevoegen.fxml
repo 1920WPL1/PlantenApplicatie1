@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="plantenApp.ControllerPlantToevoegen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerPlantToevoegen">
    <children>
       <HBox>
          <children>
@@ -125,20 +125,20 @@
                                              <children>
                                                 <HBox>
                                                    <children>
-                                                      <Slider fx:id="slBezonning" prefHeight="30.0" prefWidth="90.0" />
-                                                      <Label alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
+                                                      <Slider fx:id="slBezonning" blockIncrement="1.0" max="3.0" prefHeight="30.0" prefWidth="90.0" />
+                                                      <Label fx:id="Bezonningvalue" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
-                                                      <Slider fx:id="slVoedingsbehoefte" prefHeight="30.0" prefWidth="90.0" />
-                                                      <Label alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
+                                                      <Slider fx:id="slVoedingsbehoefte" blockIncrement="100.0" max="3.0" prefHeight="30.0" prefWidth="90.0" showTickMarks="true" value="1.0" />
+                                                      <Label fx:id="VoedingbehoefteValue" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
                                                       <Slider fx:id="slVochtbehoefte" prefHeight="30.0" prefWidth="90.0" />
-                                                      <Label alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
+                                                      <Label fx:id="VochtbehoefteValue" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
                                                    </children>
                                                 </HBox>
                                              </children>
@@ -969,7 +969,7 @@
             </TitledPane>
          </children>
       </HBox>
-      <Button fx:id="PLantToevoegenButton" layoutX="1495.0" layoutY="980.0" mnemonicParsing="false"  onMouseClicked="#Clicked_PlantToevoegen" text="Voeg plant toe">
+      <Button fx:id="PLantToevoegenButton" layoutX="1495.0" layoutY="980.0" mnemonicParsing="false" onMouseClicked="#Clicked_PlantToevoegen" text="Voeg plant toe">
          <font>
             <Font size="24.0" />
          </font>
