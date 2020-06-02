@@ -8,6 +8,7 @@ import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import plantenApp.java.dao.AbiotischeFactorenDAO;
 import plantenApp.java.dao.Database;
+import plantenApp.java.dao.PlantDAO;
 import plantenApp.java.model.AbiotischeFactoren;
 
 import java.sql.Connection;
@@ -35,7 +36,8 @@ public class ControllerPlantToevoegen {
         slBezonning.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::Bzonninglabelveranderen);
         combovullen();
 
-        
+        PlantDAO plantDAO = new PlantDAO(dbConnection);
+        System.out.println(plantDAO.getPlantById(5).getFamilie());
     }
     public void combovullen()
     {
