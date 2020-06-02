@@ -82,6 +82,7 @@ public class InfoTables {
         this.beheerdaden = beheerdaden;
         this.nectarwaardes = nectarwaardes;
         this.pollenwaardes = pollenwaardes;
+        System.out.println("test");
     }
 
     public ArrayList<String> getTypes() {
