@@ -8,6 +8,7 @@ import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import plantenApp.java.dao.AbiotischeFactorenDAO;
 import plantenApp.java.dao.Database;
+import plantenApp.java.dao.PlantDAO;
 import plantenApp.java.model.AbiotischeFactoren;
 
 import java.sql.Connection;
@@ -34,6 +35,9 @@ public class ControllerPlantToevoegen {
         slVochtbehoefte.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::Vochtbehoeftelabelveranderen);
         slBezonning.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::Bzonninglabelveranderen);
         combovullen();
+
+        PlantDAO plantDAO = new PlantDAO(dbConnection);
+        System.out.println(plantDAO.getPlantById(5).getFamilie());
     }
     public void combovullen()
     {
@@ -64,9 +68,11 @@ public class ControllerPlantToevoegen {
     public void createAbiotischefactoren() throws SQLException {
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
         String bezonning = valuebezonning();
+
         /*plant id moet een cijfer zijn dat gekregen wordt als de plant in de database zit.*/
-        AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(0,2, bezonning,);
+        //AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(0,2, bezonning,);
     }
+
     public  String valuebezonning()
     {
         String value="";
