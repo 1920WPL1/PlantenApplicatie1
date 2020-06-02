@@ -45,31 +45,6 @@ public class PlantDAO implements Queries {
         return plant;
     }
 
-    /**@author Siebe
-     * @param type -> waarde type van de plant
-     * @param familie -> familie van de plant
-     * @param fgsv -> familie, geslacht, soort, variant
-     * @return -> de gefilterde ids
-     */
-    public ArrayList<Integer> KenmerkenFilter (String type, String familie, String fgsv) throws SQLException {
-        ArrayList<Integer> ids = new ArrayList<>();;
 
-        int iTrue = (type.isBlank())? 1:0;
-        stmtSelectByPlant.setString(1,type);
-        stmtSelectByPlant.setInt(2,iTrue);
 
-        iTrue = (familie.isBlank())? 1:0;
-        stmtSelectByPlant.setString(3,type);
-        stmtSelectByPlant.setInt(4,iTrue);
-
-        iTrue = (fgsv.isBlank())? 1:0;
-        stmtSelectByPlant.setString(5,type);
-        stmtSelectByPlant.setInt(6,iTrue);
-
-        ResultSet rs = stmtSelectByPlant.executeQuery();
-        while (rs.next()){
-            ids.add(rs.getInt("plant_id"));
-        }
-        return ids;
-    }
 }

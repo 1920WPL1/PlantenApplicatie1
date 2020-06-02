@@ -9,11 +9,12 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Database {
-    private static String jdbcDriver;
-    private static String url;
-    private static String user;
-    private static String password;
+
+public class Database  {
+    private static  String jdbcDriver;
+    private static  String url;
+    private static  String user;
+    private static  String password;
 
     private static Database instance;
     private Connection connection;
@@ -36,19 +37,18 @@ public class Database {
 
     private void readDbPropertiesFromResource() {
         ClassLoader cl = Database.class.getClassLoader();
-        System.out.println("read");
+        //TODO 1 : maak een resources directory met een file config.properties (zie cursus)
+        //TODO 2 : plaats uw databaseconnectieparameters in de file config.properties
         try (InputStream inputStream =
                      cl.getResourceAsStream("config.properties")) {
             Properties prop = new Properties();
             // load a properties file
             prop.load(inputStream);
-            System.out.println("na class");
             // get the property value
             jdbcDriver = prop.getProperty("db.jdbcDriver");
             url = prop.getProperty("db.url");
             user = prop.getProperty("db.user");
             password = prop.getProperty("db.password");
-            System.out.println("connectie ok");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -59,10 +59,12 @@ public class Database {
         Connection dbConnection = null;
         try {
             Class.forName(jdbcDriver);
-            dbConnection = DriverManager.getConnection(url, user, password);
-            System.out.println("Created Db Connection....");
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            dbConnection = DriverManager.getConnection(url , user , password);
+            System.out.println(" het lukt");
+        }
+        catch (ClassNotFoundException | SQLException ex)
+        {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null , ex);
         }
         return dbConnection;
     }
