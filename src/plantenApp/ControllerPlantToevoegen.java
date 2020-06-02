@@ -34,6 +34,8 @@ public class ControllerPlantToevoegen {
         slVochtbehoefte.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::Vochtbehoeftelabelveranderen);
         slBezonning.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::Bzonninglabelveranderen);
         combovullen();
+
+        
     }
     public void combovullen()
     {
