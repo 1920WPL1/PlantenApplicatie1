@@ -62,18 +62,18 @@
                                           </VBox>
                                           <VBox>
                                              <children>
-                                                <ComboBox prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField prefHeight="30.0" prefWidth="120.0" />
+                                                <ComboBox id="cboType" prefHeight="30.0" prefWidth="120.0" />
+                                                <TextField id="txtFamilie" prefHeight="30.0" prefWidth="120.0" />
+                                                <TextField id="txtGeslacht" prefHeight="30.0" prefWidth="120.0" />
+                                                <TextField id="txtSoort" prefHeight="30.0" prefWidth="120.0" />
+                                                <TextField id="txtVariant" prefHeight="30.0" prefWidth="120.0" />
                                              </children>
                                           </VBox>
                                        </children>
                                     </HBox>
                                     <VBox>
                                        <children>
-                                          <Label prefHeight="30.0" prefWidth="240.0" text="  Optimale plandichtheid:">
+                                          <Label prefHeight="30.0" prefWidth="240.0" text="  Optimale plantdichtheid:">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -81,9 +81,9 @@
                                           <HBox>
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="30.0" prefWidth="20.0" text="X" />
-                                                <TextField prefHeight="30.0" prefWidth="100.0" />
+                                                <TextField id="txtDichtheidX" prefHeight="30.0" prefWidth="100.0" />
                                                 <Label alignment="CENTER" prefHeight="30.0" prefWidth="20.0" text="Y" />
-                                                <TextField prefHeight="30.0" prefWidth="100.0" />
+                                                <TextField id="txtDichtheidY" prefHeight="30.0" prefWidth="100.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -199,7 +199,7 @@
                                        </font>
                                     </Label>
                                     <HBox />
-                                    <ComboBox prefHeight="30.0" prefWidth="240.0" />
+                                    <ComboBox fx:id="cbOntwikkelingssnelheid" prefHeight="30.0" prefWidth="240.0" />
                                     <Label prefHeight="30.0" prefWidth="120.0" text="Sociabiliteit:">
                                        <font>
                                           <Font size="14.0" />
@@ -207,11 +207,11 @@
                                     </Label>
                                     <HBox>
                                        <children>
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="I" />
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="II" />
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="III" />
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="IV" />
-                                          <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="V" />
+                                          <CheckBox fx:id="chkSociabiliteit1" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="I" />
+                                          <CheckBox fx:id="chkSociabiliteit2" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="II" />
+                                          <CheckBox fx:id="chkSociabiliteit3" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="III" />
+                                          <CheckBox fx:id="chkSociabiliteit4" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="IV" />
+                                          <CheckBox fx:id="chkSociabiliteit5" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="V" />
                                        </children>
                                     </HBox>
                                     <Label prefHeight="30.0" prefWidth="120.0" text="Strategie:">
@@ -223,9 +223,9 @@
                                        <children>
                                           <HBox>
                                              <children>
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Unknown" />
+                                                <RadioButton fx:id="rbStrategieUnknown" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Unknown" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="C" />
+                                                <RadioButton fx:id="rbStrategieTop" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="C" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                              </children>
@@ -235,9 +235,9 @@
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
+                                                <RadioButton fx:id="rbStrategieLM" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
+                                                <RadioButton fx:id="rbStrategieMM" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
+                                                <RadioButton fx:id="rbStrategieRM" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                              </children>
                                           </HBox>
@@ -245,11 +245,11 @@
                                              <children>
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="R" />
+                                                <RadioButton fx:id="rbStrategieLO" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="R" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
+                                                <RadioButton fx:id="rbStrategieMO" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="S" />
+                                                <RadioButton fx:id="rbStrategieRO" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="S" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -265,11 +265,11 @@
                                     </Label>
                                     <HBox>
                                        <children>
-                                          <ComboBox prefHeight="30.0" prefWidth="210.0" />
+                                          <ComboBox fx:id="cbLevensduur" prefHeight="30.0" prefWidth="210.0" />
                                           <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="+" />
                                        </children>
                                     </HBox>
-                                    <ListView prefHeight="176.0" prefWidth="240.0" />
+                                    <ListView fx:id="lvLevensduur" prefHeight="176.0" prefWidth="240.0" />
                                  </children>
                               </VBox>
                            </children>
