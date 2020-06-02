@@ -62,18 +62,18 @@
                                           </VBox>
                                           <VBox>
                                              <children>
-                                                <ComboBox prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField prefHeight="30.0" prefWidth="120.0" />
+                                                <ComboBox id="cboType" prefHeight="30.0" prefWidth="120.0" />
+                                                <TextField id="txtFamilie" prefHeight="30.0" prefWidth="120.0" />
+                                                <TextField id="txtGeslacht" prefHeight="30.0" prefWidth="120.0" />
+                                                <TextField id="txtSoort" prefHeight="30.0" prefWidth="120.0" />
+                                                <TextField id="txtVariant" prefHeight="30.0" prefWidth="120.0" />
                                              </children>
                                           </VBox>
                                        </children>
                                     </HBox>
                                     <VBox>
                                        <children>
-                                          <Label prefHeight="30.0" prefWidth="240.0" text="  Optimale plandichtheid:">
+                                          <Label prefHeight="30.0" prefWidth="240.0" text="  Optimale plantdichtheid:">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -81,9 +81,9 @@
                                           <HBox>
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="30.0" prefWidth="20.0" text="X" />
-                                                <TextField prefHeight="30.0" prefWidth="100.0" />
+                                                <TextField id="txtDichtheidX" prefHeight="30.0" prefWidth="100.0" />
                                                 <Label alignment="CENTER" prefHeight="30.0" prefWidth="20.0" text="Y" />
-                                                <TextField prefHeight="30.0" prefWidth="100.0" />
+                                                <TextField id="txtDichtheidY" prefHeight="30.0" prefWidth="100.0" />
                                              </children>
                                           </HBox>
                                        </children>
