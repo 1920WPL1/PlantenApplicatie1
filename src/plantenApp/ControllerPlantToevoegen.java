@@ -36,6 +36,7 @@ public class ControllerPlantToevoegen {
         slBezonning.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::Bzonninglabelveranderen);
         combovullen();
 
+
         PlantDAO plantDAO = new PlantDAO(dbConnection);
         System.out.println(plantDAO.getPlantById(5).getFamilie());
     }
@@ -64,13 +65,15 @@ public class ControllerPlantToevoegen {
     }
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException {
         createAbiotischefactoren();
+
     }
     public void createAbiotischefactoren() throws SQLException {
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
         String bezonning = valuebezonning();
 
         /*plant id moet een cijfer zijn dat gekregen wordt als de plant in de database zit.*/
-        //AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(0,2, bezonning,);
+        //AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(5,2, "tt","ee ", "nat","frietjes","hey kasper");
+        //abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
     }
 
     public  String valuebezonning()

@@ -24,6 +24,16 @@ public class AbiotischeFactoren {
         this.multiEigenschappen = multiEigenschappen;
     }
 
+    public AbiotischeFactoren(int id, int plant_id, String bezonning, String grondsoort, String vochtbehoefte, String voedingsbehoefte, String reactieAntagonistischeOmgeving) {
+        this.id = id;
+        this.plant_id = plant_id;
+        this.bezonning = bezonning;
+        this.grondsoort = grondsoort;
+        this.vochtbehoefte = vochtbehoefte;
+        this.voedingsbehoefte = voedingsbehoefte;
+        this.reactieAntagonistischeOmgeving = reactieAntagonistischeOmgeving;
+    }
+
     public int getId() {
         return id;
     }
