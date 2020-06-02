@@ -1,5 +1,8 @@
 package plantenApp;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import plantenApp.java.dao.AbiotischeFactorenDAO;
@@ -11,6 +14,13 @@ import java.sql.SQLException;
 
 public class ControllerPlantToevoegen {
     public Slider slBezonning;
+    public Slider slVoedingsbehoefte;
+    public Slider slVochtbehoefte;
+    public ComboBox cbReactieAnta;
+    public ComboBox cbGrondsoort;
+    public ComboBox cbHabitat;
+    public Button btnHabitat;
+    public ListView lvHabitat;
     private Connection dbConnection;
     private AbiotischeFactorenDAO abiotischeFactorenDAO;
 
