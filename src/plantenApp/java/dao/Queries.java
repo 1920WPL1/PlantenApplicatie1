@@ -223,6 +223,9 @@ public interface Queries {
 
     String NTFOTOBlOEIWIJZE =
             "SELECT afbeelding FROM bloeiwijze";
+    String INSERTABIOTISCHEFACTOREN = "Insert into " +
+            "abiotische_factoren(plant_id , bezonning , grondsoort, vochtbehoefte,voedingsbehoefte,reactie)" +
+            " VALUES (?, ?, ?, ?, ?, ?)";
     //endregion
 }
 

@@ -16,6 +16,8 @@ public class AbiotischeFactorenDAO implements Queries {
     private PreparedStatement stmtSelectAbioMultiByID;
     private PreparedStatement stmtSelectIdsByAbio;
     private PreparedStatement stmtSelectIdsByAbioMulti;
+    private PreparedStatement stmInsertAbiotische;
+
 
     public AbiotischeFactorenDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
@@ -23,6 +25,7 @@ public class AbiotischeFactorenDAO implements Queries {
         stmtSelectAbioMultiByID = dbConnection.prepareStatement(GETABIOTISCHBMULTIYPLANTID);
         stmtSelectIdsByAbio = dbConnection.prepareStatement(GETIDSBYABIO);
         stmtSelectIdsByAbioMulti = dbConnection.prepareStatement(GETIDSBYABIOMULTI);
+        stmInsertAbiotische = dbConnection.prepareStatement(INSERTABIOTISCHEFACTOREN);
     }
 
     /**@author Siebe
@@ -131,5 +134,16 @@ public class AbiotischeFactorenDAO implements Queries {
             ids.add(rs.getInt("plant_id"));
         }
         return ids;
+    }
+    public void CreateAbiostische(AbiotischeFactoren abiotischeFactoren) throws SQLException {
+//       stmtInsert.setInt(1, 60); // hulp vragen bij functie om max id te vragen...
+        stmInsertAbiotische.setInt(1, abiotischeFactoren.getPlant_id());
+        stmInsertAbiotische.setString(2,abiotischeFactoren.getBezonning());
+        stmInsertAbiotische.setString(3,abiotischeFactoren.getGrondsoort());
+        stmInsertAbiotische.setString(4,abiotischeFactoren.getVochtbehoefte());
+        stmInsertAbiotische.setString(5,abiotischeFactoren.getVoedingsbehoefte());
+        stmInsertAbiotische.setString(6,abiotischeFactoren.getReactieAntagonistischeOmgeving());
+        stmInsertAbiotische.executeUpdate();
+        System.out.println("gelukt");
     }
 }
