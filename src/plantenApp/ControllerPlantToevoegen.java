@@ -64,9 +64,11 @@ public class ControllerPlantToevoegen {
     public void createAbiotischefactoren() throws SQLException {
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
         String bezonning = valuebezonning();
+
         /*plant id moet een cijfer zijn dat gekregen wordt als de plant in de database zit.*/
-        AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(0,2, bezonning,);
+        //AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(0,2, bezonning,);
     }
+
     public  String valuebezonning()
     {
         String value="";
