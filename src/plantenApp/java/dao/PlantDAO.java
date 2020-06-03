@@ -25,7 +25,7 @@ public class PlantDAO implements Queries {
 
         stmtSelectById = dbConnection.prepareStatement(GETPLANTBYID);
         stmtSelectByPlant = dbConnection.prepareStatement(GETIDSBYPLANT);
-        stmtInsert = dbConnection.prepareStatement(Inserplant);
+        stmtInsert = dbConnection.prepareStatement(Insertplant);
         stmgetmaxid = dbConnection.prepareStatement(getmaxplantid);
         stmtSelectByIds = dbConnection.prepareStatement(GETPLANTSBYIDS);
         stmtSelectIdsByPlant = dbConnection.prepareStatement(GETIDSBYPLANT);
@@ -57,7 +57,8 @@ public class PlantDAO implements Queries {
                     rs.getString("soort"),
                     rs.getString("variatie"),
                     rs.getInt("plantdichtheid_min"),
-                    rs.getInt("plantdichtheid_max")
+                    rs.getInt("plantdichtheid_max"),
+                    rs.getInt("status")
             ));
         }
 
@@ -88,6 +89,7 @@ public class PlantDAO implements Queries {
                     rs.getString("soort"),
                     rs.getString("variatie"),
                     rs.getInt("plantdichtheid_min"),
+                    rs.getInt("plantdichtheid_max"),
                     rs.getInt("plantdichtheid_max")
             );
         }
@@ -148,6 +150,8 @@ public class PlantDAO implements Queries {
         stmtInsert.setInt(7,plant.getMinPlantdichtheid());
         stmtInsert.setInt(8,plant.getMaxPlantdichtheid());
         stmtInsert.setString(9,plant.getFgsv());
+        stmtInsert.setInt(10,plant.getStatus());
+
         stmtInsert.executeUpdate();
         System.out.println("gelukt plant toegevoegd");
     }
