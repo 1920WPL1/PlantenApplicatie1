@@ -9,7 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**@author Siebe*/
+/**
+ * @author Siebe
+ */
 public class FenotypeDAO implements Queries {
 
     private Connection dbConnection;
@@ -49,7 +51,7 @@ public class FenotypeDAO implements Queries {
                     rs.getString("bloeiwijze"),
                     rs.getInt("bladgrootte"),
                     rs.getString("ratio_bloei_blad"),
-                    rs.getString("spruitfenelogie"),
+                    rs.getString("spruitfenologie"),
                     getByIdMulti(id)
             );
         }
@@ -64,6 +66,9 @@ public class FenotypeDAO implements Queries {
     private ArrayList<FenoMulti_Eigenschap> getByIdMulti(int id) throws SQLException {
         ArrayList<FenoMulti_Eigenschap> commMulti = new ArrayList<>();;
 
+        //Items
+
+        //SqlCommand
         stmtSelectFenoMultiByID.setInt(1, id);
         ResultSet rs = stmtSelectFenoMultiByID.executeQuery();
         while (rs.next()) {

@@ -22,6 +22,7 @@ public class AbiotischeFactorenDAO implements Queries {
 
     public AbiotischeFactorenDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
+
         stmtSelectAbioByID = dbConnection.prepareStatement(GETABIOTISCHBYPLANTID);
         stmtSelectAbioMultiByID = dbConnection.prepareStatement(GETABIOTISCHBMULTIYPLANTID);
         stmtSelectIdsByAbio = dbConnection.prepareStatement(GETIDSBYABIO);
@@ -37,6 +38,7 @@ public class AbiotischeFactorenDAO implements Queries {
     public AbiotischeFactoren getById(int id) throws SQLException {
         AbiotischeFactoren abio = null;
 
+        //SqlCommand
         stmtSelectAbioByID.setInt(1, id);
         ResultSet rs = stmtSelectAbioByID.executeQuery();
         if (rs.next()) {
@@ -51,13 +53,16 @@ public class AbiotischeFactorenDAO implements Queries {
                     getByIdMulti(id)
             );
         }
+
+        //Output
         return abio;
     }
 
-    /**@author Siebe
-     * word alleen gebruikt in getById
+    /**
      * @param id -> plant_id
      * @return -> alle abiotische_multi factoren van de specifieke plant
+     * @author Siebe
+     * word alleen gebruikt in getById
      */
     private ArrayList<AbioMulti_Eigenschap> getByIdMulti(int id) throws SQLException {
         ArrayList<AbioMulti_Eigenschap> abioMulti = new ArrayList<>();;

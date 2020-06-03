@@ -12,6 +12,14 @@ public class Plant {
     private int maxPlantdichtheid;
     private String fgsv;
 
+    private Foto foto;
+    private Beheer beheer;
+    private AbiotischeFactoren abiotischeFactoren;
+    private Commensalisme commensalisme;
+    private Fenotype fenotype;
+    private Extra extra;
+
+
     public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid) {
         this.id = id;
         this.type = type;
@@ -41,6 +49,23 @@ public class Plant {
 
     public void setFgsv(String fgsv) {
         this.fgsv = fgsv;
+    }
+
+    public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, Foto foto, Beheer beheer, AbiotischeFactoren abiotischeFactoren, Commensalisme commensalisme, Fenotype fenotype, Extra extra) {
+        this.id = id;
+        this.type = type;
+        this.familie = familie;
+        this.geslacht = geslacht;
+        this.soort = soort;
+        this.variatie = variatie;
+        this.minPlantdichtheid = minPlantdichtheid;
+        this.maxPlantdichtheid = maxPlantdichtheid;
+        this.foto = foto;
+        this.beheer = beheer;
+        this.abiotischeFactoren = abiotischeFactoren;
+        this.commensalisme = commensalisme;
+        this.fenotype = fenotype;
+        this.extra = extra;
     }
 
     public int getId() {
@@ -73,5 +98,29 @@ public class Plant {
 
     public int getMaxPlantdichtheid() {
         return maxPlantdichtheid;
+    }
+
+    public Foto getFoto() {
+        return foto;
+    }
+
+    public Beheer getBeheer() {
+        return beheer;
+    }
+
+    public AbiotischeFactoren getAbiotischeFactoren() {
+        return abiotischeFactoren;
+    }
+
+    public Commensalisme getCommensalisme() {
+        return commensalisme;
+    }
+
+    public Fenotype getFenotype() {
+        return fenotype;
+    }
+
+    public Extra getExtra() {
+        return extra;
     }
 }
