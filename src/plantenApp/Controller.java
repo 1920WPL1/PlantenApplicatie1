@@ -20,7 +20,7 @@ import java.sql.SQLException;
 
 public class Controller {
     public ComboBox<String> cboType;
-    public ComboBox cboFamilie;
+    public ComboBox<String> cboFamilie;
     public TextField txtNaam;
     public Spinner nudMinBloeiHoogte;
     public Spinner nudMinBladHoogte;

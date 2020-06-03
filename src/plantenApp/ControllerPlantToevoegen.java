@@ -183,6 +183,7 @@ public class ControllerPlantToevoegen {
     public RadioButton rbSmallePluimTv;
     public Button PLantToevoegenButtonTv;
     public Button TerugButtonTv;
+
     private Connection dbConnection;
     private AbiotischeFactorenDAO abiotischeFactorenDAO;
     private InfoTables infoTables;
@@ -205,33 +206,85 @@ public class ControllerPlantToevoegen {
         //type
         System.out.println(infotables.getTypes().toString());
         cboTypeTv.getItems().addAll(infotables.getTypes());
-        //familie
-        /*
-        cboFamilie.getItems().addAll(infotables.getFamilies());
+
         //bladgrootte
-        cboBladgrootte.getItems().addAll(infotables.getBladgroottes());
+        cbBladgrootteTotTv.getItems().addAll(infotables.getBladgroottes());
         //bladvorm
-        cboBladvorm.getItems().addAll(infotables.getBladvormen());
-        //Levensvorm
+        cbBladvormTv.getItems().addAll(infotables.getBladvormen());
+        //Grondsoort
+        cbGrondsoortTv.getItems().addAll(infotables.getGrondsoorten());
 
         //BehandelingMaand
-        cboMaand.getItems().addAll("Januari", "februari", "maart", "april", "mei", "juni", "juli","augustus","september", "oktober", "november", "december");
+        //cboMaand.getItems().addAll("Januari", "februari", "maart", "april", "mei", "juni", "juli","augustus","september", "oktober", "november", "december");
         //ratio
-        cboRatio.getItems().addAll(infotables.getBloeiBladRatios());
+        cbRatioTv.getItems().addAll(infotables.getBloeiBladRatios());
         //spruitfenologie
-        cboSpruitFenologie.getItems().addAll(infotables.getSpruitfenologieen());
+        cbSpruitfenologieTv.getItems().addAll(infotables.getSpruitfenologieen());
         //reactie antagonistische omgeving
-        cboReactie.getItems().addAll(infotables.getAntagonistischeOmgevingsReacties());
+        cbReactieAntaTv.getItems().addAll(infotables.getAntagonistischeOmgevingsReacties());
         //behandeling
-        */
+
+        //Kleuren
+        //Jan
+        cbBladkleurJanTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurJanTv.getItems().addAll(infotables.getKleuren());
+        //Feb
+        cbBladkleurFebTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurFebTv.getItems().addAll(infotables.getKleuren());
+        //Maart
+        cbBladkleurMaaTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurMaaTv.getItems().addAll(infotables.getKleuren());
+        //April
+        cbBladkleurAprTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurAprTv.getItems().addAll(infotables.getKleuren());
+        //Mei
+        cbBladkleurMeiTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurMeiTv.getItems().addAll(infotables.getKleuren());
+        //Juni
+        cbBladkleurJunTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurJunTv.getItems().addAll(infotables.getKleuren());
+        //Juli
+        cbBladkleurJulTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurJulTv.getItems().addAll(infotables.getKleuren());
+        //Augustus
+        cbBladkleurAugTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurAugTv.getItems().addAll(infotables.getKleuren());
+        //September
+        cbBladkleurSeptTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurSeptTv.getItems().addAll(infotables.getKleuren());
+        //Oktober
+        cbBladkleurOktTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurOktTv.getItems().addAll(infotables.getKleuren());
+        //November
+        cbBladkleurNovTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurNovTv.getItems().addAll(infotables.getKleuren());
+        //November
+        cbBladkleurDecTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurDecTv.getItems().addAll(infotables.getKleuren());
+
+        //Habitat
+        cbHabitatTv.getItems().addAll(infotables.getHabitats());
+
+        //Ontwikkelingssnelheid
+        cbOntwikkelingssnelheidTv.getItems().addAll(infotables.getOnstwikkelingssnelheden());
+
+        //Levensduur
+        cbLevensduurTv.getItems().addAll(infotables.getConcurentiekrachten());
+
     }
 
 
 
      public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException {
 
-
-
          }
+
+    public void ToevoegenCommensalisme(MouseEvent mouseEvent) throws SQLException {
+
+    }
+
+    public void ToevoegenHabitat(MouseEvent mouseEvent) throws SQLException {
+
+    }
 
 }
