@@ -292,7 +292,7 @@ public class ControllerPlantToevoegen {
         int maxidplant = plantDAO.getmaxid();
         plantid = maxidplant;
             //public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv) {
-            Plant plant = new Plant(maxidplant+1 ,"test", "familie","geslacht","soort","variatie",5,20,"familie geslacht soort van" );
+            Plant plant = new Plant(maxidplant+1 ,"test", "familie","geslacht","soort","variatie",5,20,"familie geslacht soort van", 1);
         plantDAO.createplant(plant);
     }
 
