@@ -228,9 +228,9 @@ public interface Queries {
             "abiotische_factoren(abiotische_id, plant_id , bezonning , grondsoort, vochtbehoefte,voedingsbehoefte,reactie_antagonistische_omg)" +
             " VALUES (?,?, ?, ?, ?, ?, ?)";
     String GetMaxId = "select Max(abiotische_id) from abiotische_factoren ";
-    String Inserplant =  "INSERT INTO plant" +
-            " (plant_id,type, familie,geslacht,soort,variatie,plantdichtheid_min,plantdichtheid_max,fgsv)" +
-            " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
+    String Insertplant =  "INSERT INTO plant" +
+            " (plant_id,type, familie,geslacht,soort,variatie,plantdichtheid_min,plantdichtheid_max,fgsv, status)" +
+            " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
     String getmaxplantid = "select Max(plant_id) from plant ";
     String getmaxfenotypeid= "select Max(fenotype_id) from fenotype";
     String getMaxCommensalismeID= "select Max(commensalisme_id) from commensalisme";  ;
