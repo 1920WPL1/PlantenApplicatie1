@@ -8,8 +8,10 @@ import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import plantenApp.java.dao.AbiotischeFactorenDAO;
 import plantenApp.java.dao.Database;
+import plantenApp.java.dao.InfoTablesDAO;
 import plantenApp.java.dao.PlantDAO;
 import plantenApp.java.model.AbiotischeFactoren;
+import plantenApp.java.model.InfoTables;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -183,78 +185,53 @@ public class ControllerPlantToevoegen {
     public Button TerugButtonTv;
     private Connection dbConnection;
     private AbiotischeFactorenDAO abiotischeFactorenDAO;
+    private InfoTables infoTables;
+
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
-        slVoedingsbehoefte.addEventHandler(MouseEvent.MOUSE_DRAGGED , this::Voedingsbehoeftelabelveranderen);
-        slVochtbehoefte.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::Vochtbehoeftelabelveranderen);
-        slBezonning.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::Bzonninglabelveranderen);
-        combovullen();
 
-        PlantDAO plantDAO = new PlantDAO(dbConnection);
-        System.out.println(plantDAO.getPlantById(5).getFamilie());
+        /*infotabel object aanmaken*/
+        InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
+        infoTables = infotablesDAO.getInfoTables();
 
-    }
-    public void combovullen()
-    {
-//Opties voor reactie antagonistische omgeving
-        ObservableList<String> cbReactieAntaOptions =
-                FXCollections.observableArrayList(
-                        "Option 1",
-                        "Option 2",
-                        "Option 3"
-                );
-//Opties voor grondsoort
-        ObservableList<String> cbGrondsoortOptions =
-                FXCollections.observableArrayList(
-                        "Option 1",
-                        "Option 2",
-                        "Option 3"
-                );
-//Values zetten
-        cbGrondsoort.setItems(cbGrondsoortOptions);
-        cbReactieAnta.setItems(cbReactieAntaOptions);
-
+        /*comboboxes vullen*/
+        FillComboboxes(infoTables);
 
 
     }
-    public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException {
-        createAbiotischefactoren();
-    }
-    public void createAbiotischefactoren() throws SQLException {
-        abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
-        String bezonning = valuebezonning();
 
-        /*plant id moet een cijfer zijn dat gekregen wordt als de plant in de database zit.*/
-        //AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(0,2, bezonning,);
+    private void FillComboboxes(InfoTables infotables) {
+        //type
+        System.out.println(infotables.getTypes().toString());
+        cboTypeTv.getItems().addAll(infotables.getTypes());
+        //familie
+        /*
+        cboFamilie.getItems().addAll(infotables.getFamilies());
+        //bladgrootte
+        cboBladgrootte.getItems().addAll(infotables.getBladgroottes());
+        //bladvorm
+        cboBladvorm.getItems().addAll(infotables.getBladvormen());
+        //Levensvorm
+
+        //BehandelingMaand
+        cboMaand.getItems().addAll("Januari", "februari", "maart", "april", "mei", "juni", "juli","augustus","september", "oktober", "november", "december");
+        //ratio
+        cboRatio.getItems().addAll(infotables.getBloeiBladRatios());
+        //spruitfenologie
+        cboSpruitFenologie.getItems().addAll(infotables.getSpruitfenologieen());
+        //reactie antagonistische omgeving
+        cboReactie.getItems().addAll(infotables.getAntagonistischeOmgevingsReacties());
+        //behandeling
+        */
     }
 
-    public  String valuebezonning()
-    {
-        String value="";
-        if(slBezonning.getValue() <1)
-        {
-            value="schaduw Plant";
-        }
-        else if (slBezonning.getValue() <2 && slBezonning.getValue()>1)
-        {
-            value ="zonnige plant";
-        }
-        else if(slBezonning.getValue()>2 )
-        {
-            value ="Volle zon plant";
-        }
-        return value;
-    }
-    private void Voedingsbehoeftelabelveranderen(MouseEvent e) {
-        VoedingbehoefteValue.setText(String.valueOf(slVoedingsbehoefte.getValue()));
-    }
-    private  void Vochtbehoeftelabelveranderen(MouseEvent e)
-    {
-        VochtbehoefteValue.setText(String.valueOf(slVochtbehoefte.getValue()));
-    }
-    private  void Bzonninglabelveranderen(MouseEvent e)
-    {
-        Bezonningvalue.setText(String.valueOf(slBezonning.getValue()));
-    }
+
+
+     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException {
+
+
+
+         }
+
 }

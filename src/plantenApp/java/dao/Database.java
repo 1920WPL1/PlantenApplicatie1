@@ -59,12 +59,10 @@ public class Database {
         Connection dbConnection = null;
         try {
             Class.forName(jdbcDriver);
-            dbConnection = DriverManager.getConnection(url , user , password);
-            System.out.println(" het lukt");
-        }
-        catch (ClassNotFoundException | SQLException ex)
-        {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null , ex);
+            dbConnection = DriverManager.getConnection(url, user, password);
+            System.out.println("Created Db Connection....");
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
         return dbConnection;
     }
