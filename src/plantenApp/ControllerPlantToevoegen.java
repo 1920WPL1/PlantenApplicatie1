@@ -252,31 +252,6 @@ public class ControllerPlantToevoegen {
         AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio+1,plantid, "tt","ee ", "nat","frietjes","hey kasper");
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
     }
-    public  String valuebezonning(){
-        String value="";
-        if(slBezonningTv.getValue() <1)
-        {
-            value="schaduw Plant";
-        }
-        else if (slBezonningTv.getValue() <2 && slBezonningTv.getValue()>1)
-        {
-            value ="zonnige plant";
-        }
-        else if(slBezonningTv.getValue()>2 )
-        {
-            value ="Volle zon plant";
-        }
-        return value;
-    }
-    private void Voedingsbehoeftelabelveranderen(MouseEvent e) {
-        VoedingbehoefteValueTv.setText(String.valueOf(slVoedingsbehoefteTv.getValue()));
-    }
-    private  void Vochtbehoeftelabelveranderen(MouseEvent e)  {
-        VochtbehoefteValueTv.setText(String.valueOf(slVochtbehoefteTv.getValue()));
-    }
-    private  void Bzonninglabelveranderen(MouseEvent e)   {
-        BezonningvalueTv.setText(String.valueOf(slBezonningTv.getValue()));
->>>>>>> random
-    }
+
 }
 
