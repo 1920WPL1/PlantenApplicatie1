@@ -193,8 +193,6 @@ public class ControllerPlantToevoegen {
         /*comboboxes vullen*/
         FillComboboxes(infoTables);
 
-        createplant();
-
     }
 
     public void FillComboboxes(InfoTables infotables) {

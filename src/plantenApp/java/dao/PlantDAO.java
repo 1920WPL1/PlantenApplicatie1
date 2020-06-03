@@ -90,7 +90,8 @@ public class PlantDAO implements Queries {
                     rs.getString("variatie"),
                     rs.getInt("plantdichtheid_min"),
                     rs.getInt("plantdichtheid_max"),
-                    rs.getInt("plantdichtheid_max")
+                    rs.getString("fgsv"),
+                    rs.getInt("status")
             );
         }
 
