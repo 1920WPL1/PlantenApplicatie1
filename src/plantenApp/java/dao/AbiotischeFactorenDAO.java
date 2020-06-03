@@ -17,7 +17,9 @@ public class AbiotischeFactorenDAO implements Queries {
     private PreparedStatement stmtSelectIdsByAbio;
     private PreparedStatement stmtSelectIdsByAbioMulti;
     private PreparedStatement stmInsertAbiotische;
+    private PreparedStatement stmInsertAbiotischeMulti;
     private  PreparedStatement stmGetmacid;
+    private PreparedStatement stmGetMaxIdMulti;
 
 
     public AbiotischeFactorenDAO(Connection dbConnection) throws SQLException {
@@ -29,6 +31,8 @@ public class AbiotischeFactorenDAO implements Queries {
         stmtSelectIdsByAbioMulti = dbConnection.prepareStatement(GETIDSBYABIOMULTI);
         stmInsertAbiotische = dbConnection.prepareStatement(INSERTABIOTISCHEFACTOREN);
         stmGetmacid =dbConnection.prepareStatement(GetMaxId);
+        stmGetMaxIdMulti = dbConnection.prepareStatement(GetMaxIdAbioMulti);
+        stmInsertAbiotischeMulti = dbConnection.prepareStatement(INSERTABIOTISCHEFACTORENMULTI);
     }
 
     /**@author Siebe
@@ -152,11 +156,27 @@ public class AbiotischeFactorenDAO implements Queries {
         stmInsertAbiotische.setString(6,abiotischeFactoren.getVoedingsbehoefte());
         stmInsertAbiotische.setString(7,abiotischeFactoren.getReactieAntagonistischeOmgeving());
         stmInsertAbiotische.executeUpdate();
-        System.out.println("gelukt");
+        System.out.println("Abiotische gelukt");
+    }
+
+    public void CreateAbiotischeMulti (AbioMulti_Eigenschap abioMulti_eigenschap, int plant_id) throws SQLException {
+        stmInsertAbiotischeMulti.setInt(1,abioMulti_eigenschap.getId());
+        stmInsertAbiotischeMulti.setInt(2, plant_id);
+        stmInsertAbiotischeMulti.setString(3,abioMulti_eigenschap.getNaam());
+        stmInsertAbiotischeMulti.setString(4,abioMulti_eigenschap.getValue());
+        stmInsertAbiotischeMulti.executeUpdate();
+        System.out.println("AbiotischeMulti toegevoegd");
     }
 
     public int getmaxid() throws SQLException {
         ResultSet rs =stmGetmacid.executeQuery();
+        rs.next();
+        int maxid =rs.getInt(1) ;
+        return maxid;
+    }
+
+    public int getMaxIdMulti() throws SQLException {
+        ResultSet rs =stmGetMaxIdMulti.executeQuery();
         rs.next();
         int maxid =rs.getInt(1) ;
         return maxid;

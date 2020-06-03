@@ -2,6 +2,7 @@ package plantenApp.java.dao;
 
 import plantenApp.java.model.Beheer;
 import plantenApp.java.model.Beheerdaad_Eigenschap;
+import plantenApp.java.model.Commensalisme;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,12 +15,16 @@ public class BeheerDAO implements Queries {
     private Connection dbConnection;
     private PreparedStatement stmtSelectBeheerByID;
     private PreparedStatement stmtSelectByBeheer;
+    private  PreparedStatement stmGetMaxID;
+    private PreparedStatement stmInsertBeheer;
 
     public BeheerDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
 
         stmtSelectBeheerByID = dbConnection.prepareStatement(GETBEHEERBYPLANTID);
         stmtSelectByBeheer = dbConnection.prepareStatement(GETIDSBYBEHEER);
+        stmInsertBeheer = dbConnection.prepareStatement(insertBeheer);
+        stmGetMaxID = dbConnection.prepareStatement(getMaxBeheerID);
     }
 
     //region GET
@@ -73,6 +78,24 @@ public class BeheerDAO implements Queries {
 
         //Output
         return abioMulti;
+    }
+
+    public void createBeheer(Beheerdaad_Eigenschap beheerdaad, Beheer beheer) throws SQLException {
+        stmInsertBeheer.setInt(1, beheerdaad.getId());
+        stmInsertBeheer.setInt(2, beheer.getPlant_id());
+        stmInsertBeheer.setString(3, beheerdaad.getNaam());
+        stmInsertBeheer.setString(4, beheerdaad.getOpmerking());
+        stmInsertBeheer.setString(5, beheerdaad.getMaand());
+        stmInsertBeheer.setInt(6, beheerdaad.getFrequentie());
+        stmInsertBeheer.executeUpdate();
+        System.out.println("Beheer toegevoegd");
+    }
+
+    public int getmaxid() throws SQLException {
+        ResultSet rs =stmGetMaxID.executeQuery();
+        rs.next();
+        int maxid =rs.getInt(1) ;
+        return maxid;
     }
 
     //endregion

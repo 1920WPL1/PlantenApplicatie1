@@ -194,7 +194,8 @@ public class ControllerPlantToevoegen {
         FillComboboxes(infoTables);
 
         createplant();
-
+        createBeheer();
+        createAbiotischeMulti();
     }
 
     public void FillComboboxes(InfoTables infotables) {
@@ -282,6 +283,8 @@ public class ControllerPlantToevoegen {
         createAbiotischefactoren();
         createfenotype();
         createCommensalisme();
+        createBeheer();
+        createAbiotischeMulti();
     }
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
@@ -300,11 +303,11 @@ public class ControllerPlantToevoegen {
 
     public void createAbiotischefactoren() throws SQLException {
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
-        //String bezonning = valuebezonning();
         int maxidabio = abiotischeFactorenDAO.getmaxid();
         AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio+1,plantid, "tt","ee ", "nat","frietjes","hey kasper");
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
     }
+
 
     public void createCommensalisme() throws SQLException {
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
@@ -319,6 +322,22 @@ public class ControllerPlantToevoegen {
         Extra extra = new Extra(maxidextra+1,plantid,0,0,"a","b","c","d","e");
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
         //ExtraDAO.createExtra(extra);
+    }
+
+    public void createBeheer() throws SQLException{
+        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
+        int maxIdBeheer = beheerDAO.getmaxid();
+        Beheer beheer = new Beheer(maxIdBeheer+1);
+        Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(maxIdBeheer+1, "Test", "Test", "Test", 5);
+        beheerDAO.createBeheer(beheerdaad_eigenschap,beheer);
+    }
+
+    public void createAbiotischeMulti() throws SQLException{
+        abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
+        int maxidabio = abiotischeFactorenDAO.getMaxIdMulti();
+        System.out.println(maxidabio);
+        AbioMulti_Eigenschap abioMulti_eigenschap = new AbioMulti_Eigenschap(maxidabio+1, "Test", "Test");
+        abiotischeFactorenDAO.CreateAbiotischeMulti(abioMulti_eigenschap, plantid);
     }
 }
 
