@@ -7,8 +7,10 @@ import javafx.scene.input.MouseEvent;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ControllerPlantToevoegen {
     public Slider slBezonning;
@@ -316,6 +318,13 @@ public class ControllerPlantToevoegen {
         Extra extra = new Extra(maxidextra+1,plantid,0,0,"a","b","c","d","e");
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
         //ExtraDAO.createExtra(extra);
+    }
+
+    public void createFoto() throws SQLException{
+        FotoDAO fotoDAO = new FotoDAO(dbConnection);
+        int maxIdFoto = fotoDAO.getmaxid();
+        Foto foto = new Foto(maxIdFoto + 1, plantid, "a", "b", null);
+        fotoDAO.createFoto(foto);
     }
     public void createfentotypemulti() throws SQLException {
             FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
