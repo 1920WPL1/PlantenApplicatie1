@@ -10,6 +10,13 @@ public class Commensalisme {
     private String ontwikkelingssnelheid;
     private ArrayList<CommMulti_Eigenschap> multiEigenschappen;
 
+    public Commensalisme(int id, int plant_id, String strategie, String ontwikkelingssnelheid) {
+        this.id = id;
+        this.plant_id = plant_id;
+        this.strategie = strategie;
+        this.ontwikkelingssnelheid = ontwikkelingssnelheid;
+    }
+
     public Commensalisme(int id, int plant_id, String strategie, String ontwikkelingssnelheid, ArrayList<CommMulti_Eigenschap> multiEigenschappen) {
         this.id = id;
         this.plant_id = plant_id;

@@ -3,6 +3,7 @@ package plantenApp.java.dao;
 public interface Queries {
     //region GETBYID
     String GETPLANTBYID = "SELECT * FROM plant WHERE plant_id = ?";
+    String GETPLANTSBYIDS = "SELECT * FROM plant WHERE plant_id IN ?";
 
     String GETFENOTYPEBYPLANTID = "SELECT * FROM fenotype WHERE plant_id = ?";
     String GETFENOTYPEMULTIBYPLANTID = "SELECT * FROM fenotype_multi WHERE plant_id = ?";
@@ -20,7 +21,7 @@ public interface Queries {
     String GETFOTOBYPLANTID = "SELECT * FROM foto WHERE plant_id = ?";
     //endregion
 
-    //region GETIDBYKENMERKEN
+    //region GETIDSBYKENMERKEN
     String GETIDSBYPLANT =
             "SELECT plant_id FROM plant WHERE " +
                     "type = ? OR  1=? " +
@@ -231,9 +232,12 @@ public interface Queries {
             " (plant_id,type, familie,geslacht,soort,variatie,plantdichtheid_min,plantdichtheid_max,fgsv)" +
             " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
     String getmaxplantid = "select Max(plant_id) from plant ";
-    String getmaxfenotypeid= "select MAX(fenotype_id) from fenotype";
-
-    //statements voor extraDAO
+    String getmaxfenotypeid= "select Max(fenotype_id) from fenotype";
+    String getMaxCommensalismeID= "select Max(commensalisme_id) from commensalisme";  ;
+    String insertfenotype="insert into fenotype(fenotype_id , plant_id,bladvorm , levensvorm,habitus,bloeiwijze,bladgrootte,ratio_bloei_blad,spruitfenologie) values(?,?,?,?,?,?,?,?,?)";
+    String InsertCommensalisme = "Insert into " +
+            "commensalisme(commensalisme_id, plant_id , strategie , ontwikkelingssnelheid)" +
+            " VALUES (?,?,?,?)";
     String getmaxextraid = "select Max(extra_id) from extra";
     String insertextra = "insert into " + "extra(extra_id, plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar_kruidgebruik, geurend, vorstgevoelig)" +
             " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
