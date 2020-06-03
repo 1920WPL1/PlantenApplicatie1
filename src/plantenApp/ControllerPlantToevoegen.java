@@ -193,7 +193,7 @@ public class ControllerPlantToevoegen {
 
         /*comboboxes vullen*/
         FillComboboxes(infoTables);
-        createplant();
+
 
     }
 
@@ -342,13 +342,23 @@ public class ControllerPlantToevoegen {
         }
     }
     public void createCommensalismeMulti() throws SQLException {
-        /*
+
+
         CommensalismeDAO commensalismeMulti = new CommensalismeDAO(dbConnection);
         int maxidcommensalismeMulti = commensalismeMulti.getmaxid();
-        Commensalisme commensalisme = new Commensalisme(maxidcommensalismeMulti + 1, plantid, "" );
-        commensalismeMulti.createCommensalisme(commensalisme);
-        */
+        System.out.println(  " " + plantid);
 
+        for (int i = 0; i < lvLevensduurTv.getItems().size(); i++) {
+            CommMulti_Eigenschap commensalisme = new CommMulti_Eigenschap(maxidcommensalismeMulti + 1, "Levensduur", lvLevensduurTv.getItems().get(i) );
+            System.out.println(commensalisme.getNaam());
+            commensalismeMulti.createCommensalismeMulti(commensalisme, plantid);
+            maxidcommensalismeMulti++;
+        }
+        System.out.println(maxidcommensalismeMulti + " " + plantid);
+    }
+
+    public void TestZooi(MouseEvent mouseEvent) throws SQLException {
+        createCommensalismeMulti();
     }
 }
 

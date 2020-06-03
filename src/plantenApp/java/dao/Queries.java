@@ -242,6 +242,8 @@ public interface Queries {
     String insertextra = "insert into " + "extra(extra_id, plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar_kruidgebruik, geurend, vorstgevoelig)" +
             " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
+    String InsertCommensalismeMulti = "insert into commensalisme_multi(plant_id, eigenschap, waarde)" +
+            " VALUES (?, ?, ?)";
     //String InsertNaam
     //endregion
 }

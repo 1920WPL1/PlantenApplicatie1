@@ -18,6 +18,7 @@ public class CommensalismeDAO implements Queries {
     private PreparedStatement stmtSelectIdsByCommMulti;
     private  PreparedStatement stmGetMaxID;
     private PreparedStatement stmInsertCommensalisme;
+    private PreparedStatement stmInsertCommensalismeMulti;
 
     public CommensalismeDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
@@ -27,6 +28,7 @@ public class CommensalismeDAO implements Queries {
         stmtSelectIdsByComm = dbConnection.prepareStatement(GETIDSBYCOMM);
         stmtSelectIdsByCommMulti = dbConnection.prepareStatement(GETIDSBYCOMMMULTI);
         stmInsertCommensalisme = dbConnection.prepareStatement(InsertCommensalisme);
+        stmInsertCommensalismeMulti = dbConnection.prepareStatement(InsertCommensalismeMulti);
         stmGetMaxID = dbConnection.prepareStatement(getMaxCommensalismeID);
     }
 
@@ -95,6 +97,13 @@ public class CommensalismeDAO implements Queries {
         stmInsertCommensalisme.setString(4, commensalisme.getOntwikkelingssnelheid());
         stmInsertCommensalisme.executeUpdate();
         System.out.println("Commensalisme toegevoegd");
+    }
+    public void createCommensalismeMulti(CommMulti_Eigenschap commensalismeMulti,int plantID) throws SQLException {
+        stmInsertCommensalismeMulti.setInt(1, plantID);
+        stmInsertCommensalismeMulti.setString(2,commensalismeMulti.getNaam());
+        stmInsertCommensalismeMulti.setString(3, commensalismeMulti.getValue());
+        stmInsertCommensalismeMulti.executeUpdate();
+        System.out.println("Commensalisme Multi toegevoegd");
     }
 
     public int getmaxid() throws SQLException {
