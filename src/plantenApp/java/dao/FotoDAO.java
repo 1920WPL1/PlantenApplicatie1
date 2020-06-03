@@ -34,7 +34,7 @@ public class FotoDAO implements Queries {
      * @param id -> plant_id
      * @return -> verzameling van de fotos van de specifieke plant
      */
-    /*public Foto getFotoById(int id) throws SQLException {
+    public Foto getFotoById(int id) throws SQLException {
         //TODO:Afhankelijk van hoe jullie de blobs willen doen moet je dit veranderen, wil je het als image opslaan of als blob
         //Dao
 
@@ -49,7 +49,7 @@ public class FotoDAO implements Queries {
 
         //Output
         return foto;
-    }*/
+    }
 
     /**
      * @author Siebe
@@ -88,13 +88,23 @@ public class FotoDAO implements Queries {
     }
 
     public void createFoto(Foto foto) throws SQLException{
-        //
+        int lengte = foto.getFotos().size();
+        for(int i = 0; i<lengte;i++){
+            stmtInsertFoto.setInt(1, foto.getFotos().get(i).getId());
+            stmtInsertFoto.setInt(2, foto.getPlant_id());
+            stmtInsertFoto.setString(3, foto.getFotos().get(i).getEigenschap());
+            stmtInsertFoto.setString(4, foto.getFotos().get(i).getUrl());
+            stmtInsertFoto.setBlob(5, foto.getFotos().get(i).getImage());
+            stmtInsertFoto.executeUpdate();
+        }
+        //onderstaande wordt niet meer gebruikt
+        /*
         stmtInsertFoto.setInt(1, foto.getId());
         stmtInsertFoto.setInt(2,foto.getPlant_id());
         stmtInsertFoto.setString(3,foto.getEigenschap());
         stmtInsertFoto.setString(4,foto.getUrl());
         stmtInsertFoto.setBlob(5,foto.getImage());
-        stmtInsertFoto.executeUpdate();
+        stmtInsertFoto.executeUpdate();*/
     }
     //endregion
 }
