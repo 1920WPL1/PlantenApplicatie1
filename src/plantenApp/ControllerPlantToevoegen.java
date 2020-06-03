@@ -1,7 +1,7 @@
 package plantenApp;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import plantenApp.java.dao.*;
@@ -9,6 +9,7 @@ import plantenApp.java.model.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ControllerPlantToevoegen {
     public Slider slBezonning;
@@ -22,25 +23,25 @@ public class ControllerPlantToevoegen {
     public Label VoedingbehoefteValue;
     public Label VochtbehoefteValue;
     public Label Bezonningvalue;
-    public ComboBox cboTypeTv;
+    public ComboBox<String> cboTypeTv;
     public TextField txtFamilieTv;
     public TextField txtGeslachtTv;
     public TextField txtSoortTv;
     public TextField txtVariantTv;
     public TextField txtDichtheidXTv;
     public TextField txtDichtheidYTv;
-    public ComboBox cbBezonningTv;
+    public ComboBox<String> cbBezonningTv;
     public Label BezonningvalueTv;
-    public ComboBox cbVoedingsbehoefteTv;
+    public ComboBox<String> cbVoedingsbehoefteTv;
     public Label VoedingbehoefteValueTv;
-    public ComboBox cbVochtbehoefteTv;
+    public ComboBox<String> cbVochtbehoefteTv;
     public Label VochtbehoefteValueTv;
-    public ComboBox cbReactieAntaTv;
-    public ComboBox cbGrondsoortTv;
-    public ComboBox cbHabitatTv;
+    public ComboBox<String> cbReactieAntaTv;
+    public ComboBox<String> cbGrondsoortTv;
+    public ComboBox<String> cbHabitatTv;
     public Button btnHabitatTv;
     public ListView lvHabitatTv;
-    public ComboBox cbOntwikkelingssnelheidTv;
+    public ComboBox<String> cbOntwikkelingssnelheidTv;
     public CheckBox chkSociabiliteit1Tv;
     public CheckBox chkSociabiliteit2Tv;
     public CheckBox chkSociabiliteit3Tv;
@@ -56,7 +57,7 @@ public class ControllerPlantToevoegen {
     public RadioButton rbStrategieROTv;
     public ComboBox cbLevensduurTv;
     public Button btnLevensduurTv;
-    public ListView lvLevensduurTv;
+    public ListView<String> lvLevensduurTv;
     public Slider slNectarwaardeTv;
     public Label NectarwaardeValueTv;
     public Slider slPollenwaardeTv;
@@ -79,10 +80,10 @@ public class ControllerPlantToevoegen {
     public RadioButton rbVorstgevoeligNullTv;
     public RadioButton rbVorstgevoeligJaTv;
     public RadioButton rbVorstgevoeligNeeTv;
-    public ComboBox cbBladgrootteTotTv;
-    public ComboBox cbBladvormTv;
-    public ComboBox cbRatioTv;
-    public ComboBox cbSpruitfenologieTv;
+    public ComboBox<String> cbBladgrootteTotTv;
+    public ComboBox<String> cbBladvormTv;
+    public ComboBox<String> cbRatioTv;
+    public ComboBox<String> cbSpruitfenologieTv;
     public RadioButton rbHydro1Tv;
     public RadioButton rbHydro2Tv;
     public RadioButton rbHeloTv;
@@ -104,18 +105,18 @@ public class ControllerPlantToevoegen {
     public Spinner spinMaxBladhOktTv;
     public Spinner spinMaxBladhNovTv;
     public Spinner spinMaxBladhDecTv;
-    public ComboBox cbBladkleurJanTv;
-    public ComboBox cbBladkleurFebTv;
-    public ComboBox cbBladkleurMaaTv;
-    public ComboBox cbBladkleurAprTv;
-    public ComboBox cbBladkleurMeiTv;
-    public ComboBox cbBladkleurJunTv;
-    public ComboBox cbBladkleurJulTv;
-    public ComboBox cbBladkleurAugTv;
-    public ComboBox cbBladkleurSeptTv;
-    public ComboBox cbBladkleurOktTv;
-    public ComboBox cbBladkleurNovTv;
-    public ComboBox cbBladkleurDecTv;
+    public ComboBox<String> cbBladkleurJanTv;
+    public ComboBox<String> cbBladkleurFebTv;
+    public ComboBox<String> cbBladkleurMaaTv;
+    public ComboBox<String> cbBladkleurAprTv;
+    public ComboBox<String> cbBladkleurMeiTv;
+    public ComboBox<String> cbBladkleurJunTv;
+    public ComboBox<String> cbBladkleurJulTv;
+    public ComboBox<String> cbBladkleurAugTv;
+    public ComboBox<String> cbBladkleurSeptTv;
+    public ComboBox<String> cbBladkleurOktTv;
+    public ComboBox<String> cbBladkleurNovTv;
+    public ComboBox<String> cbBladkleurDecTv;
     public Spinner spinMinBloeihJanTv;
     public Spinner spinMinBloeihFebTv;
     public Spinner spinMinBloeihMaaTv;
@@ -140,18 +141,18 @@ public class ControllerPlantToevoegen {
     public Spinner spinMaxBloeihOktTv;
     public Spinner spinMaxBloeihNovTv;
     public Spinner spinMaxBloeihDecTv;
-    public ComboBox cbBloeikleurJanTv;
-    public ComboBox cbBloeikleurFebTv;
-    public ComboBox cbBloeikleurMaaTv;
-    public ComboBox cbBloeikleurAprTv;
-    public ComboBox cbBloeikleurMeiTv;
-    public ComboBox cbBloeikleurJunTv;
-    public ComboBox cbBloeikleurJulTv;
-    public ComboBox cbBloeikleurAugTv;
-    public ComboBox cbBloeikleurSeptTv;
-    public ComboBox cbBloeikleurNovTv;
-    public ComboBox cbBloeikleurOktTv;
-    public ComboBox cbBloeikleurDecTv;
+    public ComboBox<String> cbBloeikleurJanTv;
+    public ComboBox<String> cbBloeikleurFebTv;
+    public ComboBox<String> cbBloeikleurMaaTv;
+    public ComboBox<String> cbBloeikleurAprTv;
+    public ComboBox<String> cbBloeikleurMeiTv;
+    public ComboBox<String> cbBloeikleurJunTv;
+    public ComboBox<String> cbBloeikleurJulTv;
+    public ComboBox<String> cbBloeikleurAugTv;
+    public ComboBox<String> cbBloeikleurSeptTv;
+    public ComboBox<String> cbBloeikleurNovTv;
+    public ComboBox<String> cbBloeikleurOktTv;
+    public ComboBox<String> cbBloeikleurDecTv;
     public RadioButton rbTuftedTv;
     public RadioButton rbUprightarchingTv;
     public RadioButton rbArchingTv;
@@ -192,6 +193,7 @@ public class ControllerPlantToevoegen {
 
         /*comboboxes vullen*/
         FillComboboxes(infoTables);
+        createplant();
 
     }
 
@@ -281,18 +283,21 @@ public class ControllerPlantToevoegen {
         createfenotype();
         createCommensalisme();
     }
+
+
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxid();
-        Fenotype fenotype = new Fenotype(maxid+1,plantid,"bladvorm","levensvorm","habitus","bloeiwijze",2,"ratioBloeiBlad","spruitfenologie");
+        Fenotype fenotype = new Fenotype(maxid + 1, plantid, "bladvorm", "levensvorm", "habitus", "bloeiwijze", 2, "ratioBloeiBlad", "spruitfenologie");
         fenotypeDAO.createfenotype(fenotype);
     }
+
     public void createplant() throws SQLException {
         PlantDAO plantDAO = new PlantDAO(dbConnection);
         int maxidplant = plantDAO.getmaxid();
         plantid = maxidplant;
-            //public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv) {
-            Plant plant = new Plant(maxidplant+1 ,"test", "familie","geslacht","soort","variatie",5,20,"familie geslacht soort van" );
+        //public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv, int status) {
+        Plant plant = new Plant(maxidplant + 1, "test", "familie", "geslacht", "soort", "variatie", 5, 20, "familie geslacht soort van", 1);
         plantDAO.createplant(plant);
     }
 
@@ -300,23 +305,50 @@ public class ControllerPlantToevoegen {
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
         //String bezonning = valuebezonning();
         int maxidabio = abiotischeFactorenDAO.getmaxid();
-        AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio+1,plantid, "tt","ee ", "nat","frietjes","hey kasper");
+        AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio + 1, plantid, "tt", "ee ", "nat", "frietjes", "hey kasper");
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
     }
 
     public void createCommensalisme() throws SQLException {
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
         int maxidcommensalisme = commensalismeDAO.getmaxid();
-        Commensalisme commensalisme = new Commensalisme(maxidcommensalisme+1, plantid, "strategie", "test");
+        Commensalisme commensalisme = new Commensalisme(maxidcommensalisme + 1, plantid, "strategie", "test");
         commensalismeDAO.createCommensalisme(commensalisme);
     }
 
-    public void createExtra() throws SQLException{
+    public void createExtra() throws SQLException {
         ExtraDAO extraDAO = new ExtraDAO(dbConnection);
         int maxidextra = extraDAO.getmaxid();
-        Extra extra = new Extra(maxidextra+1,plantid,0,0,"a","b","c","d","e");
+        Extra extra = new Extra(maxidextra + 1, plantid, 0, 0, "a", "b", "c", "d", "e");
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
         //ExtraDAO.createExtra(extra);
+
+
+    }
+
+
+    public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
+        if (!lvLevensduurTv.getItems().contains(cbLevensduurTv.getValue())) {
+            lvLevensduurTv.getItems().add((String) cbLevensduurTv.getValue());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText("Je kan niet 2 keer hetzelfde item toevoegen");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+        }
+    }
+    public void createCommensalismeMulti() throws SQLException {
+        /*
+        CommensalismeDAO commensalismeMulti = new CommensalismeDAO(dbConnection);
+        int maxidcommensalismeMulti = commensalismeMulti.getmaxid();
+        Commensalisme commensalisme = new Commensalisme(maxidcommensalismeMulti + 1, plantid, "" );
+        commensalismeMulti.createCommensalisme(commensalisme);
+        */
+
     }
 }
 
