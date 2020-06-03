@@ -12,7 +12,7 @@ public class Plant {
     private int maxPlantdichtheid;
     private String fgsv;
     private int status;
-    private Foto foto;
+  private Foto foto;
     private Beheer beheer;
     private AbiotischeFactoren abiotischeFactoren;
     private Commensalisme commensalisme;

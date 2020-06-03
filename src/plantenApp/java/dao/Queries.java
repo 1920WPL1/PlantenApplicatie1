@@ -233,8 +233,8 @@ public interface Queries {
     String GetMaxId = "select Max(abiotische_id) from abiotische_factoren ";
     String GetMaxIdAbioMulti = "select Max(abiotische_id) from abiotisch_multi ";
     String Insertplant =  "INSERT INTO plant" +
-            " (plant_id,type, familie,geslacht,soort,variatie,plantdichtheid_min,plantdichtheid_max,fgsv, status)" +
-            " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            " (plant_id,type, familie,geslacht,soort,variatie,plantdichtheid_min,plantdichtheid_max,fgsv,status)" +
+            " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?)";
     String getmaxplantid = "select Max(plant_id) from plant ";
     String getmaxfenotypeid= "select Max(fenotype_id) from fenotype";
     String getMaxCommensalismeID= "select Max(commensalisme_id) from commensalisme";  ;
@@ -252,6 +252,10 @@ public interface Queries {
     String Getmaxidmulti = "select Max(fenotype_id) from fenotype_multi";
     String insertBeheer = "insert into " + "beheer(beheer_id, plant_id, beheerdaad, opmerking, maand, frequentie_jaar)" +
             " VALUES (?, ?, ?, ?, ?, ?)";
+
+    String InsertCommensalismeMulti = "insert into commensalisme_multi(plant_id, eigenschap, waarde)" +
+            " VALUES (?, ?, ?)";
+    //String InsertNaam
     //endregion
 }
 
