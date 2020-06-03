@@ -192,7 +192,8 @@ public class ControllerPlantToevoegen {
 
         /*comboboxes vullen*/
         FillComboboxes(infoTables);
-
+        createplant();
+        createfentotypemulti();
     }
 
     public void FillComboboxes(InfoTables infotables) {
@@ -280,6 +281,7 @@ public class ControllerPlantToevoegen {
         createAbiotischefactoren();
         createfenotype();
         createCommensalisme();
+        createExtra();
     }
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
@@ -295,7 +297,6 @@ public class ControllerPlantToevoegen {
             Plant plant = new Plant(maxidplant+1 ,"test", "familie","geslacht","soort","variatie",5,20,"familie geslacht soort van", 1);
         plantDAO.createplant(plant);
     }
-
     public void createAbiotischefactoren() throws SQLException {
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
         //String bezonning = valuebezonning();
@@ -303,20 +304,24 @@ public class ControllerPlantToevoegen {
         AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio+1,plantid, "tt","ee ", "nat","frietjes","hey kasper");
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
     }
-
     public void createCommensalisme() throws SQLException {
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
         int maxidcommensalisme = commensalismeDAO.getmaxid();
         Commensalisme commensalisme = new Commensalisme(maxidcommensalisme+1, plantid, "strategie", "test");
         commensalismeDAO.createCommensalisme(commensalisme);
     }
-
     public void createExtra() throws SQLException{
         ExtraDAO extraDAO = new ExtraDAO(dbConnection);
         int maxidextra = extraDAO.getmaxid();
         Extra extra = new Extra(maxidextra+1,plantid,0,0,"a","b","c","d","e");
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
         //ExtraDAO.createExtra(extra);
+    }
+    public void createfentotypemulti() throws SQLException {
+            FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
+            int maxid = fenotypeDAO.getmaxidmulti();
+            FenoMulti_Eigenschap fenoMulti_eigenschap = new FenoMulti_Eigenschap(maxid+1,"test","jan", "feb","maa","apr","mei","jun","jul","aug","sept","okt","nov","dec");
+            fenotypeDAO.createfenomulti(fenoMulti_eigenschap , plantid);
     }
 }
 

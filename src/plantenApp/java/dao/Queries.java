@@ -241,6 +241,8 @@ public interface Queries {
     String getmaxextraid = "select Max(extra_id) from extra";
     String insertextra = "insert into " + "extra(extra_id, plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar_kruidgebruik, geurend, vorstgevoelig)" +
             " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    String Getmaxidmulti = "select Max(fenotype_id) from fenotype_multi";
+    String inserfenomulti = "insert into fenotype_multi(fenotype_id , plant_id,eigenschap , jan,feb,maa,apr,mei,jun,jul,aug,sep,okt,nov,dec) values(? , ?,? , ?,?,?,?,?,?,?,?,?,?,?,?)";
     //endregion
 }
 
