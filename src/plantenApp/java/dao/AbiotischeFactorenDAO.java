@@ -17,6 +17,7 @@ public class AbiotischeFactorenDAO implements Queries {
     private PreparedStatement stmtSelectIdsByAbio;
     private PreparedStatement stmtSelectIdsByAbioMulti;
     private PreparedStatement stmInsertAbiotische;
+    private  PreparedStatement stmGetmacid;
 
 
     public AbiotischeFactorenDAO(Connection dbConnection) throws SQLException {
@@ -26,6 +27,7 @@ public class AbiotischeFactorenDAO implements Queries {
         stmtSelectIdsByAbio = dbConnection.prepareStatement(GETIDSBYABIO);
         stmtSelectIdsByAbioMulti = dbConnection.prepareStatement(GETIDSBYABIOMULTI);
         stmInsertAbiotische = dbConnection.prepareStatement(INSERTABIOTISCHEFACTOREN);
+        stmGetmacid =dbConnection.prepareStatement(GetMaxId);
     }
 
     /**@author Siebe
@@ -129,7 +131,7 @@ public class AbiotischeFactorenDAO implements Queries {
         stmtSelectIdsByAbio.setString(10, reactieAntagonistischeOmgeving);
         stmtSelectIdsByAbio.setInt(11, iTrue);
 
-        ResultSet rs = stmtSelectIdsByAbio.executeQuery();
+        ResultSet rs  = stmtSelectIdsByAbio.executeQuery();
         while (rs.next()) {
             ids.add(rs.getInt("plant_id"));
         }
@@ -137,13 +139,21 @@ public class AbiotischeFactorenDAO implements Queries {
     }
     public void CreateAbiostische(AbiotischeFactoren abiotischeFactoren) throws SQLException {
 //       stmtInsert.setInt(1, 60); // hulp vragen bij functie om max id te vragen...
-        stmInsertAbiotische.setInt(1, abiotischeFactoren.getPlant_id());
-        stmInsertAbiotische.setString(2,abiotischeFactoren.getBezonning());
-        stmInsertAbiotische.setString(3,abiotischeFactoren.getGrondsoort());
-        stmInsertAbiotische.setString(4,abiotischeFactoren.getVochtbehoefte());
-        stmInsertAbiotische.setString(5,abiotischeFactoren.getVoedingsbehoefte());
-        stmInsertAbiotische.setString(6,abiotischeFactoren.getReactieAntagonistischeOmgeving());
+        stmInsertAbiotische.setInt(1,abiotischeFactoren.getId());
+        stmInsertAbiotische.setInt(2, abiotischeFactoren.getPlant_id());
+        stmInsertAbiotische.setString(3,abiotischeFactoren.getBezonning());
+        stmInsertAbiotische.setString(4,abiotischeFactoren.getGrondsoort());
+        stmInsertAbiotische.setString(5,abiotischeFactoren.getVochtbehoefte());
+        stmInsertAbiotische.setString(6,abiotischeFactoren.getVoedingsbehoefte());
+        stmInsertAbiotische.setString(7,abiotischeFactoren.getReactieAntagonistischeOmgeving());
         stmInsertAbiotische.executeUpdate();
         System.out.println("gelukt");
+    }
+
+    public int getmaxid() throws SQLException {
+        ResultSet rs =stmGetmacid.executeQuery();
+        rs.next();
+        int maxid =rs.getInt(1) ;
+        return maxid;
     }
 }

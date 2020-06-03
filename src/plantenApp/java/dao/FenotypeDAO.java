@@ -17,6 +17,8 @@ public class FenotypeDAO implements Queries {
     private PreparedStatement stmtSelectFenoMultiByID;
     private PreparedStatement stmtSelectIdsByFeno;
     private PreparedStatement stmtSelectIdsByFenoMulti;
+    private PreparedStatement strmgetmacid;
+    private PreparedStatement stmtInsert;
 
     public FenotypeDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
@@ -24,6 +26,8 @@ public class FenotypeDAO implements Queries {
         stmtSelectFenoMultiByID = dbConnection.prepareStatement(GETFENOTYPEMULTIBYPLANTID);
         stmtSelectIdsByFeno = dbConnection.prepareStatement(GETIDSBYFENO);
         stmtSelectIdsByFenoMulti = dbConnection.prepareStatement(GETIDSBYFENOMULTI);
+        strmgetmacid = dbConnection.prepareStatement(getmaxfenotypeid);
+        stmtInsert = dbConnection.prepareStatement(insertfenotype);
     }
 
     /**@author Siebe
@@ -156,6 +160,25 @@ public class FenotypeDAO implements Queries {
             ids.add(rs.getInt("plant_id"));
         }
         return ids;
+    }
+    public int getmaxid() throws SQLException {
+        ResultSet rs =strmgetmacid.executeQuery();
+        rs.next();
+        int maxid =rs.getInt(1) ;
+        return maxid;
+    }
+    public void createplant(Fenotype fenotype) throws SQLException {
+        stmtInsert.setInt(1,fenotype.getId());
+        stmtInsert.setString(2, fenotype.getType());
+        stmtInsert.setString(3,fenotype.getFamilie());
+        stmtInsert.setString(4,fenotype.getGeslacht());
+        stmtInsert.setString(5,fenotype.getSoort());
+        stmtInsert.setString(6,fenotype.getVariatie());
+        stmtInsert.setInt(7,fenotype.getMinPlantdichtheid());
+        stmtInsert.setInt(8,fenotype.getMaxPlantdichtheid());
+        stmtInsert.setString(9,fenotype.getFgsv());
+        stmtInsert.executeUpdate();
+        System.out.println("gelukt plant toegevoegd");
     }
 }
 

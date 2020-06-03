@@ -224,8 +224,15 @@ public interface Queries {
     String NTFOTOBlOEIWIJZE =
             "SELECT afbeelding FROM bloeiwijze";
     String INSERTABIOTISCHEFACTOREN = "Insert into " +
-            "abiotische_factoren(plant_id , bezonning , grondsoort, vochtbehoefte,voedingsbehoefte,reactie)" +
-            " VALUES (?, ?, ?, ?, ?, ?)";
+            "abiotische_factoren(abiotische_id, plant_id , bezonning , grondsoort, vochtbehoefte,voedingsbehoefte,reactie_antagonistische_omg)" +
+            " VALUES (?,?, ?, ?, ?, ?, ?)";
+    String GetMaxId = "select Max(abiotische_id) from abiotische_factoren ";
+    String Inserplant =  "INSERT INTO plant" +
+            " (plant_id,type, familie,geslacht,soort,variatie,plantdichtheid_min,plantdichtheid_max,fgsv)" +
+            " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
+    String getmaxplantid = "select Max(plant_id) from plant ";
+    String getmaxfenotypeid= "select MAX(fenotype_id) from fenotype";
+    String insertfenotype="Insert into "
     //endregion
 }
 

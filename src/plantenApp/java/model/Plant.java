@@ -10,6 +10,7 @@ public class Plant {
     private String variatie;
     private int minPlantdichtheid;
     private int maxPlantdichtheid;
+    private String fgsv;
 
     public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid) {
         this.id = id;
@@ -20,6 +21,26 @@ public class Plant {
         this.variatie = variatie;
         this.minPlantdichtheid = minPlantdichtheid;
         this.maxPlantdichtheid = maxPlantdichtheid;
+    }
+
+    public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv) {
+        this.id = id;
+        this.type = type;
+        this.familie = familie;
+        this.geslacht = geslacht;
+        this.soort = soort;
+        this.variatie = variatie;
+        this.minPlantdichtheid = minPlantdichtheid;
+        this.maxPlantdichtheid = maxPlantdichtheid;
+        this.fgsv = fgsv;
+    }
+
+    public String getFgsv() {
+        return fgsv;
+    }
+
+    public void setFgsv(String fgsv) {
+        this.fgsv = fgsv;
     }
 
     public int getId() {
