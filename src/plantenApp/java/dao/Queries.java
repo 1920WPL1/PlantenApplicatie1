@@ -231,8 +231,9 @@ public interface Queries {
             " (plant_id,type, familie,geslacht,soort,variatie,plantdichtheid_min,plantdichtheid_max,fgsv)" +
             " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
     String getmaxplantid = "select Max(plant_id) from plant ";
-    String getmaxfenotypeid= "select MAX(fenotype_id) from fenotype";
-    String insertfenotype="Insert into "
+    String getmaxfenotypeid= "select Max(fenotype_id) from fenotype";            ;
+    String insertfenotype="insert into fenotype(fenotype_id , plant_id,bladvorm , levensvorm,habitus,bloeiwijze,bladgrootte,ratio_bloei_blad,spruitfenologie) values(?,?,?,?,?,?,?,?,?)";
+
     //endregion
 }
 

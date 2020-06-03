@@ -167,18 +167,18 @@ public class FenotypeDAO implements Queries {
         int maxid =rs.getInt(1) ;
         return maxid;
     }
-    public void createplant(Fenotype fenotype) throws SQLException {
+    public void createfenotype(Fenotype fenotype) throws SQLException {
         stmtInsert.setInt(1,fenotype.getId());
-        stmtInsert.setString(2, fenotype.getType());
-        stmtInsert.setString(3,fenotype.getFamilie());
-        stmtInsert.setString(4,fenotype.getGeslacht());
-        stmtInsert.setString(5,fenotype.getSoort());
-        stmtInsert.setString(6,fenotype.getVariatie());
-        stmtInsert.setInt(7,fenotype.getMinPlantdichtheid());
-        stmtInsert.setInt(8,fenotype.getMaxPlantdichtheid());
-        stmtInsert.setString(9,fenotype.getFgsv());
+        stmtInsert.setInt(2, fenotype.getPlant_id());
+        stmtInsert.setString(3,fenotype.getBladvorm());
+        stmtInsert.setString(4,fenotype.getLevensvorm());
+        stmtInsert.setString(5,fenotype.getHabitus());
+        stmtInsert.setString(6,fenotype.getBloeiwijze());
+        stmtInsert.setInt(7,fenotype.getBladgrootte());
+        stmtInsert.setString(8,fenotype.getRatio_bloei_blad());
+        stmtInsert.setString(9,fenotype.getSpruitfenologie());
         stmtInsert.executeUpdate();
-        System.out.println("gelukt plant toegevoegd");
+        System.out.println("gelukt fenotyoe toegevoegd");
     }
 }
 

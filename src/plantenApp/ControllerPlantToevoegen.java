@@ -18,28 +18,27 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ControllerPlantToevoegen {
-    public Slider slBezonning;
-    public Slider slVoedingsbehoefte;
-    public Slider slVochtbehoefte;
-    public ComboBox cbReactieAnta;
-    public ComboBox cbGrondsoort;
-    public ComboBox cbHabitat;
-    public Button btnHabitat;
-    public ListView lvHabitat;
-    public Label VoedingbehoefteValue;
-    public Label VochtbehoefteValue;
-    public Label Bezonningvalue;
+    public Slider slBezonningTv;
+    public Slider slVoedingsbehoefteTv;
+    public Slider slVochtbehoefteTv;
+    public ComboBox cbReactieAntaTv;
+    public ComboBox cbGrondsoortTv;
+    public ComboBox cbHabitatTv;
+    public Button btnHabitatTv;
+    public ListView lvHabitatTv;
+    public Label VoedingbehoefteValueTv;
+    public Label VochtbehoefteValueTv;
+    public Label BezonningvalueTv;
     private Connection dbConnection;
     private AbiotischeFactorenDAO abiotischeFactorenDAO;
     private int plantid;
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
-        slVoedingsbehoefte.addEventHandler(MouseEvent.MOUSE_DRAGGED , this::Voedingsbehoeftelabelveranderen);
-        slVochtbehoefte.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::Vochtbehoeftelabelveranderen);
-        slBezonning.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::Bzonninglabelveranderen);
+        slVoedingsbehoefteTv.addEventHandler(MouseEvent.MOUSE_DRAGGED , this::Voedingsbehoeftelabelveranderen);
+        slVochtbehoefteTv.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::Vochtbehoeftelabelveranderen);
+        slBezonningTv.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::Bzonninglabelveranderen);
         combovullen();
-
     }
 
     public void combovullen()
@@ -59,8 +58,8 @@ public class ControllerPlantToevoegen {
                         "Option 3"
                 );
 //Values zetten
-        cbGrondsoort.setItems(cbGrondsoortOptions);
-        cbReactieAnta.setItems(cbReactieAntaOptions);
+        cbGrondsoortTv.setItems(cbGrondsoortOptions);
+        cbReactieAntaTv.setItems(cbReactieAntaOptions);
 
 
 
@@ -73,7 +72,8 @@ public class ControllerPlantToevoegen {
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxid();
-        Fenotype fenotype = new Fenotype(maxid+1,plantid,"bladvorm","levensvorm","habitus","bloeiwijze",8,"ratioBloeiBlad","spruitfenologie");
+        Fenotype fenotype = new Fenotype(maxid+1,plantid,"bladvorm","levensvorm","habitus","bloeiwijze",2,"ratioBloeiBlad","spruitfenologie");
+        fenotypeDAO.createfenotype(fenotype);
     }
     public void createplant() throws SQLException {
         PlantDAO plantDAO = new PlantDAO(dbConnection);
@@ -95,29 +95,29 @@ public class ControllerPlantToevoegen {
     public  String valuebezonning()
     {
         String value="";
-        if(slBezonning.getValue() <1)
+        if(slBezonningTv.getValue() <1)
         {
             value="schaduw Plant";
         }
-        else if (slBezonning.getValue() <2 && slBezonning.getValue()>1)
+        else if (slBezonningTv.getValue() <2 && slBezonningTv.getValue()>1)
         {
             value ="zonnige plant";
         }
-        else if(slBezonning.getValue()>2 )
+        else if(slBezonningTv.getValue()>2 )
         {
             value ="Volle zon plant";
         }
         return value;
     }
     private void Voedingsbehoeftelabelveranderen(MouseEvent e) {
-        VoedingbehoefteValue.setText(String.valueOf(slVoedingsbehoefte.getValue()));
+        VoedingbehoefteValueTv.setText(String.valueOf(slVoedingsbehoefteTv.getValue()));
     }
     private  void Vochtbehoeftelabelveranderen(MouseEvent e)
     {
-        VochtbehoefteValue.setText(String.valueOf(slVochtbehoefte.getValue()));
+        VochtbehoefteValueTv.setText(String.valueOf(slVochtbehoefteTv.getValue()));
     }
     private  void Bzonninglabelveranderen(MouseEvent e)
     {
-        Bezonningvalue.setText(String.valueOf(slBezonning.getValue()));
+        BezonningvalueTv.setText(String.valueOf(slBezonningTv.getValue()));
     }
 }
