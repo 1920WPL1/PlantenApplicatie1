@@ -192,7 +192,6 @@ public class ControllerPlantToevoegen {
 
         /*comboboxes vullen*/
         FillComboboxes(infoTables);
-
     }
     public void FillComboboxes(InfoTables infotables) {
         //type
@@ -224,53 +223,7 @@ public class ControllerPlantToevoegen {
         //reactie antagonistische omgeving
         cbReactieAntaTv.getItems().addAll(infotables.getAntagonistischeOmgevingsReacties());
         //behandeling
-
-        //Kleuren
-        //Jan
-        cbBladkleurJanTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurJanTv.getItems().addAll(infotables.getKleuren());
-        //Feb
-        cbBladkleurFebTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurFebTv.getItems().addAll(infotables.getKleuren());
-        //Maart
-        cbBladkleurMaaTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurMaaTv.getItems().addAll(infotables.getKleuren());
-        //April
-        cbBladkleurAprTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurAprTv.getItems().addAll(infotables.getKleuren());
-        //Mei
-        cbBladkleurMeiTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurMeiTv.getItems().addAll(infotables.getKleuren());
-        //Juni
-        cbBladkleurJunTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurJunTv.getItems().addAll(infotables.getKleuren());
-        //Juli
-        cbBladkleurJulTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurJulTv.getItems().addAll(infotables.getKleuren());
-        //Augustus
-        cbBladkleurAugTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurAugTv.getItems().addAll(infotables.getKleuren());
-        //September
-        cbBladkleurSeptTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurSeptTv.getItems().addAll(infotables.getKleuren());
-        //Oktober
-        cbBladkleurOktTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurOktTv.getItems().addAll(infotables.getKleuren());
-        //November
-        cbBladkleurNovTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurNovTv.getItems().addAll(infotables.getKleuren());
-        //November
-        cbBladkleurDecTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurDecTv.getItems().addAll(infotables.getKleuren());
-
-        //Habitat
-        cbHabitatTv.getItems().addAll(infotables.getHabitats());
-
-        //Ontwikkelingssnelheid
-        cbOntwikkelingssnelheidTv.getItems().addAll(infotables.getOnstwikkelingssnelheden());
-
-        //Levensduur
-        cbLevensduurTv.getItems().addAll(infotables.getConcurentiekrachten());
+        */
     }
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException {
         createplant();
@@ -299,22 +252,6 @@ public class ControllerPlantToevoegen {
         AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio+1,plantid, "tt","ee ", "nat","frietjes","hey kasper");
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
     }
-<<<<<<< TempMaster2
-
-    public void createCommensalisme() throws SQLException {
-        CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
-        int maxidcommensalisme = commensalismeDAO.getmaxid();
-        Commensalisme commensalisme = new Commensalisme(maxidcommensalisme+1, plantid, "strategie", "test");
-        commensalismeDAO.createCommensalisme(commensalisme);
-    }
-
-    public void createExtra() throws SQLException{
-        ExtraDAO extraDAO = new ExtraDAO(dbConnection);
-        int maxidextra = extraDAO.getmaxid();
-        Extra extra = new Extra(maxidextra+1,plantid,0,0,"a","b","c","d","e");
-        //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
-        //ExtraDAO.createExtra(extra);
-=======
     public  String valuebezonning(){
         String value="";
         if(slBezonningTv.getValue() <1)
