@@ -72,7 +72,8 @@ public class ControllerPlantToevoegen {
     }
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
-        int
+        int maxid = fenotypeDAO.getmaxid();
+        Fenotype fenotype = new Fenotype(maxid+1,plantid,"bladvorm","levensvorm","habitus","bloeiwijze",8,"ratioBloeiBlad","spruitfenologie");
     }
     public void createplant() throws SQLException {
         PlantDAO plantDAO = new PlantDAO(dbConnection);
@@ -85,7 +86,7 @@ public class ControllerPlantToevoegen {
 
     public void createAbiotischefactoren() throws SQLException {
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
-        String bezonning = valuebezonning();
+        //String bezonning = valuebezonning();
         int maxidabio = abiotischeFactorenDAO.getmaxid();
         AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio+1,plantid, "tt","ee ", "nat","frietjes","hey kasper");
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
