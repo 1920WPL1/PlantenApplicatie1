@@ -13,11 +13,15 @@ public class ExtraDAO implements Queries {
     private Connection dbConnection;
     private PreparedStatement stmtSelectExtraByID;
     private PreparedStatement stmtSelectByExtra;
+    private PreparedStatement stmtInsertExtra;
+    private  PreparedStatement stmtGetmaxid;
 
     public ExtraDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
         stmtSelectExtraByID = dbConnection.prepareStatement(GETEXTRABYPLANTID);
         stmtSelectByExtra = dbConnection.prepareStatement(GETIDSBYEXTRA);
+        stmtInsertExtra = dbConnection.prepareStatement(insertextra);
+        stmtGetmaxid = dbConnection.prepareStatement(getmaxextraid);
     }
 
     /**@author Siebe
@@ -97,5 +101,25 @@ public class ExtraDAO implements Queries {
             return ids;
         }
         return ids;
+    }
+
+    public void createExtra(Extra extra) throws SQLException{
+        stmtInsertExtra.setInt(1,extra.getId());
+        stmtInsertExtra.setInt(2,extra.getPlant_id());
+        stmtInsertExtra.setInt(3,extra.getNectarwaarde());
+        stmtInsertExtra.setInt(4,extra.getPollenwaarde());
+        stmtInsertExtra.setString(5,extra.getBijvriendelijk());
+        //stmtInsertExtra.setString(6,extra.getEetbaar());
+        //stmtInsertExtra.setString(6,extra.getKruidgebruik());
+        //opletten voor de nummers en die aanpassen als eetbaar en kruidgebruik 2 verschillende kolommen worden
+        stmtInsertExtra.setString(7,extra.getGeurend());
+        stmtInsertExtra.setString(8,extra.getVorstgevoelig());
+    }
+
+    public int getmaxid() throws SQLException{
+        ResultSet rs = stmtGetmaxid.executeQuery();
+        rs.next();
+        int maxId = rs.getInt(1);
+        return maxId;
     }
 }

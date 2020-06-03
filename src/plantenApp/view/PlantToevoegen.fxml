@@ -125,19 +125,19 @@
                                              <children>
                                                 <HBox>
                                                    <children>
-                                                      <Slider fx:id="slBezonningTv" blockIncrement="1.0" max="3.0" prefHeight="30.0" prefWidth="90.0" />
+                                                      <ComboBox fx:id="cbBezonningTv" prefHeight="30.0" prefWidth="120.0" />
                                                       <Label fx:id="BezonningvalueTv" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
-                                                      <Slider fx:id="slVoedingsbehoefteTv" blockIncrement="100.0" max="3.0" prefHeight="30.0" prefWidth="90.0" showTickMarks="true" value="1.0" />
+                                                      <ComboBox fx:id="cbVoedingsbehoefteTv" prefHeight="30.0" prefWidth="120.0" />
                                                       <Label fx:id="VoedingbehoefteValueTv" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
-                                                      <Slider fx:id="slVochtbehoefteTv" prefHeight="30.0" prefWidth="90.0" />
+                                                      <ComboBox fx:id="cbVochtbehoefteTv" prefHeight="30.0" prefWidth="120.0" />
                                                       <Label fx:id="VochtbehoefteValueTv" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
                                                    </children>
                                                 </HBox>

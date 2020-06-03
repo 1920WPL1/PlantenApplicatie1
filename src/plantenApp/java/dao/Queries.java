@@ -232,7 +232,11 @@ public interface Queries {
             " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
     String getmaxplantid = "select Max(plant_id) from plant ";
     String getmaxfenotypeid= "select MAX(fenotype_id) from fenotype";
-    String insertfenotype="Insert into "
+
+    //statements voor extraDAO
+    String getmaxextraid = "select Max(extra_id) from extra";
+    String insertextra = "insert into " + "extra(extra_id, plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar_kruidgebruik, geurend, vorstgevoelig)" +
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     //endregion
 }
 

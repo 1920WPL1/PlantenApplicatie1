@@ -6,11 +6,9 @@ import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
-import plantenApp.java.dao.AbiotischeFactorenDAO;
-import plantenApp.java.dao.Database;
-import plantenApp.java.dao.FenotypeDAO;
-import plantenApp.java.dao.PlantDAO;
+import plantenApp.java.dao.*;
 import plantenApp.java.model.AbiotischeFactoren;
+import plantenApp.java.model.Extra;
 import plantenApp.java.model.Fenotype;
 import plantenApp.java.model.Plant;
 
@@ -85,11 +83,19 @@ public class ControllerPlantToevoegen {
     }
 
     public void createAbiotischefactoren() throws SQLException {
-        abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
+        AbiotischeFactorenDAO abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
         //String bezonning = valuebezonning();
         int maxidabio = abiotischeFactorenDAO.getmaxid();
         AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio+1,plantid, "tt","ee ", "nat","frietjes","hey kasper");
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
+    }
+
+    public void createExtra() throws SQLException{
+        ExtraDAO extraDAO = new ExtraDAO((dbConnection);
+        int maxidextra = extraDAO.getmaxid();
+        Extra extra = new Extra(maxidextra+1,plantid,0,0,"a","b","c","d","e");
+        //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
+        ExtraDAO.createExtra(extra);
     }
 
     public  String valuebezonning()
