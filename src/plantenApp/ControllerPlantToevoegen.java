@@ -323,8 +323,8 @@ public class ControllerPlantToevoegen {
     }
 
     public void createFoto() throws SQLException{
-        int maxIdFoto = fotoDAO.getmaxid();
         FotoDAO fotoDAO = new FotoDAO(dbConnection);
+        int maxIdFoto = fotoDAO.getmaxid();
         Foto foto = new Foto(maxIdFoto + 1, plantid, "a", "b", null);
         fotoDAO.createFoto(foto);
     }
@@ -337,13 +337,13 @@ public class ControllerPlantToevoegen {
 
     public void createBeheer() throws SQLException{
         BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
-        Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(maxIdBeheer+1, "Test", "Test", "Test", 5);
         int maxIdBeheer = beheerDAO.getmaxid();
+        Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(maxIdBeheer+1, "Test", "Test", "Test", 5);
         Beheer beheer = new Beheer(maxIdBeheer+1);
         beheerDAO.createBeheer(beheerdaad_eigenschap,beheer);
-    }
-
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
+
+    }
     public void createAbiotischeMulti() throws SQLException{
         int maxidabio = abiotischeFactorenDAO.getMaxIdMulti();
         System.out.println(maxidabio);
