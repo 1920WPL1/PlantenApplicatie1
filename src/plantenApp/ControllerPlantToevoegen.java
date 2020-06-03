@@ -29,11 +29,11 @@ public class ControllerPlantToevoegen {
     public TextField txtVariantTv;
     public TextField txtDichtheidXTv;
     public TextField txtDichtheidYTv;
-    public Slider slBezonningTv;
+    public ComboBox cbBezonningTv;
     public Label BezonningvalueTv;
-    public Slider slVoedingsbehoefteTv;
+    public ComboBox cbVoedingsbehoefteTv;
     public Label VoedingbehoefteValueTv;
-    public Slider slVochtbehoefteTv;
+    public ComboBox cbVochtbehoefteTv;
     public Label VochtbehoefteValueTv;
     public ComboBox cbReactieAntaTv;
     public ComboBox cbGrondsoortTv;
@@ -185,9 +185,6 @@ public class ControllerPlantToevoegen {
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
-        slVoedingsbehoefteTv.addEventHandler(MouseEvent.MOUSE_DRAGGED , this::Voedingsbehoeftelabelveranderen);
-        slVochtbehoefteTv.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::Vochtbehoeftelabelveranderen);
-        slBezonningTv.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::Bzonninglabelveranderen);
 
         /*infotabel object aanmaken*/
         InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
@@ -202,27 +199,79 @@ public class ControllerPlantToevoegen {
         //type
         System.out.println(infotables.getTypes().toString());
         cboTypeTv.getItems().addAll(infotables.getTypes());
-        //familie
-        /*
-        cboFamilie.getItems().addAll(infotables.getFamilies());
-        //bladgrootte
-        cboBladgrootte.getItems().addAll(infotables.getBladgroottes());
-        //bladvorm
-        cboBladvorm.getItems().addAll(infotables.getBladvormen());
-        //Levensvorm
-        /*
 
+        //Bezonning
+        cbBezonningTv.getItems().addAll(infotables.getBezonningsMogelijkheden());
+
+        //Voedingsbehoefte
+        cbVoedingsbehoefteTv.getItems().addAll(infotables.getVoedingsbehoeftes());
+
+        //Vochtbehoefte
+        cbVochtbehoefteTv.getItems().addAll(infotables.getVochtbehoeftes());
+
+        //bladgrootte
+        cbBladgrootteTotTv.getItems().addAll(infotables.getBladgroottes());
+        //bladvorm
+        cbBladvormTv.getItems().addAll(infotables.getBladvormen());
+        //Grondsoort
+        cbGrondsoortTv.getItems().addAll(infotables.getGrondsoorten());
 
         //BehandelingMaand
-        cboMaand.getItems().addAll("Januari", "februari", "maart", "april", "mei", "juni", "juli","augustus","september", "oktober", "november", "december");
+        //cboMaand.getItems().addAll("Januari", "februari", "maart", "april", "mei", "juni", "juli","augustus","september", "oktober", "november", "december");
         //ratio
-        cboRatio.getItems().addAll(infotables.getBloeiBladRatios());
+        cbRatioTv.getItems().addAll(infotables.getBloeiBladRatios());
         //spruitfenologie
-        cboSpruitFenologie.getItems().addAll(infotables.getSpruitfenologieen());
+        cbSpruitfenologieTv.getItems().addAll(infotables.getSpruitfenologieen());
         //reactie antagonistische omgeving
-        cboReactie.getItems().addAll(infotables.getAntagonistischeOmgevingsReacties());
+        cbReactieAntaTv.getItems().addAll(infotables.getAntagonistischeOmgevingsReacties());
         //behandeling
-        */
+
+        //Kleuren
+        //Jan
+        cbBladkleurJanTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurJanTv.getItems().addAll(infotables.getKleuren());
+        //Feb
+        cbBladkleurFebTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurFebTv.getItems().addAll(infotables.getKleuren());
+        //Maart
+        cbBladkleurMaaTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurMaaTv.getItems().addAll(infotables.getKleuren());
+        //April
+        cbBladkleurAprTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurAprTv.getItems().addAll(infotables.getKleuren());
+        //Mei
+        cbBladkleurMeiTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurMeiTv.getItems().addAll(infotables.getKleuren());
+        //Juni
+        cbBladkleurJunTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurJunTv.getItems().addAll(infotables.getKleuren());
+        //Juli
+        cbBladkleurJulTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurJulTv.getItems().addAll(infotables.getKleuren());
+        //Augustus
+        cbBladkleurAugTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurAugTv.getItems().addAll(infotables.getKleuren());
+        //September
+        cbBladkleurSeptTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurSeptTv.getItems().addAll(infotables.getKleuren());
+        //Oktober
+        cbBladkleurOktTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurOktTv.getItems().addAll(infotables.getKleuren());
+        //November
+        cbBladkleurNovTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurNovTv.getItems().addAll(infotables.getKleuren());
+        //November
+        cbBladkleurDecTv.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurDecTv.getItems().addAll(infotables.getKleuren());
+
+        //Habitat
+        cbHabitatTv.getItems().addAll(infotables.getHabitats());
+
+        //Ontwikkelingssnelheid
+        cbOntwikkelingssnelheidTv.getItems().addAll(infotables.getOnstwikkelingssnelheden());
+
+        //Levensduur
+        cbLevensduurTv.getItems().addAll(infotables.getConcurentiekrachten());
     }
 
 
@@ -268,35 +317,6 @@ public class ControllerPlantToevoegen {
         Extra extra = new Extra(maxidextra+1,plantid,0,0,"a","b","c","d","e");
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
         //ExtraDAO.createExtra(extra);
-    }
-
-    public  String valuebezonning()
-    {
-        String value="";
-        if(slBezonningTv.getValue() <1)
-        {
-            value="schaduw Plant";
-        }
-        else if (slBezonningTv.getValue() <2 && slBezonningTv.getValue()>1)
-        {
-            value ="zonnige plant";
-        }
-        else if(slBezonningTv.getValue()>2 )
-        {
-            value ="Volle zon plant";
-        }
-        return value;
-    }
-    private void Voedingsbehoeftelabelveranderen(MouseEvent e) {
-        VoedingbehoefteValueTv.setText(String.valueOf(slVoedingsbehoefteTv.getValue()));
-    }
-    private  void Vochtbehoeftelabelveranderen(MouseEvent e)
-    {
-        VochtbehoefteValueTv.setText(String.valueOf(slVochtbehoefteTv.getValue()));
-    }
-    private  void Bzonninglabelveranderen(MouseEvent e)
-    {
-        BezonningvalueTv.setText(String.valueOf(slBezonningTv.getValue()));
     }
 }
 
