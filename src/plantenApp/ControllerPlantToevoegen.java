@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
+import java.sql.Array;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -330,8 +331,21 @@ public class ControllerPlantToevoegen {
     public void createFoto() throws SQLException{
         FotoDAO fotoDAO = new FotoDAO(dbConnection);
         int maxIdFoto = fotoDAO.getmaxid();
-        Foto foto = new Foto(maxIdFoto + 1, plantid, "a", "b", null);
-        fotoDAO.createFoto(foto);
+
+        ArrayList<Foto_Eigenschap> verz = new ArrayList<>();
+        //hier maak je alle foto-eigenschappen aan die je in foto1 wil steken en zorg ervoor dat ze telkens een andere id krijgen dus achter die id moet iedere keer +1, +2,...
+        //komen te staan telkens als er een nieuwe Foto_eigenschap aangemaakt wordt
+        Foto_Eigenschap foto_eigenschap = new Foto_Eigenschap(maxIdFoto+1,"a","b", null);
+
+        //hier steek je dan elke Foto_eigenschap die hierboven gemaakt is in deze verzameling zoals in onderstaande lijn staat
+        verz.add(foto_eigenschap);
+
+        //hier wordt een volledig foto-object gemaakt
+        Foto foto1 = new Foto(plantid,verz);
+
+        //deze onderstaande lijn wordt niet gebruikt
+        //Foto foto2 = new Foto(maxIdFoto + 1, plantid, "a", "b", null);
+        fotoDAO.createFoto(foto1);
     }
     public void createfentotypemulti() throws SQLException {
             FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
