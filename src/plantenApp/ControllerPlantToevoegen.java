@@ -38,6 +38,7 @@ public class ControllerPlantToevoegen {
 
         PlantDAO plantDAO = new PlantDAO(dbConnection);
         System.out.println(plantDAO.getPlantById(5).getFamilie());
+
     }
     public void combovullen()
     {
