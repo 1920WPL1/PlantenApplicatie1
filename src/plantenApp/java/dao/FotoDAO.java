@@ -34,7 +34,7 @@ public class FotoDAO implements Queries {
      * @param id -> plant_id
      * @return -> verzameling van de fotos van de specifieke plant
      */
-    /*public Foto getFotoById(int id) throws SQLException {
+    public Foto getFotoById(int id) throws SQLException {
         //TODO:Afhankelijk van hoe jullie de blobs willen doen moet je dit veranderen, wil je het als image opslaan of als blob
         //Dao
 
@@ -49,7 +49,7 @@ public class FotoDAO implements Queries {
 
         //Output
         return foto;
-    }*/
+    }
 
     /**
      * @author Siebe
@@ -95,6 +95,7 @@ public class FotoDAO implements Queries {
         stmtInsertFoto.setString(4,foto.getUrl());
         stmtInsertFoto.setBlob(5,foto.getImage());
         stmtInsertFoto.executeUpdate();
+        System.out.println("foto toegevoegd");
     }
     //endregion
 }

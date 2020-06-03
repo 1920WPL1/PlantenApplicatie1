@@ -198,6 +198,11 @@ public class ControllerPlantToevoegen {
         createBeheer();
         createAbiotischeMulti();
         createfentotypemulti();
+        createExtra();
+        createAbiotischefactoren();
+        createfenotype();
+        createCommensalisme();
+        createFoto();
     }
 
     public void FillComboboxes(InfoTables infotables) {

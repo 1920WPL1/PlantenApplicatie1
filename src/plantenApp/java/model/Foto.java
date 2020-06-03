@@ -10,7 +10,13 @@ public class Foto {
     private String eigenschap;
     private String url;
     private Blob image;
-    //private ArrayList<Foto_Eigenschap> fotos;
+
+    public Foto(int plant_id, ArrayList<Foto_Eigenschap> fotos) {
+        this.plant_id = plant_id;
+        this.fotos = fotos;
+    }
+
+    private ArrayList<Foto_Eigenschap> fotos;
 
     public Foto(int id, int plant_id, String eigenschap, String url, Blob image) {
         this.id = id;
