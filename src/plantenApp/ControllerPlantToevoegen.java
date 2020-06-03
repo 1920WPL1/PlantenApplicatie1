@@ -195,6 +195,8 @@ public class ControllerPlantToevoegen {
         /*comboboxes vullen*/
         FillComboboxes(infoTables);
         createplant();
+        createBeheer();
+        createAbiotischeMulti();
         createfentotypemulti();
     }
 
@@ -283,7 +285,6 @@ public class ControllerPlantToevoegen {
         createAbiotischefactoren();
         createfenotype();
         createCommensalisme();
-        createExtra();
     }
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
@@ -301,11 +302,12 @@ public class ControllerPlantToevoegen {
     }
     public void createAbiotischefactoren() throws SQLException {
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
-        //String bezonning = valuebezonning();
         int maxidabio = abiotischeFactorenDAO.getmaxid();
         AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio+1,plantid, "tt","ee ", "nat","frietjes","hey kasper");
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
     }
+
+
     public void createCommensalisme() throws SQLException {
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
         int maxidcommensalisme = commensalismeDAO.getmaxid();
@@ -321,8 +323,8 @@ public class ControllerPlantToevoegen {
     }
 
     public void createFoto() throws SQLException{
-        FotoDAO fotoDAO = new FotoDAO(dbConnection);
         int maxIdFoto = fotoDAO.getmaxid();
+        FotoDAO fotoDAO = new FotoDAO(dbConnection);
         Foto foto = new Foto(maxIdFoto + 1, plantid, "a", "b", null);
         fotoDAO.createFoto(foto);
     }
@@ -331,6 +333,22 @@ public class ControllerPlantToevoegen {
             int maxid = fenotypeDAO.getmaxidmulti();
             FenoMulti_Eigenschap fenoMulti_eigenschap = new FenoMulti_Eigenschap(maxid+1,"test","jan", "feb","maa","apr","mei","jun","jul","aug","sept","okt","nov","dec");
             fenotypeDAO.createfenomulti(fenoMulti_eigenschap , plantid);
+    }
+
+    public void createBeheer() throws SQLException{
+        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
+        Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(maxIdBeheer+1, "Test", "Test", "Test", 5);
+        int maxIdBeheer = beheerDAO.getmaxid();
+        Beheer beheer = new Beheer(maxIdBeheer+1);
+        beheerDAO.createBeheer(beheerdaad_eigenschap,beheer);
+    }
+
+        abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
+    public void createAbiotischeMulti() throws SQLException{
+        int maxidabio = abiotischeFactorenDAO.getMaxIdMulti();
+        System.out.println(maxidabio);
+        AbioMulti_Eigenschap abioMulti_eigenschap = new AbioMulti_Eigenschap(maxidabio+1, "Test", "Test");
+        abiotischeFactorenDAO.CreateAbiotischeMulti(abioMulti_eigenschap, plantid);
     }
 }
 

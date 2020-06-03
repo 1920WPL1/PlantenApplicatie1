@@ -227,7 +227,11 @@ public interface Queries {
     String INSERTABIOTISCHEFACTOREN = "Insert into " +
             "abiotische_factoren(abiotische_id, plant_id , bezonning , grondsoort, vochtbehoefte,voedingsbehoefte,reactie_antagonistische_omg)" +
             " VALUES (?,?, ?, ?, ?, ?, ?)";
+    String INSERTABIOTISCHEFACTORENMULTI = "Insert into " +
+            "abiotisch_multi(abiotische_id, plant_id , eigenschap, waarde) " +
+            " VALUES (?,?, ?, ?) ";
     String GetMaxId = "select Max(abiotische_id) from abiotische_factoren ";
+    String GetMaxIdAbioMulti = "select Max(abiotische_id) from abiotisch_multi ";
     String Insertplant =  "INSERT INTO plant" +
             " (plant_id,type, familie,geslacht,soort,variatie,plantdichtheid_min,plantdichtheid_max,fgsv, status)" +
             " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -239,14 +243,15 @@ public interface Queries {
             "commensalisme(commensalisme_id, plant_id , strategie , ontwikkelingssnelheid)" +
             " VALUES (?,?,?,?)";
     String getmaxextraid = "select Max(extra_id) from extra";
+    String getMaxBeheerID = "select Max(beheer_id) from beheer";
     String insertextra = "insert into " + "extra(extra_id, plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar_kruidgebruik, geurend, vorstgevoelig)" +
             " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-    //queries voor fotoDAO functies getmaxid en createFoto
     String getmaxfotoid = "select Max(foto_id) from foto";
     String insertfoto = "insert into " + "foto(foto_id, plant_id, eigenschap, url, figuur)" + " VALUES (?, ?, ?, ?, ?)";
-    String Getmaxidmulti = "select Max(fenotype_id) from fenotype_multi";
     String inserfenomulti = "insert into fenotype_multi(fenotype_id , plant_id,eigenschap , jan,feb,maa,apr,mei,jun,jul,aug,sep,okt,nov,dec) values(? , ?,? , ?,?,?,?,?,?,?,?,?,?,?,?)";
+    String Getmaxidmulti = "select Max(fenotype_id) from fenotype_multi";
+    String insertBeheer = "insert into " + "beheer(beheer_id, plant_id, beheerdaad, opmerking, maand, frequentie_jaar)" +
+            " VALUES (?, ?, ?, ?, ?, ?)";
     //endregion
 }
 

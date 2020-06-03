@@ -12,6 +12,10 @@ public class Beheer {
         this.multiEigenschappen = multiEigenschappen;
     }
 
+    public Beheer(int plant_id) {
+        this.plant_id = plant_id;
+    }
+
     public int getPlant_id() {
         return plant_id;
     }
