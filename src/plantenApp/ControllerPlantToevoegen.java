@@ -203,7 +203,6 @@ public class ControllerPlantToevoegen {
         /*comboboxes vullen*/
         FillComboboxes(infoTables);
     }
-
     public void FillComboboxes(InfoTables infotables) {
         //type
         System.out.println(infotables.getTypes().toString());
@@ -230,8 +229,6 @@ public class ControllerPlantToevoegen {
         //behandeling
         */
     }
-
-
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException {
         createplant();
         createAbiotischefactoren();
@@ -251,7 +248,6 @@ public class ControllerPlantToevoegen {
             Plant plant = new Plant(maxidplant+1 ,"test", "familie","geslacht","soort","variatie",5,20,"familie geslacht soort van" );
         plantDAO.createplant(plant);
     }
-
     public void createAbiotischefactoren() throws SQLException {
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
         //String bezonning = valuebezonning();
@@ -259,9 +255,7 @@ public class ControllerPlantToevoegen {
         AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio+1,plantid, "tt","ee ", "nat","frietjes","hey kasper");
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
     }
-
-    public  String valuebezonning()
-    {
+    public  String valuebezonning(){
         String value="";
         if(slBezonningTv.getValue() <1)
         {
@@ -280,12 +274,10 @@ public class ControllerPlantToevoegen {
     private void Voedingsbehoeftelabelveranderen(MouseEvent e) {
         VoedingbehoefteValueTv.setText(String.valueOf(slVoedingsbehoefteTv.getValue()));
     }
-    private  void Vochtbehoeftelabelveranderen(MouseEvent e)
-    {
+    private  void Vochtbehoeftelabelveranderen(MouseEvent e)  {
         VochtbehoefteValueTv.setText(String.valueOf(slVochtbehoefteTv.getValue()));
     }
-    private  void Bzonninglabelveranderen(MouseEvent e)
-    {
+    private  void Bzonninglabelveranderen(MouseEvent e)   {
         BezonningvalueTv.setText(String.valueOf(slBezonningTv.getValue()));
     }
 }
