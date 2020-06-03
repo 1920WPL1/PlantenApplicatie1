@@ -194,7 +194,6 @@ public class ControllerPlantToevoegen {
         FillComboboxes(infoTables);
 
     }
-
     public void FillComboboxes(InfoTables infotables) {
         //type
         System.out.println(infotables.getTypes().toString());
@@ -273,8 +272,6 @@ public class ControllerPlantToevoegen {
         //Levensduur
         cbLevensduurTv.getItems().addAll(infotables.getConcurentiekrachten());
     }
-
-
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException {
         createplant();
         createAbiotischefactoren();
@@ -295,7 +292,6 @@ public class ControllerPlantToevoegen {
             Plant plant = new Plant(maxidplant+1 ,"test", "familie","geslacht","soort","variatie",5,20,"familie geslacht soort van" );
         plantDAO.createplant(plant);
     }
-
     public void createAbiotischefactoren() throws SQLException {
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
         //String bezonning = valuebezonning();
@@ -303,6 +299,7 @@ public class ControllerPlantToevoegen {
         AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio+1,plantid, "tt","ee ", "nat","frietjes","hey kasper");
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
     }
+<<<<<<< TempMaster2
 
     public void createCommensalisme() throws SQLException {
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
@@ -317,6 +314,32 @@ public class ControllerPlantToevoegen {
         Extra extra = new Extra(maxidextra+1,plantid,0,0,"a","b","c","d","e");
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
         //ExtraDAO.createExtra(extra);
+=======
+    public  String valuebezonning(){
+        String value="";
+        if(slBezonningTv.getValue() <1)
+        {
+            value="schaduw Plant";
+        }
+        else if (slBezonningTv.getValue() <2 && slBezonningTv.getValue()>1)
+        {
+            value ="zonnige plant";
+        }
+        else if(slBezonningTv.getValue()>2 )
+        {
+            value ="Volle zon plant";
+        }
+        return value;
+    }
+    private void Voedingsbehoeftelabelveranderen(MouseEvent e) {
+        VoedingbehoefteValueTv.setText(String.valueOf(slVoedingsbehoefteTv.getValue()));
+    }
+    private  void Vochtbehoeftelabelveranderen(MouseEvent e)  {
+        VochtbehoefteValueTv.setText(String.valueOf(slVochtbehoefteTv.getValue()));
+    }
+    private  void Bzonninglabelveranderen(MouseEvent e)   {
+        BezonningvalueTv.setText(String.valueOf(slBezonningTv.getValue()));
+>>>>>>> random
     }
 }
 
