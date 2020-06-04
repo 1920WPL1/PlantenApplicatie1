@@ -21,6 +21,8 @@ public class FenotypeDAO implements Queries {
     private PreparedStatement stmtSelectIdsByFenoMulti;
     private PreparedStatement strmgetmacid;
     private PreparedStatement stmtInsert;
+    private PreparedStatement strmGetmaxidmulti;
+    private PreparedStatement stmtInsertMulti;
 
     public FenotypeDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
@@ -30,6 +32,8 @@ public class FenotypeDAO implements Queries {
         stmtSelectIdsByFenoMulti = dbConnection.prepareStatement(GETIDSBYFENOMULTI);
         strmgetmacid = dbConnection.prepareStatement(getmaxfenotypeid);
         stmtInsert = dbConnection.prepareStatement(insertfenotype);
+        strmGetmaxidmulti = dbConnection.prepareStatement(Getmaxidmulti);
+        stmtInsertMulti = dbConnection.prepareStatement(inserfenomulti);
     }
 
     /**@author Siebe
@@ -171,6 +175,33 @@ public class FenotypeDAO implements Queries {
         rs.next();
         int maxid =rs.getInt(1) ;
         return maxid;
+    }
+    public int getmaxidmulti() throws SQLException {
+        ResultSet rs = strmGetmaxidmulti.executeQuery();
+        rs.next();
+        int maxidmulti = rs.getInt(1);
+        return  maxidmulti;
+    }
+    public void createfenomulti(FenoMulti_Eigenschap fenoMulti_eigenschap, int plantid) throws SQLException {
+        System.out.println(plantid);
+        stmtInsertMulti.setInt(1,fenoMulti_eigenschap.getId());
+        stmtInsertMulti.setInt(2,plantid);
+        stmtInsertMulti.setString(3,fenoMulti_eigenschap.getNaam());
+        stmtInsertMulti.setString(4,fenoMulti_eigenschap.getJan());
+        stmtInsertMulti.setString(5,fenoMulti_eigenschap.getFeb());
+        stmtInsertMulti.setString(6,fenoMulti_eigenschap.getMaa());
+        stmtInsertMulti.setString(7,fenoMulti_eigenschap.getApr());
+        stmtInsertMulti.setString(8,fenoMulti_eigenschap.getMei());
+        stmtInsertMulti.setString(9,fenoMulti_eigenschap.getJun());
+        stmtInsertMulti.setString(10,fenoMulti_eigenschap.getJul());
+        stmtInsertMulti.setString(11,fenoMulti_eigenschap.getAug());
+        stmtInsertMulti.setString(12,fenoMulti_eigenschap.getSep());
+        stmtInsertMulti.setString(13,fenoMulti_eigenschap.getOkt());
+        stmtInsertMulti.setString(14,fenoMulti_eigenschap.getNov());
+        stmtInsertMulti.setString(15,fenoMulti_eigenschap.getDec());
+        System.out.println(stmtInsertMulti.toString());
+        stmtInsertMulti.executeUpdate();
+        System.out.println("gelukt multi feno toegevoegd");
     }
     public void createfenotype(Fenotype fenotype) throws SQLException {
         stmtInsert.setInt(1,fenotype.getId());
