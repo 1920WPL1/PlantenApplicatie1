@@ -42,10 +42,10 @@ public class FotoDAO implements Queries {
         Foto foto = null;
 
         //SqlCommand
-        foto = new Foto(
+        /*foto = new Foto(
                 id,
                 getFotos(id)
-        );
+        );*/
 
         //Output
         return foto;
@@ -87,9 +87,9 @@ public class FotoDAO implements Queries {
         return maxid;
     }
 
-    public void createFoto(Foto foto) throws SQLException{
+    public void createFoto(Foto foto) throws SQLException {
         int lengte = foto.getFotos().size();
-        for(int i = 0; i<lengte;i++){
+        for (int i = 0; i < lengte; i++) {
             stmtInsertFoto.setInt(1, foto.getFotos().get(i).getId());
             stmtInsertFoto.setInt(2, foto.getPlant_id());
             stmtInsertFoto.setString(3, foto.getFotos().get(i).getEigenschap());
@@ -106,6 +106,7 @@ public class FotoDAO implements Queries {
         stmtInsertFoto.setBlob(5,foto.getImage());
         stmtInsertFoto.executeUpdate();
         System.out.println("foto toegevoegd");
-    }
-    //endregion
+    */
+
+    }//endregion
 }

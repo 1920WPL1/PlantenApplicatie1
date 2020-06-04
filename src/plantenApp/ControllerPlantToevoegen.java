@@ -180,6 +180,7 @@ public class ControllerPlantToevoegen {
     public RadioButton rbSmallePluimTv;
     public Button PLantToevoegenButtonTv;
     public Button TerugButtonTv;
+    public ComboBox CmdBehandeling;
     private Connection dbConnection;
     private AbiotischeFactorenDAO abiotischeFactorenDAO;
     private int plantid;
@@ -190,16 +191,18 @@ public class ControllerPlantToevoegen {
         dbConnection = Database.getInstance().getConnection();
 
         /*infotabel object aanmaken*/
-        InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
-        infoTables = infotablesDAO.getInfoTables();
+       InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
+       infoTables = infotablesDAO.getInfoTables();
 
         /*comboboxes vullen*/
         FillComboboxes(infoTables);
-
-        createplant();
+        FillComboBeheer();
 
     }
+    public void FillComboBeheer()
+    {
 
+    }
     public void FillComboboxes(InfoTables infotables) {
         //type
         System.out.println(infotables.getTypes().toString());
