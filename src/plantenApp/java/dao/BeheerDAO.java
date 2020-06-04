@@ -2,7 +2,6 @@ package plantenApp.java.dao;
 
 import plantenApp.java.model.Beheer;
 import plantenApp.java.model.Beheerdaad_Eigenschap;
-import plantenApp.java.model.Commensalisme;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,6 +16,8 @@ public class BeheerDAO implements Queries {
     private PreparedStatement stmtSelectByBeheer;
     private  PreparedStatement stmGetMaxID;
     private PreparedStatement stmInsertBeheer;
+    private  PreparedStatement stmselectall;
+    private PreparedStatement stmInsertbeheerdaad;
 
     public BeheerDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
@@ -25,6 +26,8 @@ public class BeheerDAO implements Queries {
         stmtSelectByBeheer = dbConnection.prepareStatement(GETIDSBYBEHEER);
         stmInsertBeheer = dbConnection.prepareStatement(insertBeheer);
         stmGetMaxID = dbConnection.prepareStatement(getMaxBeheerID);
+        stmselectall = dbConnection.prepareStatement(allebheerdaden);
+        stmInsertbeheerdaad = dbConnection.prepareStatement(insertbeheerdaden);
     }
 
     //region GET
@@ -79,6 +82,24 @@ public class BeheerDAO implements Queries {
         //Output
         return abioMulti;
     }
+    public ArrayList<String> getalbeheerdaden() throws SQLException {
+        //Dao
+
+        //Items
+        ArrayList<String> beheerdaaden = new ArrayList<>();
+
+        //SqlCommand
+
+        ResultSet rs = stmselectall.executeQuery();
+        while (rs.next()) {
+                String test = rs.getString("waarde");
+
+            beheerdaaden.add(test);
+        }
+
+        //Output
+        return beheerdaaden;
+    }
 
     public void createBeheer(Beheerdaad_Eigenschap beheerdaad, Beheer beheer) throws SQLException {
         stmInsertBeheer.setInt(1, beheerdaad.getId());
@@ -89,6 +110,11 @@ public class BeheerDAO implements Queries {
         stmInsertBeheer.setInt(6, beheerdaad.getFrequentie());
         stmInsertBeheer.executeUpdate();
         System.out.println("Beheer toegevoegd");
+    }
+    public void createbeheerdaad(String waarde) throws SQLException {
+        stmInsertbeheerdaad.setString(1, waarde);
+        stmInsertbeheerdaad.executeUpdate();
+        System.out.println("Beheerdaad toegevoegd");
     }
 
     public int getmaxid() throws SQLException {
