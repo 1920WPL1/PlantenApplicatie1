@@ -9,13 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * @author Siebe
- */
+/**@author Siebe*/
 public class PlantDAO implements Queries {
 
     private Connection dbConnection;
     private PreparedStatement stmtSelectById;
+    private PreparedStatement stmtSelectByPlant;
+    private PreparedStatement stmtInsert;
+    private PreparedStatement stmgetmaxid;
     private PreparedStatement stmtSelectIdsByPlant;
     private PreparedStatement stmtSelectByIds;
 
@@ -23,6 +24,9 @@ public class PlantDAO implements Queries {
         this.dbConnection = dbConnection;
 
         stmtSelectById = dbConnection.prepareStatement(GETPLANTBYID);
+        stmtSelectByPlant = dbConnection.prepareStatement(GETIDSBYPLANT);
+        stmtInsert = dbConnection.prepareStatement(Insertplant);
+        stmgetmaxid = dbConnection.prepareStatement(getmaxplantid);
         stmtSelectByIds = dbConnection.prepareStatement(GETPLANTSBYIDS);
         stmtSelectIdsByPlant = dbConnection.prepareStatement(GETIDSBYPLANT);
     }
@@ -53,7 +57,8 @@ public class PlantDAO implements Queries {
                     rs.getString("soort"),
                     rs.getString("variatie"),
                     rs.getInt("plantdichtheid_min"),
-                    rs.getInt("plantdichtheid_max")
+                    rs.getInt("plantdichtheid_max"),
+                    rs.getInt("status")
             ));
         }
 
@@ -84,6 +89,7 @@ public class PlantDAO implements Queries {
                     rs.getString("soort"),
                     rs.getString("variatie"),
                     rs.getInt("plantdichtheid_min"),
+                    rs.getInt("plantdichtheid_max"),
                     rs.getInt("plantdichtheid_max")
             );
         }
@@ -134,6 +140,25 @@ public class PlantDAO implements Queries {
         //Output
         return plant;
     }
+    public void createplant(Plant plant) throws SQLException {
+        stmtInsert.setInt(1,plant.getId());
+        stmtInsert.setString(2, plant.getType());
+        stmtInsert.setString(3,plant.getFamilie());
+        stmtInsert.setString(4,plant.getGeslacht());
+        stmtInsert.setString(5,plant.getSoort());
+        stmtInsert.setString(6,plant.getVariatie());
+        stmtInsert.setInt(7,plant.getMinPlantdichtheid());
+        stmtInsert.setInt(8,plant.getMaxPlantdichtheid());
+        stmtInsert.setString(9,plant.getFgsv());
+        stmtInsert.setInt(10,plant.getStatus());
 
-    //endregion
+        stmtInsert.executeUpdate();
+        System.out.println("gelukt plant toegevoegd");
+    }
+    public int getmaxid() throws SQLException {
+        ResultSet rs =stmgetmaxid.executeQuery();
+        rs.next();
+        int maxid =rs.getInt(1) ;
+        return maxid;
+    }
 }

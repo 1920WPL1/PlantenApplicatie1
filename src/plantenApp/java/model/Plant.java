@@ -1,8 +1,6 @@
 package plantenApp.java.model;
 
-/**
- * @author Siebe
- */
+/**@author Siebe*/
 public class Plant {
     private int id;
     private String type;
@@ -12,8 +10,9 @@ public class Plant {
     private String variatie;
     private int minPlantdichtheid;
     private int maxPlantdichtheid;
-
-    private Foto foto;
+    private String fgsv;
+    private int status;
+  private Foto foto;
     private Beheer beheer;
     private AbiotischeFactoren abiotischeFactoren;
     private Commensalisme commensalisme;
@@ -21,7 +20,7 @@ public class Plant {
     private Extra extra;
 
 
-    public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid) {
+    public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid,int status) {
         this.id = id;
         this.type = type;
         this.familie = familie;
@@ -30,7 +29,44 @@ public class Plant {
         this.variatie = variatie;
         this.minPlantdichtheid = minPlantdichtheid;
         this.maxPlantdichtheid = maxPlantdichtheid;
+        this.status = status;
+
     }
+
+    public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv, int status) {
+        this.id = id;
+        this.type = type;
+        this.familie = familie;
+        this.geslacht = geslacht;
+        this.soort = soort;
+        this.variatie = variatie;
+        this.minPlantdichtheid = minPlantdichtheid;
+        this.maxPlantdichtheid = maxPlantdichtheid;
+        this.fgsv = fgsv;
+        this.status = status;
+    }
+
+    public String getFgsv() {
+        return fgsv;
+    }
+
+    public void setFgsv(String fgsv) {
+        this.fgsv = fgsv;
+    }
+
+    public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv) {
+        this.id = id;
+        this.type = type;
+        this.familie = familie;
+        this.geslacht = geslacht;
+        this.soort = soort;
+        this.variatie = variatie;
+        this.minPlantdichtheid = minPlantdichtheid;
+        this.maxPlantdichtheid = maxPlantdichtheid;
+        this.fgsv = fgsv;
+    }
+
+
 
     public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, Foto foto, Beheer beheer, AbiotischeFactoren abiotischeFactoren, Commensalisme commensalisme, Fenotype fenotype, Extra extra) {
         this.id = id;
@@ -103,5 +139,8 @@ public class Plant {
 
     public Extra getExtra() {
         return extra;
+    }
+
+    public int getStatus() {return status;
     }
 }

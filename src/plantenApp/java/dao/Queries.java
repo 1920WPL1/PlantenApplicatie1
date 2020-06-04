@@ -216,8 +216,35 @@ public interface Queries {
     String NTBLADGROOTTE =
             "SELECT waarde FROM maxbladgrootte";
 
+    String NTLEVENSVORM =
+            "SELECT waarde FROM levensvorm";
+
     String NTFOTOHABITUS =
             "SELECT afbeelding FROM habitus";
+
+    String NTFOTOBlOEIWIJZE =
+            "SELECT afbeelding FROM bloeiwijze";
+    String INSERTABIOTISCHEFACTOREN = "Insert into " +
+            "abiotische_factoren(abiotische_id, plant_id , bezonning , grondsoort, vochtbehoefte,voedingsbehoefte,reactie_antagonistische_omg)" +
+            " VALUES (?,?, ?, ?, ?, ?, ?)";
+    String GetMaxId = "select Max(abiotische_id) from abiotische_factoren ";
+    String Insertplant =  "INSERT INTO plant" +
+            " (plant_id,type, familie,geslacht,soort,variatie,plantdichtheid_min,plantdichtheid_max,fgsv,status)" +
+            " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?)";
+    String getmaxplantid = "select Max(plant_id) from plant ";
+    String getmaxfenotypeid= "select Max(fenotype_id) from fenotype";
+    String getMaxCommensalismeID= "select Max(commensalisme_id) from commensalisme";  ;
+    String insertfenotype="insert into fenotype(fenotype_id , plant_id,bladvorm , levensvorm,habitus,bloeiwijze,bladgrootte,ratio_bloei_blad,spruitfenologie) values(?,?,?,?,?,?,?,?,?)";
+    String InsertCommensalisme = "Insert into " +
+            "commensalisme(commensalisme_id, plant_id , strategie , ontwikkelingssnelheid)" +
+            " VALUES (?,?,?,?)";
+    String getmaxextraid = "select Max(extra_id) from extra";
+    String insertextra = "insert into " + "extra(extra_id, plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar_kruidgebruik, geurend, vorstgevoelig)" +
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    String InsertCommensalismeMulti = "insert into commensalisme_multi(plant_id, eigenschap, waarde)" +
+            " VALUES (?, ?, ?)";
+    //String InsertNaam
     //endregion
 }
 

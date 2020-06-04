@@ -9,15 +9,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * @author Siebe
- */
+/**@author Siebe*/
 public class AbiotischeFactorenDAO implements Queries {
     private Connection dbConnection;
     private PreparedStatement stmtSelectAbioByID;
     private PreparedStatement stmtSelectAbioMultiByID;
     private PreparedStatement stmtSelectIdsByAbio;
     private PreparedStatement stmtSelectIdsByAbioMulti;
+    private PreparedStatement stmInsertAbiotische;
+    private  PreparedStatement stmGetmacid;
+
 
     public AbiotischeFactorenDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
@@ -26,19 +27,15 @@ public class AbiotischeFactorenDAO implements Queries {
         stmtSelectAbioMultiByID = dbConnection.prepareStatement(GETABIOTISCHBMULTIYPLANTID);
         stmtSelectIdsByAbio = dbConnection.prepareStatement(GETIDSBYABIO);
         stmtSelectIdsByAbioMulti = dbConnection.prepareStatement(GETIDSBYABIOMULTI);
+        stmInsertAbiotische = dbConnection.prepareStatement(INSERTABIOTISCHEFACTOREN);
+        stmGetmacid =dbConnection.prepareStatement(GetMaxId);
     }
 
-    //region GET
-
-    /**
+    /**@author Siebe
      * @param id -> plant_id
      * @return -> alle abiotische factoren van de specifieke plant
-     * @author Siebe
      */
     public AbiotischeFactoren getById(int id) throws SQLException {
-        //Dao
-
-        //Items
         AbiotischeFactoren abio = null;
 
         //SqlCommand
@@ -68,12 +65,8 @@ public class AbiotischeFactorenDAO implements Queries {
      * word alleen gebruikt in getById
      */
     private ArrayList<AbioMulti_Eigenschap> getByIdMulti(int id) throws SQLException {
-        //Dao
+        ArrayList<AbioMulti_Eigenschap> abioMulti = new ArrayList<>();;
 
-        //Items
-        ArrayList<AbioMulti_Eigenschap> abioMulti = new ArrayList<>();
-
-        //SqlCommand
         stmtSelectAbioMultiByID.setInt(1, id);
         ResultSet rs = stmtSelectAbioMultiByID.executeQuery();
         while (rs.next()) {
@@ -84,11 +77,88 @@ public class AbiotischeFactorenDAO implements Queries {
             );
             abioMulti.add(abioEigenschap);
         }
-
-        //Output
         return abioMulti;
     }
 
-    //endregion
+    /**@author Siebe
+     * @param sPlant_ids -> de te filteren ids
+     * @param eigenschap -> de naam van de eigenschap om op te filteren
+     * @param waarde -> de waarde van de eigenschap
+     * @return -> de gefilterde ids
+     */
+    public ArrayList<Integer> KenmerkenMultiFilter(String sPlant_ids,String eigenschap,String waarde) throws SQLException {
+        ArrayList<Integer> ids = new ArrayList<>();;
+        stmtSelectIdsByAbioMulti.setString(1,sPlant_ids);
+        stmtSelectIdsByAbioMulti.setString(2,eigenschap);
 
+        int iTrue = (waarde.isBlank()) ? 1 : 0;
+        stmtSelectIdsByAbioMulti.setString(2, waarde);
+        stmtSelectIdsByAbioMulti.setInt(3, iTrue);
+
+        ResultSet rs = stmtSelectIdsByAbioMulti.executeQuery();
+        while (rs.next()) {
+            ids.add(rs.getInt("plant_id"));
+        }
+        return ids;
+    }
+
+    /**@author Siebe
+     * @param sPlant_ids -> de te filteren ids
+     * @param bezonning -> waarde van bezonning om op te filteren
+     * @param grondsoort -> waarde van grondsoort om op te filteren
+     * @param vochtbehoefte -> waarde van vochtbehoefte om op te filteren
+     * @param voedingsbehoefte -> waarde van voedingsbehoefte om op te filteren
+     * @param reactieAntagonistischeOmgeving -> waarde van reactie antagonistische omgeving om op te filteren
+     * @return -> de gefilterde ids
+     */
+    public ArrayList<Integer> KenmerkenFilter(String sPlant_ids, String bezonning, String grondsoort, String vochtbehoefte, String voedingsbehoefte, String reactieAntagonistischeOmgeving) throws SQLException {
+        ArrayList<Integer> ids = new ArrayList<>();;
+
+        stmtSelectIdsByAbio.setString(1, sPlant_ids);
+
+        int iTrue = (bezonning.isBlank()) ? 1 : 0;
+        stmtSelectIdsByAbio.setString(2, bezonning);
+        stmtSelectIdsByAbio.setInt(3, iTrue);
+
+        iTrue = (grondsoort.isBlank()) ? 1 : 0;
+        stmtSelectIdsByAbio.setString(4, grondsoort);
+        stmtSelectIdsByAbio.setInt(5, iTrue);
+
+        iTrue = (vochtbehoefte.isBlank()) ? 1 : 0;
+        stmtSelectIdsByAbio.setString(6, vochtbehoefte);
+        stmtSelectIdsByAbio.setInt(7, iTrue);
+
+        iTrue = (voedingsbehoefte.isBlank()) ? 1 : 0;
+        stmtSelectIdsByAbio.setString(8, voedingsbehoefte);
+        stmtSelectIdsByAbio.setInt(9, iTrue);
+
+        iTrue = (reactieAntagonistischeOmgeving.isBlank()) ? 1 : 0;
+        stmtSelectIdsByAbio.setString(10, reactieAntagonistischeOmgeving);
+        stmtSelectIdsByAbio.setInt(11, iTrue);
+
+        ResultSet rs  = stmtSelectIdsByAbio.executeQuery();
+        while (rs.next()) {
+            ids.add(rs.getInt("plant_id"));
+        }
+        return ids;
+    }
+    public void CreateAbiostische(AbiotischeFactoren abiotischeFactoren) throws SQLException {
+//       stmtInsert.setInt(1, 60); // hulp vragen bij functie om max id te vragen...
+        stmInsertAbiotische.setInt(1,abiotischeFactoren.getId());
+        stmInsertAbiotische.setInt(2, abiotischeFactoren.getPlant_id());
+        stmInsertAbiotische.setString(3,abiotischeFactoren.getBezonning());
+        stmInsertAbiotische.setString(4,abiotischeFactoren.getGrondsoort());
+        stmInsertAbiotische.setString(5,abiotischeFactoren.getVochtbehoefte());
+        stmInsertAbiotische.setString(6,abiotischeFactoren.getVoedingsbehoefte());
+        stmInsertAbiotische.setString(7,abiotischeFactoren.getReactieAntagonistischeOmgeving());
+        stmInsertAbiotische.executeUpdate();
+        System.out.println("gelukt");
+    }
+
+    public int getmaxid() throws SQLException {
+        ResultSet rs =stmGetmacid.executeQuery();
+        rs.next();
+        int maxid =rs.getInt(1) ;
+        return maxid;
+    }
 }
