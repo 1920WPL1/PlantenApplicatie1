@@ -291,7 +291,7 @@ public class ControllerPlantToevoegen {
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxid();
-        Fenotype fenotype = new Fenotype(maxid + 1, plantid, "bladvorm", "levensvorm", "habitus", "bloeiwijze", 2, "ratioBloeiBlad", "spruitfenologie");
+        Fenotype fenotype = new Fenotype(maxid + 1, plantid, "bladvorm", 5, "habitus", "bloeiwijze", 2, "ratioBloeiBlad", "spruitfenologie");
         fenotypeDAO.createfenotype(fenotype);
     }
 
