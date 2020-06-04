@@ -407,575 +407,575 @@
                         </AnchorPane>
                      </content>
                   </TitledPane>
-               </children>
-            </VBox>
-            <TitledPane text="Fenotype">
-               <content>
-                  <AnchorPane>
-                     <children>
-                        <VBox layoutX="14.0" layoutY="14.0">
+                  <TitledPane text="Fenotype">
+                     <content>
+                        <AnchorPane>
                            <children>
-                              <HBox>
+                              <VBox layoutX="14.0" layoutY="14.0">
                                  <children>
                                     <HBox>
                                        <children>
-                                          <VBox>
+                                          <HBox>
                                              <children>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Bladgrootte tot:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Bladvorm">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Ratio bloei/blad:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" prefWidth="120.0" text="Spruitfenologie:">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </VBox>
-                                          <VBox>
-                                             <children>
-                                                <ComboBox fx:id="cbBladgrootteTotTv" prefHeight="30.0" prefWidth="120.0" />
-                                                <ComboBox fx:id="cbBladvormTv" prefHeight="30.0" prefWidth="120.0" />
-                                                <ComboBox fx:id="cbRatioTv" prefHeight="30.0" prefWidth="120.0" />
-                                                <ComboBox fx:id="cbSpruitfenologieTv" prefHeight="30.0" prefWidth="120.0" />
-                                             </children>
-                                          </VBox>
-                                          <Label text="       " />
-                                          <TitledPane text="Levensvorm volgens Raunkhiaer">
-                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0">
+                                                <VBox>
                                                    <children>
-                                                      <HBox layoutX="14.0" layoutY="14.0">
-                                                         <children>
-                                                            <ImageView fitHeight="226.0" fitWidth="469.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@img/LevensvormenvolgensRaunkiaer.gif" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <VBox>
-                                                               <children>
-                                                                  <RadioButton fx:id="rbHydro1Tv" mnemonicParsing="false" prefHeight="25.0" text="1. Hydrofyt">
-                                                                     <font>
-                                                                        <Font size="14.0" />
-                                                                     </font>
-                                                                  </RadioButton>
-                                                                  <RadioButton fx:id="rbHydro2Tv" mnemonicParsing="false" prefHeight="25.0" text="2. Hydrofyt">
-                                                                     <font>
-                                                                        <Font size="14.0" />
-                                                                     </font>
-                                                                  </RadioButton>
-                                                                  <RadioButton fx:id="rbHeloTv" mnemonicParsing="false" prefHeight="25.0" text="3. Helofyt">
-                                                                     <font>
-                                                                        <Font size="14.0" />
-                                                                     </font>
-                                                                  </RadioButton>
-                                                                  <RadioButton fx:id="rbCrypto1Tv" mnemonicParsing="false" prefHeight="25.0" text="4. Cryptophyt ">
-                                                                     <font>
-                                                                        <Font size="14.0" />
-                                                                     </font>
-                                                                  </RadioButton>
-                                                                  <RadioButton fx:id="rbCrypto2Tv" mnemonicParsing="false" prefHeight="25.0" text="5. Cryptophyt ">
-                                                                     <font>
-                                                                        <Font size="14.0" />
-                                                                     </font>
-                                                                  </RadioButton>
-                                                                  <RadioButton fx:id="rbHemikryptoTv" mnemonicParsing="false" prefHeight="25.0" text="6. Hemikryptofyt ">
-                                                                     <font>
-                                                                        <Font size="14.0" />
-                                                                     </font>
-                                                                  </RadioButton>
-                                                                  <RadioButton fx:id="rbChamae1Tv" mnemonicParsing="false" prefHeight="25.0" text="7. Chamaefyt">
-                                                                     <font>
-                                                                        <Font size="14.0" />
-                                                                     </font>
-                                                                  </RadioButton>
-                                                                  <RadioButton fx:id="rbChamae2Tv" mnemonicParsing="false" prefHeight="25.0" text="8. Chamaefyt">
-                                                                     <font>
-                                                                        <Font size="14.0" />
-                                                                     </font>
-                                                                  </RadioButton>
-                                                                  <RadioButton fx:id="rbFaneroTv" mnemonicParsing="false" prefHeight="25.0" text="9. Fanerophyt">
-                                                                     <font>
-                                                                        <Font size="14.0" />
-                                                                     </font>
-                                                                  </RadioButton>
-                                                               </children>
-                                                            </VBox>
-                                                         </children>
-                                                      </HBox>
+                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Bladgrootte tot:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Bladvorm">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Ratio bloei/blad:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Spruitfenologie:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
                                                    </children>
-                                                </AnchorPane>
-                                             </content>
-                                          </TitledPane>
+                                                </VBox>
+                                                <VBox>
+                                                   <children>
+                                                      <ComboBox fx:id="cbBladgrootteTotTv" prefHeight="30.0" prefWidth="120.0" />
+                                                      <ComboBox fx:id="cbBladvormTv" prefHeight="30.0" prefWidth="120.0" />
+                                                      <ComboBox fx:id="cbRatioTv" prefHeight="30.0" prefWidth="120.0" />
+                                                      <ComboBox fx:id="cbSpruitfenologieTv" prefHeight="30.0" prefWidth="120.0" />
+                                                   </children>
+                                                </VBox>
+                                                <Label text="       " />
+                                                <TitledPane text="Levensvorm volgens Raunkhiaer">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0">
+                                                         <children>
+                                                            <HBox layoutX="14.0" layoutY="14.0">
+                                                               <children>
+                                                                  <ImageView fitHeight="226.0" fitWidth="469.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@img/LevensvormenvolgensRaunkiaer.gif" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                                  <VBox>
+                                                                     <children>
+                                                                        <RadioButton fx:id="rbHydro1Tv" mnemonicParsing="false" prefHeight="25.0" text="1. Hydrofyt">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </RadioButton>
+                                                                        <RadioButton fx:id="rbHydro2Tv" mnemonicParsing="false" prefHeight="25.0" text="2. Hydrofyt">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </RadioButton>
+                                                                        <RadioButton fx:id="rbHeloTv" mnemonicParsing="false" prefHeight="25.0" text="3. Helofyt">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </RadioButton>
+                                                                        <RadioButton fx:id="rbCrypto1Tv" mnemonicParsing="false" prefHeight="25.0" text="4. Cryptophyt ">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </RadioButton>
+                                                                        <RadioButton fx:id="rbCrypto2Tv" mnemonicParsing="false" prefHeight="25.0" text="5. Cryptophyt ">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </RadioButton>
+                                                                        <RadioButton fx:id="rbHemikryptoTv" mnemonicParsing="false" prefHeight="25.0" text="6. Hemikryptofyt ">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </RadioButton>
+                                                                        <RadioButton fx:id="rbChamae1Tv" mnemonicParsing="false" prefHeight="25.0" text="7. Chamaefyt">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </RadioButton>
+                                                                        <RadioButton fx:id="rbChamae2Tv" mnemonicParsing="false" prefHeight="25.0" text="8. Chamaefyt">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </RadioButton>
+                                                                        <RadioButton fx:id="rbFaneroTv" mnemonicParsing="false" prefHeight="25.0" text="9. Fanerophyt">
+                                                                           <font>
+                                                                              <Font size="14.0" />
+                                                                           </font>
+                                                                        </RadioButton>
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </TitledPane>
+                                             </children>
+                                          </HBox>
                                        </children>
                                     </HBox>
                                  </children>
-                              </HBox>
-                              <TitledPane text="Monthly">
-                                 <content>
-                                    <AnchorPane>
-                                       <children>
-                                          <VBox layoutX="14.0" layoutY="14.0">
-                                             <children>
-                                                <HBox>
-                                                   <children>
-                                                      <Label prefHeight="30.0" prefWidth="120.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="80.0" text="Jan">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="80.0" text="Feb">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="80.0" text="Maa">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="80.0" text="Apr">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="80.0" text="Mei">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="80.0" text="Jun">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="80.0" text="Jul">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="80.0" text="Aug">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="80.0" text="Sept">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="80.0" text="Okt">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="80.0" text="Nov">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="80.0" text="Dec">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Max bladhoogte">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Spinner fx:id="spinMaxBladhJanTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBladhFebTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBladhMaaTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBladhAprTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBladhMeiTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBladhJunTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBladhJulTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBladhAugTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBladhSeptTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBladhOktTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBladhNovTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBladhDecTv" prefHeight="30.0" prefWidth="80.0" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Bladkleur">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <ComboBox fx:id="cbBladkleurJanTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBladkleurFebTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBladkleurMaaTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBladkleurAprTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBladkleurMeiTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBladkleurJunTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBladkleurJulTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBladkleurAugTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBladkleurSeptTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBladkleurOktTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBladkleurNovTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBladkleurDecTv" prefHeight="30.0" prefWidth="80.0" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Min bloeihoogte">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Spinner fx:id="spinMinBloeihJanTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMinBloeihFebTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMinBloeihMaaTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMinBloeihAprTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMinBloeihMeiTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMinBloeihJunTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMinBloeihJulTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMinBloeihAugTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMinBloeihSeptTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMinBloeihOktTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMinBloeihNovTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMinBloeihDecTv" prefHeight="30.0" prefWidth="80.0" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Max bloeihoogte">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Spinner fx:id="spinMaxBloeihJanTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBloeihFebTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBloeihMaaTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBloeihAprTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBloeihMeiTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBloeihJunTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBloeihJulTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBloeihAugTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBloeihSeptTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBloeihOktTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBloeihNovTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <Spinner fx:id="spinMaxBloeihDecTv" prefHeight="30.0" prefWidth="80.0" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <Label prefHeight="30.0" prefWidth="120.0" text="Bloeikleur">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <ComboBox fx:id="cbBloeikleurJanTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBloeikleurFebTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBloeikleurMaaTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBloeikleurAprTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBloeikleurMeiTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBloeikleurJunTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBloeikleurJulTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBloeikleurAugTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBloeikleurSeptTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBloeikleurOktTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBloeikleurNovTv" prefHeight="30.0" prefWidth="80.0" />
-                                                      <ComboBox fx:id="cbBloeikleurDecTv" prefHeight="30.0" prefWidth="80.0" />
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane text="Habitus">
-                                 <content>
-                                    <AnchorPane>
-                                       <children>
-                                          <HBox layoutX="14.0" layoutY="14.0">
-                                             <children>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbTuftedTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_01.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbUprightarchingTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_02.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbArchingTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_03.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbUprightDivergentTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_04.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbUprightErectTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_05.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbMountedTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_06.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbKOfHGOfMTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_07.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbRondOfWaaiervormigTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_08.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbKussenvormendTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_09.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbZuilvormigTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_10.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbUitbuigendTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_11.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbWortelrozetplantTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_12.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbSucculentenTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_13.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbPollenvormersTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_14.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbParasolvormigTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
-                                                      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/Habitus_15.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
-                              <TitledPane text="Bloeiwijze">
-                                 <content>
-                                    <AnchorPane>
-                                       <children>
-                                          <HBox layoutX="14.0" layoutY="14.0">
-                                             <children>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbAarTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Aar" />
-                                                      <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/aar.jpg" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbBredePluimTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Brede pluim" />
-                                                      <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/bredepluim.jpg" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbEtageTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Etage" />
-                                                      <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/etage.jpg" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbBolOfKnopTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Bol of knop" />
-                                                      <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/knop.jpg" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbMargrietachtigTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Margrietachtig" />
-                                                      <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/margrietachtig.jpg" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbSchotelTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Schotel" />
-                                                      <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/platscherm-schotel.jpg" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbSchermTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Scherm" />
-                                                      <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/scherm.jpg" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <RadioButton fx:id="rbSmallePluimTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Smalle pluim" />
-                                                      <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@img/smallepluim.jpg" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </TitledPane>
+                              </VBox>
                            </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </TitledPane>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane text="Monthly">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <VBox layoutX="14.0" layoutY="14.0">
+                                 <children>
+                                    <HBox>
+                                       <children>
+                                          <Label prefHeight="30.0" prefWidth="120.0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="80.0" text="Jan">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="80.0" text="Feb">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="80.0" text="Maa">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="80.0" text="Apr">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="80.0" text="Mei">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="80.0" text="Jun">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="80.0" text="Jul">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="80.0" text="Aug">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="80.0" text="Sept">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="80.0" text="Okt">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="80.0" text="Nov">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="30.0" prefWidth="80.0" text="Dec">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox>
+                                       <children>
+                                          <Label prefHeight="30.0" prefWidth="120.0" text="Max bladhoogte">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Spinner fx:id="spinMaxBladhJanTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhFebTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhMaaTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhAprTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhMeiTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhJunTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhJulTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhAugTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhSeptTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhOktTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhNovTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhDecTv" prefHeight="30.0" prefWidth="80.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox>
+                                       <children>
+                                          <Label prefHeight="30.0" prefWidth="120.0" text="Bladkleur">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cbBladkleurJanTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurFebTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurMaaTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurAprTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurMeiTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurJunTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurJulTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurAugTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurSeptTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurOktTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurNovTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurDecTv" prefHeight="30.0" prefWidth="80.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox>
+                                       <children>
+                                          <Label prefHeight="30.0" prefWidth="120.0" text="Min bloeihoogte">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Spinner fx:id="spinMinBloeihJanTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihFebTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihMaaTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihAprTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihMeiTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihJunTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihJulTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihAugTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihSeptTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihOktTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihNovTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihDecTv" prefHeight="30.0" prefWidth="80.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox>
+                                       <children>
+                                          <Label prefHeight="30.0" prefWidth="120.0" text="Max bloeihoogte">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Spinner fx:id="spinMaxBloeihJanTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihFebTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihMaaTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihAprTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihMeiTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihJunTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihJulTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihAugTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihSeptTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihOktTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihNovTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihDecTv" prefHeight="30.0" prefWidth="80.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox>
+                                       <children>
+                                          <Label prefHeight="30.0" prefWidth="120.0" text="Bloeikleur">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cbBloeikleurJanTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBloeikleurFebTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBloeikleurMaaTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBloeikleurAprTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBloeikleurMeiTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBloeikleurJunTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBloeikleurJulTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBloeikleurAugTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBloeikleurSeptTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBloeikleurOktTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBloeikleurNovTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBloeikleurDecTv" prefHeight="30.0" prefWidth="80.0" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane text="Habitus">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <HBox layoutX="14.0" layoutY="14.0">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbTuftedTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_01.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbUprightarchingTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_02.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbArchingTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_03.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbUprightDivergentTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_04.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbUprightErectTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_05.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbMountedTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_06.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbKOfHGOfMTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_07.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbRondOfWaaiervormigTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_08.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbKussenvormendTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_09.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbZuilvormigTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_10.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbUitbuigendTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_11.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbWortelrozetplantTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_12.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbSucculentenTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_13.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbPollenvormersTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_14.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbParasolvormigTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" />
+                                          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/Habitus_15.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane text="Bloeiwijze">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <HBox layoutX="14.0" layoutY="14.0">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbAarTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Aar" />
+                                          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/aar.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbBredePluimTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Brede pluim" />
+                                          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/bredepluim.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbEtageTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Etage" />
+                                          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/etage.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbBolOfKnopTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Bol of knop" />
+                                          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/knop.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbMargrietachtigTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Margrietachtig" />
+                                          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/margrietachtig.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbSchotelTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Schotel" />
+                                          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/platscherm-schotel.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbSchermTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Scherm" />
+                                          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/scherm.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <RadioButton fx:id="rbSmallePluimTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Smalle pluim" />
+                                          <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/smallepluim.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+               </children>
+            </VBox>
          </children>
       </HBox>
-      <Button fx:id="PLantToevoegenButtonTv" layoutX="1495.0" layoutY="980.0" mnemonicParsing="false" onMouseClicked="#Clicked_PlantToevoegen" text="Voeg plant toe">
+      <Button fx:id="PLantToevoegenButtonTv" layoutX="1305.0" layoutY="42.0" mnemonicParsing="false" onMouseClicked="#Clicked_PlantToevoegen" text="Voeg plant toe">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="TerugButtonTv" layoutX="1700.0" layoutY="980.0" mnemonicParsing="false" text="Terug">
+      <Button fx:id="TerugButtonTv" layoutX="1309.0" layoutY="123.0" mnemonicParsing="false" text="Terug">
          <font>
             <Font size="24.0" />
          </font>
