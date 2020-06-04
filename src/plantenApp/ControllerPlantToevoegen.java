@@ -1,5 +1,6 @@
 package plantenApp;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
@@ -213,14 +214,29 @@ public class ControllerPlantToevoegen {
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
+        slNectarwaardeTv.setMax(5);
+        slPollenwaardeTv.setMax(5);
+        //Change value
+        PollenValueTv.textProperty().bind(
+                Bindings.format(
+                        "%.0f",
+                        slPollenwaardeTv.valueProperty()
+                )
+        );
+        NectarwaardeValueTv.textProperty().bind(
+                Bindings.format(
+                        "%.0f",
+                        slNectarwaardeTv.valueProperty()
+                )
+        );
 
         /*infotabel object aanmaken*/
-       //InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
-        //infoTables = infotablesDAO.getInfoTables();
+       InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
+        infoTables = infotablesDAO.getInfoTables();
 
         /*comboboxes vullen*/
-        //FillComboboxes(infoTables);
-        FillComboBeheer();
+        FillComboboxes(infoTables);
+        //FillComboBeheer();
 
     }
     public void FillComboBeheer() throws SQLException {
@@ -308,9 +324,11 @@ public class ControllerPlantToevoegen {
     }
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException {
         createplant();
-        createAbiotischefactoren();
-        createfenotype();
-        createCommensalisme();
+        //createAbiotischefactoren();
+       // createfenotype();
+        //createCommensalisme();
+       // createExtra();
+        createfentotypemulti();
     }
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
@@ -339,13 +357,15 @@ public class ControllerPlantToevoegen {
         commensalismeDAO.createCommensalisme(commensalisme);
     }
     public void createExtra() throws SQLException {
+        int valueNectarwaarde = Integer.parseInt(NectarwaardeValueTv.getText());
+        int valuePollenwaarde = Integer.parseInt(PollenValueTv.getText());
         ExtraDAO extraDAO = new ExtraDAO(dbConnection);
         int maxidextra = extraDAO.getmaxid();
-        Extra extra = new Extra(maxidextra + 1, plantid, 0, 0, "a", "b", "c", "d", "e");
+        maxidextra ++;
+        System.out.println(maxidextra);
+        Extra extra = new Extra(maxidextra, plantid, valueNectarwaarde, valuePollenwaarde, "a", "b", "c", "d", "e");
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
-        //ExtraDAO.createExtra(extra);
-
-
+        extraDAO.createExtra(extra);
     }
     public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
         if (!lvLevensduurTv.getItems().contains(cbLevensduurTv.getValue())) {
@@ -401,8 +421,31 @@ public class ControllerPlantToevoegen {
     public void createfentotypemulti() throws SQLException {
             FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
             int maxid = fenotypeDAO.getmaxidmulti();
-            FenoMulti_Eigenschap fenoMulti_eigenschap = new FenoMulti_Eigenschap(maxid+1,"test","jan", "feb","maa","apr","mei","jun","jul","aug","sept","okt","nov","dec");
+            maxid++;
+        System.out.println(maxid);
+            String naam ="bladhoogte";
+            ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschaps = new ArrayList<>();
+            FenoMulti_Eigenschap bladhoogte = new FenoMulti_Eigenschap(maxid,"Bloeikleur", spinMaxBladhJanTv.getValue().toString(),spinMaxBladhFebTv.getValue().toString(),spinMaxBladhMaaTv.getValue().toString(),spinMaxBladhAprTv.getValue().toString(),spinMaxBladhMeiTv.getValue().toString(),spinMaxBladhJunTv.getValue().toString(),spinMaxBladhJulTv.getValue().toString(),spinMaxBladhAugTv.getValue().toString(),spinMaxBladhSeptTv.getValue().toString(),spinMaxBladhOktTv.getValue().toString(),spinMaxBladhNovTv.getValue().toString(),spinMaxBladhDecTv.getValue().toString());
+             maxid++;
+            FenoMulti_Eigenschap bladkleur = new FenoMulti_Eigenschap(maxid,"Bladkleur",cbBladkleurJanTv.getValue(),cbBladkleurFebTv.getValue(),cbBladkleurMaaTv.getValue(),cbBladkleurAprTv.getValue(), cbBladkleurMeiTv.getValue(), cbBladkleurJunTv.getValue(),cbBladkleurJulTv.getValue(),cbBladkleurAugTv.getValue(),cbBladkleurSeptTv.getValue(),cbBladkleurOktTv.getValue(),cbBladkleurNovTv.getValue(),cbBladkleurDecTv.getValue());
+             maxid++;
+             FenoMulti_Eigenschap minbloeihoogte = new FenoMulti_Eigenschap(maxid,"Min Bloeihoogte",spinMinBloeihJanTv.getValue().toString() , spinMinBloeihFebTv.getValue().toString(),spinMinBloeihMaaTv.getValue().toString(),spinMinBloeihAprTv.getValue().toString(),spinMinBloeihMeiTv.getValue().toString(),spinMinBloeihJunTv.getValue().toString(),spinMinBloeihJulTv.getValue().toString(),spinMinBloeihAugTv.getValue().toString(),spinMaxBloeihSeptTv.getValue().toString(),spinMinBloeihOktTv.getValue().toString(),spinMinBloeihNovTv.getValue().toString(),spinMinBloeihDecTv.getValue().toString());
+             maxid++;
+             FenoMulti_Eigenschap maxbloeihoogte = new FenoMulti_Eigenschap(maxid,"Max Bloeihoogte",spinMaxBloeihJanTv.getValue().toString(),spinMaxBloeihFebTv.getValue().toString(),spinMaxBladhMaaTv.getValue().toString(),spinMaxBloeihAprTv.getValue().toString(),spinMaxBloeihMeiTv.getValue().toString(),spinMaxBloeihJunTv.getValue().toString(),spinMaxBloeihJulTv.getValue().toString(),spinMaxBloeihAugTv.getValue().toString(),spinMaxBloeihSeptTv.getValue().toString(),spinMaxBloeihOktTv.getValue().toString(),spinMaxBloeihNovTv.getValue().toString(),spinMaxBloeihDecTv.getValue().toString());
+            maxid++;
+            FenoMulti_Eigenschap bloeikleur = new FenoMulti_Eigenschap(maxid,"Bloeikleur" ,cbBloeikleurJanTv.getValue(),cbBloeikleurFebTv.getValue(),cbBloeikleurMaaTv.getValue(),cbBloeikleurAprTv.getValue(),cbBloeikleurMeiTv.getValue(),cbBloeikleurJunTv.getValue(),cbBloeikleurJulTv.getValue(),cbBloeikleurAugTv.getValue(),cbBloeikleurSeptTv.getValue(),cbBloeikleurOktTv.getValue(),cbBloeikleurNovTv.getValue(),cbBloeikleurDecTv.getValue());
+            fenoMulti_eigenschaps.add(bladhoogte);
+            fenoMulti_eigenschaps.add(bladkleur);
+            fenoMulti_eigenschaps.add(minbloeihoogte);
+            fenoMulti_eigenschaps.add(maxbloeihoogte);
+            fenoMulti_eigenschaps.add(bloeikleur);
+        for (int i =0 ; i < 5;i++)
+        {
+            FenoMulti_Eigenschap fenoMulti_eigenschap = new FenoMulti_Eigenschap(fenoMulti_eigenschaps.get(i).getId(),fenoMulti_eigenschaps.get(i).getNaam(),fenoMulti_eigenschaps.get(i).getJan(), fenoMulti_eigenschaps.get(i).getFeb(),fenoMulti_eigenschaps.get(i).getMaa(),fenoMulti_eigenschaps.get(i).getApr(),fenoMulti_eigenschaps.get(i).getMei(),fenoMulti_eigenschaps.get(i).getJun(),fenoMulti_eigenschaps.get(i).getJul(),fenoMulti_eigenschaps.get(i).getAug(),fenoMulti_eigenschaps.get(i).getSep(),fenoMulti_eigenschaps.get(i).getOkt(),fenoMulti_eigenschaps.get(i).getNov(),fenoMulti_eigenschaps.get(i).getDec());
+
             fenotypeDAO.createfenomulti(fenoMulti_eigenschap , plantid);
+
+        }
     }
     public void createBeheer() throws SQLException{
         BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
@@ -545,6 +588,8 @@ public class ControllerPlantToevoegen {
         {
             beheerDAO.createBeheer(beheerdaad_eigenschaps.get(m) ,beheer);
         }
+    }
+    public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) {
     }
 }
 
