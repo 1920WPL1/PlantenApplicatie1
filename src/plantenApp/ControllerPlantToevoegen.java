@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
@@ -183,6 +184,10 @@ public class ControllerPlantToevoegen {
     public Button PLantToevoegenButtonTv;
     public Button TerugButtonTv;
     public ComboBox CmdBehandeling;
+    public VBox levensvormKeuzeTv;
+    public ToggleGroup bloeiwijzegroepTv;
+    public ToggleGroup habitusgroepTv;
+    public ToggleGroup lvTv;
     public TextField behandlingnaamtxt;
     public Button behandelingtoevoegenbutton;
     public Button teovoegenbehandlingbtn;
@@ -322,41 +327,113 @@ public class ControllerPlantToevoegen {
         //Levensduur
         cbLevensduurTv.getItems().addAll(infotables.getConcurentiekrachten());
     }
+
+
+    public int inputProbleem(){
+        return 0;
+    }
+
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException {
-        createplant();
-        //createAbiotischefactoren();
-       // createfenotype();
-        //createCommensalisme();
-       // createExtra();
-        createfentotypemulti();
+        createplant();//ik
+        createAbiotischefactoren();//afgewerkt
+        createAbiotischeMulti();//Mathias
+        createfenotype();//afgewerkt
+        createfenotypemulti();//Wout
+        createCommensalisme();//Kasper
+        createCommensalismeMulti();//Mathias
+        createBeheer();//Wout
+        createExtra();//Kasper
+        createFoto();
     }
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxid();
-        Fenotype fenotype = new Fenotype(maxid + 1, plantid, "bladvorm", 5, "habitus", "bloeiwijze", 2, "ratioBloeiBlad", "spruitfenologie");
+        Fenotype fenotype = new Fenotype(maxid + 1, plantid, cbBladvormTv.getValue(), levensvormCheck(), habitusCheck(), bloeiwijzeCheck(), Integer.parseInt(cbBladgrootteTotTv.getValue()), cbRatioTv.getValue(), cbSpruitfenologieTv.getValue());
         fenotypeDAO.createfenotype(fenotype);
     }
+
+    public String habitusCheck(){
+        if(rbTuftedTv.isSelected()){ return "tufted";}
+        if(rbUprightarchingTv.isSelected()){ return "Upright arching";}
+        if(rbArchingTv.isSelected()){ return "Arching";}
+        if(rbUprightDivergentTv.isSelected()){ return "Upright Divergent";}
+        if(rbUprightErectTv.isSelected()){ return "Upright erect";}
+        if(rbMountedTv.isSelected()){ return "Mounted";}
+        if(rbKOfHGOfMTv.isSelected()){ return "Kruipend of horizontaal groeiend of mattenvormend";}
+        if(rbRondOfWaaiervormigTv.isSelected()){ return "Rond- of waaiervormig";}
+        if(rbKussenvormendTv.isSelected()){ return "Kussenvormend";}
+        if(rbZuilvormigTv.isSelected()){ return "Zuilvormig";}
+        if(rbUitbuigendTv.isSelected()){ return "Uitbuigend";}
+        if(rbWortelrozetplantTv.isSelected()){ return "(Wortel)rozetplant";}
+        if(rbSucculentenTv.isSelected()){ return "Succulenten";}
+        if(rbPollenvormersTv.isSelected()){ return "Pollenvormers";}
+        if(rbParasolvormigTv.isSelected()){ return "Parasolvormig";}
+        return null;
+    }
+
+    public int levensvormCheck(){
+        if(rbHydro1Tv.isSelected()){return 1;}
+        if(rbHydro2Tv.isSelected()){return 2;}
+        if(rbHeloTv.isSelected()){return 3;}
+        if(rbCrypto1Tv.isSelected()){return 4;}
+        if(rbCrypto2Tv.isSelected()){return 5;}
+        if(rbHemikryptoTv.isSelected()){return 6;}
+        if(rbChamae1Tv.isSelected()){return 7;}
+        if(rbChamae2Tv.isSelected()){return 8;}
+        if(rbFaneroTv.isSelected()){return 9;}
+        return 0;
+    }
+
+    public String bloeiwijzeCheck(){
+        if(rbAarTv.isSelected()){return "Aar";}
+        if(rbBredePluimTv.isSelected()){return "Brede pluim";}
+        if(rbEtageTv.isSelected()){return "Etage";}
+        if(rbBolOfKnopTv.isSelected()){return "Bol of knop";}
+        if(rbMargrietachtigTv.isSelected()){return "Margrietachtig";}
+        if(rbSchotelTv.isSelected()){return "Schotel";}
+        if(rbSchermTv.isSelected()){return "Scherm";}
+        if(rbSmallePluimTv.isSelected()){return "Smalle pluim";}
+        return null;
+    }
+
     public void createplant() throws SQLException {
+        //volledig toevoegen in databank vanuit scherm, waarschijnlijk nog iets toevoegen voor te kijken of de naam al in de databank zit
         PlantDAO plantDAO = new PlantDAO(dbConnection);
         int maxidplant = plantDAO.getmaxid();
         plantid = maxidplant;
-        //public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv, int status) {
-        Plant plant = new Plant(maxidplant + 1, "test", "familie", "geslacht", "soort", "variatie", 5, 20, "familie geslacht soort van", 1);
+        Plant plant;
+        String familie = txtFamilieTv.getText();
+        String geslacht = txtGeslachtTv.getText();
+        String soort = txtSoortTv.getText();
+        String variant = txtVariantTv.getText();
+        String fgsv = familie + geslacht + soort + variant;
+        int x = 0;
+        int y = 0;
+        if(txtDichtheidXTv.getText().matches("[0-9]+")){
+            x = Integer.parseInt(txtDichtheidXTv.getText());
+        }
+        if(txtDichtheidYTv.getText().matches("[0-9]+")){
+            x = Integer.parseInt(txtDichtheidYTv.getText());
+        }
+        plant = new Plant(maxidplant + 1, cboTypeTv.getValue(), familie, geslacht, soort, variant, x, y, fgsv, 1);
         plantDAO.createplant(plant);
     }
     public void createAbiotischefactoren() throws SQLException {
+        //alles van scherm direct naar databank aangezien hier de input enkel kan gekozen worden uit gegeven lijsten
+        //deze functie is afgewerkt
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
         int maxidabio = abiotischeFactorenDAO.getmaxid();
-        AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio + 1, plantid, "tt", "ee ", "nat", "frietjes", "hey kasper");
+        AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio + 1, plantid, cbBezonningTv.getValue(), cbGrondsoortTv.getValue(), cbVochtbehoefteTv.getValue(), cbVoedingsbehoefteTv.getValue(), cbReactieAntaTv.getValue());
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
     }
     public void createCommensalisme() throws SQLException {
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
         int maxidcommensalisme = commensalismeDAO.getmaxid();
-        Commensalisme commensalisme = new Commensalisme(maxidcommensalisme + 1, plantid, "strategie", "test");
+        Commensalisme commensalisme = new Commensalisme(maxidcommensalisme + 1, plantid, "strat", cbOntwikkelingssnelheidTv.getValue());
         commensalismeDAO.createCommensalisme(commensalisme);
     }
     public void createExtra() throws SQLException {
+        //kan pas volledig gedaan worden wanneer er de kwestie van de eetbaar/kruidgebruik splitsing opgelost is
         int valueNectarwaarde = Integer.parseInt(NectarwaardeValueTv.getText());
         int valuePollenwaarde = Integer.parseInt(PollenValueTv.getText());
         ExtraDAO extraDAO = new ExtraDAO(dbConnection);
@@ -366,6 +443,7 @@ public class ControllerPlantToevoegen {
         Extra extra = new Extra(maxidextra, plantid, valueNectarwaarde, valuePollenwaarde, "a", "b", "c", "d", "e");
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
         extraDAO.createExtra(extra);
+        //ExtraDAO.createExtra(extra);
     }
     public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
         if (!lvLevensduurTv.getItems().contains(cbLevensduurTv.getValue())) {
@@ -418,7 +496,7 @@ public class ControllerPlantToevoegen {
         //Foto foto2 = new Foto(maxIdFoto + 1, plantid, "a", "b", null);
         fotoDAO.createFoto(foto1);
     }
-    public void createfentotypemulti() throws SQLException {
+    public void createfenotypemulti() throws SQLException {
             FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
             int maxid = fenotypeDAO.getmaxidmulti();
             maxid++;
