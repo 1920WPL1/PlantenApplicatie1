@@ -20,6 +20,7 @@ public class PlantDAO implements Queries {
     private PreparedStatement stmtSelectIdsByPlant;
     private PreparedStatement stmtSelectByIds;
 
+
     public PlantDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
 
@@ -162,4 +163,5 @@ public class PlantDAO implements Queries {
         int maxid =rs.getInt(1) ;
         return maxid;
     }
+
 }

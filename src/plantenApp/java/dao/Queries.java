@@ -255,7 +255,16 @@ public interface Queries {
 
     String InsertCommensalismeMulti = "insert into commensalisme_multi(plant_id, eigenschap, waarde)" +
             " VALUES (?, ?, ?)";
-    //String InsertNaam
+
+    //Queries voor toevoegen naam
+    String SelectTypeID = "select type_id from type where type_naam = ?";
+    String InsertFamilie = "insert into familie(familie_naam,type_id) values(?,?)";
+    String SelectFamilieID = "select familie_id from familie where familie_naam = ?";
+    String InsertGeslacht = "insert into geslacht(geslacht_naam,familie_id) values(?,?)";
+    String SelectGeslachtID = "select geslacht_id from geslacht where geslacht_naam = ?";
+    String InsertSoort = "insert into soort(soort_naam,geslacht_id) values(?,?)";
+    String SelectSoortID = "select soort_id from soort where soort_naam = ?";
+    String InsertVariatie = "insert into variatie(variatie_naam,soort_id) values(?,?)";
     //endregion
 }
 

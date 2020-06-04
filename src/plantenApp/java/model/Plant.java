@@ -85,6 +85,14 @@ public class Plant {
         this.extra = extra;
     }
 
+    public Plant(String type, String familie, String geslacht, String soort, String variatie){
+        this.type = type;
+        this.familie = familie;
+        this.geslacht = geslacht;
+        this.soort = soort;
+        this.variatie = variatie;
+    }
+
     public int getId() {
         return id;
     }

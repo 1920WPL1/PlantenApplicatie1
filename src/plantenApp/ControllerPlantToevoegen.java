@@ -195,13 +195,14 @@ public class ControllerPlantToevoegen {
 
         /*comboboxes vullen*/
         FillComboboxes(infoTables);
-        createplant();
+
 
     }
-    public void FillComboBeheer()
-    {
+
+    public void FillComboBeheer() {
 
     }
+
     public void FillComboboxes(InfoTables infotables) {
         //type
         System.out.println(infotables.getTypes().toString());
@@ -310,6 +311,7 @@ public class ControllerPlantToevoegen {
         Plant plant = new Plant(maxidplant + 1, "test", "familie", "geslacht", "soort", "variatie", 5, 20, "familie geslacht soort van", 1);
         plantDAO.createplant(plant);
     }
+
     public void createAbiotischefactoren() throws SQLException {
     /*
         AbiotischeFactorenDAO abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
@@ -320,6 +322,14 @@ public class ControllerPlantToevoegen {
 
     }
 
+    public void createNaam() throws SQLException {
+        NaamDAO naamDAO = new NaamDAO(dbConnection);
+        Plant plant = new Plant(cboTypeTv.getValue(),txtFamilieTv.getText(),txtGeslachtTv.getText(),txtSoortTv.getText(),txtVariantTv.getText());
+        naamDAO.createNaam(plant);
+
+
+
+    }
 
     public void createCommensalisme() throws SQLException {
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
@@ -352,99 +362,90 @@ public class ControllerPlantToevoegen {
             });
         }
     }
+
     public void createCommensalismeMulti() throws SQLException {
 
         //Toevoegen van levensduur
         CommensalismeDAO commensalismeMulti = new CommensalismeDAO(dbConnection);
 
-        System.out.println(  " " + plantid);
+        System.out.println(" " + plantid);
 
         for (int i = 0; i < lvLevensduurTv.getItems().size(); i++) {
-            CommMulti_Eigenschap levensduur = new CommMulti_Eigenschap("levensduur", lvLevensduurTv.getItems().get(i) );
+            CommMulti_Eigenschap levensduur = new CommMulti_Eigenschap("levensduur", lvLevensduurTv.getItems().get(i));
             System.out.println(levensduur.getNaam());
             commensalismeMulti.createCommensalismeMulti(levensduur, plantid);
 
         }
 
+
         //Toevoegen van sociabiliteit
-
-
-        if (chkSociabiliteit1Tv.isSelected())
-        {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1" );
+        if (chkSociabiliteit1Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
             System.out.println(sociabiliteit.getNaam());
             commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
         }
-        if (chkSociabiliteit2Tv.isSelected())
-        {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1" );
+        if (chkSociabiliteit2Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
             System.out.println(sociabiliteit.getNaam());
             commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
         }
-        if (chkSociabiliteit3Tv.isSelected())
-        {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1" );
+        if (chkSociabiliteit3Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
             System.out.println(sociabiliteit.getNaam());
             commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
         }
-        if (chkSociabiliteit4Tv.isSelected())
-        {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1" );
+        if (chkSociabiliteit4Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
             System.out.println(sociabiliteit.getNaam());
             commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
         }
-        if (chkSociabiliteit5Tv.isSelected())
-        {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1" );
+        if (chkSociabiliteit5Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
             System.out.println(sociabiliteit.getNaam());
             commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
         }
-
-
-
-
     }
 
-
-
-    public void createFoto() throws SQLException{
+    public void createFoto() throws SQLException {
         FotoDAO fotoDAO = new FotoDAO(dbConnection);
         int maxIdFoto = fotoDAO.getmaxid();
 
         ArrayList<Foto_Eigenschap> verz = new ArrayList<>();
         //hier maak je alle foto-eigenschappen aan die je in foto1 wil steken en zorg ervoor dat ze telkens een andere id krijgen dus achter die id moet iedere keer +1, +2,...
         //komen te staan telkens als er een nieuwe Foto_eigenschap aangemaakt wordt
-        Foto_Eigenschap foto_eigenschap = new Foto_Eigenschap(maxIdFoto+1,"a","b", null);
+        Foto_Eigenschap foto_eigenschap = new Foto_Eigenschap(maxIdFoto + 1, "a", "b", null);
 
         //hier steek je dan elke Foto_eigenschap die hierboven gemaakt is in deze verzameling zoals in onderstaande lijn staat
         verz.add(foto_eigenschap);
 
         //hier wordt een volledig foto-object gemaakt
-        Foto foto1 = new Foto(plantid,verz);
+        Foto foto1 = new Foto(plantid, verz);
 
         //deze onderstaande lijn wordt niet gebruikt
         //Foto foto2 = new Foto(maxIdFoto + 1, plantid, "a", "b", null);
         fotoDAO.createFoto(foto1);
     }
+
     public void createfentotypemulti() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxidmulti();
-        FenoMulti_Eigenschap fenoMulti_eigenschap = new FenoMulti_Eigenschap(maxid+1,"test","jan", "feb","maa","apr","mei","jun","jul","aug","sept","okt","nov","dec");
-        fenotypeDAO.createfenomulti(fenoMulti_eigenschap , plantid);
+        FenoMulti_Eigenschap fenoMulti_eigenschap = new FenoMulti_Eigenschap(maxid + 1, "test", "jan", "feb", "maa", "apr", "mei", "jun", "jul", "aug", "sept", "okt", "nov", "dec");
+        fenotypeDAO.createfenomulti(fenoMulti_eigenschap, plantid);
     }
 
-    public void createBeheer() throws SQLException{
+    public void createBeheer() throws SQLException {
         BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
         int maxIdBeheer = beheerDAO.getmaxid();
-        Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(maxIdBeheer+1, "Test", "Test", "Test", 5);
-        Beheer beheer = new Beheer(maxIdBeheer+1);
-        beheerDAO.createBeheer(beheerdaad_eigenschap,beheer);
+        Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(maxIdBeheer + 1, "Test", "Test", "Test", 5);
+        Beheer beheer = new Beheer(maxIdBeheer + 1);
+        beheerDAO.createBeheer(beheerdaad_eigenschap, beheer);
     }
-    private void createAbiotischeMulti() throws SQLException{
+
+    private void createAbiotischeMulti() throws SQLException {
 
         AbiotischeFactorenDAO abiotischeMulti = new AbiotischeFactorenDAO(dbConnection);
         int maxidcommensalismeMulti = abiotischeMulti.getMaxIdMulti();
-        System.out.println(  " " + plantid);
+        System.out.println(" " + plantid);
 
         for (int i = 0; i < lvHabitatTv.getItems().size(); i++) {
             AbioMulti_Eigenschap abiotisch = new AbioMulti_Eigenschap("Habitat", lvHabitatTv.getItems().get(i));
@@ -473,7 +474,7 @@ public class ControllerPlantToevoegen {
     }
 
     public void TestZooi(MouseEvent mouseEvent) throws SQLException {
-        createCommensalismeMulti();
+        createNaam();
     }
 }
 
