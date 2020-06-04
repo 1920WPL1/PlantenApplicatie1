@@ -79,7 +79,6 @@ public class CommensalismeDAO implements Queries {
         ResultSet rs = stmtSelectCommeMultiByID.executeQuery();
         while (rs.next()) {
             CommMulti_Eigenschap commEigenschap = new CommMulti_Eigenschap(
-                    rs.getInt("commensialisme_id"),
                     rs.getString("eigenschap"),
                     rs.getString("waarde")
             );
@@ -91,11 +90,13 @@ public class CommensalismeDAO implements Queries {
     }
 
     public void createCommensalisme(Commensalisme commensalisme) throws SQLException {
+        System.out.println("test");
         stmInsertCommensalisme.setInt(1, commensalisme.getId());
         stmInsertCommensalisme.setInt(2, commensalisme.getPlant_id());
         stmInsertCommensalisme.setString(3, commensalisme.getStrategie());
         stmInsertCommensalisme.setString(4, commensalisme.getOntwikkelingssnelheid());
         stmInsertCommensalisme.executeUpdate();
+        System.out.println("testttt");
         System.out.println("Commensalisme toegevoegd");
     }
     public void createCommensalismeMulti(CommMulti_Eigenschap commensalismeMulti,int plantID) throws SQLException {

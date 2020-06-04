@@ -17,15 +17,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerPlantToevoegen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerPlantToevoegen">
    <children>
       <HBox>
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <TitledPane text="Standaard">
-                    <content>
-                      <AnchorPane>
+                     <content>
+                        <AnchorPane>
                            <children>
                               <HBox layoutX="14.0" layoutY="14.0">
                                  <children>
@@ -92,11 +92,11 @@
                               </HBox>
                            </children>
                         </AnchorPane>
-                    </content>
+                     </content>
                   </TitledPane>
                   <TitledPane prefHeight="14.0" prefWidth="1096.0" text="AbiotischeFactoren">
-                    <content>
-                      <AnchorPane>
+                     <content>
+                        <AnchorPane>
                            <children>
                               <VBox layoutX="14.0" layoutY="14.0">
                                  <children>
@@ -125,19 +125,19 @@
                                              <children>
                                                 <HBox>
                                                    <children>
-                                                      <Slider fx:id="slBezonningTv" blockIncrement="1.0" max="3.0" prefHeight="30.0" prefWidth="90.0" />
+                                                      <ComboBox fx:id="cbBezonningTv" prefHeight="30.0" prefWidth="120.0" />
                                                       <Label fx:id="BezonningvalueTv" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
-                                                      <Slider fx:id="slVoedingsbehoefteTv" blockIncrement="100.0" max="3.0" prefHeight="30.0" prefWidth="90.0" showTickMarks="true" value="1.0" />
+                                                      <ComboBox fx:id="cbVoedingsbehoefteTv" prefHeight="30.0" prefWidth="120.0" />
                                                       <Label fx:id="VoedingbehoefteValueTv" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
-                                                      <Slider fx:id="slVochtbehoefteTv" prefHeight="30.0" prefWidth="90.0" />
+                                                      <ComboBox fx:id="cbVochtbehoefteTv" prefHeight="30.0" prefWidth="120.0" />
                                                       <Label fx:id="VochtbehoefteValueTv" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
                                                    </children>
                                                 </HBox>
@@ -175,7 +175,7 @@
                                           <HBox>
                                              <children>
                                                 <ComboBox fx:id="cbHabitatTv" prefHeight="30.0" prefWidth="450.0" />
-                                                <Button fx:id="btnHabitatTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="+" />
+                                                <Button fx:id="btnHabitatTv" mnemonicParsing="false" onMouseClicked="#ToevoegenAbiotischeMulti" prefHeight="30.0" prefWidth="30.0" text="+" />
                                              </children>
                                           </HBox>
                                           <ListView fx:id="lvHabitatTv" prefHeight="155.0" prefWidth="480.0" />
@@ -185,11 +185,11 @@
                               </VBox>
                            </children>
                         </AnchorPane>
-                    </content>
+                     </content>
                   </TitledPane>
                   <TitledPane text="Commensalisme">
-                    <content>
-                      <AnchorPane>
+                     <content>
+                        <AnchorPane>
                            <children>
                               <VBox layoutX="14.0" layoutY="14.0">
                                  <children>
@@ -266,19 +266,20 @@
                                     <HBox>
                                        <children>
                                           <ComboBox fx:id="cbLevensduurTv" prefHeight="30.0" prefWidth="210.0" />
-                                          <Button fx:id="btnLevensduurTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="+" />
+                                          <Button fx:id="btnLevensduurTv" mnemonicParsing="false" onMouseClicked="#ToevoegenCommensalismeMulti" prefHeight="30.0" prefWidth="30.0" text="+" />
                                        </children>
                                     </HBox>
                                     <ListView fx:id="lvLevensduurTv" prefHeight="176.0" prefWidth="240.0" />
                                  </children>
                               </VBox>
+                              <Button fx:id="btnTest" layoutX="329.0" layoutY="251.0" mnemonicParsing="false" onMouseClicked="#TestZooi" text="Button" />
                            </children>
                         </AnchorPane>
-                    </content>
+                     </content>
                   </TitledPane>
                   <TitledPane text="Extra">
-                    <content>
-                      <AnchorPane>
+                     <content>
+                        <AnchorPane>
                            <children>
                               <HBox layoutX="14.0" layoutY="14.0">
                                  <children>
@@ -404,13 +405,13 @@
                               </HBox>
                            </children>
                         </AnchorPane>
-                    </content>
+                     </content>
                   </TitledPane>
                </children>
             </VBox>
             <TitledPane text="Fenotype">
-              <content>
-                <AnchorPane>
+               <content>
+                  <AnchorPane>
                      <children>
                         <VBox layoutX="14.0" layoutY="14.0">
                            <children>
@@ -522,8 +523,8 @@
                                  </children>
                               </HBox>
                               <TitledPane text="Monthly">
-                                <content>
-                                  <AnchorPane>
+                                 <content>
+                                    <AnchorPane>
                                        <children>
                                           <VBox layoutX="14.0" layoutY="14.0">
                                              <children>
@@ -705,11 +706,11 @@
                                           </VBox>
                                        </children>
                                     </AnchorPane>
-                                </content>
+                                 </content>
                               </TitledPane>
                               <TitledPane text="Habitus">
-                                <content>
-                                  <AnchorPane>
+                                 <content>
+                                    <AnchorPane>
                                        <children>
                                           <HBox layoutX="14.0" layoutY="14.0">
                                              <children>
@@ -867,7 +868,7 @@
                                           </HBox>
                                        </children>
                                     </AnchorPane>
-                                </content>
+                                 </content>
                               </TitledPane>
                               <TitledPane text="Bloeiwijze">
                                  <content>
@@ -965,7 +966,7 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-              </content>
+               </content>
             </TitledPane>
          </children>
       </HBox>

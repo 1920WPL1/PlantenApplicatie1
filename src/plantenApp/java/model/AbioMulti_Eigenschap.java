@@ -6,8 +6,8 @@ public class AbioMulti_Eigenschap {
     private String naam;
     private String value;
 
-    public AbioMulti_Eigenschap(int id, String naam, String value) {
-        this.id = id;
+    public AbioMulti_Eigenschap(String naam, String value) {
+
         this.naam = naam;
         this.value = value;
     }

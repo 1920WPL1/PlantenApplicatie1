@@ -6,7 +6,7 @@ public class CommMulti_Eigenschap {
     private String naam;
     private String value;
 
-    public CommMulti_Eigenschap(int id, String naam, String value) {
+    public CommMulti_Eigenschap(String naam, String value) {
         this.id = id;
         this.naam = naam;
         this.value = value;

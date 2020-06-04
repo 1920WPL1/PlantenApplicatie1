@@ -10,7 +10,13 @@ public class Foto {
     private String eigenschap;
     private String url;
     private Blob image;
-    //private ArrayList<Foto_Eigenschap> fotos;
+    private ArrayList<Foto_Eigenschap> fotos;
+
+    public Foto(int plant_id, ArrayList<Foto_Eigenschap> fotos) {
+        this.plant_id = plant_id;
+        this.fotos = fotos;
+    }
+
 
     public Foto(int id, int plant_id, String eigenschap, String url, Blob image) {
         this.id = id;
@@ -20,10 +26,16 @@ public class Foto {
         this.image = image;
     }
 
+
+
+    public ArrayList<Foto_Eigenschap> getFotos(){return fotos;}
+
     public int getPlant_id() {
         return plant_id;
     }
 
+    /*
+    onderstaande wordt niet gebruikt
     public int getId() {
         return id;
     }
@@ -33,5 +45,5 @@ public class Foto {
     public String getUrl(){return url;}
 
     public Blob getImage(){return image;}
-
+    */
 }
