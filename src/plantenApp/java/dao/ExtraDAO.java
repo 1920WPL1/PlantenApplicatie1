@@ -71,6 +71,8 @@ public class ExtraDAO implements Queries {
         //opletten voor de nummers en die aanpassen als eetbaar en kruidgebruik 2 verschillende kolommen worden
         stmtInsertExtra.setString(7,extra.getGeurend());
         stmtInsertExtra.setString(8,extra.getVorstgevoelig());
+        stmtInsertExtra.executeUpdate();
+        System.out.println("extra toegevoegd");
     }
     public int getmaxid() throws SQLException{
         ResultSet rs = stmtGetmaxid.executeQuery();

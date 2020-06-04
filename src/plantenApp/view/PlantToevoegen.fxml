@@ -608,18 +608,18 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Spinner fx:id="spinMaxBladhJanTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhFebTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhMaaTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhAprTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhMeiTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhJunTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhJulTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhAugTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhSeptTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhOktTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhNovTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhDecTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhJanTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhFebTv" min="0" max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhMaaTv" min="0" max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhAprTv" min="0" max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhMeiTv" min="0" max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhJunTv" min="0" max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhJulTv" min="0" max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhAugTv" min="0" max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhSeptTv" min="0" max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhOktTv" min="0" max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhNovTv" min="0" max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhDecTv" min="0" max="10000" prefHeight="30.0" prefWidth="80.0" />
                                        </children>
                                     </HBox>
                                     <HBox>
@@ -629,7 +629,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="cbBladkleurJanTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurJanTv"  prefHeight="30.0" prefWidth="80.0" />
                                           <ComboBox fx:id="cbBladkleurFebTv" prefHeight="30.0" prefWidth="80.0" />
                                           <ComboBox fx:id="cbBladkleurMaaTv" prefHeight="30.0" prefWidth="80.0" />
                                           <ComboBox fx:id="cbBladkleurAprTv" prefHeight="30.0" prefWidth="80.0" />
@@ -650,18 +650,18 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Spinner fx:id="spinMinBloeihJanTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihFebTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihMaaTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihAprTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihMeiTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihJunTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihJulTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihAugTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihSeptTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihOktTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihNovTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihDecTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihJanTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihFebTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihMaaTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihAprTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihMeiTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihJunTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihJulTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihAugTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihSeptTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihOktTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihNovTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihDecTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
                                        </children>
                                     </HBox>
                                     <HBox>
@@ -671,18 +671,18 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Spinner fx:id="spinMaxBloeihJanTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihFebTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihMaaTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihAprTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihMeiTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihJunTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihJulTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihAugTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihSeptTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihOktTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihNovTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihDecTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihJanTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihFebTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihMaaTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihAprTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihMeiTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihJunTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihJulTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihAugTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihSeptTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihOktTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihNovTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihDecTv" min="0"  max="10000" prefHeight="30.0" prefWidth="80.0" />
                                        </children>
                                     </HBox>
                                     <HBox>
