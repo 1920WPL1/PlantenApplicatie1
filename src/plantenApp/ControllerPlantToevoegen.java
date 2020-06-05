@@ -7,7 +7,6 @@ import javafx.scene.input.MouseEvent;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
-import java.sql.Array;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -40,9 +39,9 @@ public class ControllerPlantToevoegen {
     public Label VochtbehoefteValueTv;
     public ComboBox<String> cbReactieAntaTv;
     public ComboBox<String> cbGrondsoortTv;
-    public ComboBox cbHabitatTv;
+    public ComboBox<String> cbHabitatTv;
     public Button btnHabitatTv;
-    public ListView<String> lvHabitatTv;
+    public ListView lvHabitatTv;
     public ComboBox<String> cbOntwikkelingssnelheidTv;
     public CheckBox chkSociabiliteit1Tv;
     public CheckBox chkSociabiliteit2Tv;
@@ -180,8 +179,8 @@ public class ControllerPlantToevoegen {
     public RadioButton rbSmallePluimTv;
     public Button PLantToevoegenButtonTv;
     public Button TerugButtonTv;
-    public ComboBox CmdBehandeling;
     private Connection dbConnection;
+    private AbiotischeFactorenDAO abiotischeFactorenDAO;
     private int plantid;
     private InfoTables infoTables;
 
@@ -209,16 +208,14 @@ public class ControllerPlantToevoegen {
         cboTypeTv.getItems().addAll(infotables.getTypes());
 
         //Bezonning
-        System.out.println("bezoonning");
-        System.out.println(infotables.getBezonningsMogelijkheden().toString());
         cbBezonningTv.getItems().addAll(infotables.getBezonningsMogelijkheden());
-        System.out.println("test");
-        //Voedingsbehoeft
+
+        //Voedingsbehoefte
         cbVoedingsbehoefteTv.getItems().addAll(infotables.getVoedingsbehoeftes());
-        System.out.println("voding");
+
         //Vochtbehoefte
         cbVochtbehoefteTv.getItems().addAll(infotables.getVochtbehoeftes());
-        System.out.println("bocht");
+
         //bladgrootte
         cbBladgrootteTotTv.getItems().addAll(infotables.getBladgroottes());
         //bladvorm
@@ -294,13 +291,10 @@ public class ControllerPlantToevoegen {
 
 
     public void createfenotype() throws SQLException {
-        /*
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxid();
-        Fenotype fenotype = new Fenotype(maxid + 1, plantid, 5, "Hydrofyt", "habitus", "bloeiwijze", 2, "ratioBloeiBlad", "spruitfenologie");
+        Fenotype fenotype = new Fenotype(maxid + 1, plantid, "bladvorm", 5, "habitus", "bloeiwijze", 2, "ratioBloeiBlad", "spruitfenologie");
         fenotypeDAO.createfenotype(fenotype);
-        */
-
     }
 
     public void createplant() throws SQLException {
@@ -311,31 +305,12 @@ public class ControllerPlantToevoegen {
         Plant plant = new Plant(maxidplant + 1, "test", "familie", "geslacht", "soort", "variatie", 5, 20, "familie geslacht soort van", 1);
         plantDAO.createplant(plant);
     }
-
     public void createAbiotischefactoren() throws SQLException {
-    /*
-        AbiotischeFactorenDAO abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
+        abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
         int maxidabio = abiotischeFactorenDAO.getmaxid();
         AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio + 1, plantid, "tt", "ee ", "nat", "frietjes", "hey kasper");
-        abiotischeFactorenDAO.CreateAbiostische();
-*/
-
+        abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
     }
-
-    public void createNaam() throws SQLException {
-        NaamDAO naamDAO = new NaamDAO(dbConnection);
-
-        Plant plant = new Plant(cboTypeTv.getValue(),txtFamilieTv.getText(),txtGeslachtTv.getText(),txtSoortTv.getText(),txtVariantTv.getText());
-
-
-        //Controle of plantnaam al bestaat
-        int iDubbeleNaam = naamDAO.ControleDubbeleNaam(plant);
-        if (iDubbeleNaam == 0)
-        { naamDAO.createNaam(plant);}
-        System.out.println(iDubbeleNaam);
-
-    }
-
 
 
     public void createCommensalisme() throws SQLException {
@@ -344,6 +319,7 @@ public class ControllerPlantToevoegen {
         Commensalisme commensalisme = new Commensalisme(maxidcommensalisme + 1, plantid, "strategie", "test");
         commensalismeDAO.createCommensalisme(commensalisme);
     }
+
 
     public void createExtra() throws SQLException {
         ExtraDAO extraDAO = new ExtraDAO(dbConnection);
@@ -354,6 +330,7 @@ public class ControllerPlantToevoegen {
 
 
     }
+
 
     public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
         if (!lvLevensduurTv.getItems().contains(cbLevensduurTv.getValue())) {
@@ -482,8 +459,8 @@ public class ControllerPlantToevoegen {
 
 
 
+
     public void TestZooi(MouseEvent mouseEvent) throws SQLException {
         createNaam();
-    }
 }
 
