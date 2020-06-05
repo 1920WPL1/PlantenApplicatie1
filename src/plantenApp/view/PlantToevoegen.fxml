@@ -485,7 +485,7 @@
                                                                   </ImageView>
                                                                   <VBox>
                                                                      <children>
-                                                                        <RadioButton fx:id="rbHydro1Tv" mnemonicParsing="false" prefHeight="25.0" text="1. Hydrofyt">
+                                                                        <RadioButton fx:id="rbHydro1Tv" mnemonicParsing="false" prefHeight="25.0" text="1. Hydrofyt" toggleGroup="$LevensvormGroepTv">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
@@ -493,37 +493,28 @@
                                                                               <ToggleGroup fx:id="LevensvormGroepTv" />
                                                                            </toggleGroup>
                                                                         </RadioButton>
-                                                                        <RadioButton fx:id="rbHydro2Tv" mnemonicParsing="false" prefHeight="25.0" text="2. Hydrofyt">
+                                                                        <RadioButton fx:id="rbHydro2Tv" mnemonicParsing="false" prefHeight="25.0" text="2. Hydrofyt" toggleGroup="$LevensvormGroepTv">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
                                                                            <toggleGroup>
-                                                                              <ToggleGroup fx:id="LevensvormGroepTvLevensvormGroep" />
+                                                                              <ToggleGroup fx:id="LevensvormGroepTvLevensvormGroepTv" />
                                                                            </toggleGroup>
                                                                         </RadioButton>
-                                                                        <RadioButton fx:id="rbHeloTv" mnemonicParsing="false" prefHeight="25.0" text="3. Helofyt">
+                                                                        <RadioButton fx:id="rbHeloTv" mnemonicParsing="false" prefHeight="25.0" text="3. Helofyt" toggleGroup="$LevensvormGroepTv">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
-                                                                           <toggleGroup>
-                                                                              <ToggleGroup fx:id="LevensvorLevensvormGroepTvmGroep" />
-                                                                           </toggleGroup>
                                                                         </RadioButton>
-                                                                        <RadioButton fx:id="rbCrypto1Tv" mnemonicParsing="false" prefHeight="25.0" text="4. Cryptophyt ">
+                                                                        <RadioButton fx:id="rbCrypto1Tv" mnemonicParsing="false" prefHeight="25.0" text="4. Cryptophyt " toggleGroup="$LevensvormGroepTv">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
-                                                                           <toggleGroup>
-                                                                              <ToggleGroup fx:id="LevensvormLevensvormGroepTvGroep" />
-                                                                           </toggleGroup>
                                                                         </RadioButton>
-                                                                        <RadioButton fx:id="rbCrypto2Tv" mnemonicParsing="false" prefHeight="25.0" text="5. Cryptophyt ">
+                                                                        <RadioButton fx:id="rbCrypto2Tv" mnemonicParsing="false" prefHeight="25.0" text="5. Cryptophyt " toggleGroup="$LevensvormGroepTv">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
-                                                                           <toggleGroup>
-                                                                              <ToggleGroup fx:id="LevensvormGrLevensvormGroepTvoep" />
-                                                                           </toggleGroup>
                                                                         </RadioButton>
                                                                         <RadioButton fx:id="rbHemikryptoTv" mnemonicParsing="false" prefHeight="25.0" text="6. Hemikryptofyt " toggleGroup="$LevensvormGroepTv">
                                                                            <font>

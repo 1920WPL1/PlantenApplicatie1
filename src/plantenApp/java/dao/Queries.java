@@ -227,9 +227,11 @@ public interface Queries {
     String INSERTABIOTISCHEFACTOREN = "Insert into " +
             "abiotische_factoren(abiotische_id, plant_id , bezonning , grondsoort, vochtbehoefte,voedingsbehoefte,reactie_antagonistische_omg)" +
             " VALUES (?,?, ?, ?, ?, ?, ?)";
+
+    /*oude functie
     String INSERTABIOTISCHEFACTORENMULTI = "Insert into " +
             "abiotisch_multi(abiotische_id, plant_id , eigenschap, waarde) " +
-            " VALUES (?,?, ?, ?) ";
+            " VALUES (?,?, ?, ?) ";*/
     String GetMaxId = "select Max(abiotische_id) from abiotische_factoren ";
     String GetMaxIdAbioMulti = "select Max(abiotische_id) from abiotisch_multi ";
     String Insertplant =  "INSERT INTO plant" +
@@ -253,10 +255,18 @@ public interface Queries {
     String insertBeheer = "insert into " + "beheer(beheer_id, plant_id, beheerdaad, opmerking, maand, frequentie_jaar)" +
             " VALUES (?, ?, ?, ?, ?, ?)";
 
-    String InsertCommensalismeMulti = "insert into commensalisme_multi(plant_id, eigenschap, waarde)" +
-            " VALUES (?, ?, ?)";
+    //oude string
+    //String InsertCommensalismeMulti = "insert into commensalisme_multi(plant_id, eigenschap, waarde)" +
+    //        " VALUES (?, ?, ?)";
     String allebheerdaden = "select * from beheerdaad";
     String insertbeheerdaden= "insert into  beheerdaad(waarde) values(?)";
+
+    //nieuwe strings
+    String InsertCommensalismeMulti = "insert into commensalisme_multi(plant_id, eigenschap, waarde)" +
+            " VALUES (?, ?, ?)";
+    String INSERTABIOTISCHEFACTORENMULTI = "Insert into " +
+            "abiotisch_multi(plant_id , eigenschap, waarde) " +
+            " VALUES (?, ?, ?) ";
     //String InsertNaam
     //endregion
 }

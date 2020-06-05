@@ -329,24 +329,22 @@ public class ControllerPlantToevoegen {
         cbLevensduurTv.getItems().addAll(infotables.getConcurentiekrachten());
     }
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException, IOException {
-        /*createplant();
+        createplant();
         createAbiotischefactoren();
+        createAbiotischeMulti();
         createfenotype();
+        createfentotypemulti();
         createCommensalisme();
+        createCommensalismeMulti();
         createExtra();
-        createfentotypemulti();*/
-//Hier typ je gewenste scherm dat opent)
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/BeheerBehandelingPlant.fxml"));
-        Scene scene = new Scene(root);
-        Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
+        createfentotypemulti();
 
     }
 
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxid();
+        System.out.println(plantid);
         Fenotype fenotype = new Fenotype(maxid + 1, plantid, cbBladvormTv.getValue(), levensvormCheck(), habitusCheck(), bloeiwijzeCheck(), Integer.parseInt(cbBladgrootteTotTv.getValue()), cbRatioTv.getValue(), cbSpruitfenologieTv.getValue());
         fenotypeDAO.createfenotype(fenotype);
     }
@@ -402,7 +400,7 @@ public class ControllerPlantToevoegen {
         String geslacht = txtGeslachtTv.getText();
         String soort = txtSoortTv.getText();
         String variant = txtVariantTv.getText();
-        String fgsv = familie + geslacht + soort + variant;
+        String fgsv = familie +" "+ geslacht +" "+ soort +" "+ variant;
         int x = 0;
         int y = 0;
         if(txtDichtheidXTv.getText().matches("[0-9]+")){
@@ -414,6 +412,7 @@ public class ControllerPlantToevoegen {
         plant = new Plant(maxidplant + 1, cboTypeTv.getValue(), familie, geslacht, soort, variant, x, y, fgsv, 1);
         plantDAO.createplant(plant);
     }
+
     public void createAbiotischefactoren() throws SQLException {
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
         int maxidabio = abiotischeFactorenDAO.getmaxid();
@@ -518,7 +517,66 @@ public class ControllerPlantToevoegen {
             return "null";
         }
     }
+//2 onderstaande functies zijn nieuw
+    public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
+        if (!lvLevensduurTv.getItems().contains(cbLevensduurTv.getValue())) {
+            lvLevensduurTv.getItems().add((String) cbLevensduurTv.getValue());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText("Je kan niet 2 keer hetzelfde item toevoegen");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+        }
+    }
 
+    public void createCommensalismeMulti() throws SQLException {
+
+        //Toevoegen van levensduur
+        CommensalismeDAO commensalismeMulti = new CommensalismeDAO(dbConnection);
+
+        System.out.println(" " + plantid);
+
+        for (int i = 0; i < lvLevensduurTv.getItems().size(); i++) {
+            CommMulti_Eigenschap levensduur = new CommMulti_Eigenschap("levensduur", lvLevensduurTv.getItems().get(i));
+            System.out.println(levensduur.getNaam());
+            commensalismeMulti.createCommensalismeMulti(levensduur, plantid);
+
+        }
+
+
+        //Toevoegen van sociabiliteit
+        if (chkSociabiliteit1Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
+            System.out.println(sociabiliteit.getNaam());
+            commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
+        }
+        if (chkSociabiliteit2Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
+            System.out.println(sociabiliteit.getNaam());
+            commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
+        }
+        if (chkSociabiliteit3Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
+            System.out.println(sociabiliteit.getNaam());
+            commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
+        }
+        if (chkSociabiliteit4Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
+            System.out.println(sociabiliteit.getNaam());
+            commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
+        }
+        if (chkSociabiliteit5Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
+            System.out.println(sociabiliteit.getNaam());
+            commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
+        }
+    }
+
+/*
     public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
         if (!lvLevensduurTv.getItems().contains(cbLevensduurTv.getValue())) {
             lvLevensduurTv.getItems().add((String) cbLevensduurTv.getValue());
@@ -545,7 +603,7 @@ public class ControllerPlantToevoegen {
             maxidcommensalismeMulti++;
         }
         System.out.println(maxidcommensalismeMulti + " " + plantid);
-    }
+    }*/
     public void TestZooi(MouseEvent mouseEvent) throws SQLException {
         createCommensalismeMulti();
     }
@@ -607,12 +665,30 @@ public class ControllerPlantToevoegen {
             beheerDAO.createBeheer(beheerdaad_eigenschap,beheer);
         }
     }
+
+    //nieuwe functie
+    private void createAbiotischeMulti() throws SQLException {
+
+        AbiotischeFactorenDAO abiotischeMulti = new AbiotischeFactorenDAO(dbConnection);
+        int maxidcommensalismeMulti = abiotischeMulti.getMaxIdMulti();
+        System.out.println(" " + plantid);
+
+        for (int i = 0; i < lvHabitatTv.getItems().size(); i++) {
+            AbioMulti_Eigenschap abiotisch = new AbioMulti_Eigenschap("Habitat", (String) lvHabitatTv.getItems().get(i));
+
+            abiotischeMulti.CreateAbiotischeMulti(abiotisch, plantid);
+            maxidcommensalismeMulti++;
+        }
+        System.out.println(maxidcommensalismeMulti + " " + plantid);
+    }
+
+    /*oude functie
     public void createAbiotischeMulti() throws SQLException{
         int maxidabio = abiotischeFactorenDAO.getMaxIdMulti();
         System.out.println(maxidabio);
         AbioMulti_Eigenschap abioMulti_eigenschap = new AbioMulti_Eigenschap(maxidabio+1, "Test", "Test");
         abiotischeFactorenDAO.CreateAbiotischeMulti(abioMulti_eigenschap, plantid);
-    }
+    }*/
     public void behandelingtoevoegenbtn_clicked(MouseEvent mouseEvent) throws SQLException {
         try {
             BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
@@ -739,7 +815,22 @@ public class ControllerPlantToevoegen {
             beheerDAO.createBeheer(beheerdaad_eigenschaps.get(m) ,beheer);
         }
     }
+
     public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) {
+        System.out.println(cbHabitatTv.getValue());
+        if (!lvHabitatTv.getItems().contains(cbHabitatTv.getValue())) {
+            lvHabitatTv.getItems().add((String) cbHabitatTv.getValue());
+            System.out.println(cbHabitatTv.getValue());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText("Je kan niet 2 keer hetzelfde item toevoegen");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+        }
     }
 }
 
