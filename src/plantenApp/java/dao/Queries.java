@@ -3,6 +3,7 @@ package plantenApp.java.dao;
 public interface Queries {
     //region GETBYID
     String GETPLANTBYID = "SELECT * FROM plant WHERE plant_id = ?";
+    String GETPLANTSBYIDS = "SELECT * FROM plant WHERE plant_id IN ?";
 
     String GETFENOTYPEBYPLANTID = "SELECT * FROM fenotype WHERE plant_id = ?";
     String GETFENOTYPEMULTIBYPLANTID = "SELECT * FROM fenotype_multi WHERE plant_id = ?";
@@ -20,7 +21,7 @@ public interface Queries {
     String GETFOTOBYPLANTID = "SELECT * FROM foto WHERE plant_id = ?";
     //endregion
 
-    //region GETIDBYKENMERKEN
+    //region GETIDSBYKENMERKEN
     String GETIDSBYPLANT =
             "SELECT plant_id FROM plant WHERE " +
                     "type = ? OR  1=? " +
@@ -223,6 +224,40 @@ public interface Queries {
 
     String NTFOTOBlOEIWIJZE =
             "SELECT afbeelding FROM bloeiwijze";
+    String INSERTABIOTISCHEFACTOREN = "Insert into " +
+            "abiotische_factoren(abiotische_id, plant_id , bezonning , grondsoort, vochtbehoefte,voedingsbehoefte,reactie_antagonistische_omg)" +
+            " VALUES (?,?, ?, ?, ?, ?, ?)";
+    String GetMaxId = "select Max(abiotische_id) from abiotische_factoren ";
+    String GetMaxIdAbioMulti = "select Max(abiotische_id) from abiotisch_multi ";
+    String Insertplant =  "INSERT INTO plant" +
+            " (plant_id,type, familie,geslacht,soort,variatie,plantdichtheid_min,plantdichtheid_max,fgsv,status)" +
+            " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?)";
+    String getmaxplantid = "select Max(plant_id) from plant ";
+    String getmaxfenotypeid= "select Max(fenotype_id) from fenotype";
+    String getMaxCommensalismeID= "select Max(commensalisme_id) from commensalisme";  ;
+    String insertfenotype="insert into fenotype(fenotype_id , plant_id,bladvorm , levensvorm,habitus,bloeiwijze,bladgrootte,ratio_bloei_blad,spruitfenologie) values(?,?,?,?,?,?,?,?,?)";
+    String InsertCommensalisme = "Insert into " +
+            "commensalisme(commensalisme_id, plant_id , strategie , ontwikkelingssnelheid)" +
+            " VALUES (?,?,?,?)";
+    String getmaxextraid = "select Max(extra_id) from extra";
+    String getMaxBeheerID = "select Max(beheer_id) from beheer";
+    String insertextra = "insert into " + "extra(extra_id, plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar_kruidgebruik, geurend, vorstgevoelig)" +
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    String getmaxfotoid = "select Max(foto_id) from foto";
+    String insertfoto = "insert into " + "foto(foto_id, plant_id, eigenschap, url, figuur)" + " VALUES (?, ?, ?, ?, ?)";
+    String inserfenomulti = "insert into fenotype_multi(fenotype_id , plant_id,eigenschap , jan,feb,maa,apr,mei,jun,jul,aug,sep,okt,nov,dec) values(? , ?,? , ?,?,?,?,?,?,?,?,?,?,?,?)";
+    String Getmaxidmulti = "select Max(fenotype_id) from fenotype_multi";
+    String insertBeheer = "insert into " + "beheer(beheer_id, plant_id, beheerdaad, opmerking, maand, frequentie_jaar)" +
+            " VALUES (?, ?, ?, ?, ?, ?)";
+
+    String allebheerdaden = "select * from beheerdaad";
+    String insertbeheerdaden= "insert into  beheerdaad(waarde) values(?)";
+    String InsertCommensalismeMulti = "insert into commensalisme_multi(plant_id, eigenschap, waarde)" +
+            " VALUES (?, ?, ?)";
+    String INSERTABIOTISCHEFACTORENMULTI = "Insert into " +
+            "abiotisch_multi(plant_id , eigenschap, waarde) " +
+            " VALUES (?, ?, ?) ";
+    //String InsertNaam
     //endregion
 }
 

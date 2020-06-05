@@ -7,16 +7,28 @@ public class Fenotype {
     private int id;
     private int plant_id;
     private String bladvorm;
-    private String levensvorm;
+    private int levensvorm;
     private String habitus;
     private String bloeiwijze;
     private int bladgrootte;
     private String ratio_bloei_blad;
     private String spruitfenologie;
 
+    public Fenotype(int id, int plant_id, String bladvorm, int levensvorm, String habitus, String bloeiwijze, int bladgrootte, String ratio_bloei_blad, String spruitfenologie) {
+        this.id = id;
+        this.plant_id = plant_id;
+        this.bladvorm = bladvorm;
+        this.levensvorm = levensvorm;
+        this.habitus = habitus;
+        this.bloeiwijze = bloeiwijze;
+        this.bladgrootte = bladgrootte;
+        this.ratio_bloei_blad = ratio_bloei_blad;
+        this.spruitfenologie = spruitfenologie;
+    }
+
     private ArrayList<FenoMulti_Eigenschap> multiEigenschappen;
 
-    public Fenotype(int id, int plant_id, String bladvorm, String levensvorm, String habitus, String bloeiwijze, int bladgrootte, String ratio_bloei_blad, String spruitfenologie, ArrayList<FenoMulti_Eigenschap> multiEigenschappen) {
+    public Fenotype(int id, int plant_id, String bladvorm, int levensvorm, String habitus, String bloeiwijze, int bladgrootte, String ratio_bloei_blad, String spruitfenologie, ArrayList<FenoMulti_Eigenschap> multiEigenschappen) {
         this.id = id;
         this.plant_id = plant_id;
         this.bladvorm = bladvorm;
@@ -41,7 +53,7 @@ public class Fenotype {
         return bladvorm;
     }
 
-    public String getLevensvorm() {
+    public int getLevensvorm() {
         return levensvorm;
     }
 

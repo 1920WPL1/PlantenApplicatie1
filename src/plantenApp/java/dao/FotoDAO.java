@@ -14,32 +14,55 @@ public class FotoDAO implements Queries {
     private Connection dbConnection;
     private PreparedStatement stmtSelectFotoByID;
 
+    //statements voor getmaxid en createFoto in deze klasse
+    private PreparedStatement stmtGetMaxId;
+    private PreparedStatement stmtInsertFoto;
+
     public FotoDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
+
         stmtSelectFotoByID = dbConnection.prepareStatement(GETFOTOBYPLANTID);
+
+        stmtGetMaxId = dbConnection.prepareStatement(getmaxfotoid);
+        stmtInsertFoto = dbConnection.prepareStatement(insertfoto);
     }
 
-    /**@author Siebe
+    //region GET
+
+    /**
+     * @author Siebe
      * @param id -> plant_id
      * @return -> verzameling van de fotos van de specifieke plant
      */
     public Foto getFotoById(int id) throws SQLException {
+        //TODO:Afhankelijk van hoe jullie de blobs willen doen moet je dit veranderen, wil je het als image opslaan of als blob
+        //Dao
+
+        //Items
         Foto foto = null;
 
-        foto = new Foto(
+        //SqlCommand
+        /*foto = new Foto(
                 id,
                 getFotos(id)
-        );
+        );*/
+
+        //Output
         return foto;
     }
 
-    /**@author Siebe
+    /**
+     * @author Siebe
      * @param id -> plant_id
      * @return -> fotos van de specifieke plant
      */
     private ArrayList<Foto_Eigenschap> getFotos(int id) throws SQLException {
+        //Dao
+
+        //Items
         ArrayList<Foto_Eigenschap> fotos = null;
 
+        //SqlCommand
         stmtSelectFotoByID.setInt(1, id);
         ResultSet rs = stmtSelectFotoByID.executeQuery();
         while (rs.next()) {
@@ -51,6 +74,39 @@ public class FotoDAO implements Queries {
             );
             fotos.add(foto);
         }
+
+        //Output
         return fotos;
     }
+
+    //functies voor ControllerPlantToevoegen
+    public int getmaxid() throws SQLException{
+        ResultSet rs =stmtGetMaxId.executeQuery();
+        rs.next();
+        int maxid =rs.getInt(1) ;
+        return maxid;
+    }
+
+    public void createFoto(Foto foto) throws SQLException {
+        int lengte = foto.getFotos().size();
+        for (int i = 0; i < lengte; i++) {
+            stmtInsertFoto.setInt(1, foto.getFotos().get(i).getId());
+            stmtInsertFoto.setInt(2, foto.getPlant_id());
+            stmtInsertFoto.setString(3, foto.getFotos().get(i).getEigenschap());
+            stmtInsertFoto.setString(4, foto.getFotos().get(i).getUrl());
+            stmtInsertFoto.setBlob(5, foto.getFotos().get(i).getImage());
+            stmtInsertFoto.executeUpdate();
+        }
+        //onderstaande wordt niet meer gebruikt
+        /*
+        stmtInsertFoto.setInt(1, foto.getId());
+        stmtInsertFoto.setInt(2,foto.getPlant_id());
+        stmtInsertFoto.setString(3,foto.getEigenschap());
+        stmtInsertFoto.setString(4,foto.getUrl());
+        stmtInsertFoto.setBlob(5,foto.getImage());
+        stmtInsertFoto.executeUpdate();
+        System.out.println("foto toegevoegd");
+    */
+
+    }//endregion
 }

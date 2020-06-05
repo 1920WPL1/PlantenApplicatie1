@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="888.0" prefWidth="1506.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="888.0" prefWidth="1506.0" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="plantenApp.ControllerPlantToevoegen" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TitledPane animated="false" collapsible="false" text="Fiche">
-        <content>
-          <AnchorPane>
+         <content>
+            <AnchorPane>
                <children>
                   <VBox layoutX="14.0" layoutY="14.0">
                      <children>
@@ -28,7 +29,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                                    <ImageView fx:id="ivHabitusDetailO" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                        <image>
                                           <Image url="@../../../Downloads/home-slideheader_02-img.jpg" />
                                        </image>
@@ -42,7 +43,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                                    <ImageView fx:id="ivBladDetailO" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                        <image>
                                           <Image url="@../../../Downloads/fit%20(1).jpg" />
                                        </image>
@@ -56,7 +57,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                                    <ImageView fx:id="ivBloeiDetailO" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                        <image>
                                           <Image url="@../../../Downloads/flower-1235236_960_720.jpg" />
                                        </image>
@@ -73,246 +74,24 @@
                                     </Label>
                                     <HBox>
                                        <children>
-                                          <VBox>
-                                             <children>
-                                                <Label prefHeight="30.0" text="Behandeling ">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" text="Values" textFill="#838383">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" text="Values" textFill="#838383">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </VBox>
+                                          <VBox />
+                                          <Label prefWidth="20.0" />
+                                          <VBox />
                                           <Label prefWidth="20.0" />
                                           <VBox>
                                              <children>
-                                                <Label prefHeight="30.0" text="Frequentie ">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" text="Values" textFill="#838383">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label prefHeight="30.0" text="Values" textFill="#838383">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </VBox>
-                                          <Label prefWidth="20.0" />
-                                          <VBox>
-                                             <children>
-                                                <HBox>
-                                                   <children>
-                                                      <Label prefHeight="30.0" prefWidth="30.0" text="Jan">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="30.0" text="Feb">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="30.0" text="Maa">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="30.0" text="Apr">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="30.0" text="Mei">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="30.0" text="Jun">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="30.0" text="Jul">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="30.0" text="Aug">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="30.0" text="Sep">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="30.0" text="Okt">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="30.0" text="Nov">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label prefHeight="30.0" prefWidth="30.0" text="Dec">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                   </children>
-                                                </HBox>
-                                                <HBox>
-                                                   <children>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                      <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                      </CheckBox>
-                                                   </children>
-                                                </HBox>
+                                                <HBox />
+                                                <HBox />
+                                                <HBox />
                                              </children>
                                           </VBox>
                                        </children>
                                     </HBox>
+                                    <ComboBox prefHeight="31.0" prefWidth="198.0" />
                                  </children>
                               </VBox>
+                              <ListView fx:id="lvFrequentieO" prefHeight="140.0" prefWidth="249.0" />
+                              <ListView fx:id="lvBeheerbehandelingO" prefHeight="170.0" prefWidth="249.0" />
                            </children>
                         </HBox>
                         <HBox>
@@ -363,7 +142,7 @@
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                                <Label fx:id="lblXO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -377,7 +156,7 @@
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                                <Label fx:id="lblYO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -393,27 +172,27 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                          <Label fx:id="lblTypeO" prefHeight="30.0" text="Value" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                          <Label fx:id="lblFamilieO" prefHeight="30.0" text="Value" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                          <Label fx:id="lblGeslachtO" prefHeight="30.0" text="Value" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                          <Label fx:id="lblSoortO" prefHeight="30.0" text="Value" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                          <Label fx:id="lblVariantO" prefHeight="30.0" text="Value" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -432,7 +211,7 @@
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Ontwikkelinkssnelheid: ">
+                                          <Label prefHeight="30.0" text="Ontwikkelingssnelheid: ">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -461,51 +240,46 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                          <Label fx:id="lblOntwikkelingssnelheidO" prefHeight="30.0" text="Value" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
                                           <HBox>
                                              <children>
-                                                <CheckBox mnemonicParsing="false" prefHeight="30.0" text="I ">
+                                                <CheckBox fx:id="rbSociabiliteit1O" mnemonicParsing="false" prefHeight="30.0" text="I ">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </CheckBox>
-                                                <CheckBox mnemonicParsing="false" prefHeight="30.0" text="II ">
+                                                <CheckBox fx:id="rbSociabiliteit2O" mnemonicParsing="false" prefHeight="30.0" text="II ">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </CheckBox>
-                                                <CheckBox mnemonicParsing="false" prefHeight="30.0" text="III ">
+                                                <CheckBox fx:id="rbSociabiliteit3O" mnemonicParsing="false" prefHeight="30.0" text="III ">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </CheckBox>
-                                                <CheckBox mnemonicParsing="false" prefHeight="30.0" text="IV ">
+                                                <CheckBox fx:id="rbSociabiliteit4O" mnemonicParsing="false" prefHeight="30.0" text="IV ">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </CheckBox>
-                                                <CheckBox mnemonicParsing="false" prefHeight="30.0" text="V ">
+                                                <CheckBox fx:id="rbSociabiliteit5O" mnemonicParsing="false" prefHeight="30.0" text="V ">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </CheckBox>
                                              </children>
                                           </HBox>
-                                          <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                          <Label fx:id="lblStrategieO" prefHeight="30.0" text="Value" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Values" textFill="#838383">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <Label prefHeight="30.0" text="Values" textFill="#838383">
+                                          <Label fx:id="lblLevensduurO" prefHeight="30.0" text="Value" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -565,8 +339,7 @@
                                           </Label>
                                           <HBox>
                                              <children>
-                                                <Slider prefHeight="30.0" />
-                                                <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                                <Label fx:id="lblBezonningO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -575,8 +348,7 @@
                                           </HBox>
                                           <HBox>
                                              <children>
-                                                <Slider prefHeight="30.0" />
-                                                <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                                <Label fx:id="lblVochtbehoefteO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -585,34 +357,28 @@
                                           </HBox>
                                           <HBox>
                                              <children>
-                                                <Slider prefHeight="30.0" />
-                                                <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                                <Label fx:id="lblVoedingsbehoefteO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                          <Label fx:id="lblReactieO" prefHeight="30.0" text="Value" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                          <Label fx:id="lblGrondsoortO" prefHeight="30.0" text="Value" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Values" textFill="#838383">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
-                                          <Label prefHeight="30.0" text="Values" textFill="#838383">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <ListView fx:id="lvHabitatO" prefHeight="200.0" prefWidth="200.0" />
+                                             </children>
+                                          </HBox>
                                        </children>
                                     </VBox>
                                  </children>
@@ -678,8 +444,7 @@
                                           </Label>
                                           <HBox>
                                              <children>
-                                                <Slider max="5.0" prefHeight="30.0" />
-                                                <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                                <Label fx:id="lblNectarwaardeO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -688,40 +453,39 @@
                                           </HBox>
                                           <HBox>
                                              <children>
-                                                <Slider max="5.0" prefHeight="30.0" />
-                                                <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                                <Label fx:id="lblPollenwaardeO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <Label prefHeight="30.0" text="Ja" textFill="#838383">
+                                          <Label fx:id="lblBijvriendelijkO" prefHeight="30.0" text="Ja" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Ja" textFill="#838383">
+                                          <Label fx:id="lblVlindervriendelijkO" prefHeight="30.0" text="Ja" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Nee" textFill="#838383">
+                                          <Label fx:id="lblEetbaarO" prefHeight="30.0" text="Nee" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Ja" textFill="#838383">
+                                          <Label fx:id="lblKruidgebruikO" prefHeight="30.0" text="Ja" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Onbekend" textFill="#838383">
+                                          <Label fx:id="lblGeurendO" prefHeight="30.0" text="Onbekend" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label prefHeight="30.0" text="Nee" textFill="#838383">
+                                          <Label fx:id="lblVorstgevoeligO" prefHeight="30.0" text="Nee" textFill="#838383">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
@@ -781,12 +545,12 @@
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                                <Label fx:id="lblHabitusO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fx:id="ivHabitusO" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../Images/img/Habitus_01.png" />
                                                    </image>
@@ -795,27 +559,27 @@
                                           </VBox>
                                           <VBox>
                                              <children>
-                                                <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                                <Label fx:id="lblBladgrootteO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                                <Label fx:id="lblBladvormO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                                <Label fx:id="lblRatioO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                                <Label fx:id="lblSpruitfenologieO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                                <Label fx:id="lblLevensvormO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -830,12 +594,12 @@
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label prefHeight="30.0" text="Value" textFill="#838383">
+                                                <Label fx:id="lblBloeiwijzeO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fx:id="ivBloeiwijzeO" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../Images/img/aar.jpg" />
                                                    </image>
@@ -927,7 +691,7 @@
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bladhoogteMaxJanO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -996,62 +760,62 @@
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bladkleurJanO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bladkleurFebO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bladkleurMaaO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bladkleurAprO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bladkleurMeiO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bladkleurJunO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bladkleurJulO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bladkleurAugO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bladkleurSeptO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bladkleurOktO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bladkleurNovO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bladkleurDecO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -1065,62 +829,62 @@
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMinJanO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMinFebO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMinMaartO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMinAprilO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMinMeiO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMinJunO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMinJulO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMinAugO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMinSeptO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMinOktO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMinNovO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMinDecO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -1134,62 +898,62 @@
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMaxJanO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMaxFebO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMaxMaartO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMaxAprO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMaxMeiO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMaxJunO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMaxJulO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMaxAugO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMaxSeptO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMaxOktO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMaxNovO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bloeihoogteMaxDecO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -1203,62 +967,62 @@
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bloeikleurJanO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bloeikleurFebO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bloeikleurMaartO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bloeikleurAprilO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bloeikleurMeiO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bloeikleurJunO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bloeikleurJuliO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bloeikleurAugO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bloeikleurSeptO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bloeikleurOktO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bloeikleurNovO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
+                                                            <Label fx:id="bloeikleurDecO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="Kleur" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -1279,7 +1043,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-        </content>
+         </content>
       </TitledPane>
    </children>
 </AnchorPane>

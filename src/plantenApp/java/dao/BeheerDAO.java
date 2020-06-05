@@ -14,35 +14,58 @@ public class BeheerDAO implements Queries {
     private Connection dbConnection;
     private PreparedStatement stmtSelectBeheerByID;
     private PreparedStatement stmtSelectByBeheer;
+    private  PreparedStatement stmGetMaxID;
+    private PreparedStatement stmInsertBeheer;
+    private  PreparedStatement stmselectall;
+    private PreparedStatement stmInsertbeheerdaad;
 
     public BeheerDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
+
         stmtSelectBeheerByID = dbConnection.prepareStatement(GETBEHEERBYPLANTID);
         stmtSelectByBeheer = dbConnection.prepareStatement(GETIDSBYBEHEER);
+        stmInsertBeheer = dbConnection.prepareStatement(insertBeheer);
+        stmGetMaxID = dbConnection.prepareStatement(getMaxBeheerID);
+        stmselectall = dbConnection.prepareStatement(allebheerdaden);
+        stmInsertbeheerdaad = dbConnection.prepareStatement(insertbeheerdaden);
     }
 
-    /**@author Siebe
+    //region GET
+
+    /**
+     * @author Siebe
      * @param id -> plant_id
      * @return -> beheer van de specifieke plant
      */
     public Beheer getById(int id) throws SQLException {
+        //Dao
+
+        //Items
         Beheer beheer = null;
 
+        //SqlCommand
         beheer = new Beheer(
                 id,
                 getBeheerdaden(id)
         );
+
+        //Output
         return beheer;
     }
 
-    /**@author Siebe
+    /**
+     * @author Siebe
      * word alleen gebruikt in getById
      * @param id -> plant_id
      * @return -> alle beheerdaden van de specifieke plant
      */
     private ArrayList<Beheerdaad_Eigenschap> getBeheerdaden(int id) throws SQLException {
-        ArrayList<Beheerdaad_Eigenschap> abioMulti = new ArrayList<>();;
+        //Dao
 
+        //Items
+        ArrayList<Beheerdaad_Eigenschap> abioMulti = new ArrayList<>();
+
+        //SqlCommand
         stmtSelectBeheerByID.setInt(1, id);
         ResultSet rs = stmtSelectBeheerByID.executeQuery();
         while (rs.next()) {
@@ -55,37 +78,51 @@ public class BeheerDAO implements Queries {
             );
             abioMulti.add(beheerdaad);
         }
+
+        //Output
         return abioMulti;
     }
+    public ArrayList<String> getalbeheerdaden() throws SQLException {
+        //Dao
 
-    /**@author Siebe
-     * @param sPlant_ids -> de te filteren ids
-     * @param beheer -> naam van de behandeling om op te filteren
-     * @param maand -> maand van de behandeling om op te filteren
-     * @param frequentie -> frequentie om op te filteren
-     * @return -> de gefilterde ids
-     */
-    public ArrayList<Integer> KenmerkenFilter(String sPlant_ids, String beheer, String maand, int frequentie) throws SQLException {
-        ArrayList<Integer> ids = new ArrayList<Integer>();
+        //Items
+        ArrayList<String> beheerdaaden = new ArrayList<>();
 
-        stmtSelectByBeheer.setString(1, sPlant_ids);
+        //SqlCommand
 
-        int iTrue = (beheer.isBlank()) ? 1 : 0;
-        stmtSelectByBeheer.setString(2, beheer);
-        stmtSelectByBeheer.setInt(3, iTrue);
-
-        iTrue = (maand.isBlank()) ? 1 : 0;
-        stmtSelectByBeheer.setString(4, maand);
-        stmtSelectByBeheer.setInt(5, iTrue);
-
-        iTrue = (frequentie == 0) ? 1 : 0;
-        stmtSelectByBeheer.setInt(6, frequentie);
-        stmtSelectByBeheer.setInt(7, iTrue);
-
-        ResultSet rs = stmtSelectByBeheer.executeQuery();
+        ResultSet rs = stmselectall.executeQuery();
         while (rs.next()) {
-            ids.add(rs.getInt("plant_id"));
+                String test = rs.getString("waarde");
+
+            beheerdaaden.add(test);
         }
-        return ids;
+
+        //Output
+        return beheerdaaden;
     }
+
+    public void createBeheer(Beheerdaad_Eigenschap beheerdaad, int plantid) throws SQLException {
+        stmInsertBeheer.setInt(1, beheerdaad.getId());
+        stmInsertBeheer.setInt(2, plantid);
+        stmInsertBeheer.setString(3, beheerdaad.getNaam());
+        stmInsertBeheer.setString(4, beheerdaad.getOpmerking());
+        stmInsertBeheer.setString(5, beheerdaad.getMaand());
+        stmInsertBeheer.setInt(6, beheerdaad.getFrequentie());
+        stmInsertBeheer.executeUpdate();
+        System.out.println("Beheer toegevoegd");
+    }
+    public void createbeheerdaad(String waarde) throws SQLException {
+        stmInsertbeheerdaad.setString(1, waarde);
+        stmInsertbeheerdaad.executeUpdate();
+        System.out.println("Beheerdaad toegevoegd");
+    }
+
+    public int getmaxid() throws SQLException {
+        ResultSet rs =stmGetMaxID.executeQuery();
+        rs.next();
+        int maxid =rs.getInt(1) ;
+        return maxid;
+    }
+
+    //endregion
 }

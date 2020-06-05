@@ -12,6 +12,11 @@ public class AbioMulti_Eigenschap {
         this.value = value;
     }
 
+    public AbioMulti_Eigenschap(String naam, String value) {
+        this.naam = naam;
+        this.value = value;
+    }
+
     public int getId() {
         return id;
     }

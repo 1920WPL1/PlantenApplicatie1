@@ -16,22 +16,36 @@ public class CommensalismeDAO implements Queries {
     private PreparedStatement stmtSelectCommeMultiByID;
     private PreparedStatement stmtSelectIdsByComm;
     private PreparedStatement stmtSelectIdsByCommMulti;
+    private  PreparedStatement stmGetMaxID;
+    private PreparedStatement stmInsertCommensalisme;
+    private PreparedStatement stmInsertCommensalismeMulti;
 
     public CommensalismeDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
+
         stmtSelectCommeByID = dbConnection.prepareStatement(GETCOMMENSALISMEBYPLANTID);
         stmtSelectCommeMultiByID = dbConnection.prepareStatement(GETCOMMENSALISMEMULTIBYPLANTID);
         stmtSelectIdsByComm = dbConnection.prepareStatement(GETIDSBYCOMM);
         stmtSelectIdsByCommMulti = dbConnection.prepareStatement(GETIDSBYCOMMMULTI);
+        stmInsertCommensalisme = dbConnection.prepareStatement(InsertCommensalisme);
+        stmInsertCommensalismeMulti = dbConnection.prepareStatement(InsertCommensalismeMulti);
+        stmGetMaxID = dbConnection.prepareStatement(getMaxCommensalismeID);
     }
 
-    /**@author Siebe
+    //region GET
+
+    /**
+     * @author Siebe
      * @param id -> plant_id
      * @return alle abiotische factoren van de specifieke plant
      */
     public Commensalisme getById(int id) throws SQLException {
+        //Dao
+
+        //Items
         Commensalisme comm = null;
 
+        //SqlCommand
         stmtSelectCommeByID.setInt(1, id);
         ResultSet rs = stmtSelectCommeByID.executeQuery();
         if (rs.next()) {
@@ -43,17 +57,24 @@ public class CommensalismeDAO implements Queries {
                     getByIdMulti(id)
             );
         }
+
+        //Output
         return comm;
     }
 
-    /**@author Siebe
+    /**
+     * @author Siebe
      * word alleen gebruikt in getById
      * @param id -> plant_id
      * @return -> alle commensalisme_multi van de specifieke plant
      */
     private ArrayList<CommMulti_Eigenschap> getByIdMulti(int id) throws SQLException {
-        ArrayList<CommMulti_Eigenschap> commMulti = new ArrayList<>();;
+        //Dao
 
+        //Items
+        ArrayList<CommMulti_Eigenschap> commMulti = new ArrayList<>();
+
+        //SqlCommand
         stmtSelectCommeMultiByID.setInt(1, id);
         ResultSet rs = stmtSelectCommeMultiByID.executeQuery();
         while (rs.next()) {
@@ -64,55 +85,36 @@ public class CommensalismeDAO implements Queries {
             );
             commMulti.add(commEigenschap);
         }
+
+        //Output
         return commMulti;
     }
 
-    /**@author Siebe
-     * @param sPlant_ids -> de te filteren ids
-     * @param eigenschap -> de naam van de eigenschap om op te filteren
-     * @param waarde -> de waarde van de eigenschap
-     * @return -> de gefilterde ids
-     */
-    public ArrayList<Integer> KenmerkenMultiFilter(String sPlant_ids,String eigenschap,String waarde) throws SQLException {
-        ArrayList<Integer> ids = new ArrayList<>();;
-        stmtSelectIdsByCommMulti.setString(1,sPlant_ids);
-        stmtSelectIdsByCommMulti.setString(2,eigenschap);
-
-        int iTrue = (waarde.isBlank()) ? 1 : 0;
-        stmtSelectIdsByCommMulti.setString(2, waarde);
-        stmtSelectIdsByCommMulti.setInt(3, iTrue);
-
-        ResultSet rs = stmtSelectIdsByCommMulti.executeQuery();
-        while (rs.next()) {
-            ids.add(rs.getInt("plant_id"));
-        }
-        return ids;
+    public void createCommensalisme(Commensalisme commensalisme) throws SQLException {
+        System.out.println("test");
+        stmInsertCommensalisme.setInt(1, commensalisme.getId());
+        stmInsertCommensalisme.setInt(2, commensalisme.getPlant_id());
+        stmInsertCommensalisme.setString(3, commensalisme.getStrategie());
+        stmInsertCommensalisme.setString(4, commensalisme.getOntwikkelingssnelheid());
+        stmInsertCommensalisme.executeUpdate();
+        System.out.println("testttt");
+        System.out.println("Commensalisme toegevoegd");
+    }
+    public void createCommensalismeMulti(CommMulti_Eigenschap commensalismeMulti) throws SQLException {
+        stmInsertCommensalismeMulti.setInt(1, commensalismeMulti.getPlantid());
+        stmInsertCommensalismeMulti.setString(2,commensalismeMulti.getNaam());
+        stmInsertCommensalismeMulti.setString(3, commensalismeMulti.getValue());
+        stmInsertCommensalismeMulti.executeUpdate();
+        System.out.println("Commensalisme Multi toegevoegd");
     }
 
-    /**@author Siebe
-     * @param sPlant_ids -> de te filteren ids
-     * @param strategie -> waarde van stratergie om op te filteren
-     * @param ontwikkelingssnelheid -> waarde van ontwikkelingssnelheid om op te filteren
-     * @return -> de gefilterde ids
-     */
-    public ArrayList<Integer> KenmerkenFilter(String sPlant_ids, String strategie, String ontwikkelingssnelheid) throws SQLException {
-        ArrayList<Integer> ids = new ArrayList<>();;
-
-        stmtSelectIdsByComm.setString(1, sPlant_ids);
-
-        int iTrue = (strategie.isBlank()) ? 1 : 0;
-        stmtSelectIdsByComm.setString(2, strategie);
-        stmtSelectIdsByComm.setInt(3, iTrue);
-
-        iTrue = (ontwikkelingssnelheid.isBlank()) ? 1 : 0;
-        stmtSelectIdsByComm.setString(4, ontwikkelingssnelheid);
-        stmtSelectIdsByComm.setInt(5, iTrue);
-
-        ResultSet rs = stmtSelectIdsByComm.executeQuery();
-        while (rs.next()) {
-            ids.add(rs.getInt("plant_id"));
-        }
-        return ids;
+    public int getmaxid() throws SQLException {
+        ResultSet rs =stmGetMaxID.executeQuery();
+        rs.next();
+        int maxid =rs.getInt(1) ;
+        return maxid;
     }
+
+    //endregion
 }
 
