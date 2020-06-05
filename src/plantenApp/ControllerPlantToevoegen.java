@@ -1,13 +1,21 @@
 package plantenApp;
 
 import javafx.beans.binding.Bindings;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -179,124 +187,10 @@ public class ControllerPlantToevoegen {
     public RadioButton rbSmallePluimTv;
     public Button PLantToevoegenButtonTv;
     public Button TerugButtonTv;
-    public ComboBox CmdBehandeling;
     public VBox levensvormKeuzeTv;
     public ToggleGroup bloeiwijzegroepTv;
     public ToggleGroup habitusgroepTv;
     public ToggleGroup lvTv;
-    public TextField behandlingnaamtxt;
-    public Button behandelingtoevoegenbutton;
-    public Button teovoegenbehandlingbtn;
-    public Button Verwijderenbeheerbutn;
-    public ListView Beheerlistview;
-    public TextArea opmerkingtxt;
-    public Spinner frequentieNumericupdown;
-    public CheckBox jancheckbox;
-    public CheckBox febcheckbox;
-    public CheckBox maacheckbox;
-    public CheckBox aprilcheckbox;
-    public CheckBox maicheckbox;
-    public CheckBox junicheckbox;
-    public CheckBox julicheckbox;
-    public CheckBox augcheckbox;
-    public CheckBox septembecheclbox;
-    public CheckBox oktcheckbox;
-    public CheckBox novcheckbox;
-    public CheckBox deccheckbox;
-    public Button Opslaanbutton;
-    public Label boodschaptxt;
-    public ImageView ivHabitusDetailO;
-    public ImageView ivBladDetailO;
-    public ImageView ivBloeiDetailO;
-    public ListView lvFrequentieO;
-    public ListView lvBeheerbehandelingO;
-    public Label lblTypeO;
-    public Label lblFamilieO;
-    public Label lblGeslachtO;
-    public Label lblSoortO;
-    public Label lblVariantO;
-    public Label lblOntwikkelingssnelheidO;
-    public CheckBox rbSociabiliteit1O;
-    public CheckBox rbSociabiliteit2O;
-    public CheckBox rbSociabiliteit3O;
-    public CheckBox rbSociabiliteit5O;
-    public CheckBox rbSociabiliteit4O;
-    public Label lblStrategieO;
-    public Label lblLevensduurO;
-    public Label lblXO;
-    public Label lblYO;
-    public Label lblBezonningO;
-    public Label lblVochtbehoefteO;
-    public Label lblVoedingsbehoefteO;
-    public Label lblReactieO;
-    public Label lblGrondsoortO;
-    public ListView lvHabitatO;
-    public Label lblNectarwaardeO;
-    public Label lblPollenwaardeO;
-    public Label lblBijvriendelijkO;
-    public Label lblVlindervriendelijkO;
-    public Label lblEetbaarO;
-    public Label lblKruidgebruikO;
-    public Label lblGeurendO;
-    public Label lblVorstgevoeligO;
-    public Label lblHabitusO;
-    public ImageView ivHabitusO;
-    public Label lblBladgrootteO;
-    public Label lblBladvormO;
-    public Label lblRatioO;
-    public Label lblSpruitfenologieO;
-    public Label lblLevensvormO;
-    public Label lblBloeiwijzeO;
-    public ImageView ivBloeiwijzeO;
-    public Label bladhoogteMaxJanO;
-    public Label bladkleurJanO;
-    public Label bladkleurFebO;
-    public Label bladkleurMaaO;
-    public Label bladkleurAprO;
-    public Label bladkleurMeiO;
-    public Label bladkleurJunO;
-    public Label bladkleurJulO;
-    public Label bladkleurAugO;
-    public Label bladkleurSeptO;
-    public Label bladkleurOktO;
-    public Label bladkleurNovO;
-    public Label bladkleurDecO;
-    public Label bloeihoogteMinJanO;
-    public Label bloeihoogteMinFebO;
-    public Label bloeihoogteMinMaartO;
-    public Label bloeihoogteMinAprilO;
-    public Label bloeihoogteMinMeiO;
-    public Label bloeihoogteMinJunO;
-    public Label bloeihoogteMinJulO;
-    public Label bloeihoogteMinAugO;
-    public Label bloeihoogteMinSeptO;
-    public Label bloeihoogteMinOktO;
-    public Label bloeihoogteMinNovO;
-    public Label bloeihoogteMinDecO;
-    public Label bloeihoogteMaxJanO;
-    public Label bloeihoogteMaxFebO;
-    public Label bloeihoogteMaxMaartO;
-    public Label bloeihoogteMaxAprO;
-    public Label bloeihoogteMaxMeiO;
-    public Label bloeihoogteMaxJunO;
-    public Label bloeihoogteMaxJulO;
-    public Label bloeihoogteMaxAugO;
-    public Label bloeihoogteMaxSeptO;
-    public Label bloeihoogteMaxOktO;
-    public Label bloeihoogteMaxNovO;
-    public Label bloeihoogteMaxDecO;
-    public Label bloeikleurJanO;
-    public Label bloeikleurFebO;
-    public Label bloeikleurMaartO;
-    public Label bloeikleurAprilO;
-    public Label bloeikleurMeiO;
-    public Label bloeikleurJunO;
-    public Label bloeikleurJuliO;
-    public Label bloeikleurAugO;
-    public Label bloeikleurSeptO;
-    public Label bloeikleurOktO;
-    public Label bloeikleurNovO;
-    public Label bloeikleurDecO;
     private Connection dbConnection;
     private AbiotischeFactorenDAO abiotischeFactorenDAO;
     private int plantid;
@@ -313,20 +207,23 @@ public class ControllerPlantToevoegen {
     public ArrayList<Foto> fotoss = new ArrayList<>();
     public  ArrayList<Beheer> beheerss = new ArrayList<>();
     public  ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschapss = new ArrayList<>();
+    public String scherm  ;
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
-        Pollenwaarde();
-        DefaultRadioButtons();
-        /*infotabel object aanmaken*/
-        InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
-        infoTables = infotablesDAO.getInfoTables();
 
-        /*comboboxes vullen*/
-        FillComboboxes(infoTables);
-        //FillComboBeheer();
+            Pollenwaarde();
+            DefaultRadioButtons();
+            //infotabel object aanmaken*/
+            InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
+            infoTables = infotablesDAO.getInfoTables();
+
+            /*comboboxes vullen*/
+            FillComboboxes(infoTables);
+
 
     }
+
     public void Pollenwaarde()    {
         slNectarwaardeTv.setMax(5);
         slPollenwaardeTv.setMax(5);
@@ -352,11 +249,6 @@ public class ControllerPlantToevoegen {
         rbKruidgebruikNullTv.setSelected(true);
         rbGeurendNullTv.setSelected(true);
         rbVorstgevoeligNullTv.setSelected(true);
-    }
-    public void FillComboBeheer() throws SQLException {
-        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
-        CmdBehandeling.getItems().clear();
-        CmdBehandeling.getItems().addAll(beheerDAO.getalbeheerdaden());
     }
     public void FillComboboxes(InfoTables infotables) {
         //type
@@ -436,8 +328,8 @@ public class ControllerPlantToevoegen {
         //Levensduur
         cbLevensduurTv.getItems().addAll(infotables.getConcurentiekrachten());
     }
-    public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException {
-        createplant();//ik //done
+    public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException, IOException {
+        /*createplant();//ik //done
         createAbiotischefactoren();//afgewerkt //done
         createAbiotischeMulti();//Mathias //done
         createfenotype();//afgewerkt // done
@@ -447,12 +339,28 @@ public class ControllerPlantToevoegen {
         //createBeheer();//Wout dit moet nog verplaats worden naar een button op beheer scherm //done
         createExtra();//Kasper
         //createFoto(); nog geen plaats of scherm voor een foto in toe te voegen
-        gedetailleerdopbullen();
+        gedetailleerdopbullen();*/
+        openNieuwScherm(mouseEvent, "BeheeBehandelingPlant");
     }
     public void gedetailleerdopbullen()
     {
         
     }
+
+
+    public void openNieuwScherm(MouseEvent mouseEvent, String schermnaam) throws IOException {
+           Parent root = FXMLLoader.load(getClass().getResource("view/BeheeBehandelingPlant.fxml"));
+           Scene scen = new Scene(root);
+           Stage window =(Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+           window.setScene(scen);
+           window.show();
+            scherm="beheer";
+        window.setMaximized(true);
+        //ControllerBeheer controllerBeheer = new ControllerBeheer(plantss,abiotischeFactorenn,abiotischmulti,commensalismes,commMulti_eigenschapss,extrass,fenoMulti_eigenschapss,fenotypess);
+
+        // Hide this current window (if this is what you want)
+    }
+
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxid();
@@ -654,18 +562,6 @@ public class ControllerPlantToevoegen {
             fenoMulti_eigenschapss.add(fenoMulti_eigenschap);
         }
     }
-    public void createBeheer() throws SQLException{
-        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
-        int maxIdBeheer = beheerDAO.getmaxid();
-        for(int i = 0; i < Beheerlistview.getItems().size();i++)
-        {
-            maxIdBeheer++;
-            Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(maxIdBeheer+1, "Test", "Test", "Test", 5);
-            beheerdaad_eigenschapss.add(beheerdaad_eigenschap);
-            Beheer beheer = new Beheer(plantid);
-            beheerss.add(beheer);
-        }
-    }
     private void createAbiotischeMulti() throws SQLException {
 
         AbiotischeFactorenDAO abiotischeMultidao = new AbiotischeFactorenDAO(dbConnection);
@@ -677,130 +573,6 @@ public class ControllerPlantToevoegen {
             maxidcommensalismeMulti++;
             abiotischmulti.add(abiotisch);
 
-        }
-    }
-    public void behandelingtoevoegenbtn_clicked(MouseEvent mouseEvent) throws SQLException {
-        try {
-            BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
-            beheerDAO.createbeheerdaad(behandlingnaamtxt.getText());
-            FillComboBeheer();
-            behandlingnaamtxt.setText("");
-        }
-        catch (Exception e)
-        {
-            boodschaptxt.setText("er bestaat al een behandeling met deze naam");
-            behandlingnaamtxt.setText("");
-        }
-
-    }
-    public void Verwijdernbeheer_clicekd(MouseEvent mouseEvent) {
-        beheerdaad_eigenschaps.remove(Beheerlistview.getSelectionModel().getSelectedIndex());
-        Beheerlistview.getItems().clear();
-        for (int j = 0 ; j < beheerdaad_eigenschaps.size(); j++)
-        {
-            Beheerlistview.getItems().addAll(beheerdaad_eigenschaps.get(j).getNaam() + " " +beheerdaad_eigenschaps.get(j).getMaand()+ " " + beheerdaad_eigenschaps.get(j).getOpmerking() );
-        }
-    }
-    public void teovoegenbeheer_clicked(MouseEvent mouseEvent) throws SQLException {
-        try {
-            BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
-            ArrayList<String> maanden = new ArrayList<>();
-            maanden = getmaanden();
-            int id = beheerDAO.getmaxid();
-            id++;
-            for( int j=0; j < maanden.size();j++)
-            {
-                Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(id+j, CmdBehandeling.getValue().toString(), opmerkingtxt.getText(),maanden.get(j), (Integer) frequentieNumericupdown.getValue());
-                beheerdaad_eigenschaps.add(beheerdaad_eigenschap);
-                Beheerlistview.getItems().addAll(beheerdaad_eigenschaps.get(j).getNaam() + " " +beheerdaad_eigenschaps.get(j).getMaand()+ " " + beheerdaad_eigenschaps.get(j).getOpmerking() );
-                System.out.println(beheerDAO.getmaxid()+j);
-                System.out.println(beheerdaad_eigenschaps.get(j).getId());
-            }
-        }
-        catch (Exception e)
-        {
-            boodschaptxt.setText("Vul alles correct in");
-        }
-
-    }
-    public ArrayList<String> getmaanden()    {
-        ArrayList<String> maanden = new ArrayList<>();
-        if(jancheckbox.isSelected())
-        {
-            maanden.add("Januari");
-            jancheckbox.selectedProperty().set(false);
-        }
-        if(febcheckbox.isSelected())
-        {
-            maanden.add("Februarie");
-            febcheckbox.selectedProperty().set(false);
-        }
-        if(maacheckbox.isSelected())
-        {
-            maanden.add("Maart");
-            maacheckbox.selectedProperty().set(false);
-
-        }
-        if(aprilcheckbox.isSelected())
-        {
-            maanden.add("April");
-            aprilcheckbox.selectedProperty().set(false);
-
-        }
-        if(maicheckbox.isSelected())
-        {
-            maanden.add("Mei");
-            maicheckbox.selectedProperty().set(false);
-
-        }
-        if(junicheckbox.isSelected())
-        {
-            maanden.add("Juni");
-            junicheckbox.selectedProperty().set(false);
-
-        }
-        if(julicheckbox.isSelected())
-        {
-            maanden.add("Juli");
-            julicheckbox.selectedProperty().set(false);
-
-        }
-        if(augcheckbox.isSelected())
-        {
-            maanden.add("Augustus");
-            augcheckbox.selectedProperty().set(false);
-
-        }
-        if(septembecheclbox.isSelected())
-        {
-            maanden.add("September");
-            septembecheclbox.selectedProperty().set(false);
-
-        }
-        if(oktcheckbox.isSelected())
-        {
-            maanden.add("Oktober");
-            oktcheckbox.selectedProperty().set(false);
-        }
-        if(novcheckbox.isSelected())
-        {
-            maanden.add("November");
-            novcheckbox.selectedProperty().set(false);
-
-        }
-        if(deccheckbox.isSelected())
-        {
-            maanden.add("December");
-            deccheckbox.selectedProperty().set(false);
-
-        }
-        return maanden;
-    }
-    public void Opslaanbutton_clicked(MouseEvent mouseEvent) throws SQLException {
-        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
-        for (int m = 0; m < beheerdaad_eigenschaps.size();m++)
-        {
-            beheerDAO.createBeheer(beheerdaad_eigenschaps.get(m) ,plantid);
         }
     }
     public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) {

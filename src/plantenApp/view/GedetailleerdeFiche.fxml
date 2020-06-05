@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="888.0" prefWidth="1506.0" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="plantenApp.ControllerPlantToevoegen" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="888.0" prefWidth="1506.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerOverzicht">
    <children>
       <TitledPane animated="false" collapsible="false" text="Fiche">
          <content>
@@ -279,11 +279,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="lblLevensduurO" prefHeight="30.0" text="Value" textFill="#838383">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Label>
+                                          <ListView prefHeight="200.0" prefWidth="200.0" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -696,57 +692,57 @@
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bladhoogteMaxFebO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bladhoogteMaxMaaO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bladhoogteMaxAprO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bladhoogteMaxMeiO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bladhoogteMaxJunO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bladhoogteMaxJulO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bladhoogteMaxAugO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bladhoogteMaxSeptO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bladhoogteMaxOktO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bladhoogteMaxNovO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
+                                                            <Label fx:id="bladhoogteMaxDecO" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" text="0" textFill="#838383">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
