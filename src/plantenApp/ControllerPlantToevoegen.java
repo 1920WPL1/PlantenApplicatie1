@@ -324,12 +324,19 @@ public class ControllerPlantToevoegen {
 
     public void createNaam() throws SQLException {
         NaamDAO naamDAO = new NaamDAO(dbConnection);
+
         Plant plant = new Plant(cboTypeTv.getValue(),txtFamilieTv.getText(),txtGeslachtTv.getText(),txtSoortTv.getText(),txtVariantTv.getText());
-        naamDAO.createNaam(plant);
 
 
+        //Controle of plantnaam al bestaat
+        int iDubbeleNaam = naamDAO.ControleDubbeleNaam(plant);
+        if (iDubbeleNaam == 0)
+        { naamDAO.createNaam(plant);}
+        System.out.println(iDubbeleNaam);
 
     }
+
+
 
     public void createCommensalisme() throws SQLException {
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
@@ -441,21 +448,6 @@ public class ControllerPlantToevoegen {
         beheerDAO.createBeheer(beheerdaad_eigenschap, beheer);
     }
 
-    private void createAbiotischeMulti() throws SQLException {
-
-        AbiotischeFactorenDAO abiotischeMulti = new AbiotischeFactorenDAO(dbConnection);
-        int maxidcommensalismeMulti = abiotischeMulti.getMaxIdMulti();
-        System.out.println(" " + plantid);
-
-        for (int i = 0; i < lvHabitatTv.getItems().size(); i++) {
-            AbioMulti_Eigenschap abiotisch = new AbioMulti_Eigenschap("Habitat", lvHabitatTv.getItems().get(i));
-
-            abiotischeMulti.CreateAbiotischeMulti(abiotisch, plantid);
-            maxidcommensalismeMulti++;
-        }
-        System.out.println(maxidcommensalismeMulti + " " + plantid);
-    }
-
     public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) {
         System.out.println(cbHabitatTv.getValue());
         if (!lvHabitatTv.getItems().contains(cbHabitatTv.getValue())) {
@@ -472,6 +464,23 @@ public class ControllerPlantToevoegen {
             });
         }
     }
+
+    private void createAbiotischeMulti() throws SQLException {
+
+        AbiotischeFactorenDAO abiotischeMulti = new AbiotischeFactorenDAO(dbConnection);
+        int maxidcommensalismeMulti = abiotischeMulti.getMaxIdMulti();
+        System.out.println(" " + plantid);
+
+        for (int i = 0; i < lvHabitatTv.getItems().size(); i++) {
+            AbioMulti_Eigenschap abiotisch = new AbioMulti_Eigenschap("Habitat", lvHabitatTv.getItems().get(i));
+
+            abiotischeMulti.CreateAbiotischeMulti(abiotisch, plantid);
+            maxidcommensalismeMulti++;
+        }
+        System.out.println(maxidcommensalismeMulti + " " + plantid);
+    }
+
+
 
     public void TestZooi(MouseEvent mouseEvent) throws SQLException {
         createNaam();

@@ -67,7 +67,7 @@ public interface Queries {
                     "WHERE " +
                     "plant_id IN ? " +
                     "AND " +
-                    "eigenschap = ? "+
+                    "eigenschap = ? " +
                     "AND " +
                     "waarde = ? OR 1=?";
 
@@ -84,7 +84,7 @@ public interface Queries {
                     "WHERE " +
                     "plant_id IN ? " +
                     "AND " +
-                    "eigenschap = ? "+
+                    "eigenschap = ? " +
                     "AND " +
                     "waarde = ? OR 1=?";
 
@@ -111,7 +111,7 @@ public interface Queries {
                     "WHERE " +
                     "plant_id IN ? " +
                     "AND " +
-                    "eigenschap = ? "+
+                    "eigenschap = ? " +
                     "AND " +
                     "jan = ? OR 1=?" +
                     "AND " +
@@ -141,7 +141,7 @@ public interface Queries {
                     "WHERE " +
                     "plant_id IN ? " +
                     "AND " +
-                    "beheerdaad = ? OR 1=? "+
+                    "beheerdaad = ? OR 1=? " +
                     "AND " +
                     "maand = ? OR 1=?" +
                     "AND " +
@@ -227,18 +227,17 @@ public interface Queries {
     String INSERTABIOTISCHEFACTOREN = "Insert into " +
             "abiotische_factoren(abiotische_id, plant_id , bezonning , grondsoort, vochtbehoefte,voedingsbehoefte,reactie_antagonistische_omg)" +
             " VALUES (?,?, ?, ?, ?, ?, ?)";
-    String INSERTABIOTISCHEFACTORENMULTI = "Insert into " +
-            "abiotisch_multi(plant_id , eigenschap, waarde) " +
-            " VALUES (?, ?, ?) ";
+
     String GetMaxId = "select Max(abiotische_id) from abiotische_factoren ";
     String GetMaxIdAbioMulti = "select Max(abiotische_id) from abiotisch_multi ";
-    String Insertplant =  "INSERT INTO plant" +
+    String Insertplant = "INSERT INTO plant" +
             " (plant_id,type, familie,geslacht,soort,variatie,plantdichtheid_min,plantdichtheid_max,fgsv,status)" +
             " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?)";
     String getmaxplantid = "select Max(plant_id) from plant ";
-    String getmaxfenotypeid= "select Max(fenotype_id) from fenotype";
-    String getMaxCommensalismeID= "select Max(commensalisme_id) from commensalisme";  ;
-    String insertfenotype="insert into fenotype(fenotype_id , plant_id,bladvorm , levensvorm,habitus,bloeiwijze,bladgrootte,ratio_bloei_blad,spruitfenologie) values(?,?,?,?,?,?,?,?,?)";
+    String getmaxfenotypeid = "select Max(fenotype_id) from fenotype";
+    String getMaxCommensalismeID = "select Max(commensalisme_id) from commensalisme";
+    ;
+    String insertfenotype = "insert into fenotype(fenotype_id , plant_id,bladvorm , levensvorm,habitus,bloeiwijze,bladgrootte,ratio_bloei_blad,spruitfenologie) values(?,?,?,?,?,?,?,?,?)";
     String InsertCommensalisme = "Insert into " +
             "commensalisme(commensalisme_id, plant_id , strategie , ontwikkelingssnelheid)" +
             " VALUES (?,?,?,?)";
@@ -255,8 +254,14 @@ public interface Queries {
 
     String InsertCommensalismeMulti = "insert into commensalisme_multi(plant_id, eigenschap, waarde)" +
             " VALUES (?, ?, ?)";
+    String INSERTABIOTISCHEFACTORENMULTI = "Insert into " +
+            "abiotisch_multi(plant_id , eigenschap, waarde) " +
+            " VALUES (?, ?, ?) ";
 
     //Queries voor toevoegen naam
+    String SelectDubbeleNaam = "select COUNT(*) from familie f,geslacht g,soort s,variatie v, type t " +
+            "where t.type_naam = ? and f.familie_naam = ? and g.geslacht_naam = ? and s.soort_naam = ? and v.variatie_naam = ? "+
+    "and f.familie_id = g.familie_id and g.geslacht_id = s.geslacht_id and s.soort_id = v.variatie_id";
     String SelectTypeID = "select type_id from type where type_naam = ?";
     String InsertFamilie = "insert into familie(familie_naam,type_id) values(?,?)";
     String SelectFamilieID = "select familie_id from familie where familie_naam = ?";
