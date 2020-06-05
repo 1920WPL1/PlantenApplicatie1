@@ -33,10 +33,6 @@ public class CommMulti_Eigenschap {
         this.value = value;
     }
 
-    public CommMulti_Eigenschap(String naam, String value) {
-        this.naam = naam;
-        this.value = value;
-    }
 
     public int getId() {
         return id;
