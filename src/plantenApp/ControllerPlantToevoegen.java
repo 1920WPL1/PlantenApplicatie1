@@ -447,12 +447,8 @@ public class ControllerPlantToevoegen {
         //createBeheer();//Wout dit moet nog verplaats worden naar een button op beheer scherm //done
         createExtra();//Kasper
         //createFoto(); nog geen plaats of scherm voor een foto in toe te voegen
-        gedetailleerdopbullen();
     }
-    public void gedetailleerdopbullen()
-    {
-        
-    }
+    
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxid();
