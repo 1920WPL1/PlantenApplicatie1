@@ -257,6 +257,18 @@ public interface Queries {
     String INSERTABIOTISCHEFACTORENMULTI = "Insert into " +
             "abiotisch_multi(plant_id , eigenschap, waarde) " +
             " VALUES (?, ?, ?) ";
+    //Queries voor toevoegen naam
+    String SelectDubbeleNaam = "select COUNT(*) from familie f,geslacht g,soort s,variatie v, type t " +
+            "where t.type_naam = ? and f.familie_naam = ? and g.geslacht_naam = ? and s.soort_naam = ? and v.variatie_naam = ? "+
+            "and f.familie_id = g.familie_id and g.geslacht_id = s.geslacht_id and s.soort_id = v.variatie_id";
+    String SelectTypeID = "select type_id from type where type_naam = ?";
+    String InsertFamilie = "insert into familie(familie_naam,type_id) values(?,?)";
+    String SelectFamilieID = "select familie_id from familie where familie_naam = ?";
+    String InsertGeslacht = "insert into geslacht(geslacht_naam,familie_id) values(?,?)";
+    String SelectGeslachtID = "select geslacht_id from geslacht where geslacht_naam = ?";
+    String InsertSoort = "insert into soort(soort_naam,geslacht_id) values(?,?)";
+    String SelectSoortID = "select soort_id from soort where soort_naam = ?";
+    String InsertVariatie = "insert into variatie(variatie_naam,soort_id) values(?,?)";
     //String InsertNaam
     //endregion
 }

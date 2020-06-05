@@ -33,6 +33,14 @@ public class Plant {
 
     }
 
+    public Plant(String type, String familie, String geslacht, String soort, String variatie) {
+        this.type = type;
+        this.familie = familie;
+        this.geslacht = geslacht;
+        this.soort = soort;
+        this.variatie = variatie;
+    }
+
     public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv, int status) {
         this.id = id;
         this.type = type;

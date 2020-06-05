@@ -13,9 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import plantenApp.java.model.Plant;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class Controller {
@@ -103,6 +105,8 @@ public class Controller {
     private boolean maximized=false;
     private InfoTables infoTables;
     private Connection dbConnection;
+
+
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
