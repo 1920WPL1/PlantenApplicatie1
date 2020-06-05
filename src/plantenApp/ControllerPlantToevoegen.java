@@ -1,13 +1,21 @@
 package plantenApp;
 
 import javafx.beans.binding.Bindings;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -313,20 +321,27 @@ public class ControllerPlantToevoegen {
     public ArrayList<Foto> fotoss = new ArrayList<>();
     public  ArrayList<Beheer> beheerss = new ArrayList<>();
     public  ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschapss = new ArrayList<>();
+    private String scherm ;
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
-        Pollenwaarde();
-        DefaultRadioButtons();
-        /*infotabel object aanmaken*/
-        InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
-        infoTables = infotablesDAO.getInfoTables();
+        if(scherm == "toevoegen")
+        {
+            Pollenwaarde();
+            DefaultRadioButtons();
+            //infotabel object aanmaken*/
+            InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
+            infoTables = infotablesDAO.getInfoTables();
 
-        /*comboboxes vullen*/
-        FillComboboxes(infoTables);
-        //FillComboBeheer();
-
+            /*comboboxes vullen*/
+            FillComboboxes(infoTables);
+        }
+        if(scherm == "beheer")
+        {
+            FillComboBeheer();
+        }
     }
+
     public void Pollenwaarde()    {
         slNectarwaardeTv.setMax(5);
         slPollenwaardeTv.setMax(5);
@@ -436,8 +451,8 @@ public class ControllerPlantToevoegen {
         //Levensduur
         cbLevensduurTv.getItems().addAll(infotables.getConcurentiekrachten());
     }
-    public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException {
-        createplant();//ik //done
+    public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException, IOException {
+        /*createplant();//ik //done
         createAbiotischefactoren();//afgewerkt //done
         createAbiotischeMulti();//Mathias //done
         createfenotype();//afgewerkt // done
@@ -447,8 +462,26 @@ public class ControllerPlantToevoegen {
         //createBeheer();//Wout dit moet nog verplaats worden naar een button op beheer scherm //done
         createExtra();//Kasper
         //createFoto(); nog geen plaats of scherm voor een foto in toe te voegen
+        gedetailleerdopbullen();*/
+        scherm="beheer";
+        openNieuwScherm(mouseEvent, "BeheeBehandelingPlant");
     }
-    
+    public void gedetailleerdopbullen()
+    {
+        
+    }
+
+
+    public void openNieuwScherm(MouseEvent mouseEvent, String scherm) throws IOException {
+           Parent root = FXMLLoader.load(getClass().getResource("view/"+scherm+".fxml"));
+           Scene scen = new Scene(root);
+           Stage window =(Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+           window.setMaximized(true);
+           window.setScene(scen);
+           window.show();
+            // Hide this current window (if this is what you want)
+    }
+
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxid();
@@ -792,12 +825,14 @@ public class ControllerPlantToevoegen {
         }
         return maanden;
     }
-    public void Opslaanbutton_clicked(MouseEvent mouseEvent) throws SQLException {
+    public void Opslaanbutton_clicked(MouseEvent mouseEvent) throws SQLException, IOException {
         BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
         for (int m = 0; m < beheerdaad_eigenschaps.size();m++)
         {
             beheerDAO.createBeheer(beheerdaad_eigenschaps.get(m) ,plantid);
         }
+        openNieuwScherm(mouseEvent , "GedetailleerdeFiche");
+
     }
     public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) {
         System.out.println(cbHabitatTv.getValue());
