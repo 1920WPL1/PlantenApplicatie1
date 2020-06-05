@@ -100,8 +100,8 @@ public class CommensalismeDAO implements Queries {
         System.out.println("testttt");
         System.out.println("Commensalisme toegevoegd");
     }
-    public void createCommensalismeMulti(CommMulti_Eigenschap commensalismeMulti,int plantID) throws SQLException {
-        stmInsertCommensalismeMulti.setInt(1, plantID);
+    public void createCommensalismeMulti(CommMulti_Eigenschap commensalismeMulti) throws SQLException {
+        stmInsertCommensalismeMulti.setInt(1, commensalismeMulti.getPlantid());
         stmInsertCommensalismeMulti.setString(2,commensalismeMulti.getNaam());
         stmInsertCommensalismeMulti.setString(3, commensalismeMulti.getValue());
         stmInsertCommensalismeMulti.executeUpdate();
