@@ -15,6 +15,7 @@ public class Main extends Application {
         primaryStage.setTitle("Planten applicatie");
         primaryStage.setScene(new Scene(root, 1278, 858));
         primaryStage.show();
+        primaryStage.setMaximized(true);
     }
 
 

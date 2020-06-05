@@ -255,6 +255,8 @@ public interface Queries {
 
     String InsertCommensalismeMulti = "insert into commensalisme_multi(plant_id, eigenschap, waarde)" +
             " VALUES (?, ?, ?)";
+    String allebheerdaden = "select * from beheerdaad";
+    String insertbeheerdaden= "insert into  beheerdaad(waarde) values(?)";
     //String InsertNaam
     //endregion
 }
