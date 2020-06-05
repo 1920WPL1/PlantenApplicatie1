@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerPlantToevoegen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerPlantToevoegen">
    <children>
       <HBox>
          <children>
@@ -262,7 +262,7 @@
                               </VBox>
                               <VBox layoutX="260.0" layoutY="14.0">
                                  <children>
-                                    <Label prefHeight="30.0" prefWidth="240.0" text="Levensduur/oncurrentiekracht">
+                                    <Label prefHeight="30.0" prefWidth="240.0" text="Levensduur/concurrentiekracht">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -276,7 +276,6 @@
                                     <ListView fx:id="lvLevensduurTv" prefHeight="176.0" prefWidth="240.0" />
                                  </children>
                               </VBox>
-                              <Button fx:id="btnTest" layoutX="329.0" layoutY="251.0" mnemonicParsing="false" onMouseClicked="#TestZooi" text="Button" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -748,7 +747,7 @@
                                  <children>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbTuftedTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus">
+                                          <RadioButton fx:id="rbTuftedTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Tufted">
                                              <toggleGroup>
                                                 <ToggleGroup fx:id="HabitusGroepTv" />
                                              </toggleGroup></RadioButton>
@@ -761,7 +760,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbUprightarchingTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$HabitusGroepTv" />
+                                          <RadioButton fx:id="rbUprightarchingTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Upright-arching" toggleGroup="$HabitusGroepTv" />
                                           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/Habitus_02.png" />
@@ -771,7 +770,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbArchingTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$HabitusGroepTv" />
+                                          <RadioButton fx:id="rbArchingTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Arching" toggleGroup="$HabitusGroepTv" />
                                           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/Habitus_03.png" />
@@ -781,7 +780,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbUprightDivergentTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$HabitusGroepTv" />
+                                          <RadioButton fx:id="rbUprightDivergentTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Upright-divergent" toggleGroup="$HabitusGroepTv" />
                                           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/Habitus_04.png" />
@@ -791,7 +790,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbUprightErectTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$HabitusGroepTv" />
+                                          <RadioButton fx:id="rbUprightErectTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Upright-erect" toggleGroup="$HabitusGroepTv" />
                                           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/Habitus_05.png" />
@@ -801,7 +800,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbMountedTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$HabitusGroepTv" />
+                                          <RadioButton fx:id="rbMountedTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Mounted" toggleGroup="$HabitusGroepTv" />
                                           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/Habitus_06.png" />
@@ -811,7 +810,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbKOfHGOfMTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$HabitusGroepTv" />
+                                          <RadioButton fx:id="rbKOfHGOfMTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Kruipend, horizontaal groeiend of mattenvormend" toggleGroup="$HabitusGroepTv" />
                                           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/Habitus_07.png" />
@@ -821,7 +820,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbRondOfWaaiervormigTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$HabitusGroepTv" />
+                                          <RadioButton fx:id="rbRondOfWaaiervormigTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Rond- of waaiervormig" toggleGroup="$HabitusGroepTv" />
                                           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/Habitus_08.png" />
@@ -831,7 +830,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbKussenvormendTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$HabitusGroepTv" />
+                                          <RadioButton fx:id="rbKussenvormendTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Kussenvormend" toggleGroup="$HabitusGroepTv" />
                                           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/Habitus_09.png" />
@@ -841,7 +840,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbZuilvormigTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$HabitusGroepTv" />
+                                          <RadioButton fx:id="rbZuilvormigTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Zuilvormig" toggleGroup="$HabitusGroepTv" />
                                           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/Habitus_10.png" />
@@ -851,7 +850,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbUitbuigendTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$HabitusGroepTv" />
+                                          <RadioButton fx:id="rbUitbuigendTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Uitbuigend" toggleGroup="$HabitusGroepTv" />
                                           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/Habitus_11.png" />
@@ -861,7 +860,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbWortelrozetplantTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$HabitusGroepTv" />
+                                          <RadioButton fx:id="rbWortelrozetplantTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="(Wortel)rozetplant" toggleGroup="$HabitusGroepTv" />
                                           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/Habitus_12.png" />
@@ -871,7 +870,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbSucculentenTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$HabitusGroepTv" />
+                                          <RadioButton fx:id="rbSucculentenTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Succulenten" toggleGroup="$HabitusGroepTv" />
                                           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/Habitus_13.png" />
@@ -881,7 +880,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbPollenvormersTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$HabitusGroepTv" />
+                                          <RadioButton fx:id="rbPollenvormersTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Pollenvormers" toggleGroup="$HabitusGroepTv" />
                                           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/Habitus_14.png" />
@@ -891,7 +890,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <RadioButton fx:id="rbParasolvormigTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Habitus" toggleGroup="$HabitusGroepTv" />
+                                          <RadioButton fx:id="rbParasolvormigTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Parasolvormig" toggleGroup="$HabitusGroepTv" />
                                           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/Habitus_15.png" />
