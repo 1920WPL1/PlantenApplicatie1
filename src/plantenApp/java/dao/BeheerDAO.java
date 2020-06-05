@@ -101,9 +101,9 @@ public class BeheerDAO implements Queries {
         return beheerdaaden;
     }
 
-    public void createBeheer(Beheerdaad_Eigenschap beheerdaad, Beheer beheer) throws SQLException {
+    public void createBeheer(Beheerdaad_Eigenschap beheerdaad, int plantid) throws SQLException {
         stmInsertBeheer.setInt(1, beheerdaad.getId());
-        stmInsertBeheer.setInt(2, beheer.getPlant_id());
+        stmInsertBeheer.setInt(2, plantid);
         stmInsertBeheer.setString(3, beheerdaad.getNaam());
         stmInsertBeheer.setString(4, beheerdaad.getOpmerking());
         stmInsertBeheer.setString(5, beheerdaad.getMaand());

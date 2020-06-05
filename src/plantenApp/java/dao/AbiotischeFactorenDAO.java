@@ -161,10 +161,9 @@ public class AbiotischeFactorenDAO implements Queries {
 
     /*
     public void CreateAbiotischeMulti (AbioMulti_Eigenschap abioMulti_eigenschap, int plant_id) throws SQLException {
-        stmInsertAbiotischeMulti.setInt(1,abioMulti_eigenschap.getId());
-        stmInsertAbiotischeMulti.setInt(2, plant_id);
-        stmInsertAbiotischeMulti.setString(3,abioMulti_eigenschap.getNaam());
-        stmInsertAbiotischeMulti.setString(4,abioMulti_eigenschap.getValue());
+        stmInsertAbiotischeMulti.setInt(1, plant_id);
+        stmInsertAbiotischeMulti.setString(2,abioMulti_eigenschap.getNaam());
+        stmInsertAbiotischeMulti.setString(3,abioMulti_eigenschap.getValue());
         stmInsertAbiotischeMulti.executeUpdate();
         System.out.println("AbiotischeMulti toegevoegd");
     }*/
