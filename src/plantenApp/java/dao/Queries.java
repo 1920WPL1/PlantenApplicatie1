@@ -292,6 +292,16 @@ public interface Queries {
     //Ophalen ID's foto
     String GETMAXIDFOTO = "select Max(foto_id) from foto";
 
+    //Queries voor gebruiker
+    String GETALLGEBRUIKERS = "SELECT * FROM gebruiker";
+    String GETGEBRUIKERBYEMAILADRES = "SELECT * FROM gebruiker WHERE email = ?";
+    String SETWACHTWOORDHASH = "UPDATE gebruiker SET wachtwoord_hash = ?, salt = ?, geregistreerd = 1 WHERE gebruiker_id = ?";
+    /**
+     * @Author Jasper
+     */
+    String GETGEBRUIKERSBYFULLNAME = "SELECT * FROM gebruiker WHERE voornaam LIKE ? OR achternaam LIKE ?";
+    String SETGEBRUIKERBYID = "UPDATE gebruiker SET voornaam = ?, achternaam = ?, email = ?, rol = ? WHERE gebruiker_id = ?";
+
     //Queries voor toevoegen naam
     String SELECTDUBBELENAAM = "select COUNT(*) from familie f,geslacht g,soort s,variatie v, planttype p " +
             "where p.planttype_naam = ? and f.familie_naam = ? and g.geslacht_naam = ? and s.soort_naam = ? and v.variatie_naam = ? " +
