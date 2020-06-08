@@ -489,8 +489,15 @@ public class ControllerPlantToevoegen {
 
     public void createNaam() throws SQLException {
         NaamDAO naamDAO = new NaamDAO(dbConnection);
+
         Plant plant = new Plant(cboTypeTv.getValue(),txtFamilieTv.getText(),txtGeslachtTv.getText(),txtSoortTv.getText(),txtVariantTv.getText());
-        naamDAO.createNaam(plant);
+
+
+        //Controle of plantnaam al bestaat
+        int iDubbeleNaam = naamDAO.ControleDubbeleNaam(plant);
+        if (iDubbeleNaam == 0)
+        { naamDAO.createNaam(plant);}
+        System.out.println(iDubbeleNaam);
     }
 }
 
