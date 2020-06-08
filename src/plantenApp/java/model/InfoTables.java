@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class InfoTables {
     //Plant
-    private ArrayList<String> types;
+    private ArrayList<String> planttypes;
     private ArrayList<String> families;
 
     //Fenotype
@@ -40,7 +40,7 @@ public class InfoTables {
     private ArrayList<Integer> pollenwaardes;
 
     public InfoTables(
-            ArrayList<String> types,
+            ArrayList<String> planttypes,
             ArrayList<String> families,
             ArrayList<String> kleuren,
             ArrayList<String> bladgroottes,
@@ -66,7 +66,7 @@ public class InfoTables {
     {
 
 
-        this.types = types;
+        this.planttypes = planttypes;
         this.families = families;
         this.kleuren = kleuren;
         this.bladgroottes = bladgroottes;
@@ -90,8 +90,8 @@ public class InfoTables {
         this.pollenwaardes = pollenwaardes;
     }
 
-    public ArrayList<String> getTypes() {
-        return types;
+    public ArrayList<String> getPlantTypes() {
+        return planttypes;
     }
 
     public ArrayList<String> getFamilies() {

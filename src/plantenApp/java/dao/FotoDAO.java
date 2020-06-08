@@ -23,8 +23,8 @@ public class FotoDAO implements Queries {
 
         stmtSelectFotoByID = dbConnection.prepareStatement(GETFOTOBYPLANTID);
 
-        stmtGetMaxId = dbConnection.prepareStatement(getmaxfotoid);
-        stmtInsertFoto = dbConnection.prepareStatement(insertfoto);
+        stmtGetMaxId = dbConnection.prepareStatement(GETMAXIDFOTO);
+        stmtInsertFoto = dbConnection.prepareStatement(INSERTFOTO);
     }
 
     //region GET

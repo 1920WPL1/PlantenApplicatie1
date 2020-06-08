@@ -13,6 +13,7 @@ import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class ControllerPlantToevoegen {
     public ComboBox cbGrondsoort;
     public ComboBox cbHabitat;
     public Button btnHabitat;
-    public ListView lvHabitat;
+    public ListView <String> lvHabitat;
     public Label VoedingbehoefteValue;
     public Label VochtbehoefteValue;
     public Label Bezonningvalue;
@@ -221,6 +222,8 @@ public class ControllerPlantToevoegen {
         FillComboboxes(infoTables);
 
 
+    public void FillComboBeheer() {
+
     }
     public void createNaam() throws SQLException {
         NaamDao naamDAO = new NaamDao(dbConnection);
@@ -255,8 +258,8 @@ public class ControllerPlantToevoegen {
     }
     public void FillComboboxes(InfoTables infotables) {
         //type
-        System.out.println(infotables.getTypes().toString());
-        cboTypeTv.getItems().addAll(infotables.getTypes());
+        System.out.println(infotables.getPlantTypes().toString());
+        cboTypeTv.getItems().addAll(infotables.getPlantTypes());
 
         //Bezonning
         cbBezonningTv.getItems().addAll(infotables.getBezonningsMogelijkheden());
@@ -573,6 +576,7 @@ public class ControllerPlantToevoegen {
             });
         }
     }
+
     public void createCommensalismeMulti() throws SQLException {
         //aantal elementen in bovenstaande lijst bijhouden
         int aantalCommMulti = 0;
@@ -622,27 +626,12 @@ public class ControllerPlantToevoegen {
         }
         AantalPerElCommMulti.add(aantalCommMulti);
     }
-    public void TestZooi(MouseEvent mouseEvent) throws SQLException {
-        createCommensalismeMulti();
-    }
+
     public void createFoto() throws SQLException{
         FotoDAO fotoDAO = new FotoDAO(dbConnection);
         int maxIdFoto = fotoDAO.getmaxid();
-
-        ArrayList<Foto_Eigenschap> verz = new ArrayList<>();
-        //hier maak je alle foto-eigenschappen aan die je in foto1 wil steken en zorg ervoor dat ze telkens een andere id krijgen dus achter die id moet iedere keer +1, +2,...
-        //komen te staan telkens als er een nieuwe Foto_eigenschap aangemaakt wordt
-        Foto_Eigenschap foto_eigenschap = new Foto_Eigenschap(maxIdFoto+1,"a","b", null);
-
-        //hier steek je dan elke Foto_eigenschap die hierboven gemaakt is in deze verzameling zoals in onderstaande lijn staat
-        verz.add(foto_eigenschap);
-
-        //hier wordt een volledig foto-object gemaakt
-        Foto foto1 = new Foto(plantid,verz);
-
-        //deze onderstaande lijn wordt niet gebruikt
-        //Foto foto2 = new Foto(maxIdFoto + 1, plantid, "a", "b", null);
-        fotoDAO.createFoto(foto1);
+        Foto foto = new Foto(maxIdFoto + 1, plantid, "a", "b", null);
+        fotoDAO.createFoto(foto);
     }
 
     public void createfenotypemulti() throws SQLException {

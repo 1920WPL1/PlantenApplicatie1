@@ -20,13 +20,14 @@ public class PlantDAO implements Queries {
     private PreparedStatement stmtSelectIdsByPlant;
     private PreparedStatement stmtSelectByIds;
 
+
     public PlantDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
 
         stmtSelectById = dbConnection.prepareStatement(GETPLANTBYID);
         stmtSelectByPlant = dbConnection.prepareStatement(GETIDSBYPLANT);
-        stmtInsert = dbConnection.prepareStatement(Insertplant);
-        stmgetmaxid = dbConnection.prepareStatement(getmaxplantid);
+        stmtInsert = dbConnection.prepareStatement(INSERTPLANT);
+        stmgetmaxid = dbConnection.prepareStatement(GETMAXIDPLANT);
         stmtSelectByIds = dbConnection.prepareStatement(GETPLANTSBYIDS);
         stmtSelectIdsByPlant = dbConnection.prepareStatement(GETIDSBYPLANT);
     }
@@ -51,7 +52,7 @@ public class PlantDAO implements Queries {
         while (rs.next()) {
             plants.add(new Plant(
                     rs.getInt("plant_id"),
-                    rs.getString("type"),
+                    rs.getString("planttype"),
                     rs.getString("familie"),
                     rs.getString("geslacht"),
                     rs.getString("soort"),
@@ -83,7 +84,7 @@ public class PlantDAO implements Queries {
         if (rs.next()) {
             plant = new Plant(
                     rs.getInt("plant_id"),
-                    rs.getString("type"),
+                    rs.getString("planttype"),
                     rs.getString("familie"),
                     rs.getString("geslacht"),
                     rs.getString("soort"),
@@ -122,7 +123,7 @@ public class PlantDAO implements Queries {
         if (rs.next()) {
             plant = new Plant(
                     rs.getInt("plant_id"),
-                    rs.getString("type"),
+                    rs.getString("planttype"),
                     rs.getString("familie"),
                     rs.getString("geslacht"),
                     rs.getString("soort"),
@@ -143,7 +144,7 @@ public class PlantDAO implements Queries {
     }
     public void createplant(Plant plant) throws SQLException {
         stmtInsert.setInt(1,plant.getId());
-        stmtInsert.setString(2, plant.getType());
+        stmtInsert.setString(2, plant.getPlantType());
         stmtInsert.setString(3,plant.getFamilie());
         stmtInsert.setString(4,plant.getGeslacht());
         stmtInsert.setString(5,plant.getSoort());
