@@ -9,9 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
@@ -217,13 +215,16 @@ public class ControllerPlantToevoegen {
             //infotabel object aanmaken*/
             InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
             infoTables = infotablesDAO.getInfoTables();
-
             /*comboboxes vullen*/
             FillComboboxes(infoTables);
 
 
     }
-
+    public void createNaam() throws SQLException {
+        NaamDao naamDAO = new NaamDao(dbConnection);
+        Plant plant = new Plant(cboTypeTv.getValue(),txtFamilieTv.getText(),txtGeslachtTv.getText(),txtSoortTv.getText(),txtVariantTv.getText());
+        naamDAO.createNaam(plant);
+    }
     public void Pollenwaarde()    {
         slNectarwaardeTv.setMax(5);
         slPollenwaardeTv.setMax(5);
@@ -329,7 +330,7 @@ public class ControllerPlantToevoegen {
         cbLevensduurTv.getItems().addAll(infotables.getConcurentiekrachten());
     }
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException, IOException {
-        /*createplant();//ik //done
+        createplant();//ik //done
         createAbiotischefactoren();//afgewerkt //done
         createAbiotischeMulti();//Mathias //done
         createfenotype();//afgewerkt // done
@@ -339,28 +340,23 @@ public class ControllerPlantToevoegen {
         //createBeheer();//Wout dit moet nog verplaats worden naar een button op beheer scherm //done
         createExtra();//Kasper
         //createFoto(); nog geen plaats of scherm voor een foto in toe te voegen
-        gedetailleerdopbullen();*/
-        openNieuwScherm(mouseEvent, "BeheeBehandelingPlant");
+        gedetailleerdopbullen();
+        openNieuwScherm(mouseEvent);
     }
-    public void gedetailleerdopbullen()
-    {
+    public void gedetailleerdopbullen()  {
         
     }
-
-
-    public void openNieuwScherm(MouseEvent mouseEvent, String schermnaam) throws IOException {
+    public void openNieuwScherm(MouseEvent mouseEvent) throws IOException {
            Parent root = FXMLLoader.load(getClass().getResource("view/BeheeBehandelingPlant.fxml"));
            Scene scen = new Scene(root);
            Stage window =(Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
            window.setScene(scen);
            window.show();
-            scherm="beheer";
         window.setMaximized(true);
-        //ControllerBeheer controllerBeheer = new ControllerBeheer(plantss,abiotischeFactorenn,abiotischmulti,commensalismes,commMulti_eigenschapss,extrass,fenoMulti_eigenschapss,fenotypess);
-
-        // Hide this current window (if this is what you want)
+        ControllerBeheer controllerBeheer = new ControllerBeheer(plantss,abiotischeFactorenn,abiotischmulti,commensalismes,commMulti_eigenschapss,extrass,fenoMulti_eigenschapss,fenotypess);
+        controllerBeheer.lijstenvullen(plantss,abiotischeFactorenn,abiotischmulti,commensalismes,commMulti_eigenschapss,extrass,fenoMulti_eigenschapss,fenotypess);
+        controllerBeheer.setPlants(plantss);
     }
-
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxid();
@@ -453,6 +449,7 @@ public class ControllerPlantToevoegen {
         int maxidextra = extraDAO.getmaxid();
         maxidextra ++;
         System.out.println(maxidextra);
+        System.out.println(valuePollenwaarde + " " + valueNectarwaarde);
         Extra extra = new Extra(maxidextra, plantid, valueNectarwaarde, valuePollenwaarde, "a", "b", "c", "d", "e");
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
         extrass.add(extra);
