@@ -151,7 +151,7 @@ public class ControllerOverzicht {
         fenoMulti_eigenschaps.addAll(fenoMulti_eigenschapss);
         fenotypes.addAll(fenotypess);
         beheerdaad_eigenschaps.addAll(beheerdaad_eigenschapss);
-        System.out.println(plants.get(0).getFgsv());
+        System.out.println(plantss.size());
         System.out.println(abiotischeFactoren.size());
         System.out.println(abiotischmultis.size());
         System.out.println(commensalisme.size());
