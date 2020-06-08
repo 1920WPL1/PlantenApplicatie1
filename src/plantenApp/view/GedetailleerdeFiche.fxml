@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="888.0" prefWidth="1506.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerOverzicht">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="888.0" prefWidth="1506.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerOverzicht">
    <children>
-      <TitledPane animated="false" collapsible="false" layoutX="-101.0" layoutY="7.0" text="Fiche">
+      <TitledPane animated="false" collapsible="false" layoutX="5.0" layoutY="7.0" prefHeight="951.0" prefWidth="1391.0" text="Fiche">
          <content>
             <AnchorPane>
                <children>
