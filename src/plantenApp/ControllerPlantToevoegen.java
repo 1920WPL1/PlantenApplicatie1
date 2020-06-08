@@ -193,17 +193,17 @@ public class ControllerPlantToevoegen {
     private int plantid;
     private InfoTables infoTables;
     private ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps = new ArrayList<>();
-    public ArrayList<Plant> plantss = new ArrayList<>();
-    public ArrayList<AbiotischeFactoren> abiotischeFactorenn = new ArrayList<>();
-    public  ArrayList<AbioMulti_Eigenschap> abiotischmulti = new ArrayList<>();
-    public ArrayList<Commensalisme> commensalismes = new ArrayList<>();
-    public  ArrayList<CommMulti_Eigenschap> commMulti_eigenschapss = new ArrayList<>();
-    public ArrayList<Extra> extrass = new ArrayList<>();
-    public  ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschapss = new ArrayList<>();
-    public ArrayList<Fenotype> fenotypess = new ArrayList<>();
-    public ArrayList<Foto> fotoss = new ArrayList<>();
-    public  ArrayList<Beheer> beheerss = new ArrayList<>();
-    public  ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschapss = new ArrayList<>();
+    public static ArrayList<Plant> plantss = new ArrayList<>();
+    public static ArrayList<AbiotischeFactoren> abiotischeFactorenn = new ArrayList<>();
+    public static ArrayList<AbioMulti_Eigenschap> abiotischmulti = new ArrayList<>();
+    public static ArrayList<Commensalisme> commensalismes = new ArrayList<>();
+    public static ArrayList<CommMulti_Eigenschap> commMulti_eigenschapss = new ArrayList<>();
+    public static ArrayList<Extra> extrass = new ArrayList<>();
+    public static ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschapss = new ArrayList<>();
+    public static ArrayList<Fenotype> fenotypess = new ArrayList<>();
+    public static ArrayList<Foto> fotoss = new ArrayList<>();
+    public static ArrayList<Beheer> beheerss = new ArrayList<>();
+    public static ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschapss = new ArrayList<>();
     public String scherm  ;
 
     public void initialize() throws SQLException {

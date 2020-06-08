@@ -273,10 +273,10 @@ public class ControllerBeheer {
         window.setMaximized(true);
         System.out.println("controlleroverzicht");
         ControllerOverzicht controllerOverzicht = new ControllerOverzicht();
-        System.out.println(plants.get(0).getFgsv());
+        //controllerOverzicht.lijstenvullen(plants, abiotischeFactoren, abiotischmultis, commensalismess, commMulti_eigenschaps, extras, fenoMulti_eigenschaps, fenotypes, beheerdaad_eigenschaps);
+        System.out.println(ControllerPlantToevoegen.plantss.size());
+        System.out.println(ControllerPlantToevoegen.beheerdaad_eigenschapss.size());
 
-        controllerOverzicht.lijstenvullen(plants, abiotischeFactoren, abiotischmultis, commensalismess, commMulti_eigenschaps, extras, fenoMulti_eigenschaps, fenotypes, beheerdaad_eigenschaps);
-        System.out.println(plants.get(0).getFgsv());
     }
 
 }
