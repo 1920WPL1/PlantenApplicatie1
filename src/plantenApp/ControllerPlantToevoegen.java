@@ -308,6 +308,7 @@ public class ControllerPlantToevoegen {
     public Label bladhoogteMaxOktO;
     public Label bladhoogteMaxNovO;
     public Label bladhoogteMaxDecO;
+    public ComboBox cbMaandBeheerO;
     private Connection dbConnection;
     private AbiotischeFactorenDAO abiotischeFactorenDAO;
     private int plantid;
@@ -458,7 +459,7 @@ public class ControllerPlantToevoegen {
         createfenotypemulti();//Wout // done
         createCommensalisme();//Kasper //done
         createCommensalismeMulti();//Mathias //done
-        //createBeheer();//Wout dit moet nog verplaats worden naar een button op beheer scherm //done
+        //createBeheer();//Wout dit moet nog verplaatst worden naar een button op beheer scherm //done
         createExtra();//Kasper
         //createFoto(); nog geen plaats of scherm voor een foto in toe te voegen
         tonenPlantOpFiche(0);//later nog extra voorzorgen nemen hier om niet buiten de arrayLists te gaan zoeken, hoe multi's doen aangezien meerdere elementen in hun lijst
@@ -583,20 +584,107 @@ public class ControllerPlantToevoegen {
         }
         int eindplaats = teller + AantalPerElAbMulti.get(indexArrays);
         for(int j = teller; j<eindplaats;j++){
-            lvHabitatO.getItems().add(abiotischmulti.get(j));
+            lvHabitatO.getItems().add(abiotischmulti.get(j).getValue());
         }
 
         Commensalisme c = commensalismes.get(indexArrays);
         lblOntwikkelingssnelheidO.setText(c.getOntwikkelingssnelheid());
         lblStrategieO.setText(c.getStrategie());
+        int tellerc = 0;
+        for(int i = 0; i<indexArrays;i++){
+            tellerc +=AantalPerElCommMulti.get(i);
+        }
+        int eindplaatsc = tellerc + AantalPerElCommMulti.get(indexArrays);
+        for(int j = tellerc; j<eindplaatsc;j++){
+            //lvLevensduurO
+            if(commMulti_eigenschapss.get(j).getNaam().matches("sociabiliteit")){
+                if(commMulti_eigenschapss.get(j).getValue().matches("1")){rbSociabiliteit1O.setSelected(true);}
+                if(commMulti_eigenschapss.get(j).getValue().matches("2")){rbSociabiliteit2O.setSelected(true);}
+                if(commMulti_eigenschapss.get(j).getValue().matches("3")){rbSociabiliteit3O.setSelected(true);}
+                if(commMulti_eigenschapss.get(j).getValue().matches("4")){rbSociabiliteit4O.setSelected(true);}
+                if(commMulti_eigenschapss.get(j).getValue().matches("5")){rbSociabiliteit5O.setSelected(true);}
+            }
+            if(commMulti_eigenschapss.get(j).getNaam().matches("levensduur")){
+                lvLevensduurO.getItems().add(commMulti_eigenschapss.get(j).getValue());
+            }
+            lvHabitatO.getItems().add(commMulti_eigenschapss.get(j));
+        }
 
-        CommMulti_Eigenschap cm = commMulti_eigenschapss.get(indexArrays);
-
+        //dit wordt waarschijnlijk gebruikt voor die details bovenaan het scherm van gedetailleerdefiche
         Foto fo = fotoss.get(indexArrays);
 
-        Beheer be = beheerss.get(indexArrays);
-
-        Beheerdaad_Eigenschap bd = beheerdaad_eigenschapss.get(indexArrays);
+        //
+        int tellerb = 0;
+        for(int i = 0; i<indexArrays;i++){
+            tellerb +=AantalPerElBehMulti.get(i);
+        }
+        int eindplaatsb = tellerb + AantalPerElBehMulti.get(indexArrays);
+        for(int j = tellerb; j<eindplaatsb;j++){
+            Beheerdaad_Eigenschap beheerdaad_e = beheerdaad_eigenschapss.get(j);
+            switch((String)cbMaandBeheerO.getValue()){
+                case "januari":
+                    if(beheerdaad_e.getMaand().matches("januari")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "februari":
+                    if(beheerdaad_e.getMaand().matches("febuari")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "maart":
+                    if(beheerdaad_e.getMaand().matches("maart")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "april":
+                    if(beheerdaad_e.getMaand().matches("april")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "mei":
+                    if(beheerdaad_e.getMaand().matches("mei")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "juni":
+                    if(beheerdaad_e.getMaand().matches("juni")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "juli":
+                    if(beheerdaad_e.getMaand().matches("juli")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "augustus":
+                    if(beheerdaad_e.getMaand().matches("augustus")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "september":
+                    if(beheerdaad_e.getMaand().matches("september")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "oktober":
+                    if(beheerdaad_e.getMaand().matches("oktober")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "november":
+                    if(beheerdaad_e.getMaand().matches("november")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "december":
+                    if(beheerdaad_e.getMaand().matches("december")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+            }
+            //lvHabitatO.getItems().add(abiotischmulti.get(j).getValue());
+        }
     }
     
     public void createfenotype() throws SQLException {
@@ -734,25 +822,25 @@ public class ControllerPlantToevoegen {
             aantalCommMulti++;
         }
         if (chkSociabiliteit2Tv.isSelected()) {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "2",plantid);
             System.out.println(sociabiliteit.getNaam());
             commMulti_eigenschapss.add(sociabiliteit);
             aantalCommMulti++;
         }
         if (chkSociabiliteit3Tv.isSelected()) {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "3",plantid);
             System.out.println(sociabiliteit.getNaam());
             commMulti_eigenschapss.add(sociabiliteit);
             aantalCommMulti++;
         }
         if (chkSociabiliteit4Tv.isSelected()) {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "4",plantid);
             System.out.println(sociabiliteit.getNaam());
             commMulti_eigenschapss.add(sociabiliteit);
             aantalCommMulti++;
         }
         if (chkSociabiliteit5Tv.isSelected()) {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "5",plantid);
             System.out.println(sociabiliteit.getNaam());
             commMulti_eigenschapss.add(sociabiliteit);
             aantalCommMulti++;
