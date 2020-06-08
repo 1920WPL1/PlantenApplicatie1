@@ -16,7 +16,7 @@ public class CommensalismeDAO implements Queries {
     private PreparedStatement stmtSelectCommeMultiByID;
     private PreparedStatement stmtSelectIdsByComm;
     private PreparedStatement stmtSelectIdsByCommMulti;
-    private  PreparedStatement stmGetMaxID;
+    private PreparedStatement stmGetMaxID;
     private PreparedStatement stmInsertCommensalisme;
     private PreparedStatement stmInsertCommensalismeMulti;
 
@@ -27,9 +27,9 @@ public class CommensalismeDAO implements Queries {
         stmtSelectCommeMultiByID = dbConnection.prepareStatement(GETCOMMENSALISMEMULTIBYPLANTID);
         stmtSelectIdsByComm = dbConnection.prepareStatement(GETIDSBYCOMM);
         stmtSelectIdsByCommMulti = dbConnection.prepareStatement(GETIDSBYCOMMMULTI);
-        stmInsertCommensalisme = dbConnection.prepareStatement(InsertCommensalisme);
-        stmInsertCommensalismeMulti = dbConnection.prepareStatement(InsertCommensalismeMulti);
-        stmGetMaxID = dbConnection.prepareStatement(getMaxCommensalismeID);
+        stmInsertCommensalisme = dbConnection.prepareStatement(INSERTCOMMENSALISME);
+        stmInsertCommensalismeMulti = dbConnection.prepareStatement(INSERTCOMMENSALISMEMULTI);
+        stmGetMaxID = dbConnection.prepareStatement(GETMAXIDCOMMENSALISME);
     }
 
     //region GET

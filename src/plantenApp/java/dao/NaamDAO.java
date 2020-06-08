@@ -25,20 +25,20 @@ public class NaamDAO implements Queries {
     public NaamDAO(Connection dbConnection) throws SQLException {
 
         this.dbConnection = dbConnection;
-        stmtSelectDubbeleNaam = dbConnection.prepareStatement(SelectDubbeleNaam);;
-        stmtSelectTypeId = dbConnection.prepareStatement(SelectTypeID);
-        stmtInsertInFamilie= dbConnection.prepareStatement(InsertFamilie);
-        stmtSelectFamilieId = dbConnection.prepareStatement(SelectFamilieID);
-        stmtInsertInGeslacht= dbConnection.prepareStatement(InsertGeslacht);
-        stmtSelectGeslachtId = dbConnection.prepareStatement(SelectGeslachtID);
-        stmtInsertInSoort = dbConnection.prepareStatement(InsertSoort);
-        stmtSelectSoortId = dbConnection.prepareStatement(SelectSoortID);
-        stmtInsertInVariatie = dbConnection.prepareStatement(InsertVariatie);
+        stmtSelectDubbeleNaam = dbConnection.prepareStatement(SELECTDUBBELENAAM);;
+        stmtSelectTypeId = dbConnection.prepareStatement(SELECTIDPLANTTYPE);
+        stmtInsertInFamilie= dbConnection.prepareStatement(INSERTFAMILIE);
+        stmtSelectFamilieId = dbConnection.prepareStatement(SELECTIDFAMILIE);
+        stmtInsertInGeslacht= dbConnection.prepareStatement(INSERTGESLACHT);
+        stmtSelectGeslachtId = dbConnection.prepareStatement(SELECTIDGESLACHT);
+        stmtInsertInSoort = dbConnection.prepareStatement(INSERTSOORT);
+        stmtSelectSoortId = dbConnection.prepareStatement(SELECTIDSOORT);
+        stmtInsertInVariatie = dbConnection.prepareStatement(INSERTVARIATIE);
 
     }
     public Integer ControleDubbeleNaam(Plant plant) throws SQLException {
 
-        stmtSelectDubbeleNaam.setString(1,plant.getType());
+        stmtSelectDubbeleNaam.setString(1,plant.getPlantType());
         stmtSelectDubbeleNaam.setString(2,plant.getFamilie());
         stmtSelectDubbeleNaam.setString(3,plant.getGeslacht());
         stmtSelectDubbeleNaam.setString(4,plant.getSoort());
@@ -56,7 +56,7 @@ public class NaamDAO implements Queries {
             int typeID, familieID, geslachtID, soortID;
 
         //Ophalen typeID
-        stmtSelectTypeId.setString(1,plant.getType() );
+        stmtSelectTypeId.setString(1,plant.getPlantType() );
         ResultSet rsTypeID =stmtSelectTypeId.executeQuery();
         rsTypeID.next();
         typeID = rsTypeID.getInt(1) ;

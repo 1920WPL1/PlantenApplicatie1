@@ -24,10 +24,10 @@ public class BeheerDAO implements Queries {
 
         stmtSelectBeheerByID = dbConnection.prepareStatement(GETBEHEERBYPLANTID);
         stmtSelectByBeheer = dbConnection.prepareStatement(GETIDSBYBEHEER);
-        stmInsertBeheer = dbConnection.prepareStatement(insertBeheer);
-        stmGetMaxID = dbConnection.prepareStatement(getMaxBeheerID);
-        stmselectall = dbConnection.prepareStatement(allebheerdaden);
-        stmInsertbeheerdaad = dbConnection.prepareStatement(insertbeheerdaden);
+        stmInsertBeheer = dbConnection.prepareStatement(INSERTBEHEER);
+        stmGetMaxID = dbConnection.prepareStatement(GETMAXIDBEHEER);
+        stmselectall = dbConnection.prepareStatement(GETBEHEERDADEN);
+        stmInsertbeheerdaad = dbConnection.prepareStatement(INSERTBEHEERDAAD);
     }
 
     //region GET

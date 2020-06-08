@@ -1,25 +1,16 @@
 package plantenApp;
 
-import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
-import java.io.IOException;
-import java.sql.Array;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.SplittableRandom;
 
 public class ControllerPlantToevoegen {
     public Slider slBezonning;
@@ -29,7 +20,7 @@ public class ControllerPlantToevoegen {
     public ComboBox cbGrondsoort;
     public ComboBox cbHabitat;
     public Button btnHabitat;
-    public ListView lvHabitat;
+    public ListView <String> lvHabitat;
     public Label VoedingbehoefteValue;
     public Label VochtbehoefteValue;
     public Label Bezonningvalue;
@@ -188,72 +179,33 @@ public class ControllerPlantToevoegen {
     public RadioButton rbSmallePluimTv;
     public Button PLantToevoegenButtonTv;
     public Button TerugButtonTv;
-    public ComboBox CmdBehandeling;
-    public TextField behandlingnaamtxt;
-    public Button behandelingtoevoegenbutton;
-    public Button teovoegenbehandlingbtn;
-    public Button Verwijderenbeheerbutn;
-    public ListView Beheerlistview;
-    public TextArea opmerkingtxt;
-    public Spinner frequentieNumericupdown;
-    public CheckBox jancheckbox;
-    public CheckBox febcheckbox;
-    public CheckBox maacheckbox;
-    public CheckBox aprilcheckbox;
-    public CheckBox maicheckbox;
-    public CheckBox junicheckbox;
-    public CheckBox julicheckbox;
-    public CheckBox augcheckbox;
-    public CheckBox septembecheclbox;
-    public CheckBox oktcheckbox;
-    public CheckBox novcheckbox;
-    public CheckBox deccheckbox;
-    public Button Opslaanbutton;
-    public Label boodschaptxt;
     private Connection dbConnection;
     private AbiotischeFactorenDAO abiotischeFactorenDAO;
     private int plantid;
     private InfoTables infoTables;
-    private ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps = new ArrayList<>();
-
 
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
-        slNectarwaardeTv.setMax(5);
-        slPollenwaardeTv.setMax(5);
-        //Change value
-        PollenValueTv.textProperty().bind(
-                Bindings.format(
-                        "%.0f",
-                        slPollenwaardeTv.valueProperty()
-                )
-        );
-        NectarwaardeValueTv.textProperty().bind(
-                Bindings.format(
-                        "%.0f",
-                        slNectarwaardeTv.valueProperty()
-                )
-        );
 
         /*infotabel object aanmaken*/
-       InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
+        InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
         infoTables = infotablesDAO.getInfoTables();
 
         /*comboboxes vullen*/
         FillComboboxes(infoTables);
-        //FillComboBeheer();
+
 
     }
-    public void FillComboBeheer() throws SQLException {
-        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
-        CmdBehandeling.getItems().clear();
-        CmdBehandeling.getItems().addAll(beheerDAO.getalbeheerdaden());
+
+    public void FillComboBeheer() {
+
     }
+
     public void FillComboboxes(InfoTables infotables) {
         //type
-        System.out.println(infotables.getTypes().toString());
-        cboTypeTv.getItems().addAll(infotables.getTypes());
+        System.out.println(infotables.getPlantTypes().toString());
+        cboTypeTv.getItems().addAll(infotables.getPlantTypes());
 
         //Bezonning
         cbBezonningTv.getItems().addAll(infotables.getBezonningsMogelijkheden());
@@ -328,196 +280,57 @@ public class ControllerPlantToevoegen {
         //Levensduur
         cbLevensduurTv.getItems().addAll(infotables.getConcurentiekrachten());
     }
-    public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException, IOException {
-        /*createplant();
+
+
+    public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException {
+        createplant();
         createAbiotischefactoren();
         createfenotype();
         createCommensalisme();
-        createExtra();
-        createfentotypemulti();*/
-//Hier typ je gewenste scherm dat opent)
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/BeheerBehandelingPlant.fxml"));
-        Scene scene = new Scene(root);
-        Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-
     }
+
 
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxid();
-        Fenotype fenotype = new Fenotype(maxid + 1, plantid, cbBladvormTv.getValue(), levensvormCheck(), habitusCheck(), bloeiwijzeCheck(), Integer.parseInt(cbBladgrootteTotTv.getValue()), cbRatioTv.getValue(), cbSpruitfenologieTv.getValue());
+        Fenotype fenotype = new Fenotype(maxid + 1, plantid, "bladvorm", 5, "habitus", "bloeiwijze", 2, "ratioBloeiBlad", "spruitfenologie");
         fenotypeDAO.createfenotype(fenotype);
-    }
-    public String habitusCheck(){
-        if(rbTuftedTv.isSelected()){ return "tufted";}
-        if(rbUprightarchingTv.isSelected()){ return "Upright arching";}
-        if(rbArchingTv.isSelected()){ return "Arching";}
-        if(rbUprightDivergentTv.isSelected()){ return "Upright Divergent";}
-        if(rbUprightErectTv.isSelected()){ return "Upright erect";}
-        if(rbMountedTv.isSelected()){ return "Mounted";}
-        if(rbKOfHGOfMTv.isSelected()){ return "Kruipend of horizontaal groeiend of mattenvormend";}
-        if(rbRondOfWaaiervormigTv.isSelected()){ return "Rond- of waaiervormig";}
-        if(rbKussenvormendTv.isSelected()){ return "Kussenvormend";}
-        if(rbZuilvormigTv.isSelected()){ return "Zuilvormig";}
-        if(rbUitbuigendTv.isSelected()){ return "Uitbuigend";}
-        if(rbWortelrozetplantTv.isSelected()){ return "(Wortel)rozetplant";}
-        if(rbSucculentenTv.isSelected()){ return "Succulenten";}
-        if(rbPollenvormersTv.isSelected()){ return "Pollenvormers";}
-        if(rbParasolvormigTv.isSelected()){ return "Parasolvormig";}
-        return null;
-    }
-    public int levensvormCheck(){
-        if(rbHydro1Tv.isSelected()){return 1;}
-        if(rbHydro2Tv.isSelected()){return 2;}
-        if(rbHeloTv.isSelected()){return 3;}
-        if(rbCrypto1Tv.isSelected()){return 4;}
-        if(rbCrypto2Tv.isSelected()){return 5;}
-        if(rbHemikryptoTv.isSelected()){return 6;}
-        if(rbChamae1Tv.isSelected()){return 7;}
-        if(rbChamae2Tv.isSelected()){return 8;}
-        if(rbFaneroTv.isSelected()){return 9;}
-        return 0;
-    }
-    public String bloeiwijzeCheck(){
-        if(rbAarTv.isSelected()){return "Aar";}
-        if(rbBredePluimTv.isSelected()){return "Brede pluim";}
-        if(rbEtageTv.isSelected()){return "Etage";}
-        if(rbBolOfKnopTv.isSelected()){return "Bol of knop";}
-        if(rbMargrietachtigTv.isSelected()){return "Margrietachtig";}
-        if(rbSchotelTv.isSelected()){return "Schotel";}
-        if(rbSchermTv.isSelected()){return "Scherm";}
-        if(rbSmallePluimTv.isSelected()){return "Smalle pluim";}
-        return null;
     }
 
     public void createplant() throws SQLException {
-        //volledig toevoegen in databank vanuit scherm, waarschijnlijk nog iets toevoegen voor te kijken of de naam al in de databank zit
         PlantDAO plantDAO = new PlantDAO(dbConnection);
         int maxidplant = plantDAO.getmaxid();
         plantid = maxidplant;
-        Plant plant;
-        String familie = txtFamilieTv.getText();
-        String geslacht = txtGeslachtTv.getText();
-        String soort = txtSoortTv.getText();
-        String variant = txtVariantTv.getText();
-        String fgsv = familie + geslacht + soort + variant;
-        int x = 0;
-        int y = 0;
-        if(txtDichtheidXTv.getText().matches("[0-9]+")){
-            x = Integer.parseInt(txtDichtheidXTv.getText());
-        }
-        if(txtDichtheidYTv.getText().matches("[0-9]+")){
-            x = Integer.parseInt(txtDichtheidYTv.getText());
-        }
-        plant = new Plant(maxidplant + 1, cboTypeTv.getValue(), familie, geslacht, soort, variant, x, y, fgsv, 1);
+        //public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv, int status) {
+        Plant plant = new Plant(maxidplant + 1, "test", "familie", "geslacht", "soort", "variatie", 5, 20, "familie geslacht soort van", 1);
         plantDAO.createplant(plant);
     }
     public void createAbiotischefactoren() throws SQLException {
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
         int maxidabio = abiotischeFactorenDAO.getmaxid();
-        AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio + 1, plantid, cbBezonningTv.getValue(), cbGrondsoortTv.getValue(), cbVochtbehoefteTv.getValue(), cbVoedingsbehoefteTv.getValue(), cbReactieAntaTv.getValue());
+        AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio + 1, plantid, "tt", "ee ", "nat", "frietjes", "hey kasper");
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
     }
+
+
     public void createCommensalisme() throws SQLException {
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
         int maxidcommensalisme = commensalismeDAO.getmaxid();
-        Commensalisme commensalisme = new Commensalisme(maxidcommensalisme + 1, plantid, strategieCheck(), cbOntwikkelingssnelheidTv.getValue());
+        Commensalisme commensalisme = new Commensalisme(maxidcommensalisme + 1, plantid, "strategie", "test");
         commensalismeDAO.createCommensalisme(commensalisme);
     }
-    public String strategieCheck() {
-        if(rbStrategieTopTv.isSelected()) {
-            return "C";
-        }
-        else if (rbStrategieMMTv.isSelected()) {
-            return "C-S-R";
-        }
-        else if (rbStrategieLMTv.isSelected()) {
-            return "C-R";
-        }
-        else if (rbStrategieRMTv.isSelected()) {
-            return "C-S";
-        }
-        else if (rbStrategieLOTv.isSelected()) {
-            return "R";
-        }
-        else if (rbStrategieMOTv.isSelected()) {
-            return "S-R";
-        }
-        else if (rbStrategieROTv.isSelected()) {
-            return "S";
-        }
-        else {
-            return "null";
-        }
-    }
+
 
     public void createExtra() throws SQLException {
         ExtraDAO extraDAO = new ExtraDAO(dbConnection);
         int maxidextra = extraDAO.getmaxid();
-        int valueNectarwaarde = Integer.parseInt(NectarwaardeValueTv.getText());
-        int valuePollenwaarde = Integer.parseInt(PollenValueTv.getText());
-        Extra extra = new Extra(maxidextra + 1, plantid, valueNectarwaarde, valuePollenwaarde, bijvriendelijkCheck(), eetbaarCheck(), kruidgebruikCheck(), geurendCheck(), vorstgevoeligCheck());
+        Extra extra = new Extra(maxidextra + 1, plantid, 0, 0, "a", "b", "c", "d", "e");
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
-        extraDAO.createExtra(extra);
-        System.out.println("Extra is gefixt");
+        //ExtraDAO.createExtra(extra);
+
+
     }
-    public String vorstgevoeligCheck() {
-        if(rbVorstgevoeligJaTv.isSelected()) {
-            return "ja";
-        }
-        else if (rbVorstgevoeligNeeTv.isSelected()) {
-            return "nee";
-        }
-        else {
-            return "null";
-        }
-    }
-    public String eetbaarCheck() {
-        if(rbEetbaarJaTv.isSelected()) {
-            return "ja";
-        }
-        else if (rbEetbaarNeeTv.isSelected()) {
-            return "nee";
-        }
-        else {
-            return "null";
-        }
-    }
-    public String geurendCheck() {
-        if(rbGeurendJaTv.isSelected()) {
-            return "ja";
-        }
-        else if (rbGeurendNeeTv.isSelected()) {
-            return "nee";
-        }
-        else {
-            return "null";
-        }
-    }
-    public String kruidgebruikCheck() {
-        if(rbKruidgebruikJaTv.isSelected()) {
-            return "ja";
-        }
-        else if (rbKruidgebruikNeeTv.isSelected()) {
-            return "nee";
-        }
-        else {
-            return "null";
-        }
-    }
-    public String bijvriendelijkCheck() {
-        if(rbBijvriendelijkJaTv.isSelected()) {
-            return "ja";
-        }
-        else if (rbBijvriendelijkNeeTv.isSelected()) {
-            return "nee";
-        }
-        else {
-            return "null";
-        }
-    }
+
 
     public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
         if (!lvLevensduurTv.getItems().contains(cbLevensduurTv.getValue())) {
@@ -533,213 +346,108 @@ public class ControllerPlantToevoegen {
             });
         }
     }
+
     public void createCommensalismeMulti() throws SQLException {
+
+        //Toevoegen van levensduur
         CommensalismeDAO commensalismeMulti = new CommensalismeDAO(dbConnection);
-        int maxidcommensalismeMulti = commensalismeMulti.getmaxid();
-        System.out.println(  " " + plantid);
+
+        System.out.println(" " + plantid);
 
         for (int i = 0; i < lvLevensduurTv.getItems().size(); i++) {
-            CommMulti_Eigenschap commensalisme = new CommMulti_Eigenschap(maxidcommensalismeMulti + 1, "Levensduur", lvLevensduurTv.getItems().get(i) );
-            System.out.println(commensalisme.getNaam());
-            commensalismeMulti.createCommensalismeMulti(commensalisme, plantid);
-            maxidcommensalismeMulti++;
+            CommMulti_Eigenschap levensduur = new CommMulti_Eigenschap("levensduur", lvLevensduurTv.getItems().get(i));
+            System.out.println(levensduur.getNaam());
+            commensalismeMulti.createCommensalismeMulti(levensduur, plantid);
+
         }
-        System.out.println(maxidcommensalismeMulti + " " + plantid);
+        //Toevoegen van sociabiliteit
+        if (chkSociabiliteit1Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
+            System.out.println(sociabiliteit.getNaam());
+            commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
+        }
+        if (chkSociabiliteit2Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
+            System.out.println(sociabiliteit.getNaam());
+            commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
+        }
+        if (chkSociabiliteit3Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
+            System.out.println(sociabiliteit.getNaam());
+            commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
+        }
+        if (chkSociabiliteit4Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
+            System.out.println(sociabiliteit.getNaam());
+            commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
+        }
+        if (chkSociabiliteit5Tv.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1");
+            System.out.println(sociabiliteit.getNaam());
+            commensalismeMulti.createCommensalismeMulti(sociabiliteit, plantid);
+        }
     }
-    public void TestZooi(MouseEvent mouseEvent) throws SQLException {
-        createCommensalismeMulti();
-    }
+
     public void createFoto() throws SQLException{
         FotoDAO fotoDAO = new FotoDAO(dbConnection);
         int maxIdFoto = fotoDAO.getmaxid();
-
-        ArrayList<Foto_Eigenschap> verz = new ArrayList<>();
-        //hier maak je alle foto-eigenschappen aan die je in foto1 wil steken en zorg ervoor dat ze telkens een andere id krijgen dus achter die id moet iedere keer +1, +2,...
-        //komen te staan telkens als er een nieuwe Foto_eigenschap aangemaakt wordt
-        Foto_Eigenschap foto_eigenschap = new Foto_Eigenschap(maxIdFoto+1,"a","b", null);
-
-        //hier steek je dan elke Foto_eigenschap die hierboven gemaakt is in deze verzameling zoals in onderstaande lijn staat
-        verz.add(foto_eigenschap);
-
-        //hier wordt een volledig foto-object gemaakt
-        Foto foto1 = new Foto(plantid,verz);
-
-        //deze onderstaande lijn wordt niet gebruikt
-        //Foto foto2 = new Foto(maxIdFoto + 1, plantid, "a", "b", null);
-        fotoDAO.createFoto(foto1);
+        Foto foto = new Foto(maxIdFoto + 1, plantid, "a", "b", null);
+        fotoDAO.createFoto(foto);
     }
     public void createfentotypemulti() throws SQLException {
             FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
             int maxid = fenotypeDAO.getmaxidmulti();
-            maxid++;
-        System.out.println(maxid);
-            String naam ="bladhoogte";
-            ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschaps = new ArrayList<>();
-            FenoMulti_Eigenschap bladhoogte = new FenoMulti_Eigenschap(maxid,"Bloeikleur", spinMaxBladhJanTv.getValue().toString(),spinMaxBladhFebTv.getValue().toString(),spinMaxBladhMaaTv.getValue().toString(),spinMaxBladhAprTv.getValue().toString(),spinMaxBladhMeiTv.getValue().toString(),spinMaxBladhJunTv.getValue().toString(),spinMaxBladhJulTv.getValue().toString(),spinMaxBladhAugTv.getValue().toString(),spinMaxBladhSeptTv.getValue().toString(),spinMaxBladhOktTv.getValue().toString(),spinMaxBladhNovTv.getValue().toString(),spinMaxBladhDecTv.getValue().toString());
-             maxid++;
-            FenoMulti_Eigenschap bladkleur = new FenoMulti_Eigenschap(maxid,"Bladkleur",cbBladkleurJanTv.getValue(),cbBladkleurFebTv.getValue(),cbBladkleurMaaTv.getValue(),cbBladkleurAprTv.getValue(), cbBladkleurMeiTv.getValue(), cbBladkleurJunTv.getValue(),cbBladkleurJulTv.getValue(),cbBladkleurAugTv.getValue(),cbBladkleurSeptTv.getValue(),cbBladkleurOktTv.getValue(),cbBladkleurNovTv.getValue(),cbBladkleurDecTv.getValue());
-             maxid++;
-             FenoMulti_Eigenschap minbloeihoogte = new FenoMulti_Eigenschap(maxid,"Min Bloeihoogte",spinMinBloeihJanTv.getValue().toString() , spinMinBloeihFebTv.getValue().toString(),spinMinBloeihMaaTv.getValue().toString(),spinMinBloeihAprTv.getValue().toString(),spinMinBloeihMeiTv.getValue().toString(),spinMinBloeihJunTv.getValue().toString(),spinMinBloeihJulTv.getValue().toString(),spinMinBloeihAugTv.getValue().toString(),spinMaxBloeihSeptTv.getValue().toString(),spinMinBloeihOktTv.getValue().toString(),spinMinBloeihNovTv.getValue().toString(),spinMinBloeihDecTv.getValue().toString());
-             maxid++;
-             FenoMulti_Eigenschap maxbloeihoogte = new FenoMulti_Eigenschap(maxid,"Max Bloeihoogte",spinMaxBloeihJanTv.getValue().toString(),spinMaxBloeihFebTv.getValue().toString(),spinMaxBladhMaaTv.getValue().toString(),spinMaxBloeihAprTv.getValue().toString(),spinMaxBloeihMeiTv.getValue().toString(),spinMaxBloeihJunTv.getValue().toString(),spinMaxBloeihJulTv.getValue().toString(),spinMaxBloeihAugTv.getValue().toString(),spinMaxBloeihSeptTv.getValue().toString(),spinMaxBloeihOktTv.getValue().toString(),spinMaxBloeihNovTv.getValue().toString(),spinMaxBloeihDecTv.getValue().toString());
-            maxid++;
-            FenoMulti_Eigenschap bloeikleur = new FenoMulti_Eigenschap(maxid,"Bloeikleur" ,cbBloeikleurJanTv.getValue(),cbBloeikleurFebTv.getValue(),cbBloeikleurMaaTv.getValue(),cbBloeikleurAprTv.getValue(),cbBloeikleurMeiTv.getValue(),cbBloeikleurJunTv.getValue(),cbBloeikleurJulTv.getValue(),cbBloeikleurAugTv.getValue(),cbBloeikleurSeptTv.getValue(),cbBloeikleurOktTv.getValue(),cbBloeikleurNovTv.getValue(),cbBloeikleurDecTv.getValue());
-            fenoMulti_eigenschaps.add(bladhoogte);
-            fenoMulti_eigenschaps.add(bladkleur);
-            fenoMulti_eigenschaps.add(minbloeihoogte);
-            fenoMulti_eigenschaps.add(maxbloeihoogte);
-            fenoMulti_eigenschaps.add(bloeikleur);
-        for (int i =0 ; i < 5;i++)
-        {
-            FenoMulti_Eigenschap fenoMulti_eigenschap = new FenoMulti_Eigenschap(fenoMulti_eigenschaps.get(i).getId(),fenoMulti_eigenschaps.get(i).getNaam(),fenoMulti_eigenschaps.get(i).getJan(), fenoMulti_eigenschaps.get(i).getFeb(),fenoMulti_eigenschaps.get(i).getMaa(),fenoMulti_eigenschaps.get(i).getApr(),fenoMulti_eigenschaps.get(i).getMei(),fenoMulti_eigenschaps.get(i).getJun(),fenoMulti_eigenschaps.get(i).getJul(),fenoMulti_eigenschaps.get(i).getAug(),fenoMulti_eigenschaps.get(i).getSep(),fenoMulti_eigenschaps.get(i).getOkt(),fenoMulti_eigenschaps.get(i).getNov(),fenoMulti_eigenschaps.get(i).getDec());
-
+            FenoMulti_Eigenschap fenoMulti_eigenschap = new FenoMulti_Eigenschap(maxid+1,"test","jan", "feb","maa","apr","mei","jun","jul","aug","sept","okt","nov","dec");
             fenotypeDAO.createfenomulti(fenoMulti_eigenschap , plantid);
-
-        }
     }
+
     public void createBeheer() throws SQLException{
         BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
         int maxIdBeheer = beheerDAO.getmaxid();
-        for(int i = 0; i < Beheerlistview.getItems().size();i++)
-        {
-            Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(maxIdBeheer+1, "Test", "Test", "Test", 5);
-            Beheer beheer = new Beheer(maxIdBeheer+1);
-            beheerDAO.createBeheer(beheerdaad_eigenschap,beheer);
-        }
-    }
-    public void createAbiotischeMulti() throws SQLException{
-        int maxidabio = abiotischeFactorenDAO.getMaxIdMulti();
-        System.out.println(maxidabio);
-        AbioMulti_Eigenschap abioMulti_eigenschap = new AbioMulti_Eigenschap(maxidabio+1, "Test", "Test");
-        abiotischeFactorenDAO.CreateAbiotischeMulti(abioMulti_eigenschap, plantid);
-    }
-    public void behandelingtoevoegenbtn_clicked(MouseEvent mouseEvent) throws SQLException {
-        try {
-            BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
-            beheerDAO.createbeheerdaad(behandlingnaamtxt.getText());
-            FillComboBeheer();
-            behandlingnaamtxt.setText("");
-        }
-        catch (Exception e)
-        {
-            boodschaptxt.setText("er bestaat al een behandeling met deze naam");
-            behandlingnaamtxt.setText("");
-        }
+        Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(maxIdBeheer+1, "Test", "Test", "Test", 5);
+        Beheer beheer = new Beheer(maxIdBeheer+1);
+        beheerDAO.createBeheer(beheerdaad_eigenschap,beheer);
+        abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
 
     }
-    public void Verwijdernbeheer_clicekd(MouseEvent mouseEvent) {
-        beheerdaad_eigenschaps.remove(Beheerlistview.getSelectionModel().getSelectedIndex());
-        Beheerlistview.getItems().clear();
-        for (int j = 0 ; j < beheerdaad_eigenschaps.size(); j++)
-        {
-            Beheerlistview.getItems().addAll(beheerdaad_eigenschaps.get(j).getNaam() + " " +beheerdaad_eigenschaps.get(j).getMaand()+ " " + beheerdaad_eigenschaps.get(j).getOpmerking() );
-        }
-    }
-    public void teovoegenbeheer_clicked(MouseEvent mouseEvent) throws SQLException {
-        try {
-            BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
-            ArrayList<String> maanden = new ArrayList<>();
-            maanden = getmaanden();
-            int id = beheerDAO.getmaxid();
-            id++;
-            for( int j=0; j < maanden.size();j++)
-            {
-                Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(id+j, CmdBehandeling.getValue().toString(), opmerkingtxt.getText(),maanden.get(j), (Integer) frequentieNumericupdown.getValue());
-                beheerdaad_eigenschaps.add(beheerdaad_eigenschap);
-                Beheerlistview.getItems().addAll(beheerdaad_eigenschaps.get(j).getNaam() + " " +beheerdaad_eigenschaps.get(j).getMaand()+ " " + beheerdaad_eigenschaps.get(j).getOpmerking() );
-                System.out.println(beheerDAO.getmaxid()+j);
-                System.out.println(beheerdaad_eigenschaps.get(j).getId());
-            }
-        }
-        catch (Exception e)
-        {
-            boodschaptxt.setText("Vul alles correct in");
-        }
 
-    }
-    public ArrayList<String> getmaanden()    {
-        ArrayList<String> maanden = new ArrayList<>();
-        if(jancheckbox.isSelected())
-        {
-            maanden.add("Januari");
-            jancheckbox.selectedProperty().set(false);
-        }
-        if(febcheckbox.isSelected())
-        {
-            maanden.add("Februarie");
-            febcheckbox.selectedProperty().set(false);
-        }
-        if(maacheckbox.isSelected())
-        {
-            maanden.add("Maart");
-            maacheckbox.selectedProperty().set(false);
 
-        }
-        if(aprilcheckbox.isSelected())
-        {
-            maanden.add("April");
-            aprilcheckbox.selectedProperty().set(false);
-
-        }
-        if(maicheckbox.isSelected())
-        {
-            maanden.add("Mei");
-            maicheckbox.selectedProperty().set(false);
-
-        }
-        if(junicheckbox.isSelected())
-        {
-            maanden.add("Juni");
-            junicheckbox.selectedProperty().set(false);
-
-        }
-        if(julicheckbox.isSelected())
-        {
-            maanden.add("Juli");
-            julicheckbox.selectedProperty().set(false);
-
-        }
-        if(augcheckbox.isSelected())
-        {
-            maanden.add("Augustus");
-            augcheckbox.selectedProperty().set(false);
-
-        }
-        if(septembecheclbox.isSelected())
-        {
-            maanden.add("September");
-            septembecheclbox.selectedProperty().set(false);
-
-        }
-        if(oktcheckbox.isSelected())
-        {
-            maanden.add("Oktober");
-            oktcheckbox.selectedProperty().set(false);
-        }
-        if(novcheckbox.isSelected())
-        {
-            maanden.add("November");
-            novcheckbox.selectedProperty().set(false);
-
-        }
-        if(deccheckbox.isSelected())
-        {
-            maanden.add("December");
-            deccheckbox.selectedProperty().set(false);
-
-        }
-        return maanden;
-    }
-    public void Opslaanbutton_clicked(MouseEvent mouseEvent) throws SQLException {
-        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
-        plantid = 250;
-        Beheer beheer = new Beheer( plantid,beheerdaad_eigenschaps );
-        for (int m = 0; m < beheerdaad_eigenschaps.size();m++)
-        {
-            beheerDAO.createBeheer(beheerdaad_eigenschaps.get(m) ,beheer);
-        }
-    }
     public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) {
+        System.out.println(cbHabitatTv.getValue());
+        if (!lvHabitatTv.getItems().contains(cbHabitatTv.getValue())) {
+            lvHabitatTv.getItems().add((String) cbHabitatTv.getValue());
+            System.out.println(cbHabitatTv.getValue());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText("Je kan niet 2 keer hetzelfde item toevoegen");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+        }
+    }
+
+    private void createAbiotischeMulti() throws SQLException {
+
+        AbiotischeFactorenDAO abiotischeMulti = new AbiotischeFactorenDAO(dbConnection);
+        int maxidcommensalismeMulti = abiotischeMulti.getMaxIdMulti();
+        System.out.println(" " + plantid);
+
+        for (int i = 0; i < lvHabitatTv.getItems().size(); i++) {
+            AbioMulti_Eigenschap abiotisch = new AbioMulti_Eigenschap("Habitat", (String) lvHabitatTv.getItems().get(i));
+
+            abiotischeMulti.CreateAbiotischeMulti(abiotisch, plantid);
+            maxidcommensalismeMulti++;
+        }
+        System.out.println(maxidcommensalismeMulti + " " + plantid);
+    }
+
+    public void createNaam() throws SQLException {
+        NaamDAO naamDAO = new NaamDAO(dbConnection);
+        Plant plant = new Plant(cboTypeTv.getValue(),txtFamilieTv.getText(),txtGeslachtTv.getText(),txtSoortTv.getText(),txtVariantTv.getText());
+        naamDAO.createNaam(plant);
     }
 }
 

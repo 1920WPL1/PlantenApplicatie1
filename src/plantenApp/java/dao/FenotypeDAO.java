@@ -30,10 +30,10 @@ public class FenotypeDAO implements Queries {
         stmtSelectFenoMultiByID = dbConnection.prepareStatement(GETFENOTYPEMULTIBYPLANTID);
         stmtSelectIdsByFeno = dbConnection.prepareStatement(GETIDSBYFENO);
         stmtSelectIdsByFenoMulti = dbConnection.prepareStatement(GETIDSBYFENOMULTI);
-        strmgetmacid = dbConnection.prepareStatement(getmaxfenotypeid);
-        stmtInsert = dbConnection.prepareStatement(insertfenotype);
-        strmGetmaxidmulti = dbConnection.prepareStatement(Getmaxidmulti);
-        stmtInsertMulti = dbConnection.prepareStatement(inserfenomulti);
+        strmgetmacid = dbConnection.prepareStatement(GETMAXIDFENOTYPE);
+        stmtInsert = dbConnection.prepareStatement(INSERTFENOTYPE);
+        strmGetmaxidmulti = dbConnection.prepareStatement(GETMAXIDMULTIFENOTYPE);
+        stmtInsertMulti = dbConnection.prepareStatement(INSERTFENOTYPEMULTI);
     }
 
     /**@author Siebe
