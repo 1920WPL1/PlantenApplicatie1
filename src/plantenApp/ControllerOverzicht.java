@@ -128,7 +128,7 @@ public class ControllerOverzicht {
     //indexArrays zegt van welke plaats in de arrays dat de functie een plant moet ophalen, nu is het hardcoded voor de eerste plaats in de arrayLists
     public void tonenPlantOpFiche(int indexArrays){
         Plant p = ControllerPlantToevoegen.plantss.get(indexArrays);
-        lblTypeO.setText(p.getType());
+        lblTypeO.setText(p.getPlantType());
         lblFamilieO.setText(p.getFamilie());
         lblGeslachtO.setText(p.getGeslacht());
         lblSoortO.setText(p.getSoort());

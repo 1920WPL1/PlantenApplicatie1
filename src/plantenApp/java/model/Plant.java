@@ -34,7 +34,7 @@ public class Plant {
     }
 
     public Plant(String type, String familie, String geslacht, String soort, String variatie) {
-        this.type = type;
+        this.planttype = type;
         this.familie = familie;
         this.geslacht = geslacht;
         this.soort = soort;
@@ -53,6 +53,8 @@ public class Plant {
         this.fgsv = fgsv;
         this.status = status;
     }
+
+
 
     public String getFgsv() {
         return fgsv;
@@ -93,13 +95,6 @@ public class Plant {
         this.extra = extra;
     }
 
-    public Plant(String planttype, String familie, String geslacht, String soort, String variatie){
-        this.planttype = planttype;
-        this.familie = familie;
-        this.geslacht = geslacht;
-        this.soort = soort;
-        this.variatie = variatie;
-    }
 
     public int getId() {
         return id;

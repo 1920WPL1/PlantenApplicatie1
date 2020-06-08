@@ -220,7 +220,7 @@ public class ControllerPlantToevoegen {
         infoTables = infotablesDAO.getInfoTables();
         /*comboboxes vullen*/
         FillComboboxes(infoTables);
-
+    }
 
     public void FillComboBeheer() {
 

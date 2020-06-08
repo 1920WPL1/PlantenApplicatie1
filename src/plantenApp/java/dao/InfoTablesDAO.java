@@ -63,12 +63,7 @@ public class InfoTablesDAO implements Queries {
         return ints;
     }
 
-    /**
-     * @author Siebe
-     * @param Query      -> de uit te voeren query
-     * @param colomnName -> de naam van de kolom
-     * @return -> lijst van blobs met alle info van de colomn
-     */
+
     private ArrayList<Blob> getInfoTableBlob(String Query, String colomnName) throws SQLException {
         //TODO:Afhankelijk van hoe jullie de blobs willen doen moet je dit veranderen, wil je het als image opslaan of als blob
         //Dao
@@ -87,10 +82,7 @@ public class InfoTablesDAO implements Queries {
         return blobs;
     }
 
-    /**
-     * @author Siebe
-     * @return -> InfoTables model met alle info van de naakte tabellen
-     */
+
     public InfoTables getInfoTables() throws SQLException {
         InfoTables infoTables = new InfoTables(
                 getInfoTableString(NTTYPE, "planttype_naam"),
