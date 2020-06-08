@@ -256,7 +256,6 @@ public class ControllerOverzicht {
         }
         int eindplaatsc = tellerc + ControllerPlantToevoegen.AantalPerElCommMulti.get(indexArrays);
         for(int j = tellerc; j<eindplaatsc;j++){
-            //lvLevensduurO
             if(ControllerPlantToevoegen.commMulti_eigenschapss.get(j).getNaam().matches("sociabiliteit")){
                 if(ControllerPlantToevoegen.commMulti_eigenschapss.get(j).getValue().matches("1")){rbSociabiliteit1O.setSelected(true);}
                 if(ControllerPlantToevoegen.commMulti_eigenschapss.get(j).getValue().matches("2")){rbSociabiliteit2O.setSelected(true);}
@@ -267,7 +266,6 @@ public class ControllerOverzicht {
             if(ControllerPlantToevoegen.commMulti_eigenschapss.get(j).getNaam().matches("levensduur")){
                 lvLevensduurO.getItems().add(ControllerPlantToevoegen.commMulti_eigenschapss.get(j).getValue());
             }
-            lvHabitatO.getItems().add(ControllerPlantToevoegen.commMulti_eigenschapss.get(j));
         }
 
         //dit wordt waarschijnlijk gebruikt voor die details bovenaan het scherm van gedetailleerdefiche
