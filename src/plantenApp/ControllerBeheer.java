@@ -84,6 +84,7 @@ public class ControllerBeheer {
 
     public void teovoegenbeheer_clicked(MouseEvent mouseEvent) throws SQLException {
         try {
+            int aantalBeheer = 0;
             BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
             ArrayList<String> maanden = new ArrayList<>();
             maanden = getmaanden();
@@ -93,16 +94,16 @@ public class ControllerBeheer {
                 Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(id + j, CmdBehandeling.getValue().toString(), opmerkingtxt.getText(), maanden.get(j), (Integer) frequentieNumericupdown.getValue());
                 ControllerPlantToevoegen.beheerdaad_eigenschapss.add(beheerdaad_eigenschap);
                 Beheerlistview.getItems().addAll( ControllerPlantToevoegen.beheerdaad_eigenschapss.get(j).getNaam() + " " +  ControllerPlantToevoegen.beheerdaad_eigenschapss.get(j).getMaand() + " " +  ControllerPlantToevoegen.beheerdaad_eigenschapss.get(j).getOpmerking());
-                System.out.println(beheerDAO.getmaxid() + j);
-                System.out.println( ControllerPlantToevoegen.beheerdaad_eigenschapss.get(j).getId());
+                aantalBeheer++;
             }
+            ControllerPlantToevoegen.AantalPerElBehMulti.add(aantalBeheer);
         } catch (Exception e) {
             boodschaptxt.setText("Vul alles correct in");
         }
 
     }
 
-    public ArrayList<String> getmaanden() {
+    public  ArrayList<String> getmaanden() {
         ArrayList<String> maanden = new ArrayList<>();
         if (jancheckbox.isSelected()) {
             maanden.add("Januari");
@@ -172,18 +173,6 @@ public class ControllerBeheer {
         openNieuwScherm(mouseEvent);
         System.out.println(ControllerPlantToevoegen.plantss.get(0).getFgsv());
 
-    }
-
-    public void createBeheer() throws SQLException {
-        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
-        int maxIdBeheer = beheerDAO.getmaxid();
-        for (int i = 0; i < Beheerlistview.getItems().size(); i++) {
-            maxIdBeheer++;
-            Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(maxIdBeheer + 1, "Test", "Test", "Test", 5);
-            ControllerPlantToevoegen.beheerdaad_eigenschapss.add(beheerdaad_eigenschap);
-            Beheer beheer = new Beheer(planid);
-            ControllerPlantToevoegen.beheerss.add(beheer);
-        }
     }
 
     public void openNieuwScherm(MouseEvent mouseEvent) throws IOException {
