@@ -227,9 +227,6 @@ public class ControllerPlantToevoegen {
 
         //Opvullen van emailadres om mee te geven met toevoegen plant
         sEmailadres = "kurt.engelbrecht@vives.be";
-
-
-
     }
 
     public void FillComboBeheer() {
@@ -237,8 +234,14 @@ public class ControllerPlantToevoegen {
     }
     public void createNaam() throws SQLException {
         NaamDao naamDAO = new NaamDao(dbConnection);
+
         Plant plant = new Plant(cboTypeTv.getValue(),txtFamilieTv.getText(),txtGeslachtTv.getText(),txtSoortTv.getText(),txtVariantTv.getText());
-        naamDAO.createNaam(plant);
+
+        //Controle of plantnaam al bestaat
+        int iDubbeleNaam = naamDAO.ControleDubbeleNaam(plant);
+        if (iDubbeleNaam == 0)
+        { naamDAO.createNaam(plant);}
+        System.out.println(iDubbeleNaam);
     }
     public void Pollenwaarde()    {
         slNectarwaardeTv.setMax(5);
@@ -739,7 +742,6 @@ public class ControllerPlantToevoegen {
 
         plantDAO.createplant(plant);
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
-        plantDAO.createplant(plant);
         fenotypeDAO.createfenotype(fenotype);
         for (int j =0; j < fenoMulti_eigenschaps.size();j++) {
             fenotypeDAO.createfenomulti(fenoMulti_eigenschaps.get(j),plant.getId());

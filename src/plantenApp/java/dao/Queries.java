@@ -298,9 +298,7 @@ public interface Queries {
     String SETWACHTWOORDHASH = "UPDATE gebruiker SET wachtwoord_hash = ?, salt = ?, geregistreerd = 1 WHERE gebruiker_id = ?";
     String SELECTGEBRUIKERIDMETEMAIL = "select gebruiker_id from gebruiker where email = ?";
     String SELECTGEBRUIKERROLMETEMAIL = "select rol from gebruiker where email = ?";
-    /**
-     * @Author Jasper
-     */
+
     String GETGEBRUIKERSBYFULLNAME = "SELECT * FROM gebruiker WHERE voornaam LIKE ? OR achternaam LIKE ?";
     String SETGEBRUIKERBYID = "UPDATE gebruiker SET voornaam = ?, achternaam = ?, email = ?, rol = ? WHERE gebruiker_id = ?";
 

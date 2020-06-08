@@ -64,7 +64,13 @@ public class Plant {
         this.status = status;
     }
 
-
+    public Plant(String planttype, String familie, String geslacht, String soort, String variatie) {
+        this.planttype = planttype;
+        this.familie = familie;
+        this.geslacht = geslacht;
+        this.soort = soort;
+        this.variatie = variatie;
+    }
 
     public String getFgsv() {
         return fgsv;
