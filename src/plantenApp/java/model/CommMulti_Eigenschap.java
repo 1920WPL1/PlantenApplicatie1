@@ -21,16 +21,18 @@ public class CommMulti_Eigenschap {
         this.plantid = plantid;
     }
 
+    /*
     public CommMulti_Eigenschap(int id, String naam, String value) {
         this.id = id;
         this.naam = naam;
         this.value = value;
-    }
+    }*/
 
     public CommMulti_Eigenschap(String naam, String value) {
         this.naam = naam;
         this.value = value;
     }
+
 
     public int getId() {
         return id;

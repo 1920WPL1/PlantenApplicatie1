@@ -336,15 +336,233 @@ public class ControllerPlantToevoegen {
         createfenotypemulti();//Wout // done
         createCommensalisme();//Kasper //done
         createCommensalismeMulti();//Mathias //done
-        //createBeheer();//Wout dit moet nog verplaats worden naar een button op beheer scherm //done
+        //createBeheer();//Wout dit moet nog verplaatst worden naar een button op beheer scherm //done
         createExtra();//Kasper
         //createFoto(); nog geen plaats of scherm voor een foto in toe te voegen
-        gedetailleerdopbullen();
         openNieuwScherm(mouseEvent);
     }
-    public void gedetailleerdopbullen()  {
+    //indexArrays zegt van welke plaats in de arrays dat de functie een plant moet ophalen, nu is het hardcoded voor de eerste plaats in de arrayLists
+    public void tonenPlantOpFiche(int indexArrays){
+        Plant p = plantss.get(indexArrays);
+        lblTypeO.setText(p.getType());
+        lblFamilieO.setText(p.getFamilie());
+        lblGeslachtO.setText(p.getGeslacht());
+        lblSoortO.setText(p.getSoort());
+        lblVariantO.setText(p.getVariatie());
+        lblXO.setText(String.valueOf(p.getMinPlantdichtheid()));
+        lblYO.setText(String.valueOf(p.getMaxPlantdichtheid()));
 
+        Fenotype f = fenotypess.get(indexArrays);
+        lblBladgrootteO.setText(String.valueOf(f.getBladgrootte()));
+        lblBladvormO.setText(f.getBladvorm());
+        lblRatioO.setText(f.getRatio_bloei_blad());
+        lblSpruitfenologieO.setText(f.getSpruitfenologie());
+        lblLevensvormO.setText(String.valueOf(f.getLevensvorm()));
+        lblHabitusO.setText(f.getHabitus());
+        lblBloeiwijzeO.setText(f.getBloeiwijze());
+        int a = 5*indexArrays;//beginplaats in de arraylist
+        int b = a + 5;//eindplaats in de arraylist
+        //Bladhoogte Bladkleur Min Bloeihoogte Max Bloeihoogte Bloeikleur
+        for(int i = a; i<b;i++){
+            FenoMulti_Eigenschap fme = fenoMulti_eigenschapss.get(i);
+            if(fme.getNaam().matches("Bladhoogte")){
+                bladhoogteMaxJanO.setText(fme.getJan());
+                bladhoogteMaxFebO.setText(fme.getFeb());
+                bladhoogteMaxMaaO.setText(fme.getMaa());
+                bladhoogteMaxAprO.setText(fme.getApr());
+                bladhoogteMaxMeiO.setText(fme.getMei());
+                bladhoogteMaxJunO.setText(fme.getJun());
+                bladhoogteMaxJulO.setText(fme.getJul());
+                bladhoogteMaxAugO.setText(fme.getAug());
+                bladhoogteMaxSeptO.setText(fme.getSep());
+                bladhoogteMaxOktO.setText(fme.getOkt());
+                bladhoogteMaxNovO.setText(fme.getNov());
+                bladhoogteMaxDecO.setText(fme.getDec());
+            }
+            if(fme.getNaam().matches("Bladkleur")){
+                bladkleurJanO.setText(fme.getJan());
+                bladkleurFebO.setText(fme.getFeb());
+                bladkleurMaaO.setText(fme.getMaa());
+                bladkleurAprO.setText(fme.getApr());
+                bladkleurMeiO.setText(fme.getMei());
+                bladkleurJunO.setText(fme.getJun());
+                bladkleurJulO.setText(fme.getJul());
+                bladkleurAugO.setText(fme.getAug());
+                bladkleurSeptO.setText(fme.getSep());
+                bladkleurOktO.setText(fme.getOkt());
+                bladkleurNovO.setText(fme.getNov());
+                bladkleurDecO.setText(fme.getDec());
+            }
+            if(fme.getNaam().matches("Bloeikleur")){
+                bloeikleurJanO.setText(fme.getJan());
+                bloeikleurFebO.setText(fme.getFeb());
+                bloeikleurMaartO.setText(fme.getMaa());
+                bloeikleurAprilO.setText(fme.getApr());
+                bloeikleurMeiO.setText(fme.getMei());
+                bloeikleurJunO.setText(fme.getJun());
+                bloeikleurJuliO.setText(fme.getJul());
+                bloeikleurAugO.setText(fme.getAug());
+                bloeikleurSeptO.setText(fme.getSep());
+                bloeikleurOktO.setText(fme.getOkt());
+                bloeikleurNovO.setText(fme.getNov());
+                bloeikleurDecO.setText(fme.getDec());
+            }
+            if(fme.getNaam().matches("Min Bloeihoogte")){
+                bloeihoogteMinJanO.setText(fme.getJan());
+                bloeihoogteMinFebO.setText(fme.getFeb());
+                bloeihoogteMinMaartO.setText(fme.getMaa());
+                bloeihoogteMinAprilO.setText(fme.getApr());
+                bloeihoogteMinMeiO.setText(fme.getMei());
+                bloeihoogteMinJunO.setText(fme.getJun());
+                bloeihoogteMinJulO.setText(fme.getJul());
+                bloeihoogteMinAugO.setText(fme.getAug());
+                bloeihoogteMinSeptO.setText(fme.getSep());
+                bloeihoogteMinOktO.setText(fme.getOkt());
+                bloeihoogteMinNovO.setText(fme.getNov());
+                bloeihoogteMinDecO.setText(fme.getDec());
+            }
+            if(fme.getNaam().matches("Max Bloeihoogte")){
+                bloeihoogteMaxJanO.setText(fme.getJan());
+                bloeihoogteMaxFebO.setText(fme.getFeb());
+                bloeihoogteMaxMaartO.setText(fme.getMaa());
+                bloeihoogteMaxAprO.setText(fme.getApr());
+                bloeihoogteMaxMeiO.setText(fme.getMei());
+                bloeihoogteMaxJunO.setText(fme.getJun());
+                bloeihoogteMaxJulO.setText(fme.getJul());
+                bloeihoogteMaxAugO.setText(fme.getAug());
+                bloeihoogteMaxSeptO.setText(fme.getSep());
+                bloeihoogteMaxOktO.setText(fme.getOkt());
+                bloeihoogteMaxNovO.setText(fme.getNov());
+                bloeihoogteMaxDecO.setText(fme.getDec());
+            }
+        }
+
+
+        Extra e = extrass.get(indexArrays);
+        lblNectarwaardeO.setText(String.valueOf(e.getNectarwaarde()));
+        lblPollenwaardeO.setText(String.valueOf(e.getPollenwaarde()));
+        lblBijvriendelijkO.setText(e.getBijvriendelijk());
+        lblVlindervriendelijkO.setText("Nergens in de databank of in de klasse Extra zitten er waarden voor vlindervriendelijk dus geeft ik dit label een belachelijk lange zin mee.");
+        lblEetbaarO.setText(e.getEetbaar());
+        lblKruidgebruikO.setText(e.getKruidgebruik());
+        lblGeurendO.setText(e.getGeurend());
+        lblVorstgevoeligO.setText(e.getVorstgevoelig());
+
+        AbiotischeFactoren af = abiotischeFactorenn.get(indexArrays);
+        lblBezonningO.setText(af.getBezonning());
+        lblVochtbehoefteO.setText(af.getVochtbehoefte());
+        lblVoedingsbehoefteO.setText(af.getVoedingsbehoefte());
+        lblReactieO.setText(af.getReactieAntagonistischeOmgeving());
+        lblGrondsoortO.setText(af.getGrondsoort());
+        int teller = 0;
+        for(int i = 0; i<indexArrays;i++){
+            teller +=AantalPerElAbMulti.get(i);
+        }
+        int eindplaats = teller + AantalPerElAbMulti.get(indexArrays);
+        for(int j = teller; j<eindplaats;j++){
+            lvHabitatO.getItems().add(abiotischmulti.get(j).getValue());
+        }
+
+        Commensalisme c = commensalismes.get(indexArrays);
+        lblOntwikkelingssnelheidO.setText(c.getOntwikkelingssnelheid());
+        lblStrategieO.setText(c.getStrategie());
+        int tellerc = 0;
+        for(int i = 0; i<indexArrays;i++){
+            tellerc +=AantalPerElCommMulti.get(i);
+        }
+        int eindplaatsc = tellerc + AantalPerElCommMulti.get(indexArrays);
+        for(int j = tellerc; j<eindplaatsc;j++){
+            //lvLevensduurO
+            if(commMulti_eigenschapss.get(j).getNaam().matches("sociabiliteit")){
+                if(commMulti_eigenschapss.get(j).getValue().matches("1")){rbSociabiliteit1O.setSelected(true);}
+                if(commMulti_eigenschapss.get(j).getValue().matches("2")){rbSociabiliteit2O.setSelected(true);}
+                if(commMulti_eigenschapss.get(j).getValue().matches("3")){rbSociabiliteit3O.setSelected(true);}
+                if(commMulti_eigenschapss.get(j).getValue().matches("4")){rbSociabiliteit4O.setSelected(true);}
+                if(commMulti_eigenschapss.get(j).getValue().matches("5")){rbSociabiliteit5O.setSelected(true);}
+            }
+            if(commMulti_eigenschapss.get(j).getNaam().matches("levensduur")){
+                lvLevensduurO.getItems().add(commMulti_eigenschapss.get(j).getValue());
+            }
+            lvHabitatO.getItems().add(commMulti_eigenschapss.get(j));
+        }
+
+        //dit wordt waarschijnlijk gebruikt voor die details bovenaan het scherm van gedetailleerdefiche
+        Foto fo = fotoss.get(indexArrays);
+
+        //
+        int tellerb = 0;
+        for(int i = 0; i<indexArrays;i++){
+            tellerb +=AantalPerElBehMulti.get(i);
+        }
+        int eindplaatsb = tellerb + AantalPerElBehMulti.get(indexArrays);
+        for(int j = tellerb; j<eindplaatsb;j++){
+            Beheerdaad_Eigenschap beheerdaad_e = beheerdaad_eigenschapss.get(j);
+            switch((String)cbMaandBeheerO.getValue()){
+                case "januari":
+                    if(beheerdaad_e.getMaand().matches("januari")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "februari":
+                    if(beheerdaad_e.getMaand().matches("febuari")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "maart":
+                    if(beheerdaad_e.getMaand().matches("maart")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "april":
+                    if(beheerdaad_e.getMaand().matches("april")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "mei":
+                    if(beheerdaad_e.getMaand().matches("mei")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "juni":
+                    if(beheerdaad_e.getMaand().matches("juni")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "juli":
+                    if(beheerdaad_e.getMaand().matches("juli")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "augustus":
+                    if(beheerdaad_e.getMaand().matches("augustus")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "september":
+                    if(beheerdaad_e.getMaand().matches("september")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "oktober":
+                    if(beheerdaad_e.getMaand().matches("oktober")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "november":
+                    if(beheerdaad_e.getMaand().matches("november")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+                case "december":
+                    if(beheerdaad_e.getMaand().matches("december")){
+                        lvBeheerbehandelingO.getItems().add(beheerdaad_e.getNaam());
+                        lvFrequentieO.getItems().add(beheerdaad_e.getFrequentie());
+                    } break;
+            }
+            //lvHabitatO.getItems().add(abiotischmulti.get(j).getValue());
+        }
     }
+    
 
 
     public void openNieuwScherm(MouseEvent mouseEvent) throws IOException {
@@ -490,6 +708,8 @@ public class ControllerPlantToevoegen {
         }
     }
     public void createCommensalismeMulti() throws SQLException {
+        //aantal elementen in bovenstaande lijst bijhouden
+        int aantalCommMulti = 0;
 
         //Toevoegen van levensduur
         CommensalismeDAO commensalismeMulti = new CommensalismeDAO(dbConnection);
@@ -499,6 +719,7 @@ public class ControllerPlantToevoegen {
         for (int i = 0; i < lvLevensduurTv.getItems().size(); i++) {
             CommMulti_Eigenschap commensalisme = new CommMulti_Eigenschap("levensduur", lvLevensduurTv.getItems().get(i),plantid);
             commMulti_eigenschapss.add(commensalisme);
+            aantalCommMulti++;
         }
 
 
@@ -507,28 +728,33 @@ public class ControllerPlantToevoegen {
             CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
             System.out.println(sociabiliteit.getNaam());
             commMulti_eigenschapss.add(sociabiliteit);
-
+            aantalCommMulti++;
         }
         if (chkSociabiliteit2Tv.isSelected()) {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "2",plantid);
             System.out.println(sociabiliteit.getNaam());
             commMulti_eigenschapss.add(sociabiliteit);
+            aantalCommMulti++;
         }
         if (chkSociabiliteit3Tv.isSelected()) {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "3",plantid);
             System.out.println(sociabiliteit.getNaam());
             commMulti_eigenschapss.add(sociabiliteit);
+            aantalCommMulti++;
         }
         if (chkSociabiliteit4Tv.isSelected()) {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "4",plantid);
             System.out.println(sociabiliteit.getNaam());
             commMulti_eigenschapss.add(sociabiliteit);
+            aantalCommMulti++;
         }
         if (chkSociabiliteit5Tv.isSelected()) {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "5",plantid);
             System.out.println(sociabiliteit.getNaam());
             commMulti_eigenschapss.add(sociabiliteit);
+            aantalCommMulti++;
         }
+        AantalPerElCommMulti.add(aantalCommMulti);
     }
     public void TestZooi(MouseEvent mouseEvent) throws SQLException {
         createCommensalismeMulti();
@@ -585,7 +811,8 @@ public class ControllerPlantToevoegen {
 
     }
     private void createAbiotischeMulti() throws SQLException {
-
+        //aantal el toegevoegd in abmulti lijst bijhouden
+        int aantalAbMultiEl = 0;
         AbiotischeFactorenDAO abiotischeMultidao = new AbiotischeFactorenDAO(dbConnection);
         int maxidcommensalismeMulti = abiotischeMultidao.getMaxIdMulti();
         System.out.println(" " + plantid);
@@ -594,8 +821,9 @@ public class ControllerPlantToevoegen {
             AbioMulti_Eigenschap abiotisch = new AbioMulti_Eigenschap("Habitat", (String) lvHabitatTv.getItems().get(i));
             maxidcommensalismeMulti++;
             abiotischmulti.add(abiotisch);
-
+            aantalAbMultiEl++;
         }
+        AantalPerElAbMulti.add(aantalAbMultiEl);
     }
     public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) {
         System.out.println(cbHabitatTv.getValue());
