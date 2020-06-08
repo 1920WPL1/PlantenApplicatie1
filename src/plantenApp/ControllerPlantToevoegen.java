@@ -470,11 +470,67 @@ public class ControllerPlantToevoegen {
         maxidextra ++;
         System.out.println(maxidextra);
         System.out.println(valuePollenwaarde + " " + valueNectarwaarde);
-        Extra extra = new Extra(maxidextra, plantid, valueNectarwaarde, valuePollenwaarde, "a", "b", "c", "d", "e");
+        Extra extra = new Extra(maxidextra, plantid, valueNectarwaarde, valuePollenwaarde, bijvriendelijkCheck(), eetbaarCheck(), kruidgebruikCheck(), geurendCheck(), vorstgevoeligCheck());
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
         extrass.add(extra);
         //ExtraDAO.createExtra(extra);
     }
+    public String vorstgevoeligCheck() {
+        if(rbVorstgevoeligJaTv.isSelected()) {
+            return "ja";
+        }
+        else if (rbVorstgevoeligNeeTv.isSelected()) {
+            return "nee";
+        }
+        else {
+            return "null";
+        }
+    }
+    public String eetbaarCheck() {
+        if(rbEetbaarJaTv.isSelected()) {
+            return "ja";
+        }
+        else if (rbEetbaarNeeTv.isSelected()) {
+            return "nee";
+        }
+        else {
+            return "null";
+        }
+    }
+    public String geurendCheck() {
+        if(rbGeurendJaTv.isSelected()) {
+            return "ja";
+        }
+        else if (rbGeurendNeeTv.isSelected()) {
+            return "nee";
+        }
+        else {
+            return "null";
+        }
+    }
+    public String kruidgebruikCheck() {
+        if(rbKruidgebruikJaTv.isSelected()) {
+            return "ja";
+        }
+        else if (rbKruidgebruikNeeTv.isSelected()) {
+            return "nee";
+        }
+        else {
+            return "null";
+        }
+    }
+    public String bijvriendelijkCheck() {
+        if(rbBijvriendelijkJaTv.isSelected()) {
+            return "ja";
+        }
+        else if (rbBijvriendelijkNeeTv.isSelected()) {
+            return "nee";
+        }
+        else {
+            return "null";
+        }
+    }
+
     public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
         if (!lvLevensduurTv.getItems().contains(cbLevensduurTv.getValue())) {
             lvLevensduurTv.getItems().add((String) cbLevensduurTv.getValue());
