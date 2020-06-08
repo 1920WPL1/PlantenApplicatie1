@@ -190,7 +190,7 @@ public class ControllerPlantToevoegen {
     public ToggleGroup lvTv;
     private Connection dbConnection;
     private AbiotischeFactorenDAO abiotischeFactorenDAO;
-    private int plantid;
+    public static int plantid;
     private InfoTables infoTables;
     private ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps = new ArrayList<>();
     public static ArrayList<Plant> plantss = new ArrayList<>();
@@ -204,6 +204,9 @@ public class ControllerPlantToevoegen {
     public static ArrayList<Foto> fotoss = new ArrayList<>();
     public static ArrayList<Beheer> beheerss = new ArrayList<>();
     public static ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschapss = new ArrayList<>();
+    public static ArrayList<Integer>AantalPerElCommMulti = new ArrayList<>();
+    public static ArrayList<Integer> AantalPerElAbMulti = new ArrayList<>();
+    public static ArrayList<Integer> AantalPerElBehMulti = new ArrayList<>();
     public String scherm  ;
 
     public void initialize() throws SQLException {
@@ -336,15 +339,12 @@ public class ControllerPlantToevoegen {
         createfenotypemulti();//Wout // done
         createCommensalisme();//Kasper //done
         createCommensalismeMulti();//Mathias //done
-        //createBeheer();//Wout dit moet nog verplaats worden naar een button op beheer scherm //done
+        //createBeheer();//Wout dit moet nog verplaatst worden naar een button op beheer scherm //done
         createExtra();//Kasper
         //createFoto(); nog geen plaats of scherm voor een foto in toe te voegen
-        gedetailleerdopbullen();
         openNieuwScherm(mouseEvent);
     }
-    public void gedetailleerdopbullen()  {
 
-    }
 
 
     public void openNieuwScherm(MouseEvent mouseEvent) throws IOException {
@@ -490,6 +490,8 @@ public class ControllerPlantToevoegen {
         }
     }
     public void createCommensalismeMulti() throws SQLException {
+        //aantal elementen in bovenstaande lijst bijhouden
+        int aantalCommMulti = 0;
 
         //Toevoegen van levensduur
         CommensalismeDAO commensalismeMulti = new CommensalismeDAO(dbConnection);
@@ -499,6 +501,7 @@ public class ControllerPlantToevoegen {
         for (int i = 0; i < lvLevensduurTv.getItems().size(); i++) {
             CommMulti_Eigenschap commensalisme = new CommMulti_Eigenschap("levensduur", lvLevensduurTv.getItems().get(i),plantid);
             commMulti_eigenschapss.add(commensalisme);
+            aantalCommMulti++;
         }
 
 
@@ -507,28 +510,33 @@ public class ControllerPlantToevoegen {
             CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
             System.out.println(sociabiliteit.getNaam());
             commMulti_eigenschapss.add(sociabiliteit);
-
+            aantalCommMulti++;
         }
         if (chkSociabiliteit2Tv.isSelected()) {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "2",plantid);
             System.out.println(sociabiliteit.getNaam());
             commMulti_eigenschapss.add(sociabiliteit);
+            aantalCommMulti++;
         }
         if (chkSociabiliteit3Tv.isSelected()) {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "3",plantid);
             System.out.println(sociabiliteit.getNaam());
             commMulti_eigenschapss.add(sociabiliteit);
+            aantalCommMulti++;
         }
         if (chkSociabiliteit4Tv.isSelected()) {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "4",plantid);
             System.out.println(sociabiliteit.getNaam());
             commMulti_eigenschapss.add(sociabiliteit);
+            aantalCommMulti++;
         }
         if (chkSociabiliteit5Tv.isSelected()) {
-            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "5",plantid);
             System.out.println(sociabiliteit.getNaam());
             commMulti_eigenschapss.add(sociabiliteit);
+            aantalCommMulti++;
         }
+        AantalPerElCommMulti.add(aantalCommMulti);
     }
     public void TestZooi(MouseEvent mouseEvent) throws SQLException {
         createCommensalismeMulti();
@@ -585,7 +593,8 @@ public class ControllerPlantToevoegen {
 
     }
     private void createAbiotischeMulti() throws SQLException {
-
+        //aantal el toegevoegd in abmulti lijst bijhouden
+        int aantalAbMultiEl = 0;
         AbiotischeFactorenDAO abiotischeMultidao = new AbiotischeFactorenDAO(dbConnection);
         int maxidcommensalismeMulti = abiotischeMultidao.getMaxIdMulti();
         System.out.println(" " + plantid);
@@ -594,8 +603,9 @@ public class ControllerPlantToevoegen {
             AbioMulti_Eigenschap abiotisch = new AbioMulti_Eigenschap("Habitat", (String) lvHabitatTv.getItems().get(i));
             maxidcommensalismeMulti++;
             abiotischmulti.add(abiotisch);
-
+            aantalAbMultiEl++;
         }
+        AantalPerElAbMulti.add(aantalAbMultiEl);
     }
     public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) {
         System.out.println(cbHabitatTv.getValue());

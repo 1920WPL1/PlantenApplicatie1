@@ -75,7 +75,7 @@ public class AbiotischeFactorenDAO implements Queries {
         ResultSet rs = stmtSelectAbioMultiByID.executeQuery();
         while (rs.next()) {
             AbioMulti_Eigenschap abioEigenschap = new AbioMulti_Eigenschap(
-                    rs.getInt("abiotische_id"),
+                    //rs.getInt("abiotische_id"),
                     rs.getString("eigenschap"),
                     rs.getString("waarde")
             );
@@ -158,6 +158,15 @@ public class AbiotischeFactorenDAO implements Queries {
         stmInsertAbiotische.executeUpdate();
         System.out.println("Abiotische gelukt");
     }
+
+    /*
+    public void CreateAbiotischeMulti (AbioMulti_Eigenschap abioMulti_eigenschap, int plant_id) throws SQLException {
+        stmInsertAbiotischeMulti.setInt(1, plant_id);
+        stmInsertAbiotischeMulti.setString(2,abioMulti_eigenschap.getNaam());
+        stmInsertAbiotischeMulti.setString(3,abioMulti_eigenschap.getValue());
+        stmInsertAbiotischeMulti.executeUpdate();
+        System.out.println("AbiotischeMulti toegevoegd");
+    }*/
 
     public void CreateAbiotischeMulti (AbioMulti_Eigenschap abioMulti_eigenschap, int plant_id) throws SQLException {
         stmInsertAbiotischeMulti.setInt(1, plant_id);
