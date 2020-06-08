@@ -441,11 +441,12 @@ public class ControllerPlantToevoegen {
         return null;
     }
     public void createplant() throws SQLException {
-
-
+        //Aanmaken variabelen
         //volledig toevoegen in databank vanuit scherm, waarschijnlijk nog iets toevoegen voor te kijken of de naam al in de databank zit
         GebruikerDAO gebruikerDAO = new GebruikerDAO(dbConnection);
         PlantDAO plantDAO = new PlantDAO(dbConnection);
+        NaamDAO naamDAO = new NaamDAO(dbConnection);
+        Plant plantTest = new Plant(cboTypeTv.getValue(),txtFamilieTv.getText(),txtGeslachtTv.getText(),txtSoortTv.getText(),txtVariantTv.getText());
         int maxidplant = plantDAO.getmaxid();
         int iGebruikerID = gebruikerDAO.getIdMetEmail(sEmailadres);
         String srolGebruiker = gebruikerDAO.getRolMetEmail(sEmailadres);
@@ -467,21 +468,43 @@ public class ControllerPlantToevoegen {
             y = Integer.parseInt(txtDichtheidYTv.getText());
         }
 
-        //Toevoegen plant docent/admin
-        if (srolGebruiker.equals("admin") || srolGebruiker.equals("docent"))
-        {
-            iStatus = 2;
-            Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv);
-            plantDAO.createplant(plant, iStatus, iGebruikerID);
+        //Controle of plantnaam al bestaat
+        int iDubbeleNaam = naamDAO.ControleDubbeleNaam(plantTest);
+        //als plant nog niet bestaat, plant toevoegen
+        if (iDubbeleNaam == 0) {
+            //Toevoegen plant docent/admin
+            if (srolGebruiker.equals("admin") || srolGebruiker.equals("docent"))
+            {
+                iStatus = 2;
+                Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv);
+                plantDAO.createplant(plant, iStatus, iGebruikerID);
+            }
+            //Toevoegen plant als leerling/gast
+            else
+            {
+                iStatus = 1;
+                Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv);
+                plantDAO.createplant(plant, iStatus, iGebruikerID);
+            }
         }
-        //Toevoegen plant als leerling/gast
+        //Als plant bestaat waarschuwing geven
         else
         {
-            iStatus = 1;
-            Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv);
-            plantDAO.createplant(plant, iStatus, iGebruikerID);
+            DubbelePlantWaarschuwing();
         }
 
+
+    }
+
+    private void DubbelePlantWaarschuwing() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setContentText("Deze plant bestaat al.");
+        alert.showAndWait().ifPresent(rs -> {
+            if (rs == ButtonType.OK) {
+                System.out.println("Pressed OK.");
+            }
+        });
     }
 
     public void createAbiotischefactoren() throws SQLException {
@@ -758,6 +781,19 @@ public class ControllerPlantToevoegen {
         }
         extraDAO.createExtra(extra);
 
+    public void createNaam() throws SQLException {
+        NaamDAO naamDAO = new NaamDAO(dbConnection);
+
+        Plant plant = new Plant(cboTypeTv.getValue(),txtFamilieTv.getText(),txtGeslachtTv.getText(),txtSoortTv.getText(),txtVariantTv.getText());
+
+
+        //Controle of plantnaam al bestaat
+        int iDubbeleNaam = naamDAO.ControleDubbeleNaam(plant);
+        if (iDubbeleNaam == 0)
+        { naamDAO.createNaam(plant);}
+        else{
+            DubbelePlantWaarschuwing();
+        }
     }
 }
 
