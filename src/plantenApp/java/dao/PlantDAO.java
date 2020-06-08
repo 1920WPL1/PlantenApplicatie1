@@ -142,7 +142,7 @@ public class PlantDAO implements Queries {
         //Output
         return plant;
     }
-    public void createplant(Plant plant) throws SQLException {
+    public void createplant(Plant plant,int iStatus, int iGebruikerID) throws SQLException {
         stmtInsert.setInt(1,plant.getId());
         stmtInsert.setString(2, plant.getPlantType());
         stmtInsert.setString(3,plant.getFamilie());
@@ -153,6 +153,7 @@ public class PlantDAO implements Queries {
         stmtInsert.setInt(8,plant.getMaxPlantdichtheid());
         stmtInsert.setString(9,plant.getFgsv());
         stmtInsert.setInt(10,plant.getStatus());
+        stmtInsert.setInt(11,iGebruikerID);
 
         stmtInsert.executeUpdate();
         System.out.println("gelukt plant toegevoegd");

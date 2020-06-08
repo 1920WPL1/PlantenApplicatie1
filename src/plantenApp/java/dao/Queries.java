@@ -241,8 +241,8 @@ public interface Queries {
     /*Queries voor plant*/
     //Toevoegen plant
     String INSERTPLANT = "INSERT INTO plant" +
-            " (plant_id, planttype, familie,geslacht,soort,variatie,plantdichtheid_min,plantdichtheid_max,fgsv,status)" +
-            " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?)";
+            " (plant_id, planttype, familie,geslacht,soort,variatie,plantdichtheid_min,plantdichtheid_max,fgsv,status, laatste_update_door, laatste_update_datum)" +
+            " VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,?,?, GETDATE())";
     //Ophalen ID's plant
     String GETMAXIDPLANT = "select Max(plant_id) from plant ";
 
@@ -296,6 +296,8 @@ public interface Queries {
     String GETALLGEBRUIKERS = "SELECT * FROM gebruiker";
     String GETGEBRUIKERBYEMAILADRES = "SELECT * FROM gebruiker WHERE email = ?";
     String SETWACHTWOORDHASH = "UPDATE gebruiker SET wachtwoord_hash = ?, salt = ?, geregistreerd = 1 WHERE gebruiker_id = ?";
+    String SELECTGEBRUIKERIDMETEMAIL = "select gebruiker_id from gebruiker where email = ?";
+    String SELECTGEBRUIKERROLMETEMAIL = "select rol from gebruiker where email = ?";
     /**
      * @Author Jasper
      */

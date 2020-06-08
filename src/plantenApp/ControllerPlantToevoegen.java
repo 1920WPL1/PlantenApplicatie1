@@ -184,6 +184,9 @@ public class ControllerPlantToevoegen {
     private int plantid;
     private InfoTables infoTables;
 
+    //Moet meegekregen worden van login
+    private String sEmailadres;
+
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
@@ -194,6 +197,10 @@ public class ControllerPlantToevoegen {
 
         /*comboboxes vullen*/
         FillComboboxes(infoTables);
+
+        //Opvullen van emailadres om mee te geven met toevoegen plant
+        sEmailadres = "kurt.engelbrecht@vives.be";
+
 
 
     }
@@ -298,13 +305,49 @@ public class ControllerPlantToevoegen {
     }
 
     public void createplant() throws SQLException {
+
+
+        //volledig toevoegen in databank vanuit scherm, waarschijnlijk nog iets toevoegen voor te kijken of de naam al in de databank zit
+        GebruikerDAO gebruikerDAO = new GebruikerDAO(dbConnection);
         PlantDAO plantDAO = new PlantDAO(dbConnection);
         int maxidplant = plantDAO.getmaxid();
-        plantid = maxidplant;
-        //public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv, int status) {
-        Plant plant = new Plant(maxidplant + 1, "test", "familie", "geslacht", "soort", "variatie", 5, 20, "familie geslacht soort van", 1);
-        plantDAO.createplant(plant);
+        int iGebruikerID = gebruikerDAO.getIdMetEmail(sEmailadres);
+        String srolGebruiker = gebruikerDAO.getRolMetEmail(sEmailadres);
+        this.plantid = maxidplant;
+        plantid = maxidplant+1;
+        String sFamilie = txtFamilieTv.getText();
+        String sGeslacht = txtGeslachtTv.getText();
+        String sSoort = txtSoortTv.getText();
+        String sVariant = txtVariantTv.getText();
+        String sFgsv = sFamilie + " " + sGeslacht+ " " + sSoort+" " + sVariant;
+        String sPlanttype = cboTypeTv.getValue();
+        int iStatus = 0;
+        int x = 0;
+        int y = 0;
+        if(txtDichtheidXTv.getText().matches("[0-9]+")){
+            x = Integer.parseInt(txtDichtheidXTv.getText());
+        }
+        if(txtDichtheidYTv.getText().matches("[0-9]+")){
+            y = Integer.parseInt(txtDichtheidYTv.getText());
+        }
+
+        //Toevoegen plant docent/admin
+        if (srolGebruiker.equals("admin") || srolGebruiker.equals("docent"))
+        {
+            iStatus = 2;
+            Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv);
+            plantDAO.createplant(plant, iStatus, iGebruikerID);
+        }
+        //Toevoegen plant als leerling/gast
+        else
+        {
+            iStatus = 1;
+            Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv);
+            plantDAO.createplant(plant, iStatus, iGebruikerID);
+        }
+
     }
+
     public void createAbiotischefactoren() throws SQLException {
         abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
         int maxidabio = abiotischeFactorenDAO.getmaxid();

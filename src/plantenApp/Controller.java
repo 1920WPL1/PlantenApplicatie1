@@ -126,8 +126,8 @@ public class Controller {
      */
     public void FillComboboxes(InfoTables infotables){
         //type
-         System.out.println(infotables.getTypes().toString());
-        cboType.getItems().addAll(infotables.getTypes());
+         System.out.println(infotables.getPlantTypes().toString());
+        cboType.getItems().addAll(infotables.getPlantTypes());
         //familie
         cboFamilie.getItems().addAll(infotables.getFamilies());
         //bladgrootte
