@@ -134,10 +134,27 @@ public class ControllerOverzicht {
         this.fenoMulti_eigenschaps = fenoMulti_eigenschapss;
         this.fenotypes = fenotypess;
         this.beheerdaad_eigenschaps = beheerdaad_eigenschapss;
-        System.out.println(plants.size());
+        System.out.println(plants.get(0).getFgsv());
         System.out.println(abiotischeFactoren.size());
         System.out.println(abiotischmultis.size());
         System.out.println(fenotypes.size());
+        System.out.println(fenoMulti_eigenschaps.size());
+    }
+    public void lijstenvullen(ArrayList<Plant> plantss, ArrayList<AbiotischeFactoren> abiotischeFactorenn, ArrayList<AbioMulti_Eigenschap> abiotischmulti, ArrayList<Commensalisme> commensalismes, ArrayList<CommMulti_Eigenschap> commMulti_eigenschapss, ArrayList<Extra> extrass, ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschapss, ArrayList<Fenotype> fenotypess,  ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschapss)
+    {
+        plants.addAll(plantss);
+        abiotischeFactoren.addAll( abiotischeFactorenn);
+        commensalisme.addAll(commensalismes);
+        abiotischmultis.addAll(abiotischmulti);
+        commMulti_eigenschaps.addAll(commMulti_eigenschapss);
+        extras.addAll(extrass);
+        fenoMulti_eigenschaps.addAll(fenoMulti_eigenschapss);
+        fenotypes.addAll(fenotypess);
+        beheerdaad_eigenschaps.addAll(beheerdaad_eigenschapss);
+        System.out.println(plants.get(0).getFgsv());
+        System.out.println(abiotischeFactoren.size());
+        System.out.println(abiotischmultis.size());
+        System.out.println(commensalisme.size());
         System.out.println(fenoMulti_eigenschaps.size());
     }
 

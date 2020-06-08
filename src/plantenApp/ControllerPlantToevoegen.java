@@ -346,19 +346,17 @@ public class ControllerPlantToevoegen {
     public void gedetailleerdopbullen()  {
         
     }
-
-
     public void openNieuwScherm(MouseEvent mouseEvent) throws IOException {
            Parent root = FXMLLoader.load(getClass().getResource("view/BeheeBehandelingPlant.fxml"));
            Scene scen = new Scene(root);
            Stage window =(Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
            window.setScene(scen);
            window.show();
-            scherm="beheer";
         window.setMaximized(true);
         ControllerBeheer controllerBeheer = new ControllerBeheer(plantss,abiotischeFactorenn,abiotischmulti,commensalismes,commMulti_eigenschapss,extrass,fenoMulti_eigenschapss,fenotypess);
+        controllerBeheer.lijstenvullen(plantss,abiotischeFactorenn,abiotischmulti,commensalismes,commMulti_eigenschapss,extrass,fenoMulti_eigenschapss,fenotypess);
+        controllerBeheer.setPlants(plantss);
     }
-
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxid();
