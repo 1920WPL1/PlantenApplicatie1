@@ -71,7 +71,6 @@ public class ControllerBeheer {
             boodschaptxt.setText("er bestaat al een behandeling met deze naam");
             behandlingnaamtxt.setText("");
         }
-
     }
 
     public void Verwijdernbeheer_clicekd(MouseEvent mouseEvent) {
@@ -83,7 +82,7 @@ public class ControllerBeheer {
     }
 
     public void teovoegenbeheer_clicked(MouseEvent mouseEvent) throws SQLException {
-        try {
+        //try {
             int aantalBeheer = 0;
             BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
             ArrayList<String> maanden = new ArrayList<>();
@@ -97,9 +96,10 @@ public class ControllerBeheer {
                 aantalBeheer++;
             }
             ControllerPlantToevoegen.AantalPerElBehMulti.add(aantalBeheer);
-        } catch (Exception e) {
+       // }
+        //catch (Exception e) {
             boodschaptxt.setText("Vul alles correct in");
-        }
+        //}
 
     }
 

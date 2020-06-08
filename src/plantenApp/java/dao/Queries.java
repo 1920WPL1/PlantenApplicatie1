@@ -278,11 +278,11 @@ public interface Queries {
 
     /*Queries voor beheer*/
     //Toevoegen beheer
-    String INSERTBEHEER = "insert into " + "beheer(beheer_id, plant_id, beheerdaad, opmerking, maand, frequentie_jaar)" +
+    String INSERTBEHEER = "insert into " + "beheer_multi(beheer_id, plant_id, beheerdaad, opmerking, maand, frequentie_jaar)" +
             " VALUES (?, ?, ?, ?, ?, ?)";
     String INSERTBEHEERDAAD = "insert into  beheerdaad(waarde) values(?)";
     //Ophalen ID's beheer
-    String GETMAXIDBEHEER = "select Max(beheer_id) from beheer";
+    String GETMAXIDBEHEER = "select Max(beheer_id) from beheer_multi";
     //Ophalen alle beheerdaden
     String GETBEHEERDADEN = "select * from beheerdaad";
 
