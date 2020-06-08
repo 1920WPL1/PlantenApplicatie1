@@ -13,14 +13,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import plantenApp.java.model.Plant;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class Controller {
     public ComboBox<String> cboType;
-    public ComboBox cboFamilie;
+    public ComboBox<String> cboFamilie;
     public TextField txtNaam;
     public Spinner nudMinBloeiHoogte;
     public Spinner nudMinBladHoogte;
@@ -104,6 +106,8 @@ public class Controller {
     private InfoTables infoTables;
     private Connection dbConnection;
 
+
+
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
 
@@ -126,8 +130,8 @@ public class Controller {
      */
     public void FillComboboxes(InfoTables infotables){
         //type
-         System.out.println(infotables.getTypes().toString());
-        cboType.getItems().addAll(infotables.getTypes());
+         System.out.println(infotables.getPlantTypes().toString());
+        cboType.getItems().addAll(infotables.getPlantTypes());
         //familie
         cboFamilie.getItems().addAll(infotables.getFamilies());
         //bladgrootte

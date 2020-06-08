@@ -276,7 +276,7 @@
                                     <ListView fx:id="lvLevensduurTv" prefHeight="176.0" prefWidth="240.0" />
                                  </children>
                               </VBox>
-                              <Button fx:id="btnTest" layoutX="329.0" layoutY="251.0" mnemonicParsing="false" onMouseClicked="#TestZooi" text="Button" />
+                              <Button fx:id="btnTest" layoutX="329.0" layoutY="251.0" mnemonicParsing="false"  text="Button" />
                            </children>
                         </AnchorPane>
                      </content>

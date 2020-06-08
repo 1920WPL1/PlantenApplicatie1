@@ -22,8 +22,8 @@ public class ExtraDAO implements Queries {
 
         stmtSelectExtraByID = dbConnection.prepareStatement(GETEXTRABYPLANTID);
         stmtSelectByExtra = dbConnection.prepareStatement(GETIDSBYEXTRA);
-        stmtInsertExtra = dbConnection.prepareStatement(insertextra);
-        stmtGetmaxid = dbConnection.prepareStatement(getmaxextraid);
+        stmtInsertExtra = dbConnection.prepareStatement(INSERTEXTRA);
+        stmtGetmaxid = dbConnection.prepareStatement(GETMAXIDEXTRA);
     }
 
     //region GET

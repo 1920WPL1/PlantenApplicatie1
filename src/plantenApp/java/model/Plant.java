@@ -1,9 +1,11 @@
 package plantenApp.java.model;
 
+import java.sql.Date;
+
 /**@author Siebe*/
 public class Plant {
     private int id;
-    private String type;
+    private String planttype;
     private String familie;
     private String geslacht;
     private String soort;
@@ -18,11 +20,26 @@ public class Plant {
     private Commensalisme commensalisme;
     private Fenotype fenotype;
     private Extra extra;
+    private int laatste_update_door;
 
 
-    public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid,int status) {
+    public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv, int status, int laatste_update_door) {
         this.id = id;
-        this.type = type;
+        this.planttype = planttype;
+        this.familie = familie;
+        this.geslacht = geslacht;
+        this.soort = soort;
+        this.variatie = variatie;
+        this.minPlantdichtheid = minPlantdichtheid;
+        this.maxPlantdichtheid = maxPlantdichtheid;
+        this.fgsv = fgsv;
+        this.status = status;
+        this.laatste_update_door = laatste_update_door;
+    }
+
+    public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid,int status) {
+        this.id = id;
+        this.planttype = planttype;
         this.familie = familie;
         this.geslacht = geslacht;
         this.soort = soort;
@@ -33,9 +50,10 @@ public class Plant {
 
     }
 
-    public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv, int status) {
+
+    public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv, int status) {
         this.id = id;
-        this.type = type;
+        this.planttype = planttype;
         this.familie = familie;
         this.geslacht = geslacht;
         this.soort = soort;
@@ -44,6 +62,14 @@ public class Plant {
         this.maxPlantdichtheid = maxPlantdichtheid;
         this.fgsv = fgsv;
         this.status = status;
+    }
+
+    public Plant(String planttype, String familie, String geslacht, String soort, String variatie) {
+        this.planttype = planttype;
+        this.familie = familie;
+        this.geslacht = geslacht;
+        this.soort = soort;
+        this.variatie = variatie;
     }
 
     public String getFgsv() {
@@ -54,9 +80,9 @@ public class Plant {
         this.fgsv = fgsv;
     }
 
-    public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv) {
+    public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, String fgsv) {
         this.id = id;
-        this.type = type;
+        this.planttype = planttype;
         this.familie = familie;
         this.geslacht = geslacht;
         this.soort = soort;
@@ -68,9 +94,9 @@ public class Plant {
 
 
 
-    public Plant(int id, String type, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, Foto foto, Beheer beheer, AbiotischeFactoren abiotischeFactoren, Commensalisme commensalisme, Fenotype fenotype, Extra extra) {
+    public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, Foto foto, Beheer beheer, AbiotischeFactoren abiotischeFactoren, Commensalisme commensalisme, Fenotype fenotype, Extra extra) {
         this.id = id;
-        this.type = type;
+        this.planttype = planttype;
         this.familie = familie;
         this.geslacht = geslacht;
         this.soort = soort;
@@ -85,12 +111,14 @@ public class Plant {
         this.extra = extra;
     }
 
+
     public int getId() {
         return id;
     }
 
-    public String getType() {
-        return type;
+
+    public String getPlantType() {
+        return planttype;
     }
 
     public String getFamilie() {
