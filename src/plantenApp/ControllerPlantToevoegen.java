@@ -355,7 +355,6 @@ public class ControllerPlantToevoegen {
         window.show();
         scherm="beheer";
         window.setMaximized(true);
-        ControllerBeheer controllerBeheer = new ControllerBeheer(plantss,abiotischeFactorenn,abiotischmulti,commensalismes,commMulti_eigenschapss,extrass,fenoMulti_eigenschapss,fenotypess);
     }
 
     public void createfenotype() throws SQLException {
