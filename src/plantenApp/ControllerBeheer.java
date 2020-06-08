@@ -110,7 +110,7 @@ public class ControllerBeheer {
             jancheckbox.selectedProperty().set(false);
         }
         if (febcheckbox.isSelected()) {
-            maanden.add("Februarie");
+            maanden.add("Februari");
             febcheckbox.selectedProperty().set(false);
         }
         if (maacheckbox.isSelected()) {
@@ -166,10 +166,10 @@ public class ControllerBeheer {
     }
 
     public void Opslaanbutton_clicked(MouseEvent mouseEvent) throws SQLException, IOException {
-        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
+        /*BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
         for (int m = 0; m <  ControllerPlantToevoegen.beheerdaad_eigenschapss.size(); m++) {
             beheerDAO.createBeheer( ControllerPlantToevoegen.beheerdaad_eigenschapss.get(m), planid);
-        }
+        }*/
         openNieuwScherm(mouseEvent);
         System.out.println(ControllerPlantToevoegen.plantss.get(0).getFgsv());
 

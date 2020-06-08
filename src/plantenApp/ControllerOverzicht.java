@@ -1,5 +1,6 @@
 package plantenApp;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -7,6 +8,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import plantenApp.java.model.*;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class ControllerOverzicht {
@@ -118,19 +120,7 @@ public class ControllerOverzicht {
 
     public void initialize()
     {
-        cbMaandBeheerO.getItems().add(0,"januari");
-        cbMaandBeheerO.getItems().add(1,"februari");
-        cbMaandBeheerO.getItems().add(2,"maart");
-        cbMaandBeheerO.getItems().add(3,"april");
-        cbMaandBeheerO.getItems().add(4,"mei");
-        cbMaandBeheerO.getItems().add(5,"juni");
-        cbMaandBeheerO.getItems().add(6,"juli");
-        cbMaandBeheerO.getItems().add(7,"augustus");
-        cbMaandBeheerO.getItems().add(8,"september");
-        cbMaandBeheerO.getItems().add(9, "oktober");
-        cbMaandBeheerO.getItems().add(10, "november");
-        cbMaandBeheerO.getItems().add(11, "december");
-        cbMaandBeheerO.getSelectionModel().select(0);
+        comboaanvullen();
         tonenPlantOpFiche(0);
     }
     public ControllerOverzicht() {
@@ -355,4 +345,36 @@ public class ControllerOverzicht {
             }
         }
     }
+    public void comboaanvullen()  {
+        cbMaandBeheerO.getItems().add(0,"Januari");
+        cbMaandBeheerO.getItems().add(1,"Februari");
+        cbMaandBeheerO.getItems().add(2,"Maart");
+        cbMaandBeheerO.getItems().add(3,"April");
+        cbMaandBeheerO.getItems().add(4,"Mei");
+        cbMaandBeheerO.getItems().add(5,"Juni");
+        cbMaandBeheerO.getItems().add(6,"Juli");
+        cbMaandBeheerO.getItems().add(7,"Augustus");
+        cbMaandBeheerO.getItems().add(8,"September");
+        cbMaandBeheerO.getItems().add(9, "Oktober");
+        cbMaandBeheerO.getItems().add(10, "November");
+        cbMaandBeheerO.getItems().add(11, "December");
+        cbMaandBeheerO.getSelectionModel().select(0);
+    }
+
+
+
+    public void test(javafx.scene.input.MouseEvent mouseEvent) {
+        System.out.println("test");
+        lvFrequentieO.getItems().clear();
+        lvBeheerbehandelingO.getItems().clear();
+        for (int i = 0 ; i < ControllerPlantToevoegen.beheerdaad_eigenschapss.size(); i++)
+        {
+            if(ControllerPlantToevoegen.beheerdaad_eigenschapss.get(i).getMaand() ==  cbMaandBeheerO.getValue())
+            {
+                lvFrequentieO.getItems().add(ControllerPlantToevoegen.beheerdaad_eigenschapss.get(i).getFrequentie());
+                lvBeheerbehandelingO.getItems().add(ControllerPlantToevoegen.beheerdaad_eigenschapss.get(i).getNaam());
+            }
+        }
+    }
 }
+

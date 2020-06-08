@@ -87,7 +87,7 @@
                                           </VBox>
                                        </children>
                                     </HBox>
-                                    <ComboBox fx:id="cbMaandBeheerO" prefHeight="31.0" prefWidth="198.0" />
+                                    <ComboBox fx:id="cbMaandBeheerO" onMouseClicked="#test" prefHeight="31.0" prefWidth="198.0" />
                                  </children>
                               </VBox>
                               <ListView fx:id="lvFrequentieO" prefHeight="140.0" prefWidth="249.0" />
