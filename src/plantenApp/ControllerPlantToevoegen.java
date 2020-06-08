@@ -458,9 +458,37 @@ public class ControllerPlantToevoegen {
     public void createCommensalisme() throws SQLException {
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
         int maxidcommensalisme = commensalismeDAO.getmaxid();
-        Commensalisme commensalisme = new Commensalisme(maxidcommensalisme + 1, plantid, "strat", comboboxCheckString(cbOntwikkelingssnelheidTv.getSelectionModel()));
+        Commensalisme commensalisme = new Commensalisme(maxidcommensalisme + 1, plantid, strategieCheck(), comboboxCheckString(cbOntwikkelingssnelheidTv.getSelectionModel()));
         commensalismes.add(commensalisme);
     }
+
+    public String strategieCheck() {
+        if(rbStrategieTopTv.isSelected()) {
+            return "C";
+        }
+        else if (rbStrategieMMTv.isSelected()) {
+            return "C-S-R";
+        }
+        else if (rbStrategieLMTv.isSelected()) {
+            return "C-R";
+        }
+        else if (rbStrategieRMTv.isSelected()) {
+            return "C-S";
+        }
+        else if (rbStrategieLOTv.isSelected()) {
+            return "R";
+        }
+        else if (rbStrategieMOTv.isSelected()) {
+            return "S-R";
+        }
+        else if (rbStrategieROTv.isSelected()) {
+            return "S";
+        }
+        else {
+            return "null";
+        }
+    }
+
     public void createExtra() throws SQLException {
         //kan pas volledig gedaan worden wanneer er de kwestie van de eetbaar/kruidgebruik splitsing opgelost is
         int valueNectarwaarde = Integer.parseInt(NectarwaardeValueTv.getText());
