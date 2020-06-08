@@ -112,20 +112,40 @@ public class ControllerOverzicht {
     public Label bladhoogteMaxOktO;
     public Label bladhoogteMaxNovO;
     public Label bladhoogteMaxDecO;
-    public ArrayList<Plant> plantss = new ArrayList<>();
-    public ArrayList<AbiotischeFactoren> abiotischeFactorenn = new ArrayList<>();
-    public  ArrayList<AbioMulti_Eigenschap> abiotischmulti = new ArrayList<>();
-    public ArrayList<Commensalisme> commensalismes = new ArrayList<>();
-    public  ArrayList<CommMulti_Eigenschap> commMulti_eigenschapss = new ArrayList<>();
-    public ArrayList<Extra> extrass = new ArrayList<>();
-    public  ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschapss = new ArrayList<>();
-    public ArrayList<Fenotype> fenotypess = new ArrayList<>();
-    public ArrayList<Foto> fotoss = new ArrayList<>();
-    public  ArrayList<Beheer> beheerss = new ArrayList<>();
-    public  ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschapss = new ArrayList<>();
+    public ArrayList<Plant> plants = new ArrayList<>();
+    public ArrayList<AbiotischeFactoren> abiotischeFactoren = new ArrayList<>();
+    public  ArrayList<AbioMulti_Eigenschap> abiotischmultis = new ArrayList<>();
+    public ArrayList<Commensalisme> commensalisme = new ArrayList<>();
+    public  ArrayList<CommMulti_Eigenschap> commMulti_eigenschaps = new ArrayList<>();
+    public ArrayList<Extra> extras = new ArrayList<>();
+    public  ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschaps = new ArrayList<>();
+    public ArrayList<Fenotype> fenotypes = new ArrayList<>();
+    public ArrayList<Foto> fotos = new ArrayList<>();
+    public  ArrayList<Beheer> beheers = new ArrayList<>();
+    public  ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps = new ArrayList<>();
+
+    public ControllerOverzicht( ArrayList<Plant> plantss, ArrayList<AbiotischeFactoren> abiotischeFactorenn, ArrayList<AbioMulti_Eigenschap> abiotischmulti, ArrayList<Commensalisme> commensalismes, ArrayList<CommMulti_Eigenschap> commMulti_eigenschapss, ArrayList<Extra> extrass, ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschapss, ArrayList<Fenotype> fenotypess,  ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschapss) {
+        this.plants = plantss;
+        this.abiotischeFactoren = abiotischeFactorenn;
+        this.abiotischmultis = abiotischmulti;
+        this.commensalisme = commensalismes;
+        this.commMulti_eigenschaps = commMulti_eigenschapss;
+        this.extras = extrass;
+        this.fenoMulti_eigenschaps = fenoMulti_eigenschapss;
+        this.fenotypes = fenotypess;
+        this.beheerdaad_eigenschaps = beheerdaad_eigenschapss;
+        System.out.println(plants.size());
+        System.out.println(abiotischeFactoren.size());
+        System.out.println(abiotischmultis.size());
+        System.out.println(fenotypes.size());
+        System.out.println(fenoMulti_eigenschaps.size());
+    }
+
+    public ControllerOverzicht() {
+    }
 
     public void tonenPlantOpFiche(int indexArrays){
-        Plant p = plantss.get(indexArrays);
+        Plant p = plants.get(indexArrays);
         lblTypeO.setText(p.getType());
         lblFamilieO.setText(p.getFamilie());
         lblGeslachtO.setText(p.getGeslacht());
@@ -134,7 +154,7 @@ public class ControllerOverzicht {
         lblXO.setText(String.valueOf(p.getMinPlantdichtheid()));
         lblYO.setText(String.valueOf(p.getMaxPlantdichtheid()));
 
-        Fenotype f = fenotypess.get(indexArrays);
+        Fenotype f = fenotypes.get(indexArrays);
         lblBladgrootteO.setText(String.valueOf(f.getBladgrootte()));
         lblBladvormO.setText(f.getBladvorm());
         lblRatioO.setText(f.getRatio_bloei_blad());
@@ -219,7 +239,7 @@ public class ControllerOverzicht {
         }
 
 
-        Extra e = extrass.get(indexArrays);
+        Extra e = extras.get(indexArrays);
         lblNectarwaardeO.setText(String.valueOf(e.getNectarwaarde()));
         lblPollenwaardeO.setText(String.valueOf(e.getPollenwaarde()));
         lblBijvriendelijkO.setText(e.getBijvriendelijk());
@@ -229,7 +249,7 @@ public class ControllerOverzicht {
         lblGeurendO.setText(e.getGeurend());
         lblVorstgevoeligO.setText(e.getVorstgevoelig());
 
-        AbiotischeFactoren af = abiotischeFactorenn.get(indexArrays);
+        AbiotischeFactoren af = abiotischeFactoren.get(indexArrays);
         lblBezonningO.setText(af.getBezonning());
         lblVochtbehoefteO.setText(af.getVochtbehoefte());
         lblVoedingsbehoefteO.setText(af.getVoedingsbehoefte());
@@ -237,17 +257,17 @@ public class ControllerOverzicht {
         lblGrondsoortO.setText(af.getGrondsoort());
         int b = af.getMultiEigenschappen().size();
 
-        Commensalisme c = commensalismes.get(indexArrays);
+        Commensalisme c = commensalisme.get(indexArrays);
         lblOntwikkelingssnelheidO.setText(c.getOntwikkelingssnelheid());
         lblStrategieO.setText(c.getStrategie());
 
-        CommMulti_Eigenschap cm = commMulti_eigenschapss.get(indexArrays);
+        CommMulti_Eigenschap cm = commMulti_eigenschaps.get(indexArrays);
 
-        Foto fo = fotoss.get(indexArrays);
+        Foto fo = fotos.get(indexArrays);
 
-        Beheer be = beheerss.get(indexArrays);
+        Beheer be = beheers.get(indexArrays);
 
-        Beheerdaad_Eigenschap bd = beheerdaad_eigenschapss.get(indexArrays);
+        Beheerdaad_Eigenschap bd = beheerdaad_eigenschaps.get(indexArrays);
     }
 
 

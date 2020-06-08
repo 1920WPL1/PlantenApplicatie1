@@ -41,48 +41,44 @@ public class ControllerBeheer {
     public Button Opslaanbutton;
     public Label boodschaptxt;
     private Connection dbConnection;
-    public ArrayList<Beheer> beheerss = new ArrayList<>();
-    public ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschapss = new ArrayList<>();
-    private ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps = new ArrayList<>();
-    public ArrayList<Plant> plantss = new ArrayList<>();
-    public ArrayList<AbiotischeFactoren> abiotischeFactorenn = new ArrayList<>();
-    public ArrayList<AbioMulti_Eigenschap> abiotischmulti = new ArrayList<>();
-    public ArrayList<Commensalisme> commensalismes = new ArrayList<>();
-    public ArrayList<CommMulti_Eigenschap> commMulti_eigenschapss = new ArrayList<>();
-    public ArrayList<Extra> extrass = new ArrayList<>();
-    public ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschapss = new ArrayList<>();
-    public ArrayList<Fenotype> fenotypess = new ArrayList<>();
-    public ArrayList<Foto> fotoss = new ArrayList<>();
+    public ArrayList<Beheer> beheers = new ArrayList<>();
+    public ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps = new ArrayList<>();
+    private ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschap= new ArrayList<>();
+    public ArrayList<Plant> plants = new ArrayList<>();
+    public ArrayList<AbiotischeFactoren> abiotischeFactoren = new ArrayList<>();
+    public ArrayList<AbioMulti_Eigenschap> abiotischmultis = new ArrayList<>();
+    public ArrayList<Commensalisme> commensalismess = new ArrayList<>();
+    public ArrayList<CommMulti_Eigenschap> commMulti_eigenschaps = new ArrayList<>();
+    public ArrayList<Extra> extras = new ArrayList<>();
+    public ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschaps = new ArrayList<>();
+    public ArrayList<Fenotype> fenotypes = new ArrayList<>();
+    public ArrayList<Foto> fotos = new ArrayList<>();
     private int planid;
 
+    public ControllerBeheer() {
+    }
+
     public ControllerBeheer(ArrayList<Plant> plantss, ArrayList<AbiotischeFactoren> abiotischeFactorenn, ArrayList<AbioMulti_Eigenschap> abiotischmulti, ArrayList<Commensalisme> commensalismes, ArrayList<CommMulti_Eigenschap> commMulti_eigenschapss, ArrayList<Extra> extrass, ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschapss, ArrayList<Fenotype> fenotypess) {
-        System.out.println("in controller");
-        this.plantss = plantss;
-        System.out.println("onderplanten");
-        this.abiotischeFactorenn = abiotischeFactorenn;
-        System.out.println("onder abio");
-        this.abiotischmulti = abiotischmulti;
-        System.out.println("onder multie abio");
-        this.commensalismes = commensalismes;
-        System.out.println("onder comm");
-        this.commMulti_eigenschapss = commMulti_eigenschapss;
-        System.out.println("onder scom multi");
-        this.extrass = extrass;
-        System.out.println("extr");
-        this.fenoMulti_eigenschapss = fenoMulti_eigenschapss;
-        System.out.println("fsdlfk");
-        this.fenotypess = fenotypess;
-        System.out.println("lkfdsq jfldf ");
+        this.plants = plantss;
+        this.abiotischeFactoren = abiotischeFactorenn;
+        this.abiotischmultis = abiotischmulti;
+        this.commensalismess = commensalismes;
+        this.commMulti_eigenschaps = commMulti_eigenschapss;
+        this.extras = extrass;
+        this.fenoMulti_eigenschaps = fenoMulti_eigenschapss;
+        this.fenotypes = fenotypess;
+        System.out.println(plants.size());
+        System.out.println(abiotischeFactoren.size());
+        System.out.println(abiotischmultis.size());
+        System.out.println(commensalismess.size());
+        System.out.println(fenoMulti_eigenschaps.size());
     }
 
 
     public void initialize() throws SQLException {
-        System.out.println("lkfdsq jfldf ");
         dbConnection = Database.getInstance().getConnection();
         PlantDAO plantDAO = new PlantDAO(dbConnection);
-        System.out.println("fsdlfk");
         planid = plantDAO.getmaxid();
-        System.out.println("onder scom multi");
         FillComboBeheer();
 
              }
@@ -93,7 +89,6 @@ public class ControllerBeheer {
             CmdBehandeling.getItems().clear();
             CmdBehandeling.getItems().addAll(beheerDAO.getalbeheerdaden());
         }
-
         public void behandelingtoevoegenbtn_clicked(MouseEvent mouseEvent) throws SQLException {
             try {
                 BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
@@ -227,9 +222,9 @@ public class ControllerBeheer {
         {
             maxIdBeheer++;
             Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(maxIdBeheer+1, "Test", "Test", "Test", 5);
-            beheerdaad_eigenschapss.add(beheerdaad_eigenschap);
+            beheerdaad_eigenschaps.add(beheerdaad_eigenschap);
             Beheer beheer = new Beheer(planid);
-            beheerss.add(beheer);
+            beheers.add(beheer);
         }
     }
 
@@ -240,6 +235,8 @@ public class ControllerBeheer {
         window.setScene(scen);
         window.show();
         window.setMaximized(true);
+        ControllerOverzicht controllerOverzicht = new ControllerOverzicht(plants,abiotischeFactoren,abiotischmultis,commensalismess,commMulti_eigenschaps,extras,fenoMulti_eigenschaps,fenotypes,beheerdaad_eigenschaps);
+
         // Hide this current window (if this is what you want)
     }
 

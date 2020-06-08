@@ -330,7 +330,7 @@ public class ControllerPlantToevoegen {
         cbLevensduurTv.getItems().addAll(infotables.getConcurentiekrachten());
     }
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException, IOException {
-        /*createplant();//ik //done
+        createplant();//ik //done
         createAbiotischefactoren();//afgewerkt //done
         createAbiotischeMulti();//Mathias //done
         createfenotype();//afgewerkt // done
@@ -340,16 +340,15 @@ public class ControllerPlantToevoegen {
         //createBeheer();//Wout dit moet nog verplaats worden naar een button op beheer scherm //done
         createExtra();//Kasper
         //createFoto(); nog geen plaats of scherm voor een foto in toe te voegen
-        gedetailleerdopbullen();*/
-        scherm="beheer";
-        openNieuwScherm(mouseEvent, "BeheeBehandelingPlant");
+        gedetailleerdopbullen();
+        openNieuwScherm(mouseEvent);
     }
     public void gedetailleerdopbullen()  {
         
     }
 
 
-    public void openNieuwScherm(MouseEvent mouseEvent, String schermnaam) throws IOException {
+    public void openNieuwScherm(MouseEvent mouseEvent) throws IOException {
            Parent root = FXMLLoader.load(getClass().getResource("view/BeheeBehandelingPlant.fxml"));
            Scene scen = new Scene(root);
            Stage window =(Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
@@ -357,9 +356,7 @@ public class ControllerPlantToevoegen {
            window.show();
             scherm="beheer";
         window.setMaximized(true);
-        //ControllerBeheer controllerBeheer = new ControllerBeheer(plantss,abiotischeFactorenn,abiotischmulti,commensalismes,commMulti_eigenschapss,extrass,fenoMulti_eigenschapss,fenotypess);
-
-        // Hide this current window (if this is what you want)
+        ControllerBeheer controllerBeheer = new ControllerBeheer(plantss,abiotischeFactorenn,abiotischmulti,commensalismes,commMulti_eigenschapss,extrass,fenoMulti_eigenschapss,fenotypess);
     }
 
     public void createfenotype() throws SQLException {
