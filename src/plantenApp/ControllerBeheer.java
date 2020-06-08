@@ -249,6 +249,7 @@ public class ControllerBeheer {
             beheerDAO.createBeheer(beheerdaad_eigenschaps.get(m), planid);
         }
         openNieuwScherm(mouseEvent);
+        System.out.println(ControllerPlantToevoegen.plantss.get(0).getFgsv());
 
     }
 
@@ -273,10 +274,8 @@ public class ControllerBeheer {
         window.setMaximized(true);
         System.out.println("controlleroverzicht");
         ControllerOverzicht controllerOverzicht = new ControllerOverzicht();
-        //controllerOverzicht.lijstenvullen(plants, abiotischeFactoren, abiotischmultis, commensalismess, commMulti_eigenschaps, extras, fenoMulti_eigenschaps, fenotypes, beheerdaad_eigenschaps);
-        System.out.println(ControllerPlantToevoegen.plantss.size());
-        System.out.println(ControllerPlantToevoegen.beheerdaad_eigenschapss.size());
-
+        controllerOverzicht.lijstenvullen(plants, abiotischeFactoren, abiotischmultis, commensalismess, commMulti_eigenschaps, extras, fenoMulti_eigenschaps, fenotypes, beheerdaad_eigenschaps);
+        System.out.println(ControllerPlantToevoegen.plantss.get(0).getFgsv());  
     }
 
 }
