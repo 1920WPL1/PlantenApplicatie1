@@ -212,7 +212,15 @@ public class ControllerPlantToevoegen {
     public  int iGebruikerID;
     //Moet meegekregen worden van login
     private String sEmailadres;
-
+    /**
+     * @author: Arne Vandenborre
+     *Wout is helemaal NIET veranderd
+     * Kasper eeft MEERDERE vriendinnen dit kan dus helemaal NIET
+     * Kevin doet zich voor als een 90's kid klopt NIET
+     * Mathias valt NIET  op
+     * mvg
+     * Arne xx    <3 *
+     * */
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
 
@@ -333,6 +341,7 @@ public class ControllerPlantToevoegen {
     }
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException, IOException {
         createplant();//ik //done
+        createNaam();
         createAbiotischefactoren();//afgewerkt //done
         createAbiotischeMulti();//Mathias //done
         createfenotype();//afgewerkt // done*/
