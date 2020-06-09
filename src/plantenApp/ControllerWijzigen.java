@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import plantenApp.java.dao.Database;
 import plantenApp.java.dao.InfoTablesDAO;
 import plantenApp.java.model.InfoTables;
 
@@ -42,6 +43,38 @@ public class ControllerWijzigen {
     public RadioButton rbVorstgevoeligNeeWz;
     public ListView lvLevensduurTv;
     public ComboBox cbLevensduurTv;
+    public ComboBox cbLevensduurWz;
+    public ComboBox cbBladkleurJanWz;
+    public ComboBox cbBladkleurFebWz;
+    public ComboBox cbBladkleurMaaWz;
+    public ComboBox cbBladkleurAprWz;
+    public ComboBox cbBladkleurMeiWz;
+    public ComboBox cbBladkleurJunWz;
+    public ComboBox cbBladkleurJulWz;
+    public ComboBox cbBladkleurAugWz;
+    public ComboBox cbBladkleurSeptWz;
+    public ComboBox cbBladkleurOktWz;
+    public ComboBox cbBladkleurNovTv;
+    public ComboBox cbBladkleurDecTv;
+    public ComboBox cbBloeikleurJanWz;
+    public ComboBox cbBloeikleurFebWz;
+    public ComboBox cbBloeikleurMaaWz;
+    public ComboBox cbBloeikleurAprWz;
+    public ComboBox cbBloeikleurMeiWz;
+    public ComboBox cbBloeikleurJunWz;
+    public ComboBox cbBloeikleurJulWz;
+    public ComboBox cbBloeikleurAugWz;
+    public ComboBox cbBloeikleurSeptWz;
+    public ComboBox cbBloeikleurOktWz;
+    public ComboBox cbBloeikleurNovTv;
+    public ComboBox cbBloeikleurDecTv;
+    public ComboBox cbBezonningWz;
+    public ComboBox cbVoedingsbehoefteWz;
+    public ComboBox cbVochtbehoefteWz;
+    public ComboBox cbReactieAntaWz;
+    public ComboBox cbGrondsoortWz;
+    public ComboBox cbHabitatWz;
+    public ComboBox cbOntwikkelingssnelheidWz;
     private InfoTables infoTables;
     private Connection dbConnection;
     public ComboBox cboTypeWz;
@@ -66,15 +99,18 @@ public class ControllerWijzigen {
     public RadioButton rbChamae2Wz;
     public RadioButton rbFaneroWz;
 
+
     public void initialize() throws SQLException {
         LadenPlant();
         LadenFenotype();
         LadenExtra();
-        //infotabel object aanmaken*/
-       // InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
-       // infoTables = infotablesDAO.getInfoTables();
-        /*comboboxes vullen*/
-        //FillComboboxes(infoTables);
+        dbConnection = Database.getInstance().getConnection();
+
+        //infotabel object aanmaken
+        InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
+        infoTables = infotablesDAO.getInfoTables();
+        //comboboxes vullen
+        FillComboboxes(infoTables);
     }
     public void LadenExtra()    {
         slNectarwaardeWz.setValue( ControllerPlantToevoegen.extrass.get(0).getNectarwaarde());
@@ -116,66 +152,66 @@ public class ControllerWijzigen {
     }
     public void FillComboboxes(InfoTables infotables) {
         //type
-        /*System.out.println(infotables.getPlantTypes().toString());
-        cboTypeTv.getItems().addAll(infotables.getPlantTypes());
+        System.out.println(infotables.getPlantTypes().toString());
+        cboTypeWz.getItems().addAll(infotables.getPlantTypes());
 
         //Bezonning
-        cbBezonningTv.getItems().addAll(infotables.getBezonningsMogelijkheden());
+        cbBezonningWz.getItems().addAll(infotables.getBezonningsMogelijkheden());
 
         //Voedingsbehoefte
-        cbVoedingsbehoefteTv.getItems().addAll(infotables.getVoedingsbehoeftes());
+        cbVoedingsbehoefteWz.getItems().addAll(infotables.getVoedingsbehoeftes());
 
         //Vochtbehoefte
-        cbVochtbehoefteTv.getItems().addAll(infotables.getVochtbehoeftes());
+        cbVochtbehoefteWz.getItems().addAll(infotables.getVochtbehoeftes());
 
         //bladgrootte
-        cbBladgrootteTotTv.getItems().addAll(infotables.getBladgroottes());
+        cbBladgrootteTotWz.getItems().addAll(infotables.getBladgroottes());
         //bladvorm
-        cbBladvormTv.getItems().addAll(infotables.getBladvormen());
+        cbBladvormWz.getItems().addAll(infotables.getBladvormen());
         //Grondsoort
-        cbGrondsoortTv.getItems().addAll(infotables.getGrondsoorten());
+        cbGrondsoortWz.getItems().addAll(infotables.getGrondsoorten());
 
         //BehandelingMaand
         //cboMaand.getItems().addAll("Januari", "februari", "maart", "april", "mei", "juni", "juli","augustus","september", "oktober", "november", "december");
         //ratio
-        cbRatioTv.getItems().addAll(infotables.getBloeiBladRatios());
+        cbRatioWz.getItems().addAll(infotables.getBloeiBladRatios());
         //spruitfenologie
-        cbSpruitfenologieTv.getItems().addAll(infotables.getSpruitfenologieen());
+        cbSpruitfenologieWz.getItems().addAll(infotables.getSpruitfenologieen());
         //reactie antagonistische omgeving
-        cbReactieAntaTv.getItems().addAll(infotables.getAntagonistischeOmgevingsReacties());
+        cbReactieAntaWz.getItems().addAll(infotables.getAntagonistischeOmgevingsReacties());
         //behandeling
 
         //Kleuren
         //Jan
-        cbBladkleurJanTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurJanTv.getItems().addAll(infotables.getKleuren());
+        cbBladkleurJanWz.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurJanWz.getItems().addAll(infotables.getKleuren());
         //Feb
-        cbBladkleurFebTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurFebTv.getItems().addAll(infotables.getKleuren());
+        cbBladkleurFebWz.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurFebWz.getItems().addAll(infotables.getKleuren());
         //Maart
-        cbBladkleurMaaTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurMaaTv.getItems().addAll(infotables.getKleuren());
+        cbBladkleurMaaWz.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurMaaWz.getItems().addAll(infotables.getKleuren());
         //April
-        cbBladkleurAprTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurAprTv.getItems().addAll(infotables.getKleuren());
+        cbBladkleurAprWz.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurAprWz.getItems().addAll(infotables.getKleuren());
         //Mei
-        cbBladkleurMeiTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurMeiTv.getItems().addAll(infotables.getKleuren());
+        cbBladkleurMeiWz.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurMeiWz.getItems().addAll(infotables.getKleuren());
         //Juni
-        cbBladkleurJunTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurJunTv.getItems().addAll(infotables.getKleuren());
+        cbBladkleurJunWz.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurJunWz.getItems().addAll(infotables.getKleuren());
         //Juli
-        cbBladkleurJulTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurJulTv.getItems().addAll(infotables.getKleuren());
+        cbBladkleurJulWz.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurJulWz.getItems().addAll(infotables.getKleuren());
         //Augustus
-        cbBladkleurAugTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurAugTv.getItems().addAll(infotables.getKleuren());
+        cbBladkleurAugWz.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurAugWz.getItems().addAll(infotables.getKleuren());
         //September
-        cbBladkleurSeptTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurSeptTv.getItems().addAll(infotables.getKleuren());
+        cbBladkleurSeptWz.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurSeptWz.getItems().addAll(infotables.getKleuren());
         //Oktober
-        cbBladkleurOktTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurOktTv.getItems().addAll(infotables.getKleuren());
+        cbBladkleurOktWz.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurOktWz.getItems().addAll(infotables.getKleuren());
         //November
         cbBladkleurNovTv.getItems().addAll(infotables.getKleuren());
         cbBloeikleurNovTv.getItems().addAll(infotables.getKleuren());
@@ -184,13 +220,13 @@ public class ControllerWijzigen {
         cbBloeikleurDecTv.getItems().addAll(infotables.getKleuren());
 
         //Habitat
-        cbHabitatTv.getItems().addAll(infotables.getHabitats());
+        cbHabitatWz.getItems().addAll(infotables.getHabitats());
 
         //Ontwikkelingssnelheid
-        cbOntwikkelingssnelheidTv.getItems().addAll(infotables.getOnstwikkelingssnelheden());*/
+        cbOntwikkelingssnelheidWz.getItems().addAll(infotables.getOnstwikkelingssnelheden());
 
         //Levensduur
-        cbLevensduurTv.getItems().addAll(infotables.getConcurentiekrachten());
+        cbLevensduurWz.getItems().addAll(infotables.getConcurentiekrachten());
     }
     public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) {
     }
