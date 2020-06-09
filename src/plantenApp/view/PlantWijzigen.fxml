@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerWijzigen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerWijzigen">
    <children>
       <HBox>
          <children>
@@ -276,7 +276,7 @@
                                     <ListView fx:id="lvLevensduurTv" prefHeight="176.0" prefWidth="240.0" />
                                  </children>
                               </VBox>
-                              <Button fx:id="btnTest" layoutX="329.0" layoutY="251.0" mnemonicParsing="false"  text="Button" />
+                              <Button fx:id="btnTest" layoutX="329.0" layoutY="251.0" mnemonicParsing="false" text="Button" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -317,34 +317,34 @@
                                              <children>
                                                 <HBox>
                                                    <children>
-                                                      <Slider fx:id="slNectarwaardeTv" prefHeight="30.0" prefWidth="90.0" />
+                                                      <Slider fx:id="slNectarwaardeWz" prefHeight="30.0" prefWidth="90.0" />
                                                       <Label fx:id="NectarwaardeValueTv" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
-                                                      <Slider fx:id="slPollenwaardeTv" prefHeight="30.0" prefWidth="90.0" />
+                                                      <Slider fx:id="slPollenwaardeWz" prefHeight="30.0" prefWidth="90.0" />
                                                       <Label fx:id="PollenValueTv" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" text="0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
-                                                      <RadioButton fx:id="rbBijvriendelijkNullTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
+                                                      <RadioButton fx:id="rbBijvriendelijkNullWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
                                                          <toggleGroup>
                                                             <ToggleGroup fx:id="BijvriendelijkGroepTv" />
                                                          </toggleGroup></RadioButton>
-                                                      <RadioButton fx:id="rbBijvriendelijkJaTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$BijvriendelijkGroepTv" />
-                                                      <RadioButton fx:id="rbBijvriendelijkNeeTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$BijvriendelijkGroepTv" />
+                                                      <RadioButton fx:id="rbBijvriendelijkJaWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$BijvriendelijkGroepTv" />
+                                                      <RadioButton fx:id="rbBijvriendelijkNeeWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$BijvriendelijkGroepTv" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
-                                                      <RadioButton fx:id="rbVlindervriendelijkNullTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
+                                                      <RadioButton fx:id="rbVlindervriendelijkNullWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
                                                          <toggleGroup>
                                                             <ToggleGroup fx:id="VlindervriendelijkGroepTv" />
                                                          </toggleGroup></RadioButton>
-                                                      <RadioButton fx:id="rbVlindervriendelijkJaTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$VlindervriendelijkGroepTv" />
-                                                      <RadioButton fx:id="rbVlindervriendelijkNeeTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$VlindervriendelijkGroepTv" />
+                                                      <RadioButton fx:id="rbVlindervriendelijkJaWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$VlindervriendelijkGroepTv" />
+                                                      <RadioButton fx:id="rbVlindervriendelijkNeeWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$VlindervriendelijkGroepTv" />
                                                    </children>
                                                 </HBox>
                                              </children>
@@ -381,42 +381,42 @@
                                              <children>
                                                 <HBox>
                                                    <children>
-                                                      <RadioButton fx:id="rbEetbaarNullTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
+                                                      <RadioButton fx:id="rbEetbaarNullWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
                                                          <toggleGroup>
                                                             <ToggleGroup fx:id="EetbaarGroepTv" />
                                                          </toggleGroup></RadioButton>
-                                                      <RadioButton fx:id="rbEetbaarJaTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$EetbaarGroepTv" />
-                                                      <RadioButton fx:id="rbEetbaarNeeTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$EetbaarGroepTv" />
+                                                      <RadioButton fx:id="rbEetbaarJaWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$EetbaarGroepTv" />
+                                                      <RadioButton fx:id="rbEetbaarNeeWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$EetbaarGroepTv" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
-                                                      <RadioButton fx:id="rbKruidgebruikNullTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
+                                                      <RadioButton fx:id="rbKruidgebruikNullWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
                                                          <toggleGroup>
                                                             <ToggleGroup fx:id="KruidgebruikGroepTv" />
                                                          </toggleGroup></RadioButton>
-                                                      <RadioButton fx:id="rbKruidgebruikJaTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$KruidgebruikGroepTv" />
-                                                      <RadioButton fx:id="rbKruidgebruikNeeTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$KruidgebruikGroepTv" />
+                                                      <RadioButton fx:id="rbKruidgebruikJaWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$KruidgebruikGroepTv" />
+                                                      <RadioButton fx:id="rbKruidgebruikNeeWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$KruidgebruikGroepTv" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
-                                                      <RadioButton fx:id="rbGeurendNullTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
+                                                      <RadioButton fx:id="rbGeurendNullWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
                                                          <toggleGroup>
                                                             <ToggleGroup fx:id="GeurendGroepTv" />
                                                          </toggleGroup></RadioButton>
-                                                      <RadioButton fx:id="rbGeurendJaTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$GeurendGroepTv" />
-                                                      <RadioButton fx:id="rbGeurendNeeTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$GeurendGroepTv" />
+                                                      <RadioButton fx:id="rbGeurendJaWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$GeurendGroepTv" />
+                                                      <RadioButton fx:id="rbGeurendNeeWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$GeurendGroepTv" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
-                                                      <RadioButton fx:id="rbVorstgevoeligNullTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
+                                                      <RadioButton fx:id="rbVorstgevoeligNullWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0">
                                                          <toggleGroup>
                                                             <ToggleGroup fx:id="VorstgevoeligGroepTv" />
                                                          </toggleGroup></RadioButton>
-                                                      <RadioButton fx:id="rbVorstgevoeligJaTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$VorstgevoeligGroepTv" />
-                                                      <RadioButton fx:id="rbVorstgevoeligNeeTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$VorstgevoeligGroepTv" />
+                                                      <RadioButton fx:id="rbVorstgevoeligJaWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="J" toggleGroup="$VorstgevoeligGroepTv" />
+                                                      <RadioButton fx:id="rbVorstgevoeligNeeWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="N" toggleGroup="$VorstgevoeligGroepTv" />
                                                    </children>
                                                 </HBox>
                                              </children>
