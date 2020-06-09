@@ -1,12 +1,20 @@
 package plantenApp;
 
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ControllerOverzicht {
@@ -115,22 +123,14 @@ public class ControllerOverzicht {
     public Label bladhoogteMaxDecO;
     public ComboBox cbMaandBeheerO;
     public ListView lvLevensduurO;
+    public Button Opslaanbtno;
+    public Button WijzigenbtnWz;
+    private Connection dbConnection;
 
-    public void initialize()
-    {
-        cbMaandBeheerO.getItems().add(0,"januari");
-        cbMaandBeheerO.getItems().add(1,"februari");
-        cbMaandBeheerO.getItems().add(2,"maart");
-        cbMaandBeheerO.getItems().add(3,"april");
-        cbMaandBeheerO.getItems().add(4,"mei");
-        cbMaandBeheerO.getItems().add(5,"juni");
-        cbMaandBeheerO.getItems().add(6,"juli");
-        cbMaandBeheerO.getItems().add(7,"augustus");
-        cbMaandBeheerO.getItems().add(8,"september");
-        cbMaandBeheerO.getItems().add(9, "oktober");
-        cbMaandBeheerO.getItems().add(10, "november");
-        cbMaandBeheerO.getItems().add(11, "december");
-        cbMaandBeheerO.getSelectionModel().select(0);
+    public void initialize() throws SQLException {
+        dbConnection = Database.getInstance().getConnection();
+
+        comboaanvullen();
         tonenPlantOpFiche(0);
     }
     public ControllerOverzicht() {
@@ -138,7 +138,7 @@ public class ControllerOverzicht {
     //indexArrays zegt van welke plaats in de arrays dat de functie een plant moet ophalen, nu is het hardcoded voor de eerste plaats in de arrayLists
     public void tonenPlantOpFiche(int indexArrays){
         Plant p = ControllerPlantToevoegen.plantss.get(indexArrays);
-        lblTypeO.setText(p.getType());
+        lblTypeO.setText(p.getPlantType());
         lblFamilieO.setText(p.getFamilie());
         lblGeslachtO.setText(p.getGeslacht());
         lblSoortO.setText(p.getSoort());
@@ -353,4 +353,83 @@ public class ControllerOverzicht {
             }
         }
     }
+    public void comboaanvullen()  {
+        cbMaandBeheerO.getItems().add(0,"Januari");
+        cbMaandBeheerO.getItems().add(1,"Februari");
+        cbMaandBeheerO.getItems().add(2,"Maart");
+        cbMaandBeheerO.getItems().add(3,"April");
+        cbMaandBeheerO.getItems().add(4,"Mei");
+        cbMaandBeheerO.getItems().add(5,"Juni");
+        cbMaandBeheerO.getItems().add(6,"Juli");
+        cbMaandBeheerO.getItems().add(7,"Augustus");
+        cbMaandBeheerO.getItems().add(8,"September");
+        cbMaandBeheerO.getItems().add(9, "Oktober");
+        cbMaandBeheerO.getItems().add(10, "November");
+        cbMaandBeheerO.getItems().add(11, "December");
+        cbMaandBeheerO.getSelectionModel().select(0);
+    }
+
+
+
+    public void test(javafx.scene.input.MouseEvent mouseEvent) {
+        System.out.println("test");
+        lvFrequentieO.getItems().clear();
+        lvBeheerbehandelingO.getItems().clear();
+        for (int i = 0 ; i < ControllerPlantToevoegen.beheerdaad_eigenschapss.size(); i++)
+        {
+            if(ControllerPlantToevoegen.beheerdaad_eigenschapss.get(i).getMaand() ==  cbMaandBeheerO.getValue())
+            {
+                lvFrequentieO.getItems().add(ControllerPlantToevoegen.beheerdaad_eigenschapss.get(i).getFrequentie());
+                lvBeheerbehandelingO.getItems().add(ControllerPlantToevoegen.beheerdaad_eigenschapss.get(i).getNaam());
+            }
+        }
+    }
+
+    public void opslaanbtn_clicked(MouseEvent mouseEvent) throws SQLException {
+        createdatabase(ControllerPlantToevoegen.plantss.get(0),ControllerPlantToevoegen.abiotischeFactorenn.get(0),ControllerPlantToevoegen.fenotypess.get(0),ControllerPlantToevoegen.fenoMulti_eigenschapss,ControllerPlantToevoegen.abiotischmulti,ControllerPlantToevoegen.commensalismes.get(0),ControllerPlantToevoegen.commMulti_eigenschapss,ControllerPlantToevoegen.beheerdaad_eigenschapss,ControllerPlantToevoegen.extrass.get(0));
+    }
+    public  void createdatabase(Plant plant , AbiotischeFactoren abiotischeFactoren , Fenotype fenotype , ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschaps , ArrayList<AbioMulti_Eigenschap> abiottisschemulti_eigenschaps,Commensalisme commensalisme, ArrayList<CommMulti_Eigenschap> commMulti_eigenschaps,ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps, Extra extra) throws SQLException {
+
+        PlantDAO plantDAO = new PlantDAO(dbConnection);
+        AbiotischeFactorenDAO abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
+        FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
+        AbiotischeFactorenDAO abiotischeMultidao = new AbiotischeFactorenDAO(dbConnection);
+        CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
+        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
+        ExtraDAO extraDAO = new ExtraDAO(dbConnection);
+        System.out.println(plant.getLaatste_update_door());
+        plantDAO.createplant(plant,0,plant.getLaatste_update_door());
+        abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
+        fenotypeDAO.createfenotype(fenotype);
+        for (int j = 0; j < fenoMulti_eigenschaps.size(); j++) {
+            fenotypeDAO.createfenomulti(fenoMulti_eigenschaps.get(j), plant.getId());
+        }
+        for (int f = 0; f < abiottisschemulti_eigenschaps.size(); f++) {
+            abiotischeMultidao.CreateAbiotischeMulti(abiottisschemulti_eigenschaps.get(f), plant.getId());
+        }
+        commensalismeDAO.createCommensalisme(commensalisme);
+        for (int m = 0; m < commMulti_eigenschaps.size(); m++) {
+            commensalismeDAO.createCommensalismeMulti(commMulti_eigenschaps.get(m));
+        }
+        for (int a = 0; a < beheerdaad_eigenschaps.size(); a++) {
+            beheerDAO.createBeheer(beheerdaad_eigenschaps.get(a), plant.getId());
+        }
+        System.out.println("alles behalve extra");
+        extraDAO.createExtra(extra);
+        System.out.println("extra oook nu ");
+    }
+
+    public void WijzigenbtnWz_clicked(MouseEvent mouseEvent) throws IOException {
+        openNieuwScherm(mouseEvent);
+    }
+    public void openNieuwScherm(MouseEvent mouseEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("view/PlantWijzigen.fxml"));
+        Scene scen = new Scene(root);
+        Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        window.setScene(scen);
+        window.show();
+        window.setMaximized(true);
+        System.out.println("controlleroverzicht");
+    }
 }
+

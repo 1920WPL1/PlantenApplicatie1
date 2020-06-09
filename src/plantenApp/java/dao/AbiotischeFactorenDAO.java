@@ -30,8 +30,8 @@ public class AbiotischeFactorenDAO implements Queries {
         stmtSelectIdsByAbio = dbConnection.prepareStatement(GETIDSBYABIO);
         stmtSelectIdsByAbioMulti = dbConnection.prepareStatement(GETIDSBYABIOMULTI);
         stmInsertAbiotische = dbConnection.prepareStatement(INSERTABIOTISCHEFACTOREN);
-        stmGetmacid =dbConnection.prepareStatement(GetMaxId);
-        stmGetMaxIdMulti = dbConnection.prepareStatement(GetMaxIdAbioMulti);
+        stmGetmacid =dbConnection.prepareStatement(GETMAXIDABIO);
+        stmGetMaxIdMulti = dbConnection.prepareStatement(GETMAXIDABIOMULTI);
         stmInsertAbiotischeMulti = dbConnection.prepareStatement(INSERTABIOTISCHEFACTORENMULTI);
     }
 

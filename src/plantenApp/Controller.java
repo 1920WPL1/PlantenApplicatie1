@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class Controller {
     public ComboBox<String> cboType;
-    public ComboBox cboFamilie;
+    public ComboBox<String> cboFamilie;
     public TextField txtNaam;
     public Spinner nudMinBloeiHoogte;
     public Spinner nudMinBladHoogte;
@@ -130,8 +130,8 @@ public class Controller {
      */
     public void FillComboboxes(InfoTables infotables){
         //type
-         System.out.println(infotables.getTypes().toString());
-        cboType.getItems().addAll(infotables.getTypes());
+         System.out.println(infotables.getPlantTypes().toString());
+        cboType.getItems().addAll(infotables.getPlantTypes());
         //familie
         cboFamilie.getItems().addAll(infotables.getFamilies());
         //bladgrootte

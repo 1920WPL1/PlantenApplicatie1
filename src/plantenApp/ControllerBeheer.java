@@ -42,6 +42,7 @@ public class ControllerBeheer {
     public Label boodschaptxt;
     private Connection dbConnection;
     private int planid;
+    private int maxidbeheer;
 
     public ControllerBeheer() {
     }
@@ -51,6 +52,8 @@ public class ControllerBeheer {
         PlantDAO plantDAO = new PlantDAO(dbConnection);
         planid = plantDAO.getmaxid();
         FillComboBeheer();
+        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
+        maxidbeheer = beheerDAO.getmaxid();
         System.out.println("intizialize");
     }
 
@@ -71,7 +74,6 @@ public class ControllerBeheer {
             boodschaptxt.setText("er bestaat al een behandeling met deze naam");
             behandlingnaamtxt.setText("");
         }
-
     }
 
     public void Verwijdernbeheer_clicekd(MouseEvent mouseEvent) {
@@ -85,21 +87,22 @@ public class ControllerBeheer {
     public void teovoegenbeheer_clicked(MouseEvent mouseEvent) throws SQLException {
         try {
             int aantalBeheer = 0;
-            BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
             ArrayList<String> maanden = new ArrayList<>();
             maanden = getmaanden();
-            int id = beheerDAO.getmaxid();
-            id++;
+
+            maxidbeheer++;
             for (int j = 0; j < maanden.size(); j++) {
-                Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(id + j, CmdBehandeling.getValue().toString(), opmerkingtxt.getText(), maanden.get(j), (Integer) frequentieNumericupdown.getValue());
+                Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(maxidbeheer , CmdBehandeling.getValue().toString(), opmerkingtxt.getText(), maanden.get(j), (Integer) frequentieNumericupdown.getValue());
                 ControllerPlantToevoegen.beheerdaad_eigenschapss.add(beheerdaad_eigenschap);
                 Beheerlistview.getItems().addAll( ControllerPlantToevoegen.beheerdaad_eigenschapss.get(j).getNaam() + " " +  ControllerPlantToevoegen.beheerdaad_eigenschapss.get(j).getMaand() + " " +  ControllerPlantToevoegen.beheerdaad_eigenschapss.get(j).getOpmerking());
                 aantalBeheer++;
+                maxidbeheer++;
             }
             ControllerPlantToevoegen.AantalPerElBehMulti.add(aantalBeheer);
-        } catch (Exception e) {
+       }
+       catch (Exception e) {
             boodschaptxt.setText("Vul alles correct in");
-        }
+       }
 
     }
 
@@ -110,7 +113,7 @@ public class ControllerBeheer {
             jancheckbox.selectedProperty().set(false);
         }
         if (febcheckbox.isSelected()) {
-            maanden.add("Februarie");
+            maanden.add("Februari");
             febcheckbox.selectedProperty().set(false);
         }
         if (maacheckbox.isSelected()) {
@@ -166,10 +169,10 @@ public class ControllerBeheer {
     }
 
     public void Opslaanbutton_clicked(MouseEvent mouseEvent) throws SQLException, IOException {
-        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
+        /*BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
         for (int m = 0; m <  ControllerPlantToevoegen.beheerdaad_eigenschapss.size(); m++) {
             beheerDAO.createBeheer( ControllerPlantToevoegen.beheerdaad_eigenschapss.get(m), planid);
-        }
+        }*/
         openNieuwScherm(mouseEvent);
         System.out.println(ControllerPlantToevoegen.plantss.get(0).getFgsv());
 

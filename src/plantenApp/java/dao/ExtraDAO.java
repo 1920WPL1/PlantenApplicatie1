@@ -22,8 +22,8 @@ public class ExtraDAO implements Queries {
 
         stmtSelectExtraByID = dbConnection.prepareStatement(GETEXTRABYPLANTID);
         stmtSelectByExtra = dbConnection.prepareStatement(GETIDSBYEXTRA);
-        stmtInsertExtra = dbConnection.prepareStatement(insertextra);
-        stmtGetmaxid = dbConnection.prepareStatement(getmaxextraid);
+        stmtInsertExtra = dbConnection.prepareStatement(INSERTEXTRA);
+        stmtGetmaxid = dbConnection.prepareStatement(GETMAXIDEXTRA);
     }
 
     //region GET
@@ -66,11 +66,11 @@ public class ExtraDAO implements Queries {
         stmtInsertExtra.setInt(3,extra.getNectarwaarde());
         stmtInsertExtra.setInt(4,extra.getPollenwaarde());
         stmtInsertExtra.setString(5,extra.getBijvriendelijk());
-        stmtInsertExtra.setString(6,extra.getEetbaar());
-        //stmtInsertExtra.setString(6,extra.getKruidgebruik());
-        //opletten voor de nummers en die aanpassen als eetbaar en kruidgebruik 2 verschillende kolommen worden
-        stmtInsertExtra.setString(7,extra.getGeurend());
-        stmtInsertExtra.setString(8,extra.getVorstgevoelig());
+        stmtInsertExtra.setString(6,extra.getVlindervriendelijk());
+        stmtInsertExtra.setString(7,extra.getEetbaar());
+        stmtInsertExtra.setString(8,extra.getKruidgebruik());
+        stmtInsertExtra.setString(9,extra.getGeurend());
+        stmtInsertExtra.setString(10,extra.getVorstgevoelig());
         stmtInsertExtra.executeUpdate();
         System.out.println("extra toegevoegd");
     }
