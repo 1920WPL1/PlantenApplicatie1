@@ -6,12 +6,22 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
+import java.awt.*;
+import java.lang.Object;
+
+
+import javax.swing.*;
+import java.io.Console;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -212,6 +222,7 @@ public class ControllerPlantToevoegen {
     public  int iGebruikerID;
     //Moet meegekregen worden van login
     private String sEmailadres;
+    //Variabelen voor error afhandeling
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
@@ -424,52 +435,160 @@ public class ControllerPlantToevoegen {
         PlantDAO plantDAO = new PlantDAO(dbConnection);
         NaamDao naamDAO = new NaamDao(dbConnection);
         Plant plantTest = new Plant(cboTypeTv.getValue(),txtFamilieTv.getText(),txtGeslachtTv.getText(),txtSoortTv.getText(),txtVariantTv.getText());
+        //Ophalen plantid voor nieuwe plant
         int maxidplant = plantDAO.getmaxid();
-         iGebruikerID = gebruikerDAO.getIdMetEmail(sEmailadres);
-        String srolGebruiker = gebruikerDAO.getRolMetEmail(sEmailadres);
         this.plantid = maxidplant;
         plantid = maxidplant+1;
-        String sFamilie = txtFamilieTv.getText();
-        String sGeslacht = txtGeslachtTv.getText();
-        String sSoort = txtSoortTv.getText();
-        String sVariant = txtVariantTv.getText();
-        String sFgsv = sFamilie + " " + sGeslacht+ " " + sSoort+" " + sVariant;
-        String sPlanttype = cboTypeTv.getValue();
-        int iStatus = 0;
-        int x = 0;
-        int y = 0;
-        if(txtDichtheidXTv.getText().matches("[0-9]+")){
-            x = Integer.parseInt(txtDichtheidXTv.getText());
+        String srolGebruiker ="", sPlanttype = "", sFamilie = "", sGeslacht = "", sSoort = "", sVariant = "", sFgsv = "";
+        String sErrorTitel = "Fout toevoegen plant";
+        int ix = 0, iy = 0, iStatus = 0;
+
+        //Controle op gebruiker
+        try{
+            iGebruikerID = gebruikerDAO.getIdMetEmail(sEmailadres);
+            srolGebruiker = gebruikerDAO.getRolMetEmail(sEmailadres);
         }
-        if(txtDichtheidYTv.getText().matches("[0-9]+")){
-            y = Integer.parseInt(txtDichtheidYTv.getText());
+        catch (Exception ex)
+        {
+            ShowError(sErrorTitel, "Er is een fout opgetreden bij het meegeven van gebruiker." );
+            System.out.println(ex);
         }
 
+        //Controle op plantType
+        try
+        {
+            sPlanttype = cboTypeTv.getValue();
+        }
+        catch (Exception ex)
+        {
+            ShowError(sErrorTitel, "Er is een fout opgetreden bij het meegeven van plant type." );
+            System.out.println(ex);
+        }
+        //Controle op familie
+        try
+        {
+            sFamilie = txtFamilieTv.getText();
+        }
+        catch (Exception ex)
+        {
+            ShowError(sErrorTitel, "Er is een fout opgetreden bij het meegeven van familie." );
+            System.out.println(ex);
+        }
+        finally {
+            sFgsv = sFgsv + sFamilie + " ";
+        }
+        //Controle op geslacht
+        try
+        {
+            sGeslacht = txtGeslachtTv.getText();
+        }
+        catch (Exception ex)
+        {
+            ShowError(sErrorTitel, "Er is een fout opgetreden bij het meegeven van geslacht." );
+            System.out.println(ex);
+        }
+        finally {
+            sFgsv = sFgsv + sGeslacht + " ";
+        }
+        //Controle op soort
+        try
+        {
+            if(txtSoortTv.getText().length() > 0)
+            {sSoort = txtSoortTv.getText(); }
+            else
+            {sSoort = "";}
+        }
+        catch (Exception ex)
+        {
+            ShowError(sErrorTitel, "Er is een fout opgetreden bij het meegeven van soort." );
+            System.out.println(ex);
+        }
+        finally {
+            sFgsv = sFgsv + sSoort+ " ";
+        }
+        //Controle op variant
+        try
+        {
+            if(txtVariantTv.getText().length() > 0)
+            {sSoort = txtVariantTv.getText(); }
+            else
+            {sVariant = "";}
+        }
+        catch (Exception ex)
+        {
+            ShowError(sErrorTitel, "Er is een fout opgetreden bij het meegeven van variant." );
+            System.out.println(ex);
+        }
+        finally {
+            sFgsv = sFgsv + sVariant + " ";
+        }
+
+        //Controle op minimum plantdichtheid
+        try{
+                ix = Integer.parseInt(txtDichtheidXTv.getText());
+
+        }
+        catch (NumberFormatException nex)
+        {
+            ShowError(sErrorTitel, "Gelieve een getal in te geven bij X." );
+
+        }
+        catch (Exception ex)
+        {
+            ShowError(sErrorTitel, "Er is een fout opgetreden bij het meegeven X." );
+            System.out.println(ex);
+        }
+        //Controle op maximum plantdichtheid
+        try{
+            if(txtDichtheidYTv.getText().matches("[0-9]+")){
+                iy = Integer.parseInt(txtDichtheidYTv.getText());
+            }
+
+        }
+        catch (NumberFormatException nex)
+        {
+            ShowError(sErrorTitel, "Gelieve een getal in te geven bij Y." );
+
+        }
+        catch (Exception ex)
+        {
+            ShowError(sErrorTitel, "Er is een fout opgetreden bij het meegeven van Y." );
+            System.out.println(ex);
+        }
+
+        
         //Controle of plantnaam al bestaat
         int iDubbeleNaam = naamDAO.ControleDubbeleNaam(plantTest);
-        //als plant nog niet bestaat, plant toevoegen
-        if (iDubbeleNaam == 0) {
-            //Toevoegen plant docent/admin
-            if (srolGebruiker.equals("admin") || srolGebruiker.equals("docent"))
-            {
+        try{
+            //als plant nog niet bestaat, plant toevoegen
+            if (iDubbeleNaam == 0) {
+                //Toevoegen plant docent/admin
+                if (srolGebruiker.equals("admin") || srolGebruiker.equals("docent"))
+                {
 
-                iStatus = 2;
-                Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv);
-                plantDAO.createplant(plant, iStatus, iGebruikerID);
+                    iStatus = 2;
+                    Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, ix, iy, sFgsv);
+                    plantDAO.createplant(plant, iStatus, iGebruikerID);
+                }
+                //Toevoegen plant als leerling/gast
+                else
+                {
+                    iStatus = 1;
+                    Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, ix, iy, sFgsv);
+                    plantDAO.createplant(plant, iStatus, iGebruikerID);
+                }
             }
-            //Toevoegen plant als leerling/gast
+            //Als plant bestaat waarschuwing geven
             else
             {
-                iStatus = 1;
-                Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv);
-                plantDAO.createplant(plant, iStatus, iGebruikerID);
+                DubbelePlantWaarschuwing();
             }
         }
-        //Als plant bestaat waarschuwing geven
-        else
+        catch (Exception ex)
         {
-            DubbelePlantWaarschuwing();
+            ShowError(sErrorTitel, "Het toevoegen van plant is niet gelukt.");
         }
+
     }
     private void DubbelePlantWaarschuwing() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -761,6 +880,12 @@ public class ControllerPlantToevoegen {
         else{
             DubbelePlantWaarschuwing();
         }
+    }
+    public void ShowError(String sTitel, String sMessage)
+    {
+        //tonen van error
+        JOptionPane.showMessageDialog(null, sMessage, "InfoBox: " + sTitel, JOptionPane.INFORMATION_MESSAGE);
+
     }
 }
 
