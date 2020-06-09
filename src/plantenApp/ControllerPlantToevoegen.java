@@ -394,17 +394,17 @@ public class ControllerPlantToevoegen {
         if(rbParasolvormigTv.isSelected()){ return "Parasolvormig";}
         return null;
     }
-    public int levensvormCheck(){
-        if(rbHydro1Tv.isSelected()){return 1;}
-        if(rbHydro2Tv.isSelected()){return 2;}
-        if(rbHeloTv.isSelected()){return 3;}
-        if(rbCrypto1Tv.isSelected()){return 4;}
-        if(rbCrypto2Tv.isSelected()){return 5;}
-        if(rbHemikryptoTv.isSelected()){return 6;}
-        if(rbChamae1Tv.isSelected()){return 7;}
-        if(rbChamae2Tv.isSelected()){return 8;}
-        if(rbFaneroTv.isSelected()){return 9;}
-        return 0;
+    public String levensvormCheck(){
+        if(rbHydro1Tv.isSelected()){return "1. Hydrofyt";}
+        if(rbHydro2Tv.isSelected()){return "2. Hydrofyt";}
+        if(rbHeloTv.isSelected()){return "3. Helofyt";}
+        if(rbCrypto1Tv.isSelected()){return "4. Cryptophyt";}
+        if(rbCrypto2Tv.isSelected()){return "5. Cryptophyt";}
+        if(rbHemikryptoTv.isSelected()){return "6. Hemikryptofyt";}
+        if(rbChamae1Tv.isSelected()){return "7. Chamaefyt";}
+        if(rbChamae2Tv.isSelected()){return "8. Chamaefyt";}
+        if(rbFaneroTv.isSelected()){return "9. Fanerophyt";}
+        return "geen";
     }
     public String bloeiwijzeCheck(){
         if(rbAarTv.isSelected()){return "Aar";}

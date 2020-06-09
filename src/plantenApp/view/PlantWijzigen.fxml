@@ -63,11 +63,11 @@
                                           </VBox>
                                           <VBox>
                                              <children>
-                                                <ComboBox fx:id="cboTypeTv" prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField fx:id="txtFamilieTv" prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField fx:id="txtGeslachtTv" prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField fx:id="txtSoortTv" prefHeight="30.0" prefWidth="120.0" />
-                                                <TextField fx:id="txtVariantTv" prefHeight="30.0" prefWidth="120.0" />
+                                                <ComboBox fx:id="cboTypeWz" prefHeight="30.0" prefWidth="120.0" />
+                                                <TextField fx:id="txtFamilieWz" prefHeight="30.0" prefWidth="120.0" />
+                                                <TextField fx:id="txtGeslachtWz" prefHeight="30.0" prefWidth="120.0" />
+                                                <TextField fx:id="txtSoortWz" prefHeight="30.0" prefWidth="120.0" />
+                                                <TextField fx:id="txtVariantWz" prefHeight="30.0" prefWidth="120.0" />
                                              </children>
                                           </VBox>
                                        </children>
@@ -82,9 +82,9 @@
                                           <HBox>
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="30.0" prefWidth="20.0" text="X" />
-                                                <TextField fx:id="txtDichtheidXTv" prefHeight="30.0" prefWidth="100.0" />
+                                                <TextField fx:id="txtDichtheidXWz" prefHeight="30.0" prefWidth="100.0" />
                                                 <Label alignment="CENTER" prefHeight="30.0" prefWidth="20.0" text="Y" />
-                                                <TextField fx:id="txtDichtheidYTv" prefHeight="30.0" prefWidth="100.0" />
+                                                <TextField fx:id="txtDichtheidYWz" prefHeight="30.0" prefWidth="100.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -465,10 +465,10 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <ComboBox fx:id="cbBladgrootteTotTv" prefHeight="30.0" prefWidth="120.0" />
-                                                      <ComboBox fx:id="cbBladvormTv" prefHeight="30.0" prefWidth="120.0" />
-                                                      <ComboBox fx:id="cbRatioTv" prefHeight="30.0" prefWidth="120.0" />
-                                                      <ComboBox fx:id="cbSpruitfenologieTv" prefHeight="30.0" prefWidth="120.0" />
+                                                      <ComboBox fx:id="cbBladgrootteTotWz" prefHeight="30.0" prefWidth="120.0" />
+                                                      <ComboBox fx:id="cbBladvormWz" prefHeight="30.0" prefWidth="120.0" />
+                                                      <ComboBox fx:id="cbRatioWz" prefHeight="30.0" prefWidth="120.0" />
+                                                      <ComboBox fx:id="cbSpruitfenologieWz" prefHeight="30.0" prefWidth="120.0" />
                                                    </children>
                                                 </VBox>
                                                 <Label text="       " />
@@ -485,7 +485,7 @@
                                                                   </ImageView>
                                                                   <VBox>
                                                                      <children>
-                                                                        <RadioButton fx:id="rbHydro1Tv" mnemonicParsing="false" prefHeight="25.0" text="1. Hydrofyt" toggleGroup="$LevensvormGroepTv">
+                                                                        <RadioButton fx:id="rbHydro1Wz" mnemonicParsing="false" prefHeight="25.0" text="1. Hydrofyt" toggleGroup="$LevensvormGroepTv">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
@@ -493,7 +493,7 @@
                                                                               <ToggleGroup fx:id="LevensvormGroepTv" />
                                                                            </toggleGroup>
                                                                         </RadioButton>
-                                                                        <RadioButton fx:id="rbHydro2Tv" mnemonicParsing="false" prefHeight="25.0" text="2. Hydrofyt" toggleGroup="$LevensvormGroepTv">
+                                                                        <RadioButton fx:id="rbHydro2Wz" mnemonicParsing="false" prefHeight="25.0" text="2. Hydrofyt" toggleGroup="$LevensvormGroepTv">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
@@ -501,37 +501,37 @@
                                                                               <ToggleGroup fx:id="LevensvormGroepTvLevensvormGroepTv" />
                                                                            </toggleGroup>
                                                                         </RadioButton>
-                                                                        <RadioButton fx:id="rbHeloTv" mnemonicParsing="false" prefHeight="25.0" text="3. Helofyt" toggleGroup="$LevensvormGroepTv">
+                                                                        <RadioButton fx:id="rbHeloWz" mnemonicParsing="false" prefHeight="25.0" text="3. Helofyt" toggleGroup="$LevensvormGroepTv">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
                                                                         </RadioButton>
-                                                                        <RadioButton fx:id="rbCrypto1Tv" mnemonicParsing="false" prefHeight="25.0" text="4. Cryptophyt " toggleGroup="$LevensvormGroepTv">
+                                                                        <RadioButton fx:id="rbCrypto1Wz" mnemonicParsing="false" prefHeight="25.0" text="4. Cryptophyt " toggleGroup="$LevensvormGroepTv">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
                                                                         </RadioButton>
-                                                                        <RadioButton fx:id="rbCrypto2Tv" mnemonicParsing="false" prefHeight="25.0" text="5. Cryptophyt " toggleGroup="$LevensvormGroepTv">
+                                                                        <RadioButton fx:id="rbCrypto2Wz" mnemonicParsing="false" prefHeight="25.0" text="5. Cryptophyt " toggleGroup="$LevensvormGroepTv">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
                                                                         </RadioButton>
-                                                                        <RadioButton fx:id="rbHemikryptoTv" mnemonicParsing="false" prefHeight="25.0" text="6. Hemikryptofyt " toggleGroup="$LevensvormGroepTv">
+                                                                        <RadioButton fx:id="rbHemikryptoWz" mnemonicParsing="false" prefHeight="25.0" text="6. Hemikryptofyt " toggleGroup="$LevensvormGroepTv">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
                                                                         </RadioButton>
-                                                                        <RadioButton fx:id="rbChamae1Tv" mnemonicParsing="false" prefHeight="25.0" text="7. Chamaefyt" toggleGroup="$LevensvormGroepTv">
+                                                                        <RadioButton fx:id="rbChamae1Wz" mnemonicParsing="false" prefHeight="25.0" text="7. Chamaefyt" toggleGroup="$LevensvormGroepTv">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
                                                                         </RadioButton>
-                                                                        <RadioButton fx:id="rbChamae2Tv" mnemonicParsing="false" prefHeight="25.0" text="8. Chamaefyt" toggleGroup="$LevensvormGroepTv">
+                                                                        <RadioButton fx:id="rbChamae2Wz" mnemonicParsing="false" prefHeight="25.0" text="8. Chamaefyt" toggleGroup="$LevensvormGroepTv">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
                                                                         </RadioButton>
-                                                                        <RadioButton fx:id="rbFaneroTv" mnemonicParsing="false" prefHeight="25.0" text="9. Fanerophyt" toggleGroup="$LevensvormGroepTv">
+                                                                        <RadioButton fx:id="rbFaneroWz" mnemonicParsing="false" prefHeight="25.0" text="9. Fanerophyt" toggleGroup="$LevensvormGroepTv">
                                                                            <font>
                                                                               <Font size="14.0" />
                                                                            </font>
