@@ -414,6 +414,7 @@ public class ControllerOverzicht {
         for (int a = 0; a < beheerdaad_eigenschaps.size(); a++) {
             beheerDAO.createBeheer(beheerdaad_eigenschaps.get(a), plant.getId());
         }
+        //lorem ipsumetcetera hablahabla wout komaan zingen gast
         System.out.println("alles behalve extra");
         extraDAO.createExtra(extra);
         System.out.println("extra oook nu ");
