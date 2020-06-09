@@ -362,7 +362,7 @@ public class ControllerPlantToevoegen {
     }
     public String comboboxCheckString(SingleSelectionModel <String> combobox) {
         if(combobox.isEmpty()) {
-            return "leeg";
+            return "";
         }
         else {
             return combobox.getSelectedItem().toString();
@@ -392,7 +392,7 @@ public class ControllerPlantToevoegen {
         if(rbSucculentenTv.isSelected()){ return "Succulenten";}
         if(rbPollenvormersTv.isSelected()){ return "Pollenvormers";}
         if(rbParasolvormigTv.isSelected()){ return "Parasolvormig";}
-        return null;
+        return "";
     }
     public String levensvormCheck(){
         if(rbHydro1Tv.isSelected()){return "1. Hydrofyt";}
@@ -404,7 +404,7 @@ public class ControllerPlantToevoegen {
         if(rbChamae1Tv.isSelected()){return "7. Chamaefyt";}
         if(rbChamae2Tv.isSelected()){return "8. Chamaefyt";}
         if(rbFaneroTv.isSelected()){return "9. Fanerophyt";}
-        return "geen";
+        return "";
     }
     public String bloeiwijzeCheck(){
         if(rbAarTv.isSelected()){return "Aar";}
@@ -415,7 +415,7 @@ public class ControllerPlantToevoegen {
         if(rbSchotelTv.isSelected()){return "Schotel";}
         if(rbSchermTv.isSelected()){return "Scherm";}
         if(rbSmallePluimTv.isSelected()){return "Smalle pluim";}
-        return null;
+        return "";
     }
     public void createplant() throws SQLException {
         //Aanmaken variabelen
@@ -522,7 +522,7 @@ public class ControllerPlantToevoegen {
             return "S";
         }
         else {
-            return "null";
+            return "";
         }
     }
     public void createExtra() throws SQLException {
@@ -547,7 +547,7 @@ public class ControllerPlantToevoegen {
             return "nee";
         }
         else {
-            return "null";
+            return "";
         }
     }
     public String eetbaarCheck() {
@@ -558,7 +558,7 @@ public class ControllerPlantToevoegen {
             return "nee";
         }
         else {
-            return "null";
+            return "";
         }
     }
     public String geurendCheck() {
@@ -569,7 +569,7 @@ public class ControllerPlantToevoegen {
             return "nee";
         }
         else {
-            return "null";
+            return "";
         }
     }
     public String kruidgebruikCheck() {
@@ -580,7 +580,7 @@ public class ControllerPlantToevoegen {
             return "nee";
         }
         else {
-            return "null";
+            return "";
         }
     }
     public String bijvriendelijkCheck() {
@@ -591,7 +591,7 @@ public class ControllerPlantToevoegen {
             return "nee";
         }
         else {
-            return "null";
+            return "";
         }
     }
     public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
