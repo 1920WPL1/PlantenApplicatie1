@@ -271,8 +271,8 @@ public interface Queries {
 
     /*Queries voor extra*/
     //Toevoegen extra
-    String INSERTEXTRA = "insert into " + "extra(extra_id, plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, eetbaar_kruidgebruik, geurend, vorstgevoelig)" +
-            " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    String INSERTEXTRA = "insert into " + "extra(extra_id, plant_id, nectarwaarde, pollenwaarde, bijvriendelijk, vlindervriendelijk, eetbaar,kruidgebruik, geurend, vorstgevoelig)" +
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
     //Ophalen ID's extra
     String GETMAXIDEXTRA = "select Max(extra_id) from extra";
 

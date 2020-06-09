@@ -14,6 +14,7 @@ public class Plant {
     private int maxPlantdichtheid;
     private String fgsv;
     private int status;
+    private int gebruikersID;
   private Foto foto;
     private Beheer beheer;
     private AbiotischeFactoren abiotischeFactoren;
@@ -37,7 +38,15 @@ public class Plant {
         this.laatste_update_door = laatste_update_door;
     }
 
-    public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid,int status) {
+    public int getLaatste_update_door() {
+        return laatste_update_door;
+    }
+
+    public int getGebruikersID() {
+        return gebruikersID;
+    }
+
+    public Plant(int id, String planttype, String familie, String geslacht, String soort, String variatie, int minPlantdichtheid, int maxPlantdichtheid, int status) {
         this.id = id;
         this.planttype = planttype;
         this.familie = familie;

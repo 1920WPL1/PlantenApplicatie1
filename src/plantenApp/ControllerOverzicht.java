@@ -1,14 +1,20 @@
 package plantenApp;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
-import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ControllerOverzicht {
@@ -117,9 +123,13 @@ public class ControllerOverzicht {
     public Label bladhoogteMaxDecO;
     public ComboBox cbMaandBeheerO;
     public ListView lvLevensduurO;
+    public Button Opslaanbtno;
+    public Button WijzigenbtnWz;
+    private Connection dbConnection;
 
-    public void initialize()
-    {
+    public void initialize() throws SQLException {
+        dbConnection = Database.getInstance().getConnection();
+
         comboaanvullen();
         tonenPlantOpFiche(0);
     }
@@ -373,6 +383,53 @@ public class ControllerOverzicht {
                 lvBeheerbehandelingO.getItems().add(ControllerPlantToevoegen.beheerdaad_eigenschapss.get(i).getNaam());
             }
         }
+    }
+
+    public void opslaanbtn_clicked(MouseEvent mouseEvent) throws SQLException {
+        createdatabase(ControllerPlantToevoegen.plantss.get(0),ControllerPlantToevoegen.abiotischeFactorenn.get(0),ControllerPlantToevoegen.fenotypess.get(0),ControllerPlantToevoegen.fenoMulti_eigenschapss,ControllerPlantToevoegen.abiotischmulti,ControllerPlantToevoegen.commensalismes.get(0),ControllerPlantToevoegen.commMulti_eigenschapss,ControllerPlantToevoegen.beheerdaad_eigenschapss,ControllerPlantToevoegen.extrass.get(0));
+    }
+    public  void createdatabase(Plant plant , AbiotischeFactoren abiotischeFactoren , Fenotype fenotype , ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschaps , ArrayList<AbioMulti_Eigenschap> abiottisschemulti_eigenschaps,Commensalisme commensalisme, ArrayList<CommMulti_Eigenschap> commMulti_eigenschaps,ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps, Extra extra) throws SQLException {
+
+        PlantDAO plantDAO = new PlantDAO(dbConnection);
+        AbiotischeFactorenDAO abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
+        FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
+        AbiotischeFactorenDAO abiotischeMultidao = new AbiotischeFactorenDAO(dbConnection);
+        CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
+        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
+        ExtraDAO extraDAO = new ExtraDAO(dbConnection);
+        System.out.println(plant.getLaatste_update_door());
+        plantDAO.createplant(plant,0,plant.getLaatste_update_door());
+        abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
+        fenotypeDAO.createfenotype(fenotype);
+        for (int j = 0; j < fenoMulti_eigenschaps.size(); j++) {
+            fenotypeDAO.createfenomulti(fenoMulti_eigenschaps.get(j), plant.getId());
+        }
+        for (int f = 0; f < abiottisschemulti_eigenschaps.size(); f++) {
+            abiotischeMultidao.CreateAbiotischeMulti(abiottisschemulti_eigenschaps.get(f), plant.getId());
+        }
+        commensalismeDAO.createCommensalisme(commensalisme);
+        for (int m = 0; m < commMulti_eigenschaps.size(); m++) {
+            commensalismeDAO.createCommensalismeMulti(commMulti_eigenschaps.get(m));
+        }
+        for (int a = 0; a < beheerdaad_eigenschaps.size(); a++) {
+            beheerDAO.createBeheer(beheerdaad_eigenschaps.get(a), plant.getId());
+        }
+        System.out.println("alles behalve extra");
+        extraDAO.createExtra(extra);
+        System.out.println("extra oook nu ");
+    }
+
+    public void WijzigenbtnWz_clicked(MouseEvent mouseEvent) throws IOException {
+        openNieuwScherm(mouseEvent);
+    }
+    public void openNieuwScherm(MouseEvent mouseEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("view/PlantWijzigen.fxml"));
+        Scene scen = new Scene(root);
+        Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        window.setScene(scen);
+        window.show();
+        window.setMaximized(true);
+        System.out.println("controlleroverzicht");
     }
 }
 
