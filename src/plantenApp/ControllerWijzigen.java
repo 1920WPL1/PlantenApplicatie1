@@ -44,7 +44,6 @@ public class ControllerWijzigen {
     public ComboBox cbLevensduurTv;
     private InfoTables infoTables;
     private Connection dbConnection;
-
     public ComboBox cboTypeWz;
     public TextField txtFamilieWz;
     public TextField txtGeslachtWz;
@@ -68,6 +67,8 @@ public class ControllerWijzigen {
     public RadioButton rbFaneroWz;
 
     public void initialize() throws SQLException {
+        LadenPlant();
+        LadenFenotype();
         LadenExtra();
         //infotabel object aanmaken*/
        // InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
@@ -99,7 +100,6 @@ public class ControllerWijzigen {
             buttonnull.isSelected();
         }
     }
-    
     public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
         if (!lvLevensduurTv.getItems().contains(cbLevensduurTv.getValue())) {
             lvLevensduurTv.getItems().add((String) cbLevensduurTv.getValue());
@@ -192,13 +192,10 @@ public class ControllerWijzigen {
         //Levensduur
         cbLevensduurTv.getItems().addAll(infotables.getConcurentiekrachten());
     }
-
     public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) {
     }
-
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) {
     }
-
     public void LadenPlant() {
         //Omzetten integer naar string
         int dichtheidX = ControllerPlantToevoegen.plantss.get(0).getMinPlantdichtheid();
@@ -213,41 +210,40 @@ public class ControllerWijzigen {
         txtDichtheidXWz.setText(String.valueOf(dichtheidX));
         txtDichtheidYWz.setText(String.valueOf(dichtheidY));
     }
-
-    public void LadenFenotype(RadioButton Hydrofyt1, RadioButton Hydrofyt2, RadioButton Helofyt, RadioButton Cryptophyt1, RadioButton Cryptophyt2, RadioButton Hemik, RadioButton Cham1, RadioButton Cham2, RadioButton Fan, String waarde) {
+    public void LadenFenotype() {
         //Comboboxes laden
         cbBladgrootteTotWz.getItems().add(ControllerPlantToevoegen.fenotypess.get(0).getBladgrootte());
         cbBladvormWz.getItems().add(ControllerPlantToevoegen.fenotypess.get(0).getBladvorm());
         cbRatioWz.getItems().add(ControllerPlantToevoegen.fenotypess.get(0).getRatio_bloei_blad());
         cbSpruitfenologieWz.getItems().add(ControllerPlantToevoegen.fenotypess.get(0).getSpruitfenologie());
-
+        String waarde = ControllerPlantToevoegen.fenotypess.get(0).getLevensvorm();
         //Radiobuttons laden
         if (waarde == "1. Hydrofyt") {
-            Hydrofyt1.isSelected();
+            rbHydro1Wz.isSelected();
         }
         else if (waarde == "2. Hydrofyt") {
-            Hydrofyt2.isSelected();
+            rbHydro2Wz.isSelected();
         }
         else if (waarde == "3. Helofyt") {
-            Helofyt.isSelected();
+            rbHeloWz.isSelected();
         }
         else if (waarde == "4. Cryptophyt") {
-            Cryptophyt1.isSelected();
+            rbCrypto1Wz.isSelected();
         }
         else if (waarde == "5. Cryptophyt") {
-            Cryptophyt2.isSelected();
+            rbCrypto2Wz.isSelected();
         }
         else if (waarde == "6. Hemikryptofyt") {
-            Hemik.isSelected();
+            rbHemikryptoWz.isSelected();
         }
         else if (waarde == "7. Chamaefyt") {
-            Cham1.isSelected();
+            rbChamae1Wz.isSelected();
         }
         else if (waarde == "8. Chamaefyt") {
-            Cham2.isSelected();
+            rbChamae2Wz.isSelected();
         }
         else if (waarde == "9. Fanerophyt") {
-            Fan.isSelected();
+            rbFaneroWz.isSelected();
         }
         else {
             System.out.println("Geen waarde voor levensvorm meegegeven");
