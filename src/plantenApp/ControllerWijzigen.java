@@ -106,7 +106,6 @@ public class ControllerWijzigen {
         LadenFenotype();
         LadenExtra();
         dbConnection = Database.getInstance().getConnection();
-
         //infotabel object aanmaken
         InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
         infoTables = infotablesDAO.getInfoTables();
@@ -132,7 +131,6 @@ public class ControllerWijzigen {
                 )
         );
     }
-
     public void LadenExtra()    {
         slNectarwaardeWz.setValue( ControllerPlantToevoegen.extrass.get(0).getNectarwaarde());
         slPollenwaardeWz.setValue(ControllerPlantToevoegen.extrass.get(0).getPollenwaarde());
