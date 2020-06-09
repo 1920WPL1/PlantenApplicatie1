@@ -452,6 +452,7 @@ public class ControllerPlantToevoegen {
             //Toevoegen plant docent/admin
             if (srolGebruiker.equals("admin") || srolGebruiker.equals("docent"))
             {
+
                 iStatus = 2;
                 Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv);
                 plantDAO.createplant(plant, iStatus, iGebruikerID);
@@ -469,8 +470,6 @@ public class ControllerPlantToevoegen {
         {
             DubbelePlantWaarschuwing();
         }
-
-
     }
     private void DubbelePlantWaarschuwing() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
