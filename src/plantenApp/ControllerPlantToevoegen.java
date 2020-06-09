@@ -426,6 +426,7 @@ public class ControllerPlantToevoegen {
         Plant plantTest = new Plant(cboTypeTv.getValue(),txtFamilieTv.getText(),txtGeslachtTv.getText(),txtSoortTv.getText(),txtVariantTv.getText());
         int maxidplant = plantDAO.getmaxid();
          iGebruikerID = gebruikerDAO.getIdMetEmail(sEmailadres);
+        System.out.println(iGebruikerID);
         String srolGebruiker = gebruikerDAO.getRolMetEmail(sEmailadres);
         this.plantid = maxidplant;
         plantid = maxidplant+1;
@@ -453,15 +454,17 @@ public class ControllerPlantToevoegen {
             if (srolGebruiker.equals("admin") || srolGebruiker.equals("docent"))
             {
                 iStatus = 2;
-                Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv);
-                plantDAO.createplant(plant, iStatus, iGebruikerID);
+                Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv,iStatus,iGebruikerID);
+                System.out.println( iGebruikerID+"gebruiker id " + plant.getLaatste_update_door());
+                plantss.add(plant);
             }
-            //Toevoegen plant als leerling/gast
+            //Toevoegen plant als leerling/gast punt voor Wout
             else
             {
                 iStatus = 1;
-                Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv);
-                plantDAO.createplant(plant, iStatus, iGebruikerID);
+                Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv,iStatus,iGebruikerID);
+                System.out.println("gebruiker id " + plant.getGebruikersID());
+                plantss.add(plant);
             }
         }
         //Als plant bestaat waarschuwing geven
@@ -531,7 +534,7 @@ public class ControllerPlantToevoegen {
         maxidextra ++;
         System.out.println(maxidextra);
         System.out.println(valuePollenwaarde + " " + valueNectarwaarde);
-        Extra extra = new Extra(maxidextra, plantid, valueNectarwaarde, valuePollenwaarde, bijvriendelijkCheck(), eetbaarCheck(), kruidgebruikCheck(), geurendCheck(), vorstgevoeligCheck());
+        Extra extra = new Extra(maxidextra, plantid, valueNectarwaarde, valuePollenwaarde, bijvriendelijkCheck(), eetbaarCheck(), kruidgebruikCheck(), geurendCheck(), vorstgevoeligCheck(),"vlinder");
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
         extrass.add(extra);
         //ExtraDAO.createExtra(extra);
@@ -723,32 +726,6 @@ public class ControllerPlantToevoegen {
         }
     }
     // de arraylist zijn de waarden van de multies die bij de specifieke plant horen;
-    public void createdatabase(Plant plant , AbiotischeFactoren abiotischeFactoren , Fenotype fenotype , ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschaps , ArrayList<AbioMulti_Eigenschap> abiottisschemulti_eigenschaps,Commensalisme commensalisme, ArrayList<CommMulti_Eigenschap> commMulti_eigenschaps,ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps, Extra extra) throws SQLException {
-        PlantDAO plantDAO = new PlantDAO(dbConnection);
-        abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
-        FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
-        AbiotischeFactorenDAO abiotischeMultidao = new AbiotischeFactorenDAO(dbConnection);
-        CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
-        BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
-        ExtraDAO extraDAO = new ExtraDAO(dbConnection);
-        plantDAO.createplant(plant,0,iGebruikerID);
-        abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
-        fenotypeDAO.createfenotype(fenotype);
-        for (int j = 0; j < fenoMulti_eigenschaps.size(); j++) {
-            fenotypeDAO.createfenomulti(fenoMulti_eigenschaps.get(j), plant.getId());
-        }
-        for (int f = 0; f < abiottisschemulti_eigenschaps.size(); f++) {
-            abiotischeMultidao.CreateAbiotischeMulti(abiottisschemulti_eigenschaps.get(f), plantid);
-        }
-        commensalismeDAO.createCommensalisme(commensalisme);
-        for (int m = 0; m < commMulti_eigenschaps.size(); m++) {
-            commensalismeDAO.createCommensalismeMulti(commMulti_eigenschaps.get(m));
-        }
-        for (int a = 0; a < beheerdaad_eigenschaps.size(); a++) {
-            beheerDAO.createBeheer(beheerdaad_eigenschaps.get(a), plant.getId());
-        }
-        extraDAO.createExtra(extra);
-    }
     public void createNaam() throws SQLException {
         NaamDao naamDAO = new NaamDao(dbConnection);
 
