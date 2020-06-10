@@ -414,8 +414,9 @@ public class ControllerWijzigen {
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxid();
+        maxid++;
         System.out.println(plantid);
-        Fenotype fenotype = new Fenotype(fenotypess.get(0).getId(), plantid, comboboxCheckString(cbBladvormWz.getSelectionModel()), levensvormCheck(), habitusCheck(), bloeiwijzeCheck(), comboboxCheckInteger(cbBladgrootteTotWz.getSelectionModel()), comboboxCheckString(cbRatioWz.getSelectionModel()), comboboxCheckString(cbSpruitfenologieWz.getSelectionModel()));
+        Fenotype fenotype = new Fenotype(maxid, plantid, comboboxCheckString(cbBladvormWz.getSelectionModel()), levensvormCheck(), habitusCheck(), bloeiwijzeCheck(), comboboxCheckInteger(cbBladgrootteTotWz.getSelectionModel()), comboboxCheckString(cbRatioWz.getSelectionModel()), comboboxCheckString(cbSpruitfenologieWz.getSelectionModel()));
         fenotypess.clear();
         fenotypess.add(fenotype);
     }
@@ -542,12 +543,18 @@ public class ControllerWijzigen {
         });
     }
     public void createAbiotischefactoren() throws SQLException {
-        AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(ControllerPlantToevoegen.abiotischeFactorenn.get(0).getId(), plantid, cbBezonningWz.getValue().toString(), cbGrondsoortWz.getValue().toString(), cbVochtbehoefteWz.getValue().toString(), cbVoedingsbehoefteWz.getValue().toString(), cbReactieAntaWz.getValue().toString());
+        AbiotischeFactorenDAO abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
+        int id = abiotischeFactorenDAO.getmaxid();
+        id++;
+        AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(id, plantid, cbBezonningWz.getValue().toString(), cbGrondsoortWz.getValue().toString(), cbVochtbehoefteWz.getValue().toString(), cbVoedingsbehoefteWz.getValue().toString(), cbReactieAntaWz.getValue().toString());
         abiotischeFactorenn.clear();
         abiotischeFactorenn.add(abiotischeFactoren);
     }
     public void createCommensalisme() throws SQLException {
-        Commensalisme commensalisme = new Commensalisme(commensalismes.get(0).getId(), plantid, strategieCheck(), comboboxCheckString(cbOntwikkelingssnelheidWz.getSelectionModel()));
+        CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
+        int id = commensalismeDAO.getmaxid();
+        id++;
+        Commensalisme commensalisme = new Commensalisme(id, plantid, strategieCheck(), comboboxCheckString(cbOntwikkelingssnelheidWz.getSelectionModel()));
         commensalismes.clear();
         commensalismes.add(commensalisme);
     }
@@ -579,9 +586,12 @@ public class ControllerWijzigen {
     }
     public void createExtra() throws SQLException {
         //kan pas volledig gedaan worden wanneer er de kwestie van de eetbaar/kruidgebruik splitsing opgelost is
+        ExtraDAO extraDAO = new ExtraDAO(dbConnection);
+        int id = extraDAO.getmaxid();
+        id++;
         int valueNectarwaarde = Integer.parseInt(NectarwaardeValueTv.getText());
         int valuePollenwaarde = Integer.parseInt(PollenValueTv.getText());
-        Extra extra = new Extra(extrass.get(0).getId(), plantid, valueNectarwaarde, valuePollenwaarde, bijvriendelijkCheck(), eetbaarCheck(), kruidgebruikCheck(), geurendCheck(), vorstgevoeligCheck(),"vlinder");
+        Extra extra = new Extra(id, plantid, valueNectarwaarde, valuePollenwaarde, bijvriendelijkCheck(), eetbaarCheck(), kruidgebruikCheck(), geurendCheck(), vorstgevoeligCheck(),"vlinder");
         extrass.clear();
         extrass.add(extra);
     }
@@ -643,7 +653,6 @@ public class ControllerWijzigen {
     public void createCommensalismeMulti() throws SQLException {
         //aantal elementen in bovenstaande lijst bijhouden
         int aantalCommMulti = 0;
-
         commMulti_eigenschapss.clear();
         for (int i = 0; i < lvLevensduurWz.getItems().size(); i++) {
             CommMulti_Eigenschap commensalisme = new CommMulti_Eigenschap("levensduur", lvLevensduurWz.getItems().get(i).toString(),plantid);

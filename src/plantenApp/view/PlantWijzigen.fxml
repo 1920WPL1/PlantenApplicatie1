@@ -278,7 +278,6 @@
                                     <ListView fx:id="lvLevensduurWz" prefHeight="176.0" prefWidth="240.0" />
                                  </children>
                               </VBox>
-                              <Button fx:id="btnTest" layoutX="329.0" layoutY="251.0" mnemonicParsing="false" text="Button" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -1006,7 +1005,7 @@
             </VBox>
          </children>
       </HBox>
-      <Button fx:id="PLantToevoegenButtonTv" layoutX="1305.0" layoutY="42.0" mnemonicParsing="false" onMouseClicked="#Clicked_PlantToevoegen" text="Voeg plant toe">
+      <Button fx:id="PLantToevoegenButtonTv" layoutX="1305.0" layoutY="42.0" mnemonicParsing="false" onMouseClicked="#Clicked_PlantToevoegen" text="Plant Wijzigen ">
          <font>
             <Font size="24.0" />
          </font>
