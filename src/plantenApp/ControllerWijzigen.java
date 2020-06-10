@@ -976,35 +976,35 @@ public class ControllerWijzigen {
         }
     }
     public void LadenBloeiwijjze()  {
-        if(fenotypess.get(0).getHabitus() == "Aar")
+        if(fenotypess.get(0).getBloeiwijze() == "Aar")
         {
             rbAarWz.setSelected(true);
         }
-        if(fenotypess.get(0).getHabitus() == "Brede pluim")
+        if(fenotypess.get(0).getBloeiwijze() == "Brede pluim")
         {
             rbBredePluimWz.setSelected(true);
         }
-        if(fenotypess.get(0).getHabitus() == "Etage")
+        if(fenotypess.get(0).getBloeiwijze() == "Etage")
         {
             rbEtageWz.setSelected(true);
         }
-        if(fenotypess.get(0).getHabitus() == "Bol of knop")
+        if(fenotypess.get(0).getBloeiwijze() == "Bol of knop")
         {
             rbBolOfKnopWz.setSelected(true);
         }
-        if(fenotypess.get(0).getHabitus() == "Margrietachtig")
+        if(fenotypess.get(0).getBloeiwijze() == "Margrietachtig")
         {
             rbMargrietachtigWz.setSelected(true);
         }
-        if(fenotypess.get(0).getHabitus() == "Schotel")
+        if(fenotypess.get(0).getBloeiwijze() == "Schotel")
         {
             rbSchotelWz.setSelected(true);
         }
-        if(fenotypess.get(0).getHabitus() == "Scherm")
+        if(fenotypess.get(0).getBloeiwijze() == "Scherm")
         {
             rbSchermWz.setSelected(true);
         }
-        if(fenotypess.get(0).getHabitus() == "Smalle pluim")
+        if(fenotypess.get(0).getBloeiwijze() == "Smalle pluim")
         {
             rbSmallePluimWz.setSelected(true);
         }

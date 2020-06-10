@@ -396,6 +396,7 @@ public class ControllerPlantToevoegen {
         Fenotype fenotype = new Fenotype(maxid, plantid, comboboxCheckString(cbBladvormTv.getSelectionModel()), levensvormCheck(), habitusCheck(), bloeiwijzeCheck(), comboboxCheckInteger(cbBladgrootteTotTv.getSelectionModel()), comboboxCheckString(cbRatioTv.getSelectionModel()), comboboxCheckString(cbSpruitfenologieTv.getSelectionModel()));
         fenotypess.add(fenotype);
     }
+    //een functie om te controleren of een combobox is ingevuld of niet. als deze leeg is dan wordt de waarde "" ingevuld bij de arrays
     public String comboboxCheckString(SingleSelectionModel <String> combobox) {
         if(combobox.isEmpty()) {
             return "";
@@ -404,6 +405,7 @@ public class ControllerPlantToevoegen {
             return combobox.getSelectedItem().toString();
         }
     }
+    //hetzelfde als de functie erboven maar dan met 0 als return waarde
     public Integer comboboxCheckInteger(SingleSelectionModel<String> combobox) {
         if (combobox.isEmpty()) {
             return 0;
@@ -411,6 +413,7 @@ public class ControllerPlantToevoegen {
             return Integer.parseInt(combobox.getSelectedItem());
         }
     }
+    //kijkt welke radiobutton er is aangeduid en return da waarde daarvan
     public String habitusCheck(){
         if(rbTuftedTv.isSelected()){ return "tufted";}
         if(rbUprightarchingTv.isSelected()){ return "Upright arching";}
@@ -429,6 +432,7 @@ public class ControllerPlantToevoegen {
         if(rbParasolvormigTv.isSelected()){ return "Parasolvormig";}
         return "";
     }
+    //hetzelfde als hierboven kijkjt welke levensvorm er gekozen is en returnt de waarde
     public String levensvormCheck(){
         if(rbHydro1Tv.isSelected()){return "1. Hydrofyt";}
         if(rbHydro2Tv.isSelected()){return "2. Hydrofyt";}
@@ -441,6 +445,7 @@ public class ControllerPlantToevoegen {
         if(rbFaneroTv.isSelected()){return "9. Fanerophyt";}
         return "";
     }
+    //hetzelfde als hierboven maar dan voor bloeiwijze
     public String bloeiwijzeCheck(){
         if(rbAarTv.isSelected()){return "Aar";}
         if(rbBredePluimTv.isSelected()){return "Brede pluim";}
@@ -452,6 +457,7 @@ public class ControllerPlantToevoegen {
         if(rbSmallePluimTv.isSelected()){return "Smalle pluim";}
         return "";
     }
+    //creat een plant en vangt alles op en geeft een specifieke boodschap per niet ingevuld veld die wel verplicht is
     public void createplant() throws SQLException, Exception {
         //Aanmaken variabelen
         //volledig toevoegen in databank vanuit scherm, waarschijnlijk nog iets toevoegen voor te kijken of de naam al in de databank zit
@@ -644,6 +650,7 @@ public class ControllerPlantToevoegen {
 
 
     }
+    //
     public void createAbiotischefactoren() throws SQLException {
         //alles van scherm direct naar databank aangezien hier de input enkel kan gekozen worden uit gegeven lijsten
         //deze functie is afgewerkt
