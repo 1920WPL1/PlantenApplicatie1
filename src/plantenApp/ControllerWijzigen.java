@@ -1,6 +1,10 @@
 package plantenApp;
 
 import javafx.beans.binding.Bindings;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -11,13 +15,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.input.MouseEvent;
-import plantenApp.java.dao.Database;
-import plantenApp.java.dao.InfoTablesDAO;
-import plantenApp.java.model.InfoTables;
+import javafx.stage.Stage;
+import plantenApp.java.dao.*;
+import plantenApp.java.model.*;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import static plantenApp.ControllerPlantToevoegen.*;
 
 public class ControllerWijzigen {
     public Slider slNectarwaardeWz;
@@ -105,6 +112,21 @@ public class ControllerWijzigen {
     public RadioButton rbSchotelWz;
     public RadioButton rbSchermWz;
     public RadioButton rbSmallePluimWz;
+    public RadioButton rbStrategieUnknownTv;
+    public ToggleGroup StrategieGroepTv;
+    public RadioButton rbStrategieTopWz;
+    public RadioButton rbStrategieLMWz;
+    public RadioButton rbStrategieMMWz;
+    public RadioButton rbStrategieRMWz;
+    public RadioButton rbStrategieLOWz;
+    public RadioButton rbStrategieMOWz;
+    public RadioButton rbStrategieROWz;
+    public CheckBox chkSociabiliteit1Wz;
+    public CheckBox chkSociabiliteit2Wz;
+    public CheckBox chkSociabiliteit3Wz;
+    public CheckBox chkSociabiliteit4Wz;
+    public CheckBox chkSociabiliteit5Wz;
+    public ListView lvHabitatWz;
     private InfoTables infoTables;
     private Connection dbConnection;
     public ComboBox cboTypeWz;
@@ -215,20 +237,6 @@ public class ControllerWijzigen {
             buttonnull.setSelected(true);
         }
     }
-    public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
-        if (!lvLevensduurTv.getItems().contains(cbLevensduurTv.getValue())) {
-            lvLevensduurTv.getItems().add((String) cbLevensduurTv.getValue());
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setContentText("Je kan niet 2 keer hetzelfde item toevoegen");
-            alert.showAndWait().ifPresent(rs -> {
-                if (rs == ButtonType.OK) {
-                    System.out.println("Pressed OK.");
-                }
-            });
-        }
-    }
     public void FillComboboxes(InfoTables infotables) {
         //type
         System.out.println(infotables.getPlantTypes().toString());
@@ -307,31 +315,414 @@ public class ControllerWijzigen {
         //Levensduur
         cbLevensduurWz.getItems().addAll(infotables.getConcurentiekrachten());
     }
-    public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) {
+        public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws IOException, SQLException {
+        createplant();//ik //done
+        //createNaam();
+        createAbiotischefactoren();//afgewerkt //done
+        createAbiotischeMulti();//Mathias //done
+        createfenotype();//afgewerkt // done*/
+        createfenotypemulti();//Wout // done
+        createCommensalisme();//Kasper //done
+        createCommensalismeMulti();//Mathias //done
+        //createBeheer();//Wout dit moet nog verplaatst worden naar een button op beheer scherm //done
+        createExtra();//Kasper
+        //createFoto(); nog geen plaats of scherm voor een foto in toe te voegen
+        openNieuwScherm(mouseEvent);
     }
-    public void Clicked_PlantToevoegen(MouseEvent mouseEvent) {
+    public void openNieuwScherm(MouseEvent mouseEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("view/GedetailleerdeFiche.fxml"));
+        Scene scen = new Scene(root);
+        Stage window =(Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        window.setScene(scen);
+        window.show();
+        window.setMaximized(true);
+    }
+    public void createfenotype() throws SQLException {
+        FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
+        int maxid = fenotypeDAO.getmaxid();
+        System.out.println(plantid);
+        Fenotype fenotype = new Fenotype(fenotypess.get(0).getId(), plantid, comboboxCheckString(cbBladvormWz.getSelectionModel()), levensvormCheck(), habitusCheck(), bloeiwijzeCheck(), comboboxCheckInteger(cbBladgrootteTotWz.getSelectionModel()), comboboxCheckString(cbRatioWz.getSelectionModel()), comboboxCheckString(cbSpruitfenologieWz.getSelectionModel()));
+        fenotypess.clear();
+        fenotypess.add(fenotype);
+    }
+    public String comboboxCheckString(SingleSelectionModel <String> combobox) {
+        if(combobox.isEmpty()) {
+            return "";
+        }
+        else {
+            return combobox.getSelectedItem().toString();
+        }
+    }
+    public Integer comboboxCheckInteger(SingleSelectionModel<String> combobox) {
+        if(combobox.isEmpty()) {
+            return 0;
+        }
+        else {
+            return Integer.parseInt(combobox.getSelectedItem());
+        }
+    }
+    public String habitusCheck(){
+        if(rbTuftedWz.isSelected()){ return "tufted";}
+        if(rbUprightarchingWz.isSelected()){ return "Upright arching";}
+        if(rbArchingWz.isSelected()){ return "Arching";}
+        if(rbUprightDivergentWz.isSelected()){ return "Upright Divergent";}
+        if(rbUprightErectWz.isSelected()){ return "Upright erect";}
+        if(rbMountedWz.isSelected()){ return "Mounted";}
+        if(rbKOfHGOfMWz.isSelected()){ return "Kruipend of horizontaal groeiend of mattenvormend";}
+        if(rbRondOfWaaiervormigWz.isSelected()){ return "Rond- of waaiervormig";}
+        if(rbKussenvormendWz.isSelected()){ return "Kussenvormend";}
+        if(rbZuilvormigWz.isSelected()){ return "Zuilvormig";}
+        if(rbUitbuigendWz.isSelected()){ return "Uitbuigend";}
+        if(rbWortelrozetplantWz.isSelected()){ return "(Wortel)rozetplant";}
+        if(rbSucculentenWz.isSelected()){ return "Succulenten";}
+        if(rbPollenvormersWz.isSelected()){ return "Pollenvormers";}
+        if(rbParasolvormigWz.isSelected()){ return "Parasolvormig";}
+        return "";
+    }
+    public String levensvormCheck(){
+        if(rbHydro1Wz.isSelected()){return "1. Hydrofyt";}
+        if(rbHydro2Wz.isSelected()){return "2. Hydrofyt";}
+        if(rbHeloWz.isSelected()){return "3. Helofyt";}
+        if(rbCrypto1Wz.isSelected()){return "4. Cryptophyt";}
+        if(rbCrypto2Wz.isSelected()){return "5. Cryptophyt";}
+        if(rbHemikryptoWz.isSelected()){return "6. Hemikryptofyt";}
+        if(rbChamae1Wz.isSelected()){return "7. Chamaefyt";}
+        if(rbChamae2Wz.isSelected()){return "8. Chamaefyt";}
+        if(rbFaneroWz.isSelected()){return "9. Fanerophyt";}
+        return "";
+    }
+    public String bloeiwijzeCheck(){
+        if(rbAarWz.isSelected()){return "Aar";}
+        if(rbBredePluimWz.isSelected()){return "Brede pluim";}
+        if(rbEtageWz.isSelected()){return "Etage";}
+        if(rbBolOfKnopWz.isSelected()){return "Bol of knop";}
+        if(rbMargrietachtigWz.isSelected()){return "Margrietachtig";}
+        if(rbSchotelWz.isSelected()){return "Schotel";}
+        if(rbSchermWz.isSelected()){return "Scherm";}
+        if(rbSmallePluimWz.isSelected()){return "Smalle pluim";}
+        return "";
+    }
+    public void createplant() throws SQLException {
+        //Aanmaken variabelen
+        //volledig toevoegen in databank vanuit scherm, waarschijnlijk nog iets toevoegen voor te kijken of de naam al in de databank zit
+        GebruikerDAO gebruikerDAO = new GebruikerDAO(dbConnection);
+        PlantDAO plantDAO = new PlantDAO(dbConnection);
+        NaamDao naamDAO = new NaamDao(dbConnection);
+        Plant plantTest = new Plant(cboTypeWz.getValue().toString(),txtFamilieWz.getText(),txtGeslachtWz.getText(),txtSoortWz.getText(),txtVariantWz.getText());
+        int maxidplant = plantDAO.getmaxid();
+        String sEmailadres = "kurt.engelbrecht@vives.be";
+        String srolGebruiker = gebruikerDAO.getRolMetEmail(sEmailadres);
+        String sFamilie = txtFamilieWz.getText();
+        String sGeslacht = txtGeslachtWz.getText();
+        String sSoort = txtSoortWz.getText();
+        String sVariant = txtVariantWz.getText();
+        String sFgsv = sFamilie + " " + sGeslacht+ " " + sSoort+" " + sVariant;
+        String sPlanttype = cboTypeWz.getValue().toString();
+        int iStatus = 0;
+        int x = 0;
+        int y = 0;
+        if(txtDichtheidXWz.getText().matches("[0-9]+")){
+            x = Integer.parseInt(txtDichtheidXWz.getText());
+        }
+        if(txtDichtheidYWz.getText().matches("[0-9]+")){
+            y = Integer.parseInt(txtDichtheidYWz.getText());
+        }
+
+        //Controle of plantnaam al bestaat
+        int iDubbeleNaam = naamDAO.ControleDubbeleNaam(plantTest);
+        //als plant nog niet bestaat, plant toevoegen
+        if (iDubbeleNaam == 0) {
+            //Toevoegen plant docent/admin
+            if (srolGebruiker.equals("admin") || srolGebruiker.equals("docent"))
+            {
+                iStatus = 2;
+                Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv,iStatus, plantss.get(0).getGebruikersID());
+                plantss.clear();
+                plantss.add(plant);
+            }
+            //Toevoegen plant als leerling/gast punt voor Wout
+            else
+            {
+                iStatus = 1;
+                Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv,iStatus,plantss.get(0).getGebruikersID());
+                plantss.clear();
+                plantss.add(plant);
+            }
+        }
+        //Als plant bestaat waarschuwing geven
+        else
+        {
+            DubbelePlantWaarschuwing();
+        }
+
+
+    }
+    private void DubbelePlantWaarschuwing() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Error");
+        alert.setContentText("Deze plant bestaat al.");
+        alert.showAndWait().ifPresent(rs -> {
+            if (rs == ButtonType.OK) {
+                System.out.println("Pressed OK.");
+            }
+        });
+    }
+    public void createAbiotischefactoren() throws SQLException {
+        AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(abiotischeFactorenn.get(0).getId(), plantid, cbBezonningWz.getValue().toString(), cbGrondsoortWz.getValue().toString(), cbVochtbehoefteWz.getValue().toString(), cbVoedingsbehoefteWz.getValue().toString(), cbReactieAntaWz.getValue().toString());
+        abiotischeFactorenn.add(abiotischeFactoren);
+    }
+    public void createCommensalisme() throws SQLException {
+        Commensalisme commensalisme = new Commensalisme(commensalismes.get(1).getId(), plantid, strategieCheck(), comboboxCheckString(cbOntwikkelingssnelheidWz.getSelectionModel()));
+        commensalismes.clear();
+        commensalismes.add(commensalisme);
+    }
+    public String strategieCheck() {
+        if(rbStrategieTopWz.isSelected()) {
+            return "C";
+        }
+        else if (rbStrategieMMWz.isSelected()) {
+            return "C-S-R";
+        }
+        else if (rbStrategieLMWz.isSelected()) {
+            return "C-R";
+        }
+        else if (rbStrategieRMWz.isSelected()) {
+            return "C-S";
+        }
+        else if (rbStrategieLOWz.isSelected()) {
+            return "R";
+        }
+        else if (rbStrategieMOWz.isSelected()) {
+            return "S-R";
+        }
+        else if (rbStrategieROWz.isSelected()) {
+            return "S";
+        }
+        else {
+            return "";
+        }
+    }
+    public void createExtra() throws SQLException {
+        //kan pas volledig gedaan worden wanneer er de kwestie van de eetbaar/kruidgebruik splitsing opgelost is
+        int valueNectarwaarde = Integer.parseInt(NectarwaardeValueTv.getText());
+        int valuePollenwaarde = Integer.parseInt(PollenValueTv.getText());
+        Extra extra = new Extra(extrass.get(0).getId(), plantid, valueNectarwaarde, valuePollenwaarde, bijvriendelijkCheck(), eetbaarCheck(), kruidgebruikCheck(), geurendCheck(), vorstgevoeligCheck(),"vlinder");
+        extrass.clear();
+        extrass.add(extra);
+    }
+    public String vorstgevoeligCheck() {
+        if(rbVorstgevoeligJaWz.isSelected()) {
+            return "ja";
+        }
+        else if (rbVorstgevoeligNeeWz.isSelected()) {
+            return "nee";
+        }
+        else {
+            return "";
+        }
+    }
+    public String eetbaarCheck() {
+        if(rbEetbaarJaWz.isSelected()) {
+            return "ja";
+        }
+        else if (rbEetbaarNeeWz.isSelected()) {
+            return "nee";
+        }
+        else {
+            return "";
+        }
+    }
+    public String geurendCheck() {
+        if(rbGeurendJaWz.isSelected()) {
+            return "ja";
+        }
+        else if (rbGeurendNeeWz.isSelected()) {
+            return "nee";
+        }
+        else {
+            return "";
+        }
+    }
+    public String kruidgebruikCheck() {
+        if(rbKruidgebruikJaWz.isSelected()) {
+            return "ja";
+        }
+        else if (rbKruidgebruikNeeWz.isSelected()) {
+            return "nee";
+        }
+        else {
+            return "";
+        }
+    }
+    public String bijvriendelijkCheck() {
+        if(rbBijvriendelijkJaWz.isSelected()) {
+            return "ja";
+        }
+        else if (rbBijvriendelijkNeeWz.isSelected()) {
+            return "nee";
+        }
+        else {
+            return "";
+        }
+    }
+    public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
+        if (!lvLevensduurTv.getItems().contains(cbLevensduurTv.getValue())) {
+            lvLevensduurTv.getItems().add((String) cbLevensduurTv.getValue());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText("Je kan niet 2 keer hetzelfde item toevoegen");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+        }
+    }
+    public void createCommensalismeMulti() throws SQLException {
+        //aantal elementen in bovenstaande lijst bijhouden
+        int aantalCommMulti = 0;
+
+        commMulti_eigenschapss.clear();
+        for (int i = 0; i < lvLevensduurTv.getItems().size(); i++) {
+            CommMulti_Eigenschap commensalisme = new CommMulti_Eigenschap("levensduur", lvLevensduurTv.getItems().get(i).toString(),plantid);
+            commMulti_eigenschapss.add(commensalisme);
+            aantalCommMulti++;
+        }
+
+
+        //Toevoegen van sociabiliteit
+        if (chkSociabiliteit1Wz.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "1",plantid);
+            System.out.println(sociabiliteit.getNaam());
+            commMulti_eigenschapss.add(sociabiliteit);
+            aantalCommMulti++;
+        }
+        if (chkSociabiliteit2Wz.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "2",plantid);
+            System.out.println(sociabiliteit.getNaam());
+            commMulti_eigenschapss.add(sociabiliteit);
+            aantalCommMulti++;
+        }
+        if (chkSociabiliteit3Wz.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "3",plantid);
+            System.out.println(sociabiliteit.getNaam());
+            commMulti_eigenschapss.add(sociabiliteit);
+            aantalCommMulti++;
+        }
+        if (chkSociabiliteit4Wz.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "4",plantid);
+            System.out.println(sociabiliteit.getNaam());
+            commMulti_eigenschapss.add(sociabiliteit);
+            aantalCommMulti++;
+        }
+        if (chkSociabiliteit5Wz.isSelected()) {
+            CommMulti_Eigenschap sociabiliteit = new CommMulti_Eigenschap("sociabiliteit", "5",plantid);
+            System.out.println(sociabiliteit.getNaam());
+            commMulti_eigenschapss.add(sociabiliteit);
+            aantalCommMulti++;
+        }
+        AantalPerElCommMulti.add(aantalCommMulti);
+    }
+    public void createFoto() throws SQLException{
+        FotoDAO fotoDAO = new FotoDAO(dbConnection);
+        int maxIdFoto = fotoDAO.getmaxid();
+        Foto foto = new Foto(maxIdFoto + 1, plantid, "a", "b", null);
+        fotoDAO.createFoto(foto);
+    }
+    public void createfenotypemulti() throws SQLException {
+        FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
+        int maxid = fenotypeDAO.getmaxidmulti();
+        maxid++;
+        System.out.println(maxid);
+        String naam ="bladhoogte";
+        System.out.println();
+        ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschaps = new ArrayList<>();
+        FenoMulti_Eigenschap bladhoogte = new FenoMulti_Eigenschap(fenoMulti_eigenschapss.get(0).getId(),"Bladhoogte", spinMaxBladhJanWz.getValue().toString(),spinMaxBladhFebWz.getValue().toString(),spinMaxBladhMaaWz.getValue().toString(),spinMaxBladhAprWz.getValue().toString(),spinMaxBladhMeiWz.getValue().toString(),spinMaxBladhJunWz.getValue().toString(),spinMaxBladhJulWz.getValue().toString(),spinMaxBladhAugWz.getValue().toString(),spinMaxBladhSeptWz.getValue().toString(),spinMaxBladhOktWz.getValue().toString(),spinMaxBladhNovWz.getValue().toString(),spinMaxBladhDecWz.getValue().toString());
+        maxid++;
+        FenoMulti_Eigenschap bladkleur = new FenoMulti_Eigenschap(fenoMulti_eigenschapss.get(1).getId(),"Bladkleur",comboboxCheckString(cbBladkleurJanWz.getSelectionModel()),comboboxCheckString(cbBladkleurFebWz.getSelectionModel()),comboboxCheckString(cbBladkleurMaaWz.getSelectionModel()),comboboxCheckString(cbBladkleurAprWz.getSelectionModel()), comboboxCheckString(cbBladkleurMeiWz.getSelectionModel()), comboboxCheckString(cbBladkleurJunWz.getSelectionModel()),comboboxCheckString(cbBladkleurJulWz.getSelectionModel()),comboboxCheckString(cbBladkleurAugWz.getSelectionModel()),comboboxCheckString(cbBladkleurSeptWz.getSelectionModel()),comboboxCheckString(cbBladkleurOktWz.getSelectionModel()),comboboxCheckString(cbBladkleurNovTv.getSelectionModel()),comboboxCheckString(cbBladkleurDecTv.getSelectionModel()));
+        maxid++;
+        FenoMulti_Eigenschap minbloeihoogte = new FenoMulti_Eigenschap(fenoMulti_eigenschapss.get(2).getId(),"Min Bloeihoogte",spinMinBloeihJanWz.getValue().toString() , spinMinBloeihFebWz.getValue().toString(),spinMinBloeihMaaWz.getValue().toString(),spinMinBloeihAprWz.getValue().toString(),spinMinBloeihMeiWz.getValue().toString(),spinMinBloeihJunWz.getValue().toString(),spinMinBloeihJulWz.getValue().toString(),spinMinBloeihAugWz.getValue().toString(),spinMaxBloeihSeptWz.getValue().toString(),spinMinBloeihOktWz.getValue().toString(),spinMinBloeihNovWz.getValue().toString(),spinMinBloeihDecWz.getValue().toString());
+        maxid++;
+        FenoMulti_Eigenschap maxbloeihoogte = new FenoMulti_Eigenschap(fenoMulti_eigenschapss.get(3).getId(),"Max Bloeihoogte",spinMaxBloeihJanWz.getValue().toString(),spinMaxBloeihFebWz.getValue().toString(),spinMaxBladhMaaWz.getValue().toString(),spinMaxBloeihAprWz.getValue().toString(),spinMaxBloeihMeiWz.getValue().toString(),spinMaxBloeihJunWz.getValue().toString(),spinMaxBloeihJulWz.getValue().toString(),spinMaxBloeihAugWz.getValue().toString(),spinMaxBloeihSeptWz.getValue().toString(),spinMaxBloeihOktWz.getValue().toString(),spinMaxBloeihNovWz.getValue().toString(),spinMaxBloeihDecWz.getValue().toString());
+        maxid++;
+        FenoMulti_Eigenschap bloeikleur = new FenoMulti_Eigenschap(fenoMulti_eigenschapss.get(4).getId(),"Bloeikleur" ,comboboxCheckString(cbBloeikleurJanWz.getSelectionModel()),comboboxCheckString(cbBloeikleurFebWz.getSelectionModel()),comboboxCheckString(cbBloeikleurMaaWz.getSelectionModel()),comboboxCheckString(cbBloeikleurAprWz.getSelectionModel()),comboboxCheckString(cbBloeikleurMeiWz.getSelectionModel()),comboboxCheckString(cbBloeikleurJunWz.getSelectionModel()),comboboxCheckString(cbBloeikleurJulWz.getSelectionModel()),comboboxCheckString(cbBloeikleurAugWz.getSelectionModel()),comboboxCheckString(cbBloeikleurSeptWz.getSelectionModel()),comboboxCheckString(cbBloeikleurOktWz.getSelectionModel()),comboboxCheckString(cbBloeikleurNovTv.getSelectionModel()),comboboxCheckString(cbBloeikleurDecTv.getSelectionModel()));
+        fenoMulti_eigenschaps.add(bladhoogte);
+        fenoMulti_eigenschaps.add(bladkleur);
+        fenoMulti_eigenschaps.add(minbloeihoogte);
+        fenoMulti_eigenschaps.add(maxbloeihoogte);
+        fenoMulti_eigenschaps.add(bloeikleur);
+        fenoMulti_eigenschapss.clear();
+        for (int i =0 ; i < 5;i++)
+        {
+            FenoMulti_Eigenschap fenoMulti_eigenschap = new FenoMulti_Eigenschap(fenoMulti_eigenschaps.get(i).getId(),fenoMulti_eigenschaps.get(i).getNaam(),fenoMulti_eigenschaps.get(i).getJan(), fenoMulti_eigenschaps.get(i).getFeb(),fenoMulti_eigenschaps.get(i).getMaa(),fenoMulti_eigenschaps.get(i).getApr(),fenoMulti_eigenschaps.get(i).getMei(),fenoMulti_eigenschaps.get(i).getJun(),fenoMulti_eigenschaps.get(i).getJul(),fenoMulti_eigenschaps.get(i).getAug(),fenoMulti_eigenschaps.get(i).getSep(),fenoMulti_eigenschaps.get(i).getOkt(),fenoMulti_eigenschaps.get(i).getNov(),fenoMulti_eigenschaps.get(i).getDec());
+            fenoMulti_eigenschapss.add(fenoMulti_eigenschap);
+        }
+    }
+    private void createAbiotischeMulti() throws SQLException {
+        //aantal el toegevoegd in abmulti lijst bijhouden
+        int aantalAbMultiEl = 0;
+        AbiotischeFactorenDAO abiotischeMultidao = new AbiotischeFactorenDAO(dbConnection);
+        System.out.println(" " + plantid);
+        abiotischmulti.clear();
+        for (int i = 0; i < lvHabitatWz.getItems().size(); i++) {
+            AbioMulti_Eigenschap abiotisch = new AbioMulti_Eigenschap("Habitat", (String) lvHabitatWz.getItems().get(i));
+            abiotischmulti.add(abiotisch);
+            aantalAbMultiEl++;
+        }
+        AantalPerElAbMulti.add(aantalAbMultiEl);
+    }
+    public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) {
+        System.out.println(cbHabitatWz.getValue());
+        if (!lvHabitatWz.getItems().contains(cbHabitatWz.getValue())) {
+            lvHabitatWz.getItems().add((String) cbHabitatWz.getValue());
+            System.out.println(cbHabitatWz.getValue());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText("Je kan niet 2 keer hetzelfde item toevoegen");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+        }
+    }
+    public void createNaam() throws SQLException {
+        NaamDao naamDAO = new NaamDao(dbConnection);
+
+        Plant plant = new Plant(cboTypeWz.getValue().toString(),txtFamilieWz.getText(),txtGeslachtWz.getText(),txtSoortWz.getText(),txtVariantWz.getText());
+
+
+        //Controle of plantnaam al bestaat
+        int iDubbeleNaam = naamDAO.ControleDubbeleNaam(plant);
+        if (iDubbeleNaam == 0)
+        { naamDAO.createNaam(plant);}
+        else{
+            DubbelePlantWaarschuwing();
+        }
     }
 
     public void LadenPlant() {
         //Omzetten integer naar string
-        int dichtheidX = ControllerPlantToevoegen.plantss.get(0).getMinPlantdichtheid();
-        int dichtheidY = ControllerPlantToevoegen.plantss.get(0).getMaxPlantdichtheid();
+        int dichtheidX = plantss.get(0).getMinPlantdichtheid();
+        int dichtheidY = plantss.get(0).getMaxPlantdichtheid();
         //Values instellen
-        cboTypeWz.getSelectionModel().select(ControllerPlantToevoegen.plantss.get(0).getPlantType());;
-        txtFamilieWz.setText(ControllerPlantToevoegen.plantss.get(0).getFamilie());
-        txtGeslachtWz.setText(ControllerPlantToevoegen.plantss.get(0).getGeslacht());
-        txtSoortWz.setText(ControllerPlantToevoegen.plantss.get(0).getSoort());
-        txtVariantWz.setText(ControllerPlantToevoegen.plantss.get(0).getVariatie());
+        cboTypeWz.getSelectionModel().select(plantss.get(0).getPlantType());;
+        txtFamilieWz.setText(plantss.get(0).getFamilie());
+        txtGeslachtWz.setText(plantss.get(0).getGeslacht());
+        txtSoortWz.setText(plantss.get(0).getSoort());
+        txtVariantWz.setText(plantss.get(0).getVariatie());
         txtDichtheidXWz.setText(String.valueOf(dichtheidX));
         txtDichtheidYWz.setText(String.valueOf(dichtheidY));
     }
     public void LadenFenotype() {
         //Comboboxes laden
-        cbBladgrootteTotWz.getSelectionModel().select(ControllerPlantToevoegen.fenotypess.get(0).getBladgrootte());
-        cbBladvormWz.getSelectionModel().select(ControllerPlantToevoegen.fenotypess.get(0).getBladvorm());
-        cbRatioWz.getSelectionModel().select(ControllerPlantToevoegen.fenotypess.get(0).getRatio_bloei_blad());
-        cbSpruitfenologieWz.getSelectionModel().select(ControllerPlantToevoegen.fenotypess.get(0).getSpruitfenologie());
-        String waarde = ControllerPlantToevoegen.fenotypess.get(0).getLevensvorm();
+        cbBladgrootteTotWz.getSelectionModel().select(fenotypess.get(0).getBladgrootte());
+        cbBladvormWz.getSelectionModel().select(fenotypess.get(0).getBladvorm());
+        cbRatioWz.getSelectionModel().select(fenotypess.get(0).getRatio_bloei_blad());
+        cbSpruitfenologieWz.getSelectionModel().select(fenotypess.get(0).getSpruitfenologie());
+        String waarde = fenotypess.get(0).getLevensvorm();
         //Radiobuttons laden
         if (waarde == "1. Hydrofyt") {
             rbHydro1Wz.setSelected(true);
@@ -469,97 +860,97 @@ public class ControllerWijzigen {
         }
     }
     public void Ladenhabitus() {
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "tufted")
+        if(fenotypess.get(0).getHabitus() == "tufted")
         {
             rbTuftedWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Upright arching")
+        if(fenotypess.get(0).getHabitus() == "Upright arching")
         {
             rbUprightarchingWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Arching")
+        if(fenotypess.get(0).getHabitus() == "Arching")
         {
             rbArchingWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Upright Divergent")
+        if(fenotypess.get(0).getHabitus() == "Upright Divergent")
         {
             rbUprightDivergentWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Upright erect")
+        if(fenotypess.get(0).getHabitus() == "Upright erect")
         {
             rbUprightErectWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Mounted")
+        if(fenotypess.get(0).getHabitus() == "Mounted")
         {
             rbMountedWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Kruipend of horizontaal groeiend of mattenvormend")
+        if(fenotypess.get(0).getHabitus() == "Kruipend of horizontaal groeiend of mattenvormend")
         {
             rbKOfHGOfMWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Rond- of waaiervormig")
+        if(fenotypess.get(0).getHabitus() == "Rond- of waaiervormig")
         {
             rbRondOfWaaiervormigWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Kussenvormend")
+        if(fenotypess.get(0).getHabitus() == "Kussenvormend")
         {
             rbKussenvormendWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Zuilvormig")
+        if(fenotypess.get(0).getHabitus() == "Zuilvormig")
         {
             rbZuilvormigWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Uitbuigend")
+        if(fenotypess.get(0).getHabitus() == "Uitbuigend")
         {
             rbUitbuigendWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "(Wortel)rozetplant")
+        if(fenotypess.get(0).getHabitus() == "(Wortel)rozetplant")
         {
             rbWortelrozetplantWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Succulenten")
+        if(fenotypess.get(0).getHabitus() == "Succulenten")
         {
             rbSucculentenWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Pollenvormers")
+        if(fenotypess.get(0).getHabitus() == "Pollenvormers")
         {
             rbPollenvormersWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Parasolvormig")
+        if(fenotypess.get(0).getHabitus() == "Parasolvormig")
         {
             rbParasolvormigWz.setSelected(true);
         }
     }
     public void LadenBloeiwijjze()  {
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Aar")
+        if(fenotypess.get(0).getHabitus() == "Aar")
         {
             rbAarWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Brede pluim")
+        if(fenotypess.get(0).getHabitus() == "Brede pluim")
         {
             rbBredePluimWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Etage")
+        if(fenotypess.get(0).getHabitus() == "Etage")
         {
             rbEtageWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Bol of knop")
+        if(fenotypess.get(0).getHabitus() == "Bol of knop")
         {
             rbBolOfKnopWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Margrietachtig")
+        if(fenotypess.get(0).getHabitus() == "Margrietachtig")
         {
             rbMargrietachtigWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Schotel")
+        if(fenotypess.get(0).getHabitus() == "Schotel")
         {
             rbSchotelWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Scherm")
+        if(fenotypess.get(0).getHabitus() == "Scherm")
         {
             rbSchermWz.setSelected(true);
         }
-        if(ControllerPlantToevoegen.fenotypess.get(0).getHabitus() == "Smalle pluim")
+        if(fenotypess.get(0).getHabitus() == "Smalle pluim")
         {
             rbSmallePluimWz.setSelected(true);
         }

@@ -221,6 +221,7 @@ public class ControllerPlantToevoegen {
      * mvg
      * Arne xx    <3 *
      * */
+
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
 
@@ -341,7 +342,7 @@ public class ControllerPlantToevoegen {
     }
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException, IOException {
         createplant();//ik //done
-        createNaam();
+        //createNaam();
         createAbiotischefactoren();//afgewerkt //done
         createAbiotischeMulti();//Mathias //done
         createfenotype();//afgewerkt // done*/
