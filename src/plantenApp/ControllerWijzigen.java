@@ -1,12 +1,11 @@
 package plantenApp;
 
 import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import plantenApp.java.dao.Database;
 import plantenApp.java.dao.InfoTablesDAO;
+import plantenApp.java.model.Commensalisme;
 import plantenApp.java.model.InfoTables;
 
 import java.sql.Connection;
@@ -75,8 +74,85 @@ public class ControllerWijzigen {
     public ComboBox cbBloeikleurOktWz;
     public ComboBox cbBloeikleurNovWz;
     public ComboBox cbBloeikleurDecWz;
+    public ComboBox cbOntwikkelingssnelheidWz;
+    public CheckBox chkSociabiliteit1Wz;
+    public CheckBox chkSociabiliteit2Wz;
+    public CheckBox chkSociabiliteit3Wz;
+    public CheckBox chkSociabiliteit4Wz;
+    public CheckBox chkSociabiliteit5Wz;
+    public RadioButton rbStrategieUnknownWz;
+    public RadioButton rbStrategieTopWz;
+    public RadioButton rbStrategieLMWz;
+    public RadioButton rbStrategieMMWz;
+    public RadioButton rbStrategieRMWz;
+    public RadioButton rbStrategieLOWz;
+    public RadioButton rbStrategieMOWz;
+    public RadioButton rbStrategieROWz;
+    public ToggleGroup StrategieGroepWz;
+    public ComboBox cbLevensduurWz;
+    public Button btnLevensduurWz;
+    public ListView lvLevensduurWz;
     private InfoTables infoTables;
     private Connection dbConnection;
+
+    public void LadenCommensalisme(){
+        //sociabiliteit
+        for(int i = 0; i<ControllerPlantToevoegen.commMulti_eigenschapss.size(); i++){
+            if(ControllerPlantToevoegen.commMulti_eigenschapss.get(i).getNaam().matches("sociabiliteit")){
+                switch(ControllerPlantToevoegen.commMulti_eigenschapss.get(i).getValue()){
+                    case "1": chkSociabiliteit1Wz.setSelected(true); break;
+                    case "2": chkSociabiliteit2Wz.setSelected(true); break;
+                    case "3": chkSociabiliteit3Wz.setSelected(true); break;
+                    case "4": chkSociabiliteit4Wz.setSelected(true); break;
+                    case "5": chkSociabiliteit5Wz.setSelected(true); break;
+                }
+            }
+        }
+        Commensalisme hulpc = ControllerPlantToevoegen.commensalismes.get(0);
+        //strategie
+        switch(hulpc.getStrategie()){
+            case "": StrategieGroepWz.selectToggle(rbStrategieUnknownWz); break;
+            case "C": StrategieGroepWz.selectToggle(rbStrategieTopWz); break;
+            case "C-S-R": StrategieGroepWz.selectToggle(rbStrategieMMWz); break;
+            case "C-R": StrategieGroepWz.selectToggle(rbStrategieLMWz); break;
+            case "C-S": StrategieGroepWz.selectToggle(rbStrategieRMWz); break;
+            case "R": StrategieGroepWz.selectToggle(rbStrategieLOWz); break;
+            case "S-R": StrategieGroepWz.selectToggle(rbStrategieMOWz); break;
+            case "S": StrategieGroepWz.selectToggle(rbStrategieROWz); break;
+        }
+        //ontwikkelingssnelheid
+        //voegt keuzes in
+        //cbOntwikkelingssnelheidWz.getItems().addAll(infoTables.getOnstwikkelingssnelheden()); blijkbaar hoeft dit niet aangezien
+        cbOntwikkelingssnelheidWz.getSelectionModel().select(hulpc.getOntwikkelingssnelheid());
+
+        //Listview opvullen
+        for(int i = 0; i < ControllerPlantToevoegen.commMulti_eigenschapss.size();i++)
+        {
+            lvLevensduurWz.getItems().add(i,ControllerPlantToevoegen.commMulti_eigenschapss.get(i).getValue());
+        }
+    }
+
+    //toevoegen items in levensduur/concurrentiekracht listview
+    public void click_toevoegenLevensduurWz(MouseEvent mouseEvent) {
+        if (!lvLevensduurWz.getItems().contains(cbLevensduurWz.getValue())) {
+            lvLevensduurWz.getItems().add((String) cbLevensduurWz.getValue());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText("Je kan niet 2 keer hetzelfde item toevoegen");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+        }
+    }
+
+    //verwijderen items in levensduur/concurrentiekracht listview
+    public void click_verwijderenLevensduurWz(MouseEvent mouseEvent) {
+        final int selectedIndex = lvLevensduurWz.getSelectionModel().getSelectedIndex();
+        lvLevensduurWz.getItems().remove(selectedIndex);
+    }
 
     public void MonthlyInvullenWz() throws SQLException{
         //mogelijke selectie van kleuren is toegevoegd
