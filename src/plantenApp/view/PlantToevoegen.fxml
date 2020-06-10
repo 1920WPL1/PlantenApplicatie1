@@ -272,12 +272,13 @@
                                        <children>
                                           <ComboBox fx:id="cbLevensduurTv" prefHeight="30.0" prefWidth="210.0" />
                                           <Button fx:id="btnLevensduurTv" mnemonicParsing="false" onMouseClicked="#ToevoegenCommensalismeMulti" prefHeight="30.0" prefWidth="30.0" text="+" />
+                                          <Button fx:id="btnLevensduurTvVerwijderen" mnemonicParsing="false" onMouseClicked="#click_verwijderenLevensduur" prefHeight="31.0" prefWidth="36.0" text="-" />
                                        </children>
                                     </HBox>
                                     <ListView fx:id="lvLevensduurTv" prefHeight="176.0" prefWidth="240.0" />
                                  </children>
                               </VBox>
-                              <Button fx:id="btnTest" layoutX="329.0" layoutY="251.0" mnemonicParsing="false"  text="Button" />
+                              <Button fx:id="btnTest" layoutX="329.0" layoutY="251.0" mnemonicParsing="false" text="Button" />
                            </children>
                         </AnchorPane>
                      </content>

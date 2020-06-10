@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import plantenApp.java.dao.Database;
 import plantenApp.java.dao.InfoTablesDAO;
 import plantenApp.java.model.AbiotischeFactoren;
+import plantenApp.java.model.Commensalisme;
 import plantenApp.java.model.InfoTables;
 
 import java.sql.Connection;
@@ -119,16 +120,6 @@ public class ControllerWijzigen {
     public Spinner spinMaxBladhOktWz;
     public Spinner spinMaxBladhNovWz;
     public Spinner spinMaxBladhDecWz;
-    public ComboBox cbBladkleurJanWz;
-    public ComboBox cbBladkleurFebWz;
-    public ComboBox cbBladkleurMaaWz;
-    public ComboBox cbBladkleurAprWz;
-    public ComboBox cbBladkleurMeiWz;
-    public ComboBox cbBladkleurJunWz;
-    public ComboBox cbBladkleurJulWz;
-    public ComboBox cbBladkleurAugWz;
-    public ComboBox cbBladkleurSeptWz;
-    public ComboBox cbBladkleurOktWz;
     public ComboBox cbBladkleurNovWz;
     public ComboBox cbBladkleurDecWz;
     public Spinner spinMinBloeihJanWz;
@@ -155,19 +146,8 @@ public class ControllerWijzigen {
     public Spinner spinMaxBloeihOktWz;
     public Spinner spinMaxBloeihNovWz;
     public Spinner spinMaxBloeihDecWz;
-    public ComboBox cbBloeikleurJanWz;
-    public ComboBox cbBloeikleurFebWz;
-    public ComboBox cbBloeikleurMaaWz;
-    public ComboBox cbBloeikleurAprWz;
-    public ComboBox cbBloeikleurMeiWz;
-    public ComboBox cbBloeikleurJunWz;
-    public ComboBox cbBloeikleurJulWz;
-    public ComboBox cbBloeikleurAugWz;
-    public ComboBox cbBloeikleurSeptWz;
-    public ComboBox cbBloeikleurOktWz;
     public ComboBox cbBloeikleurNovWz;
     public ComboBox cbBloeikleurDecWz;
-    public ComboBox cbOntwikkelingssnelheidWz;
     public CheckBox chkSociabiliteit1Wz;
     public CheckBox chkSociabiliteit2Wz;
     public CheckBox chkSociabiliteit3Wz;
@@ -182,11 +162,8 @@ public class ControllerWijzigen {
     public RadioButton rbStrategieMOWz;
     public RadioButton rbStrategieROWz;
     public ToggleGroup StrategieGroepWz;
-    public ComboBox cbLevensduurWz;
     public Button btnLevensduurWz;
     public ListView lvLevensduurWz;
-    private InfoTables infoTables;
-    private Connection dbConnection;
 
     public void LadenCommensalisme(){
         //sociabiliteit
@@ -402,6 +379,8 @@ public class ControllerWijzigen {
         //comboboxes vullen
         FillComboboxes(infoTables);
         Pollenwaarde();
+        LadenCommensalisme();
+        MonthlyInvullenWz();
     }
 
     public void Pollenwaarde()    {
@@ -523,11 +502,11 @@ public class ControllerWijzigen {
         cbBladkleurOktWz.getItems().addAll(infotables.getKleuren());
         cbBloeikleurOktWz.getItems().addAll(infotables.getKleuren());
         //November
-        cbBladkleurNovTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurNovTv.getItems().addAll(infotables.getKleuren());
+        cbBladkleurNovWz.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurNovWz.getItems().addAll(infotables.getKleuren());
         //November
-        cbBladkleurDecTv.getItems().addAll(infotables.getKleuren());
-        cbBloeikleurDecTv.getItems().addAll(infotables.getKleuren());
+        cbBladkleurDecWz.getItems().addAll(infotables.getKleuren());
+        cbBloeikleurDecWz.getItems().addAll(infotables.getKleuren());
 
         //Habitat
         cbHabitatWz.getItems().addAll(infotables.getHabitats());
