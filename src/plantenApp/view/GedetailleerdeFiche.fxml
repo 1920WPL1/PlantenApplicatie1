@@ -13,15 +13,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="888.0" prefWidth="1506.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerOverzicht">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1050.0" prefWidth="1506.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerOverzicht">
    <children>
-      <TitledPane animated="false" collapsible="false" layoutX="5.0" layoutY="7.0" prefHeight="951.0" prefWidth="1541.0" text="Fiche">
+      <TitledPane animated="false" collapsible="false" layoutX="5.0" layoutY="7.0" prefHeight="1057.0" prefWidth="1552.0" text="Fiche">
          <content>
             <AnchorPane prefHeight="925.0" prefWidth="1552.0">
                <children>
                   <VBox layoutX="14.0" layoutY="14.0" prefHeight="698.0" prefWidth="1516.0">
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="87.0" prefWidth="1516.0">
                            <children>
                               <VBox>
                                  <children>
@@ -95,11 +95,11 @@
                               <ListView fx:id="lvBeheerbehandelingO" prefHeight="170.0" prefWidth="249.0" />
                            </children>
                         </HBox>
-                        <HBox prefHeight="230.0" prefWidth="1492.0">
+                        <HBox prefHeight="307.0" prefWidth="1516.0">
                            <children>
-                              <HBox>
+                              <HBox prefHeight="245.0" prefWidth="254.0">
                                  <children>
-                                    <VBox>
+                                    <VBox prefHeight="229.0" prefWidth="160.0">
                                        <children>
                                           <Label prefHeight="30.0" text="Standaard">
                                              <font>
@@ -166,7 +166,7 @@
                                           </HBox>
                                        </children>
                                     </VBox>
-                                    <VBox>
+                                    <VBox prefHeight="229.0" prefWidth="94.0">
                                        <children>
                                           <Label prefHeight="30.0" textFill="#838383">
                                              <font>
@@ -280,13 +280,13 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <ListView fx:id="lvLevensduurO" prefHeight="200.0" prefWidth="200.0" />
+                                          <ListView fx:id="lvLevensduurO" prefHeight="112.0" prefWidth="200.0" />
                                        </children>
                                     </VBox>
                                  </children>
                               </HBox>
                               <Label prefWidth="50.0" />
-                              <HBox>
+                              <HBox prefHeight="264.0" prefWidth="469.0">
                                  <children>
                                     <VBox>
                                        <children>
@@ -327,7 +327,7 @@
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <VBox>
+                                    <VBox prefHeight="246.0" prefWidth="246.0">
                                        <children>
                                           <Label prefHeight="30.0" textFill="#838383">
                                              <font>
@@ -343,7 +343,7 @@
                                                 </Label>
                                              </children>
                                           </HBox>
-                                          <HBox>
+                                          <HBox prefHeight="22.0" prefWidth="246.0">
                                              <children>
                                                 <Label fx:id="lblVochtbehoefteO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
@@ -371,9 +371,9 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                          <HBox prefHeight="58.0" prefWidth="246.0">
                                              <children>
-                                                <ListView fx:id="lvHabitatO" prefHeight="200.0" prefWidth="200.0" />
+                                                <ListView fx:id="lvHabitatO" prefHeight="84.0" prefWidth="200.0" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -501,7 +501,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <HBox prefHeight="274.0" prefWidth="1460.0">
+                              <HBox prefHeight="210.0" prefWidth="1516.0">
                                  <children>
                                     <HBox>
                                        <children>
@@ -554,7 +554,7 @@
                                                 </ImageView>
                                              </children>
                                           </VBox>
-                                          <VBox>
+                                          <VBox prefHeight="263.0" prefWidth="124.0">
                                              <children>
                                                 <Label fx:id="lblBladgrootteO" prefHeight="30.0" text="Value" textFill="#838383">
                                                    <font>
@@ -605,7 +605,7 @@
                                           </VBox>
                                        </children>
                                     </HBox>
-                                    <AnchorPane>
+                                    <AnchorPane prefHeight="322.0" prefWidth="1094.0">
                                        <children>
                                           <VBox layoutX="14.0" layoutY="14.0">
                                              <children>
