@@ -223,8 +223,10 @@ public class ControllerPlantToevoegen {
      * */
 
     public void initialize() throws SQLException {
+        //connectie met database maken
         dbConnection = Database.getInstance().getConnection();
 
+        // enkele defaults klaarzetten
         Pollenwaarde();
         DefaultRadioButtons();
         //infotabel object aanmaken*/
@@ -236,6 +238,7 @@ public class ControllerPlantToevoegen {
         //Opvullen van emailadres om mee te geven met toevoegen plant
         sEmailadres = "kurt.engelbrecht@vives.be";
     }
+    //initialiseren van de sliders
     public void Pollenwaarde()    {
         slNectarwaardeTv.setMax(5);
         slPollenwaardeTv.setMax(5);
@@ -253,6 +256,7 @@ public class ControllerPlantToevoegen {
                 )
         );
     }
+    //default radio buttons selecteren
     public void DefaultRadioButtons () {
         rbStrategieUnknownTv.setSelected(true);
         rbBijvriendelijkNullTv.setSelected(true);
@@ -262,6 +266,7 @@ public class ControllerPlantToevoegen {
         rbGeurendNullTv.setSelected(true);
         rbVorstgevoeligNullTv.setSelected(true);
     }
+    //dit is een functie zodat alle comboboxes ingevuld worden
     public void FillComboboxes(InfoTables infotables) {
         //type
         System.out.println(infotables.getPlantTypes().toString());
@@ -340,6 +345,8 @@ public class ControllerPlantToevoegen {
         //Levensduur
         cbLevensduurTv.getItems().addAll(infotables.getConcurentiekrachten());
     }
+    //als er op planttoevoegen geclicked wordt dan worden alle gegevens in verschillende arrays gestoken
+    // op het einde wordt het beheer scherm geopend
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException, IOException {
         createplant();//ik //done
         //createNaam();
@@ -354,6 +361,7 @@ public class ControllerPlantToevoegen {
         //createFoto(); nog geen plaats of scherm voor een foto in toe te voegen
         openNieuwScherm(mouseEvent);
     }
+    //deze functie zorgt voor het open van nieuw scherm
     public void openNieuwScherm(MouseEvent mouseEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("view/BeheeBehandelingPlant.fxml"));
         Scene scen = new Scene(root);
@@ -363,11 +371,13 @@ public class ControllerPlantToevoegen {
         scherm="beheer";
         window.setMaximized(true);
     }
+    //fenotype wordt in de array gestoken
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxid();
+        maxid++;
         System.out.println(plantid);
-        Fenotype fenotype = new Fenotype(maxid + 1, plantid, comboboxCheckString(cbBladvormTv.getSelectionModel()), levensvormCheck(), habitusCheck(), bloeiwijzeCheck(), comboboxCheckInteger(cbBladgrootteTotTv.getSelectionModel()), comboboxCheckString(cbRatioTv.getSelectionModel()), comboboxCheckString(cbSpruitfenologieTv.getSelectionModel()));
+        Fenotype fenotype = new Fenotype(maxid, plantid, comboboxCheckString(cbBladvormTv.getSelectionModel()), levensvormCheck(), habitusCheck(), bloeiwijzeCheck(), comboboxCheckInteger(cbBladgrootteTotTv.getSelectionModel()), comboboxCheckString(cbRatioTv.getSelectionModel()), comboboxCheckString(cbSpruitfenologieTv.getSelectionModel()));
         fenotypess.add(fenotype);
     }
     public String comboboxCheckString(SingleSelectionModel <String> combobox) {
@@ -750,12 +760,10 @@ public class ControllerPlantToevoegen {
             DubbelePlantWaarschuwing();
         }
     }
-
     public void click_verwijderenHabitat(MouseEvent mouseEvent) {
         final int selectedIndex = lvHabitatTv.getSelectionModel().getSelectedIndex();
         lvHabitatTv.getItems().remove(selectedIndex);
     }
-
     public void click_verwijderenLevensduur(MouseEvent mouseEvent) {
         final int selectedIndex = lvLevensduurTv.getSelectionModel().getSelectedIndex();
         lvLevensduurTv.getItems().remove(selectedIndex);
