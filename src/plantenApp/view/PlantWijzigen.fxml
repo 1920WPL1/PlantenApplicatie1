@@ -127,19 +127,19 @@
                                                 <HBox>
                                                    <children>
                                                       <ComboBox fx:id="cbBezonningWz" prefHeight="30.0" prefWidth="120.0" />
-                                                      <Label fx:id="BezonningvalueTv" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" />
+                                                      <Label fx:id="BezonningvalueWz" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
                                                       <ComboBox fx:id="cbVoedingsbehoefteWz" prefHeight="30.0" prefWidth="120.0" />
-                                                      <Label fx:id="VoedingbehoefteValueTv" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" />
+                                                      <Label fx:id="VoedingbehoefteValueWz" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
                                                       <ComboBox fx:id="cbVochtbehoefteWz" prefHeight="30.0" prefWidth="120.0" />
-                                                      <Label fx:id="VochtbehoefteValueTv" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" />
+                                                      <Label fx:id="VochtbehoefteValueWz" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" />
                                                    </children>
                                                 </HBox>
                                              </children>
@@ -173,10 +173,11 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <HBox>
+                                          <HBox prefHeight="31.0" prefWidth="417.0">
                                              <children>
                                                 <ComboBox fx:id="cbHabitatWz" prefHeight="30.0" prefWidth="450.0" />
-                                                <Button fx:id="btnHabitatTv" mnemonicParsing="false" onMouseClicked="#ToevoegenAbiotischeMulti" prefHeight="30.0" prefWidth="30.0" text="+" />
+                                                <Button fx:id="btnHabitatWz" mnemonicParsing="false" onMouseClicked="#click_toevoegenHabitat" prefHeight="31.0" prefWidth="36.0" text="+" />
+                                                <Button fx:id="btnHabitatWzVerwijderen" mnemonicParsing="false" onMouseClicked="#click_verwijderenHabitat" prefHeight="31.0" prefWidth="36.0" text="-" />
                                              </children>
                                           </HBox>
                                           <ListView fx:id="lvHabitatWz" prefHeight="155.0" prefWidth="480.0" />
@@ -224,12 +225,12 @@
                                        <children>
                                           <HBox>
                                              <children>
-                                                <RadioButton fx:id="rbStrategieUnknownTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Unknown">
+                                                <RadioButton fx:id="rbStrategieUnknownWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Unknown">
                                                    <toggleGroup>
-                                                      <ToggleGroup fx:id="StrategieGroepTv" />
+                                                      <ToggleGroup fx:id="StrategieGroepWz" />
                                                    </toggleGroup></RadioButton>
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton fx:id="rbStrategieTopWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="C" toggleGroup="$StrategieGroepTv" />
+                                                <RadioButton fx:id="rbStrategieTopWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="C" toggleGroup="$StrategieGroepWz" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                              </children>
@@ -239,9 +240,9 @@
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton fx:id="rbStrategieLMWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepTv" />
-                                                <RadioButton fx:id="rbStrategieMMWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepTv" />
-                                                <RadioButton fx:id="rbStrategieRMWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepTv" />
+                                                <RadioButton fx:id="rbStrategieLMWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepWz" />
+                                                <RadioButton fx:id="rbStrategieMMWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepWz" />
+                                                <RadioButton fx:id="rbStrategieRMWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepWz" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                              </children>
                                           </HBox>
@@ -249,11 +250,11 @@
                                              <children>
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton fx:id="rbStrategieLOWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="R" toggleGroup="$StrategieGroepTv" />
+                                                <RadioButton fx:id="rbStrategieLOWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="R" toggleGroup="$StrategieGroepWz" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton fx:id="rbStrategieMOWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepTv" />
+                                                <RadioButton fx:id="rbStrategieMOWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepWz" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton fx:id="rbStrategieROWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="S" toggleGroup="$StrategieGroepTv" />
+                                                <RadioButton fx:id="rbStrategieROWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="S" toggleGroup="$StrategieGroepWz" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -270,10 +271,11 @@
                                     <HBox>
                                        <children>
                                           <ComboBox fx:id="cbLevensduurWz" prefHeight="30.0" prefWidth="210.0" />
-                                          <Button fx:id="btnLevensduurTv" mnemonicParsing="false" onMouseClicked="#ToevoegenCommensalismeMulti" prefHeight="30.0" prefWidth="30.0" text="+" />
+                                          <Button fx:id="btnLevensduurWz" mnemonicParsing="false" onMouseClicked="#click_toevoegenLevensduurWz" prefHeight="30.0" prefWidth="30.0" text="+" />
+                                          <Button fx:id="btnLevensduurVerwijderenWz" mnemonicParsing="false" onMouseClicked="#click_verwijderenLevensduurWz" prefHeight="31.0" prefWidth="36.0" text="-" />
                                        </children>
                                     </HBox>
-                                    <ListView fx:id="lvLevensduurTv" prefHeight="176.0" prefWidth="240.0" />
+                                    <ListView fx:id="lvLevensduurWz" prefHeight="176.0" prefWidth="240.0" />
                                  </children>
                               </VBox>
                               <Button fx:id="btnTest" layoutX="329.0" layoutY="251.0" mnemonicParsing="false" text="Button" />

@@ -750,5 +750,15 @@ public class ControllerPlantToevoegen {
             DubbelePlantWaarschuwing();
         }
     }
+
+    public void click_verwijderenHabitat(MouseEvent mouseEvent) {
+        final int selectedIndex = lvHabitatTv.getSelectionModel().getSelectedIndex();
+        lvHabitatTv.getItems().remove(selectedIndex);
+    }
+
+    public void click_verwijderenLevensduur(MouseEvent mouseEvent) {
+        final int selectedIndex = lvLevensduurTv.getSelectionModel().getSelectedIndex();
+        lvLevensduurTv.getItems().remove(selectedIndex);
+    }
 }
 

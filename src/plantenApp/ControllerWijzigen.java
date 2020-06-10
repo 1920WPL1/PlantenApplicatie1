@@ -6,6 +6,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -18,6 +22,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
+import plantenApp.java.dao.Database;
+import plantenApp.java.dao.InfoTablesDAO;
+import plantenApp.java.model.AbiotischeFactoren;
+import plantenApp.java.model.Commensalisme;
+import plantenApp.java.model.InfoTables;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -88,6 +97,9 @@ public class ControllerWijzigen {
     public ComboBox cbGrondsoortWz;
     public ComboBox cbHabitatWz;
     public ComboBox cbOntwikkelingssnelheidWz;
+    public Button btnHabitatWz;
+    public Button btnHabitatWzVerwijderen;
+    public ListView lvHabitatWz;
     public RadioButton rbTuftedWz;
     public ToggleGroup HabitusGroepWz;
     public RadioButton rbUprightarchingWz;
@@ -150,6 +162,41 @@ public class ControllerWijzigen {
     public RadioButton rbChamae1Wz;
     public RadioButton rbChamae2Wz;
     public RadioButton rbFaneroWz;
+
+
+    public void initialize() throws SQLException {
+        LadenPlant();
+        LadenFenotype();
+        LadenExtra();
+        dbConnection = Database.getInstance().getConnection();
+
+        //infotabel object aanmaken
+        InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
+        infoTables = infotablesDAO.getInfoTables();
+        //comboboxes vullen
+        FillComboboxes(infoTables);
+        Pollenwaarde();
+    }
+
+    public void Pollenwaarde()    {
+        slNectarwaardeWz.setMax(5);
+        slPollenwaardeWz.setMax(5);
+        //Change value
+        PollenValueTv.textProperty().bind(
+                Bindings.format(
+                        "%.0f",
+                        slPollenwaardeWz.valueProperty()
+                )
+        );
+        NectarwaardeValueTv.textProperty().bind(
+                Bindings.format(
+                        "%.0f",
+                        slNectarwaardeWz.valueProperty()
+                )
+        );
+    }
+
+<<<<<<<<< Temporary merge branch 1
     public Spinner spinMaxBladhJanWz;
     public Spinner spinMaxBladhFebWz;
     public Spinner spinMaxBladhMaaWz;
@@ -190,14 +237,180 @@ public class ControllerWijzigen {
     public Spinner spinMaxBloeihDecWz;
     public ComboBox cbBloeikleurNovWz;
     public ComboBox cbBloeikleurDecWz;
+    public CheckBox chkSociabiliteit1Wz;
+    public CheckBox chkSociabiliteit2Wz;
+    public CheckBox chkSociabiliteit3Wz;
+    public CheckBox chkSociabiliteit4Wz;
+    public CheckBox chkSociabiliteit5Wz;
+    public RadioButton rbStrategieUnknownWz;
+    public RadioButton rbStrategieTopWz;
+    public RadioButton rbStrategieLMWz;
+    public RadioButton rbStrategieMMWz;
+    public RadioButton rbStrategieRMWz;
+    public RadioButton rbStrategieLOWz;
+    public RadioButton rbStrategieMOWz;
+    public RadioButton rbStrategieROWz;
+    public ToggleGroup StrategieGroepWz;
+    public Button btnLevensduurWz;
+    public ListView lvLevensduurWz;
 
-    public void initialize() throws SQLException {
-        LadenPlant();
-        LadenFenotype();
-        LadenExtra();
-        LadenMonthlyInvullenWz();
-        Ladenhabitus();
-        LadenBloeiwijjze();
+    public void LadenCommensalisme(){
+        //sociabiliteit
+        for(int i = 0; i<ControllerPlantToevoegen.commMulti_eigenschapss.size(); i++){
+            if(ControllerPlantToevoegen.commMulti_eigenschapss.get(i).getNaam().matches("sociabiliteit")){
+                switch(ControllerPlantToevoegen.commMulti_eigenschapss.get(i).getValue()){
+                    case "1": chkSociabiliteit1Wz.setSelected(true); break;
+                    case "2": chkSociabiliteit2Wz.setSelected(true); break;
+                    case "3": chkSociabiliteit3Wz.setSelected(true); break;
+                    case "4": chkSociabiliteit4Wz.setSelected(true); break;
+                    case "5": chkSociabiliteit5Wz.setSelected(true); break;
+                }
+            }
+        }
+        Commensalisme hulpc = ControllerPlantToevoegen.commensalismes.get(0);
+        //strategie
+        switch(hulpc.getStrategie()){
+            case "": StrategieGroepWz.selectToggle(rbStrategieUnknownWz); break;
+            case "C": StrategieGroepWz.selectToggle(rbStrategieTopWz); break;
+            case "C-S-R": StrategieGroepWz.selectToggle(rbStrategieMMWz); break;
+            case "C-R": StrategieGroepWz.selectToggle(rbStrategieLMWz); break;
+            case "C-S": StrategieGroepWz.selectToggle(rbStrategieRMWz); break;
+            case "R": StrategieGroepWz.selectToggle(rbStrategieLOWz); break;
+            case "S-R": StrategieGroepWz.selectToggle(rbStrategieMOWz); break;
+            case "S": StrategieGroepWz.selectToggle(rbStrategieROWz); break;
+        }
+        //ontwikkelingssnelheid
+        //voegt keuzes in
+        //cbOntwikkelingssnelheidWz.getItems().addAll(infoTables.getOnstwikkelingssnelheden()); blijkbaar hoeft dit niet aangezien
+        cbOntwikkelingssnelheidWz.getSelectionModel().select(hulpc.getOntwikkelingssnelheid());
+
+        //Listview opvullen
+        for(int i = 0; i < ControllerPlantToevoegen.commMulti_eigenschapss.size();i++)
+        {
+            lvLevensduurWz.getItems().add(i,ControllerPlantToevoegen.commMulti_eigenschapss.get(i).getValue());
+        }
+    }
+
+    //toevoegen items in levensduur/concurrentiekracht listview
+    public void click_toevoegenLevensduurWz(MouseEvent mouseEvent) {
+        if (!lvLevensduurWz.getItems().contains(cbLevensduurWz.getValue())) {
+            lvLevensduurWz.getItems().add((String) cbLevensduurWz.getValue());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText("Je kan niet 2 keer hetzelfde item toevoegen");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+        }
+    }
+
+    //verwijderen items in levensduur/concurrentiekracht listview
+    public void click_verwijderenLevensduurWz(MouseEvent mouseEvent) {
+        final int selectedIndex = lvLevensduurWz.getSelectionModel().getSelectedIndex();
+        lvLevensduurWz.getItems().remove(selectedIndex);
+    }
+
+    public void MonthlyInvullenWz() throws SQLException{
+        //mogelijke selectie van kleuren is toegevoegd
+        KleurenCBToevoegen();
+
+        //selectie van max bladhoogte
+        for(int i=0;i<5;i++){
+            if(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getNaam().matches("Bladhoogte")){
+                spinMaxBladhJanWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJan());
+                spinMaxBladhFebWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getFeb());
+                spinMaxBladhMaaWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getMaa());
+                spinMaxBladhAprWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getApr());
+                spinMaxBladhMeiWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getMei());
+                spinMaxBladhJunWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJun());
+                spinMaxBladhJulWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJul());
+                spinMaxBladhAugWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getAug());
+                spinMaxBladhSeptWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getSep());
+                spinMaxBladhOktWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getOkt());
+                spinMaxBladhNovWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getNov());
+                spinMaxBladhDecWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getDec());
+            }
+        }
+
+        //selectie van max bloeihoogte
+        for(int i=0;i<5;i++){
+            if(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getNaam().matches("Max Bloeihoogte")){
+                spinMaxBloeihJanWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJan());
+                spinMaxBloeihFebWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getFeb());
+                spinMaxBloeihMaaWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getMaa());
+                spinMaxBloeihAprWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getApr());
+                spinMaxBloeihMeiWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getMei());
+                spinMaxBloeihJunWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJun());
+                spinMaxBloeihJulWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJul());
+                spinMaxBloeihAugWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getAug());
+                spinMaxBloeihSeptWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getSep());
+                spinMaxBloeihOktWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getOkt());
+                spinMaxBloeihNovWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getNov());
+                spinMaxBloeihDecWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getDec());
+            }
+        }
+
+        //selectie van min bloeihoogte
+        for(int i=0;i<5;i++){
+            if(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getNaam().matches("Min Bloeihoogte")){
+                spinMinBloeihJanWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJan());
+                spinMinBloeihFebWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getFeb());
+                spinMinBloeihMaaWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getMaa());
+                spinMinBloeihAprWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getApr());
+                spinMinBloeihMeiWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getMei());
+                spinMinBloeihJunWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJun());
+                spinMinBloeihJulWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJul());
+                spinMinBloeihAugWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getAug());
+                spinMinBloeihSeptWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getSep());
+                spinMinBloeihOktWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getOkt());
+                spinMinBloeihNovWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getNov());
+                spinMinBloeihDecWz.getValueFactory().setValue(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getDec());
+            }
+        }
+
+        //selectie van bloeikleur en bladkleur insteken
+        //selectie insteken van bladkleur, overlopen van lijst voor eigenschap met bladkleur te vinden, dan de waarden daarvan in deze comboboxen steken
+        for(int i=0;i<5;i++){
+            if(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getNaam().matches("Bladkleur")){
+                cbBladkleurJanWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJan());
+                cbBladkleurFebWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getFeb());
+                cbBladkleurMaaWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getMaa());
+                cbBladkleurAprWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getApr());
+                cbBladkleurMeiWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getMei());
+                cbBladkleurJunWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJun());
+                cbBladkleurJulWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJul());
+                cbBladkleurAugWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getAug());
+                cbBladkleurSeptWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getSep());
+                cbBladkleurOktWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getOkt());
+                cbBladkleurNovWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getNov());
+                cbBladkleurDecWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getDec());
+            }
+        }
+
+        //selectie insteken van bladkleur, overlopen van lijst voor eigenschap met bloeikleur te vinden, dan de waarden daarvan in deze comboboxen steken
+        for(int i=0;i<5;i++){
+            if(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getNaam().matches("Bloeikleur")){
+                cbBloeikleurJanWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJan());
+                cbBloeikleurFebWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getFeb());
+                cbBloeikleurMaaWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getMaa());
+                cbBloeikleurAprWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getApr());
+                cbBloeikleurMeiWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getMei());
+                cbBloeikleurJunWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJun());
+                cbBloeikleurJulWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getJul());
+                cbBloeikleurAugWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getAug());
+                cbBloeikleurSeptWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getSep());
+                cbBloeikleurOktWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getOkt());
+                cbBloeikleurNovWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getNov());
+                cbBloeikleurDecWz.getSelectionModel().select(ControllerPlantToevoegen.fenoMulti_eigenschapss.get(i).getDec());
+            }
+        }
+    }
+
+    public void KleurenCBToevoegen() throws SQLException{
+        //verbinding maken voor het vinden van kleuren
         dbConnection = Database.getInstance().getConnection();
         //infotabel object aanmaken
         InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
@@ -206,6 +419,25 @@ public class ControllerWijzigen {
         FillComboboxes(infoTables);
         Pollenwaarde();
     }
+
+
+    public void initialize() throws SQLException {
+        LadenPlant();
+        LadenFenotype();
+        LadenExtra();
+        LadenAbiotischeFactoren();
+        dbConnection = Database.getInstance().getConnection();
+
+        //infotabel object aanmaken
+        InfoTablesDAO infotablesDAO = new InfoTablesDAO(dbConnection);
+        infoTables = infotablesDAO.getInfoTables();
+        //comboboxes vullen
+        FillComboboxes(infoTables);
+        Pollenwaarde();
+        LadenCommensalisme();
+        MonthlyInvullenWz();
+    }
+
     public void Pollenwaarde()    {
         slNectarwaardeWz.setMax(5);
         slPollenwaardeWz.setMax(5);
@@ -223,6 +455,17 @@ public class ControllerWijzigen {
                 )
         );
     }
+
+    public void LadenExtra()    {
+        slNectarwaardeWz.setValue( ControllerPlantToevoegen.extrass.get(0).getNectarwaarde());
+        slPollenwaardeWz.setValue(ControllerPlantToevoegen.extrass.get(0).getPollenwaarde());
+        Selecteerjuisteradiobutton(rbBijvriendelijkJaWz,rbBijvriendelijkNeeWz,rbBijvriendelijkNullWz, ControllerPlantToevoegen.extrass.get(0).getBijvriendelijk());
+        Selecteerjuisteradiobutton(rbVlindervriendelijkJaWz,rbVlindervriendelijkNeeWz,rbVlindervriendelijkNullWz, ControllerPlantToevoegen.extrass.get(0).getVlindervriendelijk());
+        Selecteerjuisteradiobutton(rbEetbaarJaWz,rbEetbaarNeeWz,rbEetbaarNullWz,ControllerPlantToevoegen.extrass.get(0).getEetbaar());
+        Selecteerjuisteradiobutton(rbKruidgebruikJaWz,rbKruidgebruikNeeWz,rbKruidgebruikNullWz,ControllerPlantToevoegen.extrass.get(0).getKruidgebruik());
+        Selecteerjuisteradiobutton(rbGeurendJaWz,rbGeurendNeeWz,rbGeurendNullWz,ControllerPlantToevoegen.extrass.get(0).getGeurend());
+        Selecteerjuisteradiobutton(rbVorstgevoeligJaWz,rbVorstgevoeligNeeWz,rbVorstgevoeligNullWz,ControllerPlantToevoegen.extrass.get(0).getVorstgevoelig());
+    }
     public void Selecteerjuisteradiobutton(RadioButton buttonja , RadioButton buttonnee , RadioButton buttonnull, String waarde)    {
         if(waarde =="ja")
         {
@@ -235,6 +478,21 @@ public class ControllerWijzigen {
         if(waarde == "null")
         {
             buttonnull.setSelected(true);
+        }
+    }
+>>>>>>>>> Temporary merge branch 2
+    public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
+        if (!lvLevensduurTv.getItems().contains(cbLevensduurTv.getValue())) {
+            lvLevensduurTv.getItems().add((String) cbLevensduurTv.getValue());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText("Je kan niet 2 keer hetzelfde item toevoegen");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
         }
     }
     public void FillComboboxes(InfoTables infotables) {
@@ -954,5 +1212,39 @@ public class ControllerWijzigen {
         {
             rbSmallePluimWz.setSelected(true);
         }
+    }
+    public void LadenAbiotischeFactoren() {
+        //Comboboxen opvullen
+        cbBezonningWz.getSelectionModel().select(ControllerPlantToevoegen.abiotischeFactorenn.get(0).getBezonning());
+        cbVoedingsbehoefteWz.getSelectionModel().select(ControllerPlantToevoegen.abiotischeFactorenn.get(0).getVoedingsbehoefte());
+        cbVochtbehoefteWz.getSelectionModel().select(ControllerPlantToevoegen.abiotischeFactorenn.get(0).getVochtbehoefte());
+        cbReactieAntaWz.getSelectionModel().select(ControllerPlantToevoegen.abiotischeFactorenn.get(0).getReactieAntagonistischeOmgeving());
+        cbGrondsoortWz.getSelectionModel().select(ControllerPlantToevoegen.abiotischeFactorenn.get(0).getGrondsoort());
+
+        //Listview opvullen
+        for(int i = 0; i < ControllerPlantToevoegen.abiotischmulti.size();i++)
+        {
+            lvHabitatWz.getItems().add(i,ControllerPlantToevoegen.abiotischmulti.get(i).getValue());
+        }
+    }
+
+    public void click_toevoegenHabitat(MouseEvent mouseEvent) {
+        if (!lvHabitatWz.getItems().contains(cbHabitatWz.getValue())) {
+            lvHabitatWz.getItems().add((String) cbHabitatWz.getValue());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText("Je kan niet 2 keer hetzelfde item toevoegen");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+        }
+    }
+
+    public void click_verwijderenHabitat(MouseEvent mouseEvent) {
+        final int selectedIndex = lvHabitatWz.getSelectionModel().getSelectedIndex();
+        lvHabitatWz.getItems().remove(selectedIndex);
     }
 }
