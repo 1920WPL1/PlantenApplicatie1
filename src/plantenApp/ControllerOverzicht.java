@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -397,6 +398,7 @@ public class ControllerOverzicht {
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
         BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
         ExtraDAO extraDAO = new ExtraDAO(dbConnection);
+        createNaam();
         System.out.println(plant.getLaatste_update_door());
         plantDAO.createplant(plant,plant.getStatus(),plant.getLaatste_update_door());
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
@@ -418,6 +420,25 @@ public class ControllerOverzicht {
         System.out.println("alles behalve extra");
         extraDAO.createExtra(extra);
         System.out.println("extra oook nu ");
+    }
+    public void createNaam() throws SQLException {
+        NaamDao naamDAO = new NaamDao(dbConnection);
+
+        Plant plant = new Plant(ControllerPlantToevoegen.plantss.get(0).getPlantType(), ControllerPlantToevoegen.plantss.get(0).getFamilie(), ControllerPlantToevoegen.plantss.get(0).getGeslacht(), ControllerPlantToevoegen.plantss.get(0).getSoort(), ControllerPlantToevoegen.plantss.get(0).getVariatie());
+
+
+        //Controle of plantnaam al bestaat gebeurd al in createplant
+        int iDubbeleNaam = naamDAO.ControleDubbeleNaam(plant);
+        if (iDubbeleNaam == 0) {
+            naamDAO.createNaam(plant);
+        } else {
+            ShowError("Error bij toevoegen plant", "Deze plant bestaat al.");
+        }
+    }
+    public void ShowError(String sTitel, String sMessage) {
+        //tonen van error
+        JOptionPane.showMessageDialog(null, sMessage, "InfoBox: " + sTitel, JOptionPane.INFORMATION_MESSAGE);
+
     }
 
     public void WijzigenbtnWz_clicked(MouseEvent mouseEvent) throws IOException {

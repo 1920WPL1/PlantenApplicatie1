@@ -692,7 +692,6 @@ public class ControllerPlantToevoegen {
     // op het einde wordt het beheer scherm geopend
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws Exception {
         createplant();//ik //done
-        createNaam();
         createAbiotischefactoren();//afgewerkt //done
         createAbiotischeMulti();//Mathias //done
         createfenotype();//afgewerkt // done*/
