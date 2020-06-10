@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerWijzigen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerWijzigen">
    <children>
       <HBox>
          <children>
@@ -127,19 +127,19 @@
                                                 <HBox>
                                                    <children>
                                                       <ComboBox fx:id="cbBezonningWz" prefHeight="30.0" prefWidth="120.0" />
-                                                      <Label fx:id="BezonningvalueTv" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" />
+                                                      <Label fx:id="BezonningvalueWz" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
                                                       <ComboBox fx:id="cbVoedingsbehoefteWz" prefHeight="30.0" prefWidth="120.0" />
-                                                      <Label fx:id="VoedingbehoefteValueTv" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" />
+                                                      <Label fx:id="VoedingbehoefteValueWz" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" />
                                                    </children>
                                                 </HBox>
                                                 <HBox>
                                                    <children>
                                                       <ComboBox fx:id="cbVochtbehoefteWz" prefHeight="30.0" prefWidth="120.0" />
-                                                      <Label fx:id="VochtbehoefteValueTv" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" />
+                                                      <Label fx:id="VochtbehoefteValueWz" alignment="CENTER" prefHeight="30.0" prefWidth="30.0" />
                                                    </children>
                                                 </HBox>
                                              </children>
@@ -173,13 +173,14 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <HBox>
+                                          <HBox prefHeight="31.0" prefWidth="417.0">
                                              <children>
                                                 <ComboBox fx:id="cbHabitatWz" prefHeight="30.0" prefWidth="450.0" />
-                                                <Button fx:id="btnHabitatTv" mnemonicParsing="false" onMouseClicked="#ToevoegenAbiotischeMulti" prefHeight="30.0" prefWidth="30.0" text="+" />
+                                                <Button fx:id="btnHabitatWz" mnemonicParsing="false" onMouseClicked="#click_toevoegenHabitat" prefHeight="31.0" prefWidth="36.0" text="+" />
+                                                <Button fx:id="btnHabitatWzVerwijderen" mnemonicParsing="false" onMouseClicked="#click_verwijderenHabitat" prefHeight="31.0" prefWidth="36.0" text="-" />
                                              </children>
                                           </HBox>
-                                          <ListView fx:id="lvHabitatTv" prefHeight="155.0" prefWidth="480.0" />
+                                          <ListView fx:id="lvHabitatWz" prefHeight="155.0" prefWidth="480.0" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -657,7 +658,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="cbBladkleurJanWz"  prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurJanWz" prefHeight="30.0" prefWidth="80.0" />
                                           <ComboBox fx:id="cbBladkleurFebWz" prefHeight="30.0" prefWidth="80.0" />
                                           <ComboBox fx:id="cbBladkleurMaaWz" prefHeight="30.0" prefWidth="80.0" />
                                           <ComboBox fx:id="cbBladkleurAprWz" prefHeight="30.0" prefWidth="80.0" />

@@ -1,6 +1,8 @@
 package plantenApp;
 
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -9,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import plantenApp.java.dao.Database;
 import plantenApp.java.dao.InfoTablesDAO;
+import plantenApp.java.model.AbiotischeFactoren;
 import plantenApp.java.model.InfoTables;
 
 import java.sql.Connection;
@@ -76,6 +79,9 @@ public class ControllerWijzigen {
     public ComboBox cbGrondsoortWz;
     public ComboBox cbHabitatWz;
     public ComboBox cbOntwikkelingssnelheidWz;
+    public Button btnHabitatWz;
+    public Button btnHabitatWzVerwijderen;
+    public ListView lvHabitatWz;
     private InfoTables infoTables;
     private Connection dbConnection;
     public ComboBox cboTypeWz;
@@ -105,6 +111,7 @@ public class ControllerWijzigen {
         LadenPlant();
         LadenFenotype();
         LadenExtra();
+        LadenAbiotischeFactoren();
         dbConnection = Database.getInstance().getConnection();
 
         //infotabel object aanmaken
@@ -307,4 +314,38 @@ public class ControllerWijzigen {
         }
     }
 
+    public void LadenAbiotischeFactoren() {
+        //Comboboxen opvullen
+        cbBezonningWz.getSelectionModel().select(ControllerPlantToevoegen.abiotischeFactorenn.get(0).getBezonning());
+        cbVoedingsbehoefteWz.getSelectionModel().select(ControllerPlantToevoegen.abiotischeFactorenn.get(0).getVoedingsbehoefte());
+        cbVochtbehoefteWz.getSelectionModel().select(ControllerPlantToevoegen.abiotischeFactorenn.get(0).getVochtbehoefte());
+        cbReactieAntaWz.getSelectionModel().select(ControllerPlantToevoegen.abiotischeFactorenn.get(0).getReactieAntagonistischeOmgeving());
+        cbGrondsoortWz.getSelectionModel().select(ControllerPlantToevoegen.abiotischeFactorenn.get(0).getGrondsoort());
+
+        //Listview opvullen
+        for(int i = 0; i < ControllerPlantToevoegen.abiotischmulti.size();i++)
+        {
+            lvHabitatWz.getItems().add(i,ControllerPlantToevoegen.abiotischmulti.get(i).getValue());
+        }
+    }
+
+    public void click_toevoegenHabitat(MouseEvent mouseEvent) {
+        if (!lvHabitatWz.getItems().contains(cbHabitatWz.getValue())) {
+            lvHabitatWz.getItems().add((String) cbHabitatWz.getValue());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText("Je kan niet 2 keer hetzelfde item toevoegen");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+        }
+    }
+
+    public void click_verwijderenHabitat(MouseEvent mouseEvent) {
+        final int selectedIndex = lvHabitatWz.getSelectionModel().getSelectedIndex();
+        lvHabitatWz.getItems().remove(selectedIndex);
+    }
 }
