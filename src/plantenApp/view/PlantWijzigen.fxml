@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerWijzigen">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="plantenApp.ControllerWijzigen">
    <children>
       <HBox>
          <children>
@@ -209,11 +209,11 @@
                                     </Label>
                                     <HBox>
                                        <children>
-                                          <CheckBox fx:id="chkSociabiliteit1Tv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="I" />
-                                          <CheckBox fx:id="chkSociabiliteit2Tv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="II" />
-                                          <CheckBox fx:id="chkSociabiliteit3Tv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="III" />
-                                          <CheckBox fx:id="chkSociabiliteit4Tv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="IV" />
-                                          <CheckBox fx:id="chkSociabiliteit5Tv" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="V" />
+                                          <CheckBox fx:id="chkSociabiliteit1Wz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="I" />
+                                          <CheckBox fx:id="chkSociabiliteit2Wz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="II" />
+                                          <CheckBox fx:id="chkSociabiliteit3Wz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="III" />
+                                          <CheckBox fx:id="chkSociabiliteit4Wz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="IV" />
+                                          <CheckBox fx:id="chkSociabiliteit5Wz" mnemonicParsing="false" prefHeight="30.0" prefWidth="40.0" text="V" />
                                        </children>
                                     </HBox>
                                     <Label prefHeight="30.0" prefWidth="120.0" text="Strategie:">
@@ -225,12 +225,12 @@
                                        <children>
                                           <HBox>
                                              <children>
-                                                <RadioButton fx:id="rbStrategieUnknownTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Unknown">
+                                                <RadioButton fx:id="rbStrategieUnknownWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" text="Unknown">
                                                    <toggleGroup>
-                                                      <ToggleGroup fx:id="StrategieGroepTv" />
+                                                      <ToggleGroup fx:id="StrategieGroepWz" />
                                                    </toggleGroup></RadioButton>
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton fx:id="rbStrategieTopTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="C" toggleGroup="$StrategieGroepTv" />
+                                                <RadioButton fx:id="rbStrategieTopWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="C" toggleGroup="$StrategieGroepWz" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                              </children>
@@ -240,9 +240,9 @@
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton fx:id="rbStrategieLMTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepTv" />
-                                                <RadioButton fx:id="rbStrategieMMTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepTv" />
-                                                <RadioButton fx:id="rbStrategieRMTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepTv" />
+                                                <RadioButton fx:id="rbStrategieLMWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepWz" />
+                                                <RadioButton fx:id="rbStrategieMMWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepWz" />
+                                                <RadioButton fx:id="rbStrategieRMWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepWz" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                              </children>
                                           </HBox>
@@ -250,11 +250,11 @@
                                              <children>
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton fx:id="rbStrategieLOTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="R" toggleGroup="$StrategieGroepTv" />
+                                                <RadioButton fx:id="rbStrategieLOWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="R" toggleGroup="$StrategieGroepWz" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton fx:id="rbStrategieMOTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepTv" />
+                                                <RadioButton fx:id="rbStrategieMOWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" toggleGroup="$StrategieGroepWz" />
                                                 <Label prefHeight="30.0" prefWidth="30.0" />
-                                                <RadioButton fx:id="rbStrategieROTv" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="S" toggleGroup="$StrategieGroepTv" />
+                                                <RadioButton fx:id="rbStrategieROWz" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="S" toggleGroup="$StrategieGroepWz" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -271,10 +271,11 @@
                                     <HBox>
                                        <children>
                                           <ComboBox fx:id="cbLevensduurWz" prefHeight="30.0" prefWidth="210.0" />
-                                          <Button fx:id="btnLevensduurTv" mnemonicParsing="false" onMouseClicked="#ToevoegenCommensalismeMulti" prefHeight="30.0" prefWidth="30.0" text="+" />
+                                          <Button fx:id="btnLevensduurWz" mnemonicParsing="false" onMouseClicked="#click_toevoegenLevensduurWz" prefHeight="30.0" prefWidth="30.0" text="+" />
+                                          <Button fx:id="btnLevensduurVerwijderenWz" mnemonicParsing="false" onMouseClicked="#click_verwijderenLevensduurWz" prefHeight="31.0" prefWidth="36.0" text="-" />
                                        </children>
                                     </HBox>
-                                    <ListView fx:id="lvLevensduurTv" prefHeight="176.0" prefWidth="240.0" />
+                                    <ListView fx:id="lvLevensduurWz" prefHeight="176.0" prefWidth="240.0" />
                                  </children>
                               </VBox>
                               <Button fx:id="btnTest" layoutX="329.0" layoutY="251.0" mnemonicParsing="false" text="Button" />
@@ -637,18 +638,18 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Spinner fx:id="spinMaxBladhJanTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhFebTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhMaaTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhAprTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhMeiTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhJunTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhJulTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhAugTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhSeptTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhOktTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhNovTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBladhDecTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhJanWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhFebWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhMaaWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhAprWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhMeiWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhJunWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhJulWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhAugWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhSeptWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhOktWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhNovWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBladhDecWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
                                        </children>
                                     </HBox>
                                     <HBox>
@@ -668,8 +669,8 @@
                                           <ComboBox fx:id="cbBladkleurAugWz" prefHeight="30.0" prefWidth="80.0" />
                                           <ComboBox fx:id="cbBladkleurSeptWz" prefHeight="30.0" prefWidth="80.0" />
                                           <ComboBox fx:id="cbBladkleurOktWz" prefHeight="30.0" prefWidth="80.0" />
-                                          <ComboBox fx:id="cbBladkleurNovTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <ComboBox fx:id="cbBladkleurDecTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurNovWz" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBladkleurDecWz" prefHeight="30.0" prefWidth="80.0" />
                                        </children>
                                     </HBox>
                                     <HBox>
@@ -679,18 +680,18 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Spinner fx:id="spinMinBloeihJanTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihFebTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihMaaTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihAprTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihMeiTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihJunTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihJulTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihAugTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihSeptTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihOktTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihNovTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMinBloeihDecTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihJanWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihFebWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihMaaWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihAprWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihMeiWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihJunWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihJulWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihAugWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihSeptWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihOktWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihNovWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMinBloeihDecWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
                                        </children>
                                     </HBox>
                                     <HBox>
@@ -700,18 +701,18 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <Spinner fx:id="spinMaxBloeihJanTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihFebTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihMaaTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihAprTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihMeiTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihJunTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihJulTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihAugTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihSeptTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihOktTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihNovTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
-                                          <Spinner fx:id="spinMaxBloeihDecTv" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihJanWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihFebWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihMaaWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihAprWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihMeiWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihJunWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihJulWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihAugWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihSeptWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihOktWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihNovWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
+                                          <Spinner fx:id="spinMaxBloeihDecWz" max="10000" min="0" prefHeight="30.0" prefWidth="80.0" />
                                        </children>
                                     </HBox>
                                     <HBox>
@@ -731,8 +732,8 @@
                                           <ComboBox fx:id="cbBloeikleurAugWz" prefHeight="30.0" prefWidth="80.0" />
                                           <ComboBox fx:id="cbBloeikleurSeptWz" prefHeight="30.0" prefWidth="80.0" />
                                           <ComboBox fx:id="cbBloeikleurOktWz" prefHeight="30.0" prefWidth="80.0" />
-                                          <ComboBox fx:id="cbBloeikleurNovTv" prefHeight="30.0" prefWidth="80.0" />
-                                          <ComboBox fx:id="cbBloeikleurDecTv" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBloeikleurNovWz" prefHeight="30.0" prefWidth="80.0" />
+                                          <ComboBox fx:id="cbBloeikleurDecWz" prefHeight="30.0" prefWidth="80.0" />
                                        </children>
                                     </HBox>
                                  </children>
