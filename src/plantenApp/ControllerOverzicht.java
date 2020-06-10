@@ -398,7 +398,7 @@ public class ControllerOverzicht {
         BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
         ExtraDAO extraDAO = new ExtraDAO(dbConnection);
         System.out.println(plant.getLaatste_update_door());
-        plantDAO.createplant(plant,0,plant.getLaatste_update_door());
+        plantDAO.createplant(plant,plant.getStatus(),plant.getLaatste_update_door());
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
         fenotypeDAO.createfenotype(fenotype);
         for (int j = 0; j < fenoMulti_eigenschaps.size(); j++) {

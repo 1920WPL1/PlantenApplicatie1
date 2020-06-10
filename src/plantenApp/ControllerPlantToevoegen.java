@@ -232,7 +232,6 @@ public class ControllerPlantToevoegen {
      * mvg
      * Arne xx    <3 *
      * */
-
     public void initialize() throws SQLException {
         //connectie met database maken
         dbConnection = Database.getInstance().getConnection();
@@ -364,7 +363,7 @@ public class ControllerPlantToevoegen {
     }
     //als er op planttoevoegen geclicked wordt dan worden alle gegevens in verschillende arrays gestoken
     // op het einde wordt het beheer scherm geopend
-    public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException, IOException {
+    public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws Exception {
         createplant();//ik //done
         createNaam();
         createAbiotischefactoren();//afgewerkt //done
@@ -405,7 +404,6 @@ public class ControllerPlantToevoegen {
             return combobox.getSelectedItem().toString();
         }
     }
-
     public Integer comboboxCheckInteger(SingleSelectionModel<String> combobox) {
         if (combobox.isEmpty()) {
             return 0;
@@ -454,7 +452,6 @@ public class ControllerPlantToevoegen {
         if(rbSmallePluimTv.isSelected()){return "Smalle pluim";}
         return "";
     }
-
     public void createplant() throws SQLException, Exception {
         //Aanmaken variabelen
         //volledig toevoegen in databank vanuit scherm, waarschijnlijk nog iets toevoegen voor te kijken of de naam al in de databank zit
@@ -469,7 +466,6 @@ public class ControllerPlantToevoegen {
         String srolGebruiker = gebruikerDAO.getRolMetEmail(sEmailadres);
         this.plantid = maxidplant;
         plantid = maxidplant + 1;
-        String srolGebruiker = "";
         String sErrorTitel = "Fout toevoegen plant";
         int ix = 0, iy = 0, iStatus = 0;
 
@@ -619,16 +615,17 @@ public class ControllerPlantToevoegen {
                 System.out.println(iDubbeleNaam + " is iDubbelenaam");
                 //Toevoegen plant docent/admin
                 if (srolGebruiker.equals("admin") || srolGebruiker.equals("docent")) {
-
+                    System.out.println("plaa,t aangemaakt");
                     iStatus = 2;
-                    Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, ix, iy, sFgsv);
-                    plantDAO.createplant(plant, iStatus, iGebruikerID);
+                    Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, ix, iy, sFgsv,iStatus,iGebruikerID);
+                    plantss.add(plant);
                 }
                 //Toevoegen plant als leerling/gast
                 else {
+                    System.out.println("plant aangemaakt");
                     iStatus = 1;
-                    Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, ix, iy, sFgsv);
-                    plantDAO.createplant(plant, iStatus, iGebruikerID);
+                    Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, ix, iy, sFgsv,iStatus,iGebruikerID);
+                    plantss.add(plant);
                 }
             }
             //Als plant bestaat waarschuwing geven
@@ -647,7 +644,6 @@ public class ControllerPlantToevoegen {
 
 
     }
-
     public void createAbiotischefactoren() throws SQLException {
         //alles van scherm direct naar databank aangezien hier de input enkel kan gekozen worden uit gegeven lijsten
         //deze functie is afgewerkt
@@ -656,14 +652,12 @@ public class ControllerPlantToevoegen {
         AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio + 1, plantid, cbBezonningTv.getValue(), cbGrondsoortTv.getValue(), cbVochtbehoefteTv.getValue(), cbVoedingsbehoefteTv.getValue(), cbReactieAntaTv.getValue());
         abiotischeFactorenn.add(abiotischeFactoren);
     }
-
     public void createCommensalisme() throws SQLException {
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
         int maxidcommensalisme = commensalismeDAO.getmaxid();
         Commensalisme commensalisme = new Commensalisme(maxidcommensalisme + 1, plantid, strategieCheck(), comboboxCheckString(cbOntwikkelingssnelheidTv.getSelectionModel()));
         commensalismes.add(commensalisme);
     }
-
     public String strategieCheck() {
         if (rbStrategieTopTv.isSelected()) {
             return "C";
@@ -684,7 +678,6 @@ public class ControllerPlantToevoegen {
             return "";
         }
     }
-
     public void createExtra() throws SQLException {
         //kan pas volledig gedaan worden wanneer er de kwestie van de eetbaar/kruidgebruik splitsing opgelost is
         int valueNectarwaarde = Integer.parseInt(NectarwaardeValueTv.getText());
@@ -699,7 +692,6 @@ public class ControllerPlantToevoegen {
         extrass.add(extra);
         //ExtraDAO.createExtra(extra);
     }
-
     public String vorstgevoeligCheck() {
         if (rbVorstgevoeligJaTv.isSelected()) {
             return "ja";
@@ -710,7 +702,6 @@ public class ControllerPlantToevoegen {
             return "";
         }
     }
-
     public String eetbaarCheck() {
         if (rbEetbaarJaTv.isSelected()) {
             return "ja";
@@ -721,7 +712,6 @@ public class ControllerPlantToevoegen {
             return "";
         }
     }
-
     public String geurendCheck() {
         if (rbGeurendJaTv.isSelected()) {
             return "ja";
@@ -732,7 +722,6 @@ public class ControllerPlantToevoegen {
             return "";
         }
     }
-
     public String kruidgebruikCheck() {
         if (rbKruidgebruikJaTv.isSelected()) {
             return "ja";
@@ -743,7 +732,6 @@ public class ControllerPlantToevoegen {
             return "";
         }
     }
-
     public String bijvriendelijkCheck() {
         if (rbBijvriendelijkJaTv.isSelected()) {
             return "ja";
@@ -754,7 +742,6 @@ public class ControllerPlantToevoegen {
             return "";
         }
     }
-
     public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
         if (!lvLevensduurTv.getItems().contains(cbLevensduurTv.getValue())) {
             lvLevensduurTv.getItems().add((String) cbLevensduurTv.getValue());
@@ -769,7 +756,6 @@ public class ControllerPlantToevoegen {
             });
         }
     }
-
     public void createCommensalismeMulti() throws SQLException {
         //aantal elementen in bovenstaande lijst bijhouden
         int aantalCommMulti = 0;
@@ -819,14 +805,12 @@ public class ControllerPlantToevoegen {
         }
         AantalPerElCommMulti.add(aantalCommMulti);
     }
-
     public void createFoto() throws SQLException {
         FotoDAO fotoDAO = new FotoDAO(dbConnection);
         int maxIdFoto = fotoDAO.getmaxid();
         Foto foto = new Foto(maxIdFoto + 1, plantid, "a", "b", null);
         fotoDAO.createFoto(foto);
     }
-
     public void createfenotypemulti() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
         int maxid = fenotypeDAO.getmaxidmulti();
@@ -856,7 +840,6 @@ public class ControllerPlantToevoegen {
 
 
     }
-
     private void createAbiotischeMulti() throws SQLException {
         //aantal el toegevoegd in abmulti lijst bijhouden
         int aantalAbMultiEl = 0;
@@ -872,7 +855,6 @@ public class ControllerPlantToevoegen {
         }
         AantalPerElAbMulti.add(aantalAbMultiEl);
     }
-
     public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) {
         System.out.println(cbHabitatTv.getValue());
         if (!lvHabitatTv.getItems().contains(cbHabitatTv.getValue())) {
@@ -889,7 +871,6 @@ public class ControllerPlantToevoegen {
             });
         }
     }
-
     // de arraylist zijn de waarden van de multies die bij de specifieke plant horen;
     public void createdatabase(Plant plant , AbiotischeFactoren abiotischeFactoren , Fenotype fenotype , ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschaps , ArrayList<AbioMulti_Eigenschap> abiottisschemulti_eigenschaps,Commensalisme commensalisme, ArrayList<CommMulti_Eigenschap> commMulti_eigenschaps,ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps, Extra extra) throws SQLException {
         PlantDAO plantDAO = new PlantDAO(dbConnection);
@@ -931,7 +912,6 @@ public class ControllerPlantToevoegen {
             ShowError("Error bij toevoegen plant", "Deze plant bestaat al.");
         }
     }
-
     public void ShowError(String sTitel, String sMessage) {
         //tonen van error
         JOptionPane.showMessageDialog(null, sMessage, "InfoBox: " + sTitel, JOptionPane.INFORMATION_MESSAGE);
