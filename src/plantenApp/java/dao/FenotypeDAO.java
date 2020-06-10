@@ -50,7 +50,7 @@ public class FenotypeDAO implements Queries {
                     rs.getInt("fenotype_id"),
                     rs.getInt("plant_id"),
                     rs.getString("bladvorm"),
-                    rs.getInt("levensvorm"),
+                    rs.getString("levensvorm"),
                     rs.getString("habitus"),
                     rs.getString("bloeiwijze"),
                     rs.getInt("bladgrootte"),
@@ -207,7 +207,7 @@ public class FenotypeDAO implements Queries {
         stmtInsert.setInt(1,fenotype.getId());
         stmtInsert.setInt(2, fenotype.getPlant_id());
         stmtInsert.setString(3,fenotype.getBladvorm());
-        stmtInsert.setInt(4,fenotype.getLevensvorm());
+        stmtInsert.setString(4,fenotype.getLevensvorm());
         stmtInsert.setString(5,fenotype.getHabitus());
         stmtInsert.setString(6,fenotype.getBloeiwijze());
         stmtInsert.setInt(7,fenotype.getBladgrootte());

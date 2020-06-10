@@ -212,6 +212,15 @@ public class ControllerPlantToevoegen {
     public  int iGebruikerID;
     //Moet meegekregen worden van login
     private String sEmailadres;
+    /**
+     * @author: Arne Vandenborre
+     *Wout is helemaal NIET veranderd
+     * Kasper eeft MEERDERE vriendinnen dit kan dus helemaal NIET
+     * Kevin doet zich voor als een 90's kid klopt NIET
+     * Mathias valt NIET  op
+     * mvg
+     * Arne xx    <3 *
+     * */
 
     public void initialize() throws SQLException {
         dbConnection = Database.getInstance().getConnection();
@@ -333,6 +342,7 @@ public class ControllerPlantToevoegen {
     }
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws SQLException, IOException {
         createplant();//ik //done
+        //createNaam();
         createAbiotischefactoren();//afgewerkt //done
         createAbiotischeMulti();//Mathias //done
         createfenotype();//afgewerkt // done*/
@@ -362,7 +372,7 @@ public class ControllerPlantToevoegen {
     }
     public String comboboxCheckString(SingleSelectionModel <String> combobox) {
         if(combobox.isEmpty()) {
-            return "leeg";
+            return "";
         }
         else {
             return combobox.getSelectedItem().toString();
@@ -392,19 +402,19 @@ public class ControllerPlantToevoegen {
         if(rbSucculentenTv.isSelected()){ return "Succulenten";}
         if(rbPollenvormersTv.isSelected()){ return "Pollenvormers";}
         if(rbParasolvormigTv.isSelected()){ return "Parasolvormig";}
-        return null;
+        return "";
     }
-    public int levensvormCheck(){
-        if(rbHydro1Tv.isSelected()){return 1;}
-        if(rbHydro2Tv.isSelected()){return 2;}
-        if(rbHeloTv.isSelected()){return 3;}
-        if(rbCrypto1Tv.isSelected()){return 4;}
-        if(rbCrypto2Tv.isSelected()){return 5;}
-        if(rbHemikryptoTv.isSelected()){return 6;}
-        if(rbChamae1Tv.isSelected()){return 7;}
-        if(rbChamae2Tv.isSelected()){return 8;}
-        if(rbFaneroTv.isSelected()){return 9;}
-        return 0;
+    public String levensvormCheck(){
+        if(rbHydro1Tv.isSelected()){return "1. Hydrofyt";}
+        if(rbHydro2Tv.isSelected()){return "2. Hydrofyt";}
+        if(rbHeloTv.isSelected()){return "3. Helofyt";}
+        if(rbCrypto1Tv.isSelected()){return "4. Cryptophyt";}
+        if(rbCrypto2Tv.isSelected()){return "5. Cryptophyt";}
+        if(rbHemikryptoTv.isSelected()){return "6. Hemikryptofyt";}
+        if(rbChamae1Tv.isSelected()){return "7. Chamaefyt";}
+        if(rbChamae2Tv.isSelected()){return "8. Chamaefyt";}
+        if(rbFaneroTv.isSelected()){return "9. Fanerophyt";}
+        return "";
     }
     public String bloeiwijzeCheck(){
         if(rbAarTv.isSelected()){return "Aar";}
@@ -415,7 +425,7 @@ public class ControllerPlantToevoegen {
         if(rbSchotelTv.isSelected()){return "Schotel";}
         if(rbSchermTv.isSelected()){return "Scherm";}
         if(rbSmallePluimTv.isSelected()){return "Smalle pluim";}
-        return null;
+        return "";
     }
     public void createplant() throws SQLException {
         //Aanmaken variabelen
@@ -522,7 +532,7 @@ public class ControllerPlantToevoegen {
             return "S";
         }
         else {
-            return "null";
+            return "";
         }
     }
     public void createExtra() throws SQLException {
@@ -547,7 +557,7 @@ public class ControllerPlantToevoegen {
             return "nee";
         }
         else {
-            return "null";
+            return "";
         }
     }
     public String eetbaarCheck() {
@@ -558,7 +568,7 @@ public class ControllerPlantToevoegen {
             return "nee";
         }
         else {
-            return "null";
+            return "";
         }
     }
     public String geurendCheck() {
@@ -569,7 +579,7 @@ public class ControllerPlantToevoegen {
             return "nee";
         }
         else {
-            return "null";
+            return "";
         }
     }
     public String kruidgebruikCheck() {
@@ -580,7 +590,7 @@ public class ControllerPlantToevoegen {
             return "nee";
         }
         else {
-            return "null";
+            return "";
         }
     }
     public String bijvriendelijkCheck() {
@@ -591,7 +601,7 @@ public class ControllerPlantToevoegen {
             return "nee";
         }
         else {
-            return "null";
+            return "";
         }
     }
     public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) {
@@ -739,6 +749,16 @@ public class ControllerPlantToevoegen {
         else{
             DubbelePlantWaarschuwing();
         }
+    }
+
+    public void click_verwijderenHabitat(MouseEvent mouseEvent) {
+        final int selectedIndex = lvHabitatTv.getSelectionModel().getSelectedIndex();
+        lvHabitatTv.getItems().remove(selectedIndex);
+    }
+
+    public void click_verwijderenLevensduur(MouseEvent mouseEvent) {
+        final int selectedIndex = lvLevensduurTv.getSelectionModel().getSelectedIndex();
+        lvLevensduurTv.getItems().remove(selectedIndex);
     }
 }
 
