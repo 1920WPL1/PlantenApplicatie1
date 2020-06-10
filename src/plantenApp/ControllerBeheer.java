@@ -173,9 +173,17 @@ public class ControllerBeheer {
         for (int m = 0; m <  ControllerPlantToevoegen.beheerdaad_eigenschapss.size(); m++) {
             beheerDAO.createBeheer( ControllerPlantToevoegen.beheerdaad_eigenschapss.get(m), planid);
         }*/
-        openNieuwScherm(mouseEvent);
-        System.out.println(ControllerPlantToevoegen.plantss.get(0).getFgsv());
-
+        try {
+            openNieuwScherm(mouseEvent);
+        }
+        catch (Exception e) {
+            Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(maxidbeheer+1 , "", "", "", 0);
+            ControllerPlantToevoegen.beheerdaad_eigenschapss.add(beheerdaad_eigenschap);
+            Beheer beheer = new Beheer(maxidbeheer+1, ControllerPlantToevoegen.beheerdaad_eigenschapss);
+            ControllerPlantToevoegen.beheerss.add(beheer);
+            ControllerPlantToevoegen.AantalPerElBehMulti.add(1);
+            openNieuwScherm(mouseEvent);
+        }
     }
 
     public void openNieuwScherm(MouseEvent mouseEvent) throws IOException {
