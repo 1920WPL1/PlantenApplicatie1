@@ -1,6 +1,8 @@
 package plantenApp;
 
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -9,9 +11,11 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
+import javax.sound.sampled.Control;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -189,6 +193,7 @@ public class ControllerPlantToevoegen {
     public ToggleGroup bloeiwijzegroepTv;
     public ToggleGroup habitusgroepTv;
     public ToggleGroup lvTv;
+    public ToggleGroup StrategieGroepTv;
     private Connection dbConnection;
     private AbiotischeFactorenDAO abiotischeFactorenDAO;
     public static int plantid;
@@ -226,7 +231,329 @@ public class ControllerPlantToevoegen {
 
         //Opvullen van emailadres om mee te geven met toevoegen plant
         sEmailadres = "kurt.engelbrecht@vives.be";
+
+        if (plantss.size()>0) {
+            try {
+                OpnieuwInladen(0);
+            }
+            catch (Exception ex) {
+                System.out.println(ex);
+            }
+        }
     }
+
+    public void OpnieuwInladen(int indexArrays) {
+        //Plant
+        Plant p = ControllerPlantToevoegen.plantss.get(indexArrays);
+        cboTypeTv.getSelectionModel().select(p.getPlantType());
+        txtFamilieTv.setText(p.getFamilie());
+        txtGeslachtTv.setText(p.getGeslacht());
+        txtSoortTv.setText(p.getSoort());
+        txtVariantTv.setText(p.getVariatie());
+        txtDichtheidXTv.setText(String.valueOf(p.getMinPlantdichtheid()));
+        txtDichtheidYTv.setText(String.valueOf(p.getMaxPlantdichtheid()));
+
+        //Abiotische factoren
+        AbiotischeFactoren af = ControllerBeheer.abiotischeFactorenn2.get(indexArrays);
+        cbBezonningTv.getSelectionModel().select(af.getBezonning());
+        cbVochtbehoefteTv.getSelectionModel().select(af.getVochtbehoefte());
+        cbVoedingsbehoefteTv.getSelectionModel().select(af.getVoedingsbehoefte());
+        cbReactieAntaTv.getSelectionModel().select(af.getReactieAntagonistischeOmgeving());
+        cbGrondsoortTv.getSelectionModel().select(af.getGrondsoort());
+        int teller = 0;
+        for(int i = 0; i<indexArrays;i++){
+            teller +=ControllerBeheer.AantalPerElAbMulti2.get(i);
+        }
+        int eindplaats = teller + ControllerBeheer.AantalPerElAbMulti2.get(indexArrays);
+        for(int j = teller; j<eindplaats;j++){
+            lvHabitatTv.getItems().add(ControllerBeheer.abiotischmulti2.get(j).getValue());
+        }
+
+        //Commensalisme
+        Commensalisme c = ControllerBeheer.commensalismes2.get(indexArrays);
+        cbOntwikkelingssnelheidTv.getSelectionModel().select(c.getOntwikkelingssnelheid());
+        int tellerc = 0;
+        for(int i = 0; i<indexArrays;i++){
+            tellerc +=ControllerBeheer.AantalPerElCommMulti2.get(i);
+        }
+        int eindplaatsc = tellerc + ControllerBeheer.AantalPerElCommMulti2.get(indexArrays);
+        for(int j = tellerc; j<eindplaatsc;j++){
+            if(ControllerBeheer.commMulti_eigenschapss2.get(j).getNaam().matches("sociabiliteit")){
+                if(ControllerBeheer.commMulti_eigenschapss2.get(j).getValue().matches("1")){chkSociabiliteit1Tv.setSelected(true);}
+                if(ControllerBeheer.commMulti_eigenschapss2.get(j).getValue().matches("2")){chkSociabiliteit2Tv.setSelected(true);}
+                if(ControllerBeheer.commMulti_eigenschapss2.get(j).getValue().matches("3")){chkSociabiliteit3Tv.setSelected(true);}
+                if(ControllerBeheer.commMulti_eigenschapss2.get(j).getValue().matches("4")){chkSociabiliteit4Tv.setSelected(true);}
+                if(ControllerBeheer.commMulti_eigenschapss2.get(j).getValue().matches("5")){chkSociabiliteit5Tv.setSelected(true);}
+            }
+            if(ControllerBeheer.commMulti_eigenschapss2.get(j).getNaam().matches("levensduur")){
+                lvLevensduurTv.getItems().add(ControllerBeheer.commMulti_eigenschapss2.get(j).getValue());
+            }
+        }
+        Commensalisme hulpc = ControllerBeheer.commensalismes2.get(0);
+        switch(hulpc.getStrategie()){
+            case "": StrategieGroepTv.selectToggle(rbStrategieUnknownTv); break;
+            case "C": StrategieGroepTv.selectToggle(rbStrategieTopTv); break;
+            case "C-S-R": StrategieGroepTv.selectToggle(rbStrategieMMTv); break;
+            case "C-R": StrategieGroepTv.selectToggle(rbStrategieLMTv); break;
+            case "C-S": StrategieGroepTv.selectToggle(rbStrategieRMTv); break;
+            case "R": StrategieGroepTv.selectToggle(rbStrategieLOTv); break;
+            case "S-R": StrategieGroepTv.selectToggle(rbStrategieMOTv); break;
+            case "S": StrategieGroepTv.selectToggle(rbStrategieROTv); break;
+        }
+
+        //Extra
+        Extra e = ControllerBeheer.extrass2.get(indexArrays);
+        slNectarwaardeTv.setValue(Double.parseDouble(String.valueOf(e.getNectarwaarde())));
+        slPollenwaardeTv.setValue(Double.parseDouble(String.valueOf(e.getPollenwaarde())));
+        Selecteerjuisteradiobutton(rbBijvriendelijkJaTv,rbBijvriendelijkNeeTv,rbBijvriendelijkNullTv, e.getBijvriendelijk());
+        Selecteerjuisteradiobutton(rbVlindervriendelijkJaTv,rbVorstgevoeligNeeTv,rbVlindervriendelijkNullTv, e.getVlindervriendelijk());
+        Selecteerjuisteradiobutton(rbEetbaarJaTv,rbEetbaarNeeTv,rbEetbaarNullTv,e.getEetbaar());
+        Selecteerjuisteradiobutton(rbKruidgebruikJaTv,rbKruidgebruikNeeTv,rbKruidgebruikNullTv,e.getKruidgebruik());
+        Selecteerjuisteradiobutton(rbGeurendJaTv,rbGeurendNeeTv,rbGeurendNullTv,e.getGeurend());
+        Selecteerjuisteradiobutton(rbVorstgevoeligJaTv,rbVorstgevoeligNeeTv,rbVorstgevoeligNullTv,e.getVorstgevoelig());
+
+        //Fenotype
+        Fenotype f = ControllerBeheer.fenotypess2.get(indexArrays);
+        cbBladgrootteTotTv.getSelectionModel().select(f.getBladgrootte());
+        System.out.println("Bladgrootte: " + f.getBladgrootte());
+        cbBladvormTv.getSelectionModel().select(f.getBladvorm());
+        cbRatioTv.getSelectionModel().select(f.getRatio_bloei_blad());
+        cbSpruitfenologieTv.getSelectionModel().select(f.getSpruitfenologie());
+
+        if (f.getLevensvorm() == "1. Hydrofyt") {
+            rbHydro1Tv.setSelected(true);
+        }
+        else if (f.getLevensvorm() == "2. Hydrofyt") {
+            rbHydro2Tv.setSelected(true);
+        }
+        else if (f.getLevensvorm() == "3. Helofyt") {
+            rbHeloTv.setSelected(true);
+        }
+        else if (f.getLevensvorm() == "4. Cryptophyt") {
+            rbCrypto1Tv.setSelected(true);
+        }
+        else if (f.getLevensvorm() == "5. Cryptophyt") {
+            rbCrypto2Tv.setSelected(true);
+        }
+        else if (f.getLevensvorm() == "6. Hemikryptofyt") {
+            rbHemikryptoTv.setSelected(true);
+        }
+        else if (f.getLevensvorm() == "7. Chamaefyt") {
+            rbChamae1Tv.setSelected(true);
+        }
+        else if (f.getLevensvorm() == "8. Chamaefyt") {
+            rbChamae2Tv.setSelected(true);
+        }
+        else if (f.getLevensvorm() == "9. Fanerophyt") {
+            rbFaneroTv.setSelected(true);
+        }
+        else {
+            System.out.println("Geen waarde voor levensvorm meegegeven");
+        }
+
+        //selectie van max bladhoogte
+        for(int i=0;i<5;i++){
+            if(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getNaam().matches("Bladhoogte")){
+                spinMaxBladhJanTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJan()));
+                spinMaxBladhFebTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getFeb()));
+                spinMaxBladhMaaTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getMaa()));
+                spinMaxBladhAprTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getApr()));
+                spinMaxBladhMeiTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getMei()));
+                spinMaxBladhJunTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJun()));
+                spinMaxBladhJulTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJul()));
+                spinMaxBladhAugTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getAug()));
+                spinMaxBladhSeptTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getSep()));
+                spinMaxBladhOktTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getOkt()));
+                spinMaxBladhNovTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getNov()));
+                spinMaxBladhDecTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getDec()));
+            }
+        }
+
+        //selectie van max bloeihoogte
+        for(int i=0;i<5;i++){
+            if(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getNaam().matches("Max Bloeihoogte")){
+                spinMaxBloeihJanTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJan()));
+                spinMaxBloeihFebTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getFeb()));
+                spinMaxBloeihMaaTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getMaa()));
+                spinMaxBloeihAprTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getApr()));
+                spinMaxBloeihMeiTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getMei()));
+                spinMaxBloeihJunTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJun()));
+                spinMaxBloeihJulTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJul()));
+                spinMaxBloeihAugTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getAug()));
+                spinMaxBloeihSeptTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getSep()));
+                spinMaxBloeihOktTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getOkt()));
+                spinMaxBloeihNovTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getNov()));
+                spinMaxBloeihDecTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getDec()));
+            }
+        }
+
+        //selectie van min bloeihoogte
+        for(int i=0;i<5;i++){
+            if(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getNaam().matches("Min Bloeihoogte")){
+                spinMinBloeihJanTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJan()));
+                spinMinBloeihFebTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getFeb()));
+                spinMinBloeihMaaTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getMaa()));
+                spinMinBloeihAprTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getApr()));
+                spinMinBloeihMeiTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getMei()));
+                spinMinBloeihJunTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJun()));
+                spinMinBloeihJulTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJul()));
+                spinMinBloeihAugTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getAug()));
+                spinMinBloeihSeptTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getSep()));
+                spinMinBloeihOktTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getOkt()));
+                spinMinBloeihNovTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getNov()));
+                spinMinBloeihDecTv.getValueFactory().setValue(Integer.parseInt(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getDec()));
+            }
+        }
+
+        //selectie van bloeikleur en bladkleur insteken
+        //selectie insteken van bladkleur, overlopen van lijst voor eigenschap met bladkleur te vinden, dan de waarden daarvan in deze comboboxen steken
+        for(int i=0;i<5;i++){
+            if(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getNaam().matches("Bladkleur")){
+                cbBladkleurJanTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJan());
+                cbBladkleurFebTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getFeb());
+                cbBladkleurMaaTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getMaa());
+                cbBladkleurAprTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getApr());
+                cbBladkleurMeiTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getMei());
+                cbBladkleurJunTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJun());
+                cbBladkleurJulTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJul());
+                cbBladkleurAugTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getAug());
+                cbBladkleurSeptTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getSep());
+                cbBladkleurOktTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getOkt());
+                cbBladkleurNovTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getNov());
+                cbBladkleurDecTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getDec());
+            }
+        }
+
+        //selectie insteken van bladkleur, overlopen van lijst voor eigenschap met bloeikleur te vinden, dan de waarden daarvan in deze comboboxen steken
+        for(int i=0;i<5;i++){
+            if(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getNaam().matches("Bloeikleur")){
+                cbBloeikleurJanTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJan());
+                cbBloeikleurFebTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getFeb());
+                cbBloeikleurMaaTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getMaa());
+                cbBloeikleurAprTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getApr());
+                cbBloeikleurMeiTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getMei());
+                cbBloeikleurJunTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJun());
+                cbBloeikleurJulTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getJul());
+                cbBloeikleurAugTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getAug());
+                cbBloeikleurSeptTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getSep());
+                cbBloeikleurOktTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getOkt());
+                cbBloeikleurNovTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getNov());
+                cbBloeikleurDecTv.getSelectionModel().select(ControllerBeheer.fenoMulti_eigenschapss2.get(i).getDec());
+            }
+        }
+
+        //Habitus
+        if(f.getHabitus() == "tufted")
+        {
+            rbTuftedTv.setSelected(true);
+        }
+        if(f.getHabitus() == "Upright arching")
+        {
+            rbUprightarchingTv.setSelected(true);
+        }
+        if(f.getHabitus() == "Arching")
+        {
+            rbArchingTv.setSelected(true);
+        }
+        if(f.getHabitus() == "Upright Divergent")
+        {
+            rbUprightDivergentTv.setSelected(true);
+        }
+        if(f.getHabitus() == "Upright erect")
+        {
+            rbUprightErectTv.setSelected(true);
+        }
+        if(f.getHabitus() == "Mounted")
+        {
+            rbMountedTv.setSelected(true);
+        }
+        if(f.getHabitus() == "Kruipend of horizontaal groeiend of mattenvormend")
+        {
+            rbKOfHGOfMTv.setSelected(true);
+        }
+        if(f.getHabitus() == "Rond- of waaiervormig")
+        {
+            rbRondOfWaaiervormigTv.setSelected(true);
+        }
+        if(f.getHabitus() == "Kussenvormend")
+        {
+            rbKussenvormendTv.setSelected(true);
+        }
+        if(f.getHabitus() == "Zuilvormig")
+        {
+            rbZuilvormigTv.setSelected(true);
+        }
+        if(f.getHabitus() == "Uitbuigend")
+        {
+            rbUitbuigendTv.setSelected(true);
+        }
+        if(f.getHabitus() == "(Wortel)rozetplant")
+        {
+            rbWortelrozetplantTv.setSelected(true);
+        }
+        if(f.getHabitus() == "Succulenten")
+        {
+            rbSucculentenTv.setSelected(true);
+        }
+        if(f.getHabitus() == "Pollenvormers")
+        {
+            rbPollenvormersTv.setSelected(true);
+        }
+        if(f.getHabitus() == "Parasolvormig")
+        {
+            rbParasolvormigTv.setSelected(true);
+        }
+
+        //Bloeiwijze
+        if(f.getBloeiwijze() == "Aar")
+        {
+            rbAarTv.setSelected(true);
+        }
+        if(f.getBloeiwijze() == "Brede pluim")
+        {
+            rbBredePluimTv.setSelected(true);
+        }
+        if(f.getBloeiwijze() == "Etage")
+        {
+            rbEtageTv.setSelected(true);
+        }
+        if(f.getBloeiwijze() == "Bol of knop")
+        {
+            rbBolOfKnopTv.setSelected(true);
+        }
+        if(f.getBloeiwijze() == "Margrietachtig")
+        {
+            rbMargrietachtigTv.setSelected(true);
+        }
+        if(f.getBloeiwijze() == "Schotel")
+        {
+            rbSchotelTv.setSelected(true);
+        }
+        if(f.getBloeiwijze() == "Scherm")
+        {
+            rbSchermTv.setSelected(true);
+        }
+        if(f.getBloeiwijze() == "Smalle pluim")
+        {
+            rbSmallePluimTv.setSelected(true);
+        }
+    }
+
+    public void Selecteerjuisteradiobutton(RadioButton buttonja , RadioButton buttonnee , RadioButton buttonnull, String waarde)    {
+        if(waarde =="ja")
+        {
+            buttonja.setSelected(true);
+        }
+        if(waarde == "nee")
+        {
+            buttonnee.setSelected(true);
+        }
+        if(waarde == "null")
+        {
+            buttonnull.setSelected(true);
+        }
+    }
+
     public void Pollenwaarde()    {
         slNectarwaardeTv.setMax(5);
         slPollenwaardeTv.setMax(5);
@@ -342,8 +669,29 @@ public class ControllerPlantToevoegen {
         //createBeheer();//Wout dit moet nog verplaatst worden naar een button op beheer scherm //done
         createExtra();//Kasper
         //createFoto(); nog geen plaats of scherm voor een foto in toe te voegen
+        AllesInNieuweArrays();
         openNieuwScherm(mouseEvent);
     }
+
+    public void AllesInNieuweArrays() {
+        //In nieuwe arrays steken
+        ControllerBeheer.plantss2 = ControllerPlantToevoegen.plantss;
+        ControllerBeheer.abiotischeFactorenn2 = ControllerPlantToevoegen.abiotischeFactorenn;
+        ControllerBeheer.abiotischmulti2 = ControllerPlantToevoegen.abiotischmulti;
+        ControllerBeheer.commensalismes2 = ControllerPlantToevoegen.commensalismes;
+        ControllerBeheer.commMulti_eigenschapss2 = ControllerPlantToevoegen.commMulti_eigenschapss;
+        ControllerBeheer.extrass2 = ControllerPlantToevoegen.extrass;
+        ControllerBeheer.fenotypess2 = ControllerPlantToevoegen.fenotypess;
+        ControllerBeheer.fenoMulti_eigenschapss2 = ControllerPlantToevoegen.fenoMulti_eigenschapss;
+        ControllerBeheer.fotoss2 = ControllerPlantToevoegen.fotoss;
+        ControllerBeheer.beheerdaad_eigenschapss2 = ControllerPlantToevoegen.beheerdaad_eigenschapss;
+        ControllerBeheer.beheerss2 = ControllerPlantToevoegen.beheerss;
+
+        ControllerBeheer.AantalPerElAbMulti2 = ControllerPlantToevoegen.AantalPerElAbMulti;
+        ControllerBeheer.AantalPerElBehMulti2 = ControllerPlantToevoegen.AantalPerElBehMulti;
+        ControllerBeheer.AantalPerElCommMulti2 = ControllerPlantToevoegen.AantalPerElCommMulti;
+    }
+
     public void openNieuwScherm(MouseEvent mouseEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("view/BeheeBehandelingPlant.fxml"));
         Scene scen = new Scene(root);
@@ -351,7 +699,7 @@ public class ControllerPlantToevoegen {
         window.setScene(scen);
         window.show();
         scherm="beheer";
-        window.setMaximized(true);
+
     }
     public void createfenotype() throws SQLException {
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);

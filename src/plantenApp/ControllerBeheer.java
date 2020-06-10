@@ -40,9 +40,26 @@ public class ControllerBeheer {
     public CheckBox deccheckbox;
     public Button Opslaanbutton;
     public Label boodschaptxt;
+    public Button btnterug;
     private Connection dbConnection;
     private int planid;
     private int maxidbeheer;
+
+    public static ArrayList<Plant> plantss2 = new ArrayList<>();
+    public static ArrayList<AbiotischeFactoren> abiotischeFactorenn2 = new ArrayList<>();
+    public static ArrayList<AbioMulti_Eigenschap> abiotischmulti2 = new ArrayList<>();
+    public static ArrayList<Commensalisme> commensalismes2 = new ArrayList<>();
+    public static ArrayList<CommMulti_Eigenschap> commMulti_eigenschapss2 = new ArrayList<>();
+    public static ArrayList<Extra> extrass2 = new ArrayList<>();
+    public static ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschapss2 = new ArrayList<>();
+    public static ArrayList<Fenotype> fenotypess2 = new ArrayList<>();
+    public static ArrayList<Foto> fotoss2 = new ArrayList<>();
+    public static ArrayList<Beheer> beheerss2 = new ArrayList<>();
+    public static ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschapss2 = new ArrayList<>();
+
+    public static ArrayList<Integer>AantalPerElCommMulti2 = new ArrayList<>();
+    public static ArrayList<Integer> AantalPerElAbMulti2 = new ArrayList<>();
+    public static ArrayList<Integer> AantalPerElBehMulti2 = new ArrayList<>();
 
     public ControllerBeheer() {
     }
@@ -197,5 +214,32 @@ public class ControllerBeheer {
         System.out.println(ControllerPlantToevoegen.plantss.get(0).getFgsv());
     }
 
+    public void click_btnTerug(MouseEvent mouseEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("view/PlantToevoegen.fxml"));
+        Scene scen = new Scene(root);
+        Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        window.setScene(scen);
+        window.show();
+        window.setMaximized(true);
+
+        //In nieuwe arrays steken
+        /*
+        plantss2 = ControllerPlantToevoegen.plantss;
+        abiotischeFactorenn2 = ControllerPlantToevoegen.abiotischeFactorenn;
+        abiotischmulti2 = ControllerPlantToevoegen.abiotischmulti;
+        commensalismes2 = ControllerPlantToevoegen.commensalismes;
+        commMulti_eigenschapss2 = ControllerPlantToevoegen.commMulti_eigenschapss;
+        extrass2 = ControllerPlantToevoegen.extrass;
+        fenotypess2 = ControllerPlantToevoegen.fenotypess;
+        fenoMulti_eigenschapss2 = ControllerPlantToevoegen.fenoMulti_eigenschapss;
+        fotoss2 = ControllerPlantToevoegen.fotoss;
+        beheerdaad_eigenschapss2 = ControllerPlantToevoegen.beheerdaad_eigenschapss;
+        beheerss2 = ControllerPlantToevoegen.beheerss;
+
+        AantalPerElAbMulti2 = ControllerPlantToevoegen.AantalPerElAbMulti;
+        AantalPerElBehMulti2 = ControllerPlantToevoegen.AantalPerElBehMulti;
+        AantalPerElCommMulti2 = ControllerPlantToevoegen.AantalPerElCommMulti;
+         */
+    }
 }
 
