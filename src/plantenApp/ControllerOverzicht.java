@@ -236,7 +236,7 @@ public class ControllerOverzicht {
         lblNectarwaardeO.setText(String.valueOf(e.getNectarwaarde()));
         lblPollenwaardeO.setText(String.valueOf(e.getPollenwaarde()));
         lblBijvriendelijkO.setText(e.getBijvriendelijk());
-        lblVlindervriendelijkO.setText("Nergens in de databank of in de klasse Extra zitten er waarden voor vlindervriendelijk dus geeft ik dit label een belachelijk lange zin mee.");
+        lblVlindervriendelijkO.setText(e.getVlindervriendelijk());
         lblEetbaarO.setText(e.getEetbaar());
         lblKruidgebruikO.setText(e.getKruidgebruik());
         lblGeurendO.setText(e.getGeurend());
