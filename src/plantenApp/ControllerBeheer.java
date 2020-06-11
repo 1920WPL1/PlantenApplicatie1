@@ -222,24 +222,6 @@ public class ControllerBeheer {
         window.show();
         window.setMaximized(true);
 
-        //In nieuwe arrays steken
-        /*
-        plantss2 = ControllerPlantToevoegen.plantss;
-        abiotischeFactorenn2 = ControllerPlantToevoegen.abiotischeFactorenn;
-        abiotischmulti2 = ControllerPlantToevoegen.abiotischmulti;
-        commensalismes2 = ControllerPlantToevoegen.commensalismes;
-        commMulti_eigenschapss2 = ControllerPlantToevoegen.commMulti_eigenschapss;
-        extrass2 = ControllerPlantToevoegen.extrass;
-        fenotypess2 = ControllerPlantToevoegen.fenotypess;
-        fenoMulti_eigenschapss2 = ControllerPlantToevoegen.fenoMulti_eigenschapss;
-        fotoss2 = ControllerPlantToevoegen.fotoss;
-        beheerdaad_eigenschapss2 = ControllerPlantToevoegen.beheerdaad_eigenschapss;
-        beheerss2 = ControllerPlantToevoegen.beheerss;
-
-        AantalPerElAbMulti2 = ControllerPlantToevoegen.AantalPerElAbMulti;
-        AantalPerElBehMulti2 = ControllerPlantToevoegen.AantalPerElBehMulti;
-        AantalPerElCommMulti2 = ControllerPlantToevoegen.AantalPerElCommMulti;
-         */
     }
 }
 

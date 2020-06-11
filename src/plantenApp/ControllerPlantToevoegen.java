@@ -19,7 +19,6 @@ import javafx.stage.WindowEvent;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
-import javax.sound.sampled.Control;
 import java.awt.*;
 import java.lang.Object;
 
@@ -264,6 +263,7 @@ public class ControllerPlantToevoegen {
     }
 
     public void OpnieuwInladen(int indexArrays) {
+        System.out.println("Bezonning: " + ControllerBeheer.abiotischeFactorenn2.get(0).getBezonning());
         //Plant
         Plant p = ControllerPlantToevoegen.plantss.get(indexArrays);
         cboTypeTv.getSelectionModel().select(p.getPlantType());
@@ -281,15 +281,11 @@ public class ControllerPlantToevoegen {
         cbVoedingsbehoefteTv.getSelectionModel().select(af.getVoedingsbehoefte());
         cbReactieAntaTv.getSelectionModel().select(af.getReactieAntagonistischeOmgeving());
         cbGrondsoortTv.getSelectionModel().select(af.getGrondsoort());
-        int teller = 0;
-        for(int i = 0; i<indexArrays;i++){
-            teller +=ControllerBeheer.AantalPerElAbMulti2.get(i);
-        }
-        int eindplaats = teller + ControllerBeheer.AantalPerElAbMulti2.get(indexArrays);
-        for(int j = teller; j<eindplaats;j++){
-            lvHabitatTv.getItems().add(ControllerBeheer.abiotischmulti2.get(j).getValue());
-        }
 
+        for(int i =0;i<ControllerBeheer.abiotischmulti2.size();i++)
+        {
+            lvHabitatTv.getItems().add(ControllerBeheer.abiotischmulti2.get(i).getValue());
+        }
         //Commensalisme
         Commensalisme c = ControllerBeheer.commensalismes2.get(indexArrays);
         cbOntwikkelingssnelheidTv.getSelectionModel().select(c.getOntwikkelingssnelheid());
@@ -298,7 +294,7 @@ public class ControllerPlantToevoegen {
             tellerc +=ControllerBeheer.AantalPerElCommMulti2.get(i);
         }
         int eindplaatsc = tellerc + ControllerBeheer.AantalPerElCommMulti2.get(indexArrays);
-        for(int j = tellerc; j<eindplaatsc;j++){
+        for(int j = tellerc; j<ControllerBeheer.commMulti_eigenschapss2.size();j++){
             if(ControllerBeheer.commMulti_eigenschapss2.get(j).getNaam().matches("sociabiliteit")){
                 if(ControllerBeheer.commMulti_eigenschapss2.get(j).getValue().matches("1")){chkSociabiliteit1Tv.setSelected(true);}
                 if(ControllerBeheer.commMulti_eigenschapss2.get(j).getValue().matches("2")){chkSociabiliteit2Tv.setSelected(true);}
@@ -691,6 +687,19 @@ public class ControllerPlantToevoegen {
     //als er op planttoevoegen geclicked wordt dan worden alle gegevens in verschillende arrays gestoken
     // op het einde wordt het beheer scherm geopend
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws Exception {
+        plantss.clear();
+        abiotischeFactorenn.clear();
+        abiotischmulti.clear();
+        System.out.println("Size abio multi: " + abiotischmulti.size());
+        System.out.println("Size abio multi 2" + ControllerBeheer.abiotischmulti2.size() );
+        fenotypess.clear();
+        fenoMulti_eigenschapss.clear();
+        commensalismes.clear();
+        commMulti_eigenschapss.clear();
+        extrass.clear();
+        beheerss.clear();
+        fotoss.clear();
+
         createplant();//ik //done
         createAbiotischefactoren();//afgewerkt //done
         createAbiotischeMulti();//Mathias //done
@@ -708,6 +717,9 @@ public class ControllerPlantToevoegen {
     public void AllesInNieuweArrays() {
         //In nieuwe arrays steken
         ControllerBeheer.plantss2 = ControllerPlantToevoegen.plantss;
+        System.out.println("Variatie: " + ControllerBeheer.plantss2.get(0).getVariatie());
+        System.out.println("Variatie: " + plantss.get(0).getVariatie());
+
         ControllerBeheer.abiotischeFactorenn2 = ControllerPlantToevoegen.abiotischeFactorenn;
         ControllerBeheer.abiotischmulti2 = ControllerPlantToevoegen.abiotischmulti;
         ControllerBeheer.commensalismes2 = ControllerPlantToevoegen.commensalismes;
@@ -722,6 +734,8 @@ public class ControllerPlantToevoegen {
         ControllerBeheer.AantalPerElAbMulti2 = ControllerPlantToevoegen.AantalPerElAbMulti;
         ControllerBeheer.AantalPerElBehMulti2 = ControllerPlantToevoegen.AantalPerElBehMulti;
         ControllerBeheer.AantalPerElCommMulti2 = ControllerPlantToevoegen.AantalPerElCommMulti;
+        System.out.println(abiotischmulti.size()+"abiotmulti");
+        System.out.println(ControllerBeheer.abiotischmulti2.size()+"abiotmutli2");
     }
 
     public void openNieuwScherm(MouseEvent mouseEvent) throws IOException {
@@ -894,7 +908,7 @@ public class ControllerPlantToevoegen {
         //Controle op variant
         try {
             if (txtVariantTv.getText().length() > 0) {
-                sSoort = txtVariantTv.getText();
+                sVariant = txtVariantTv.getText();
             } else {
                 sVariant = "";
             }
