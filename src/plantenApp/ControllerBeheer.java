@@ -40,9 +40,26 @@ public class ControllerBeheer {
     public CheckBox deccheckbox;
     public Button Opslaanbutton;
     public Label boodschaptxt;
+    public Button btnterug;
     private Connection dbConnection;
     private int planid;
     private int maxidbeheer;
+
+    public static ArrayList<Plant> plantss2 = new ArrayList<>();
+    public static ArrayList<AbiotischeFactoren> abiotischeFactorenn2 = new ArrayList<>();
+    public static ArrayList<AbioMulti_Eigenschap> abiotischmulti2 = new ArrayList<>();
+    public static ArrayList<Commensalisme> commensalismes2 = new ArrayList<>();
+    public static ArrayList<CommMulti_Eigenschap> commMulti_eigenschapss2 = new ArrayList<>();
+    public static ArrayList<Extra> extrass2 = new ArrayList<>();
+    public static ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschapss2 = new ArrayList<>();
+    public static ArrayList<Fenotype> fenotypess2 = new ArrayList<>();
+    public static ArrayList<Foto> fotoss2 = new ArrayList<>();
+    public static ArrayList<Beheer> beheerss2 = new ArrayList<>();
+    public static ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschapss2 = new ArrayList<>();
+
+    public static ArrayList<Integer>AantalPerElCommMulti2 = new ArrayList<>();
+    public static ArrayList<Integer> AantalPerElAbMulti2 = new ArrayList<>();
+    public static ArrayList<Integer> AantalPerElBehMulti2 = new ArrayList<>();
 
     public ControllerBeheer() {
     }
@@ -173,9 +190,17 @@ public class ControllerBeheer {
         for (int m = 0; m <  ControllerPlantToevoegen.beheerdaad_eigenschapss.size(); m++) {
             beheerDAO.createBeheer( ControllerPlantToevoegen.beheerdaad_eigenschapss.get(m), planid);
         }*/
-        openNieuwScherm(mouseEvent);
-        System.out.println(ControllerPlantToevoegen.plantss.get(0).getFgsv());
-
+        try {
+            openNieuwScherm(mouseEvent);
+        }
+        catch (Exception e) {
+            Beheerdaad_Eigenschap beheerdaad_eigenschap = new Beheerdaad_Eigenschap(maxidbeheer+1 , "", "", "", 0);
+            ControllerPlantToevoegen.beheerdaad_eigenschapss.add(beheerdaad_eigenschap);
+            Beheer beheer = new Beheer(maxidbeheer+1, ControllerPlantToevoegen.beheerdaad_eigenschapss);
+            ControllerPlantToevoegen.beheerss.add(beheer);
+            ControllerPlantToevoegen.AantalPerElBehMulti.add(1);
+            openNieuwScherm(mouseEvent);
+        }
     }
 
     public void openNieuwScherm(MouseEvent mouseEvent) throws IOException {
@@ -189,5 +214,14 @@ public class ControllerBeheer {
         System.out.println(ControllerPlantToevoegen.plantss.get(0).getFgsv());
     }
 
+    public void click_btnTerug(MouseEvent mouseEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("view/PlantToevoegen.fxml"));
+        Scene scen = new Scene(root);
+        Stage window = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        window.setScene(scen);
+        window.show();
+        window.setMaximized(true);
+
+    }
 }
 

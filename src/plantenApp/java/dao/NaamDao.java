@@ -14,12 +14,14 @@ public class NaamDao implements Queries {
     private PreparedStatement stmtSelectTypeId;
     private PreparedStatement stmtSelectDubbeleNaam;
     private PreparedStatement stmtInsertInFamilie;
-    private PreparedStatement stmtSelectFamilieId;
     private PreparedStatement stmtInsertInGeslacht;
-    private PreparedStatement stmtSelectGeslachtId;
     private PreparedStatement stmtInsertInSoort;
-    private PreparedStatement stmtSelectSoortId;
     private PreparedStatement stmtInsertInVariatie;
+    private PreparedStatement stmtControleDubbeleFamilie;
+    private PreparedStatement stmtControleDubbeleGeslacht;
+    private PreparedStatement stmtControleDubbeleSoort;
+    private PreparedStatement stmtControleDubbeleVariatie;
+
 
 
     public NaamDao(Connection dbConnection) throws SQLException {
@@ -28,12 +30,15 @@ public class NaamDao implements Queries {
         stmtSelectDubbeleNaam = dbConnection.prepareStatement(SELECTDUBBELENAAM);;
         stmtSelectTypeId = dbConnection.prepareStatement(SELECTIDPLANTTYPE);
         stmtInsertInFamilie= dbConnection.prepareStatement(INSERTFAMILIE);
-        stmtSelectFamilieId = dbConnection.prepareStatement(SELECTIDFAMILIE);
         stmtInsertInGeslacht= dbConnection.prepareStatement(INSERTGESLACHT);
-        stmtSelectGeslachtId = dbConnection.prepareStatement(SELECTIDGESLACHT);
         stmtInsertInSoort = dbConnection.prepareStatement(INSERTSOORT);
-        stmtSelectSoortId = dbConnection.prepareStatement(SELECTIDSOORT);
         stmtInsertInVariatie = dbConnection.prepareStatement(INSERTVARIATIE);
+        stmtControleDubbeleFamilie = dbConnection.prepareStatement(SELECTDUBBELEFAMILIE);;
+        stmtControleDubbeleGeslacht = dbConnection.prepareStatement(SELECTDUBBELEGESLACHT);;
+        stmtControleDubbeleSoort = dbConnection.prepareStatement(SELECTDUBBELESOORT);;
+        stmtControleDubbeleVariatie = dbConnection.prepareStatement(SELECTDUBBELEVARIATIE);;
+
+
 
     }
     public Integer ControleDubbeleNaam(Plant plant) throws SQLException {
@@ -53,62 +58,113 @@ public class NaamDao implements Queries {
     }
 
     public void createNaam(Plant plant) throws SQLException {
-        int typeID, familieID, geslachtID, soortID;
+        int iplanttypeID, ifamilieID, igeslachtID, isoortID, iVariatieID;
 
-        //Ophalen typeID
+        //Ophalen ID's
+        //Ophalen planttypeID
         stmtSelectTypeId.setString(1,plant.getPlantType() );
         ResultSet rsTypeID =stmtSelectTypeId.executeQuery();
         rsTypeID.next();
-        typeID = rsTypeID.getInt(1) ;
+        iplanttypeID = rsTypeID.getInt(1) ;
+        System.out.println(iplanttypeID + " is planttypeID");
 
-        System.out.println(typeID);
+        System.out.println(iplanttypeID);
+        //Ophalen bestaand ID, anders ID op 0 zetten.
+        //Ophalen familieID
+        ifamilieID = OphalenFamilieID(plant);
+        //Ophalen GeslachtID
+        igeslachtID = OphalenGeslachtID(plant);
+        //Ophalen soortID
+        isoortID = OphalenSoortID(plant);
+        //Ophalen variatieID
+        iVariatieID = OphalenVariatieID(plant);
+
+
 
         //Invoegen in familie
-        stmtInsertInFamilie.setString(1,plant.getFamilie());
-        stmtInsertInFamilie.setInt(2, typeID);
-        stmtInsertInFamilie.executeUpdate();
-        System.out.println("Toevoegen familie geslaagd");
+        if (ifamilieID == 0)
+        {
+            stmtInsertInFamilie.setString(1,plant.getFamilie());
+            stmtInsertInFamilie.setInt(2, iplanttypeID);
+            stmtInsertInFamilie.executeUpdate();
+            System.out.println("Toevoegen familie geslaagd");
 
-        //Ophalen familieID
-        stmtSelectFamilieId.setString(1,plant.getFamilie() );
-        ResultSet rsFamilieID =stmtSelectFamilieId.executeQuery();
-        rsFamilieID.next();
-        familieID = rsFamilieID.getInt(1) ;
-        System.out.println(familieID);
+            ifamilieID = OphalenFamilieID(plant);
+        }
 
         //Invoegen in geslacht
-        stmtInsertInGeslacht.setString(1,plant.getGeslacht());
-        stmtInsertInGeslacht.setInt(2, familieID);
-        stmtInsertInGeslacht.executeUpdate();
-        System.out.println("Toevoegen geslacht geslaagd");
+        if (igeslachtID == 0)
+        {
+            stmtInsertInGeslacht.setString(1,plant.getGeslacht());
+            stmtInsertInGeslacht.setInt(2, ifamilieID);
+            stmtInsertInGeslacht.executeUpdate();
+            System.out.println("Toevoegen geslacht geslaagd");
 
-        //Ophalen geslachtID
-        stmtSelectGeslachtId.setString(1,plant.getGeslacht());
-        ResultSet rsGeslachtID =stmtSelectFamilieId.executeQuery();
-        rsGeslachtID.next();
-        geslachtID = rsGeslachtID.getInt(1) ;
-        System.out.println(geslachtID);
+            igeslachtID = OphalenGeslachtID(plant);
+        }
 
         //Invoegen in soort
-        stmtInsertInSoort.setString(1,plant.getSoort());
-        stmtInsertInSoort.setInt(2, geslachtID);
-        stmtInsertInSoort.executeUpdate();
-        System.out.println("Toevoegen soort geslaagd");
+        if (isoortID == 0) {
+            stmtInsertInSoort.setString(1, plant.getSoort());
+            stmtInsertInSoort.setInt(2, igeslachtID);
+            stmtInsertInSoort.executeUpdate();
+            System.out.println("Toevoegen soort geslaagd");
 
-        //Ophalen soortID
-        stmtSelectSoortId.setString(1,plant.getSoort() );
-        ResultSet rsSoortID =stmtSelectSoortId.executeQuery();
+            isoortID = OphalenSoortID(plant);
+        }
+
+        if(iVariatieID == 0) {
+            //Invoegen in variatie
+            stmtInsertInVariatie.setString(1, plant.getVariatie());
+            stmtInsertInVariatie.setInt(2, isoortID);
+            stmtInsertInVariatie.executeUpdate();
+            System.out.println("Toevoegen variatie geslaagd");
+
+        }
+    }
+
+    private int OphalenVariatieID(Plant plant) throws SQLException {
+        int iVariatieID;
+        stmtControleDubbeleVariatie.setString(1,plant.getVariatie() );
+        stmtControleDubbeleVariatie.setString(2,plant.getVariatie() );
+        ResultSet rsVariatieID =stmtControleDubbeleVariatie.executeQuery();
+        rsVariatieID.next();
+        iVariatieID= rsVariatieID.getInt(1) ;
+        System.out.println(iVariatieID + " is variatieID");
+        return iVariatieID;
+    }
+
+    private int OphalenSoortID(Plant plant) throws SQLException {
+        int iSoortID;
+        stmtControleDubbeleSoort.setString(1,plant.getSoort() );
+        stmtControleDubbeleSoort.setString(2,plant.getSoort() );
+        ResultSet rsSoortID =stmtControleDubbeleSoort.executeQuery();
         rsSoortID.next();
-        soortID = rsSoortID.getInt(1);
-        System.out.println(soortID);
+        iSoortID = rsSoortID.getInt(1) ;
+        System.out.println(iSoortID + " is soortID");
+        return iSoortID;
+    }
 
+    private int OphalenGeslachtID(Plant plant) throws SQLException {
+        int iGeslachtID;
+        stmtControleDubbeleGeslacht.setString(1,plant.getGeslacht() );
+        stmtControleDubbeleGeslacht.setString(2,plant.getGeslacht() );
+        ResultSet rsGeslachtID =stmtControleDubbeleGeslacht.executeQuery();
+        rsGeslachtID.next();
+        iGeslachtID = rsGeslachtID.getInt(1) ;
+        System.out.println(iGeslachtID + " is geslachtID");
+        return iGeslachtID;
+    }
 
-        //Invoegen in variatie
-        stmtInsertInVariatie.setString(1,plant.getVariatie());
-        stmtInsertInVariatie.setInt(2, soortID);
-        stmtInsertInVariatie.executeUpdate();
-        System.out.println("Toevoegen variatie geslaagd");
-
+    private int OphalenFamilieID(Plant plant) throws SQLException {
+        int ifamilieID;
+        stmtControleDubbeleFamilie.setString(1,plant.getFamilie() );
+        stmtControleDubbeleFamilie.setString(2,plant.getFamilie() );
+        ResultSet rsFamilieID =stmtControleDubbeleFamilie.executeQuery();
+        rsFamilieID.next();
+        ifamilieID = rsFamilieID.getInt(1) ;
+        System.out.println(ifamilieID + " is familieID");
+        return ifamilieID;
     }
 }
 

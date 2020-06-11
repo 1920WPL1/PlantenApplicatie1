@@ -1,5 +1,6 @@
 package plantenApp.java.model;
 
+import java.sql.Connection;
 import java.util.Date;
 
 /**
@@ -32,12 +33,16 @@ public class Gebruiker {
         this.salt = salt;
     }
 
-    public int getGebruiker_id() {
-        return gebruiker_id;
+    public Gebruiker(int gebruiker_id, String voornaam, String achternaam, String email) {
+        this.gebruiker_id = gebruiker_id;
+        this.voornaam = voornaam;
+        this.achternaam = achternaam;
+        this.email = email;
     }
 
-    public void setGebruiker_id(int id) {
-        this.gebruiker_id = id;
+
+    public int getGebruiker_id() {
+        return gebruiker_id;
     }
 
     public String getVoornaam() {
@@ -80,7 +85,7 @@ public class Gebruiker {
         this.aanvraag_datum = aanvraag_datum;
     }
 
-    public int getAanvraag_status() {
+    public int isAanvraag_status() {
         return aanvraag_status;
     }
 
