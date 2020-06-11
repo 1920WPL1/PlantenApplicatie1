@@ -298,9 +298,12 @@ public interface Queries {
     String SETWACHTWOORDHASH = "UPDATE gebruiker SET wachtwoord_hash = ?, salt = ?, geregistreerd = 1 WHERE gebruiker_id = ?";
     String SELECTGEBRUIKERIDMETEMAIL = "select gebruiker_id from gebruiker where email = ?";
     String SELECTGEBRUIKERROLMETEMAIL = "select rol from gebruiker where email = ?";
-
     String GETGEBRUIKERSBYFULLNAME = "SELECT * FROM gebruiker WHERE voornaam LIKE ? OR achternaam LIKE ?";
     String SETGEBRUIKERBYID = "UPDATE gebruiker SET voornaam = ?, achternaam = ?, email = ?, rol = ? WHERE gebruiker_id = ?";
+    String DELETEGEBRUIKERBYID = "DELETE FROM gebruiker WHERE gebruiker_id = ?";
+    String GETGEBRUIKERSINAANVRAAG = "SELECT * FROM gebruiker WHERE aanvraag_status = 1";
+    String SETGEBRUIKERAANVRAAGSTATUSANDROL = "UPDATE gebruiker SET aanvraag_status = ?, rol = ? WHERE gebruiker_id = ?";
+    String INSERTAANVRAAG = "INSERT INTO gebruiker (email, voornaam, achternaam, aanvraag_status, rol) VALUES (?, ?, ?, 1, 'gast')";
 
     //Queries voor toevoegen naam
     String SELECTDUBBELENAAM = "select COUNT(*) from familie f,geslacht g,soort s,variatie v, planttype p " +
