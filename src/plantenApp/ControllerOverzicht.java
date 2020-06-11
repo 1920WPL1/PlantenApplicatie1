@@ -6,12 +6,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -280,6 +282,16 @@ public class ControllerOverzicht {
 
         //dit wordt waarschijnlijk gebruikt voor die details bovenaan het scherm van gedetailleerdefiche
         //Foto fo = ControllerPlantToevoegen.fotoss.get(indexArrays);
+        for(int k = 0; k<ControllerPlantToevoegen.files.size();k++){
+            String h = ControllerPlantToevoegen.eigenschappen.get(k);
+            if(h.matches("habitus")){
+                File imgFile = ControllerPlantToevoegen.files.get(k);
+                if(imgFile.exists())
+                {
+                    //ivHabitusDetailO.setImage(new Image(ControllerPlantToevoegen.paden.get(k)));
+                }
+            }
+        }
 
         //
         int tellerb = 0;
@@ -386,7 +398,13 @@ public class ControllerOverzicht {
     }
 
     public void opslaanbtn_clicked(MouseEvent mouseEvent) throws SQLException {
+        FotoDAO fotoDAO = new FotoDAO(dbConnection);
         createdatabase(ControllerPlantToevoegen.plantss.get(0),ControllerPlantToevoegen.abiotischeFactorenn.get(0),ControllerPlantToevoegen.fenotypess.get(0),ControllerPlantToevoegen.fenoMulti_eigenschapss,ControllerPlantToevoegen.abiotischmulti,ControllerPlantToevoegen.commensalismes.get(0),ControllerPlantToevoegen.commMulti_eigenschapss,ControllerPlantToevoegen.beheerdaad_eigenschapss,ControllerPlantToevoegen.extrass.get(0));
+        int id = fotoDAO.getmaxid() + 1;
+        int plantid = ControllerPlantToevoegen.plantid;
+        for(int i = 0; i<ControllerPlantToevoegen.files.size();i++){
+            fotoDAO.insertFoto(id, plantid,ControllerPlantToevoegen.eigenschappen.get(i),ControllerPlantToevoegen.paden.get(i),ControllerPlantToevoegen.figuren.get(i));
+        }
     }
     public  void createdatabase(Plant plant , AbiotischeFactoren abiotischeFactoren , Fenotype fenotype , ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschaps , ArrayList<AbioMulti_Eigenschap> abiottisschemulti_eigenschaps,Commensalisme commensalisme, ArrayList<CommMulti_Eigenschap> commMulti_eigenschaps,ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps, Extra extra) throws SQLException {
 

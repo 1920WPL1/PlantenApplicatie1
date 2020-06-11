@@ -1,5 +1,6 @@
 package plantenApp.java.dao;
 
+import plantenApp.ControllerPlantToevoegen;
 import plantenApp.java.model.Foto;
 import plantenApp.java.model.Foto_Eigenschap;
 
@@ -94,12 +95,14 @@ public class FotoDAO implements Queries {
     }
 
     //alleen deze wordt gebruikt voor fotos in de databank toe te voegen
-    public void insertFoto(int id, int plant_id, String eigenschap, String url, String urlVoorAfbeelding) throws SQLException {
+    //public void insertFoto(int id, int plant_id, String eigenschap, String url, String urlVoorAfbeelding) throws SQLException {
+    public void insertFoto(int id, int plant_id, String eigenschap, String url, byte[] figuur) throws SQLException {
         stmtInsertFotoAangepast.setInt(1,id);
         stmtInsertFotoAangepast.setInt(2,plant_id);
         stmtInsertFotoAangepast.setString(3,eigenschap);
         stmtInsertFotoAangepast.setString(4,url);
-        stmtInsertFotoAangepast.setString(5,urlVoorAfbeelding);
+        //stmtInsertFotoAangepast.setString(5,urlVoorAfbeelding);
+        stmtInsertFotoAangepast.setBytes(5, figuur);
         stmtInsertFotoAangepast.executeUpdate();
     }
 

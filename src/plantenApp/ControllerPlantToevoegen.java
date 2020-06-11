@@ -223,10 +223,14 @@ public class ControllerPlantToevoegen {
     //alles nodig voor fotos
     public static ArrayList<Foto> fotoss = new ArrayList<>();//deze objecten bevatten elk meerdere afbeeldingen, elk foto object bevat steeds 3 objecten van Foto_Eigenschap
     //gebruik de getFotos() functie om de arraylist van Foto_Eigenschap objecten op te halen
-    public static ArrayList<Foto_Eigenschap> foto_eigenschaps = new ArrayList<>();
+    public static ArrayList<String> eigenschappen = new ArrayList<>();
+    public static ArrayList<byte[]> figuren = new ArrayList<>();
+    public static ArrayList<String> paden = new ArrayList<>();
+    public static ArrayList<File> files = new ArrayList<>();
     private ArrayList<String> AfbeeldingExtenties;
 
     public void initialize() throws SQLException {
+        voegSelectieAfbeeldingToe();
         AfbeeldingExtenties = new ArrayList<>();
         AfbeeldingExtenties.add("*.jpg");
         AfbeeldingExtenties.add("*.png");
@@ -786,7 +790,24 @@ public class ControllerPlantToevoegen {
                 lvAfbeeldingTv.getItems().add(naam);
 
                 //voegt een record toe in de tabel foto voor de afbeelding
-                fotoDAO.insertFoto(maxidfoto, plantid, eigenschap, f.getAbsolutePath(),f.getAbsolutePath());//de 2 laatste zijn hetzelfde omdat de url ook gebruikt wordt om een blob te maken
+                byte[] bytes = new byte[(int) f.length()];
+                FileInputStream fis = null;
+                try{
+                    fis = new FileInputStream(f);
+                    fis.read(bytes);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }finally{
+                    if(fis != null){
+                        fis.close();
+                    }
+                }
+                eigenschappen.add(eigenschap);
+                paden.add(f.getAbsolutePath());
+                figuren.add(bytes);
+                files.add(f);
+                //fotoDAO.insertFoto(maxidfoto, plantid, eigenschap, f.getAbsolutePath(),f.getAbsolutePath());//de 2 laatste zijn hetzelfde omdat de url ook gebruikt wordt om een blob te maken
+                //fotoDAO.insertFoto(maxidfoto, plantid, eigenschap, f.getAbsolutePath(),bytes);
             }else{
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error");
@@ -844,16 +865,24 @@ public class ControllerPlantToevoegen {
     public void click_afbeeldingVerwijderen(MouseEvent mouseEvent) throws SQLException {
         FotoDAO fotoDAO= new FotoDAO(dbConnection);
         boolean b = false;
+        int h = 0;
         if(!lvAfbeeldingTv.getSelectionModel().isEmpty()){
             //deze string neemt het eerste deel van het geselecteerde item in de listview van de afbeeldingen
             String s = lvAfbeeldingTv.getSelectionModel().getSelectedItem().toString().split(" ")[0];
-            ArrayList<Foto_Eigenschap> hulp = fotoDAO.getFotos(plantid);
-            for(int i = 0; i<hulp.size();i++){
-                String eigenschap = hulp.get(i).getEigenschap();
-                if(eigenschap.matches(eigenschap)){
-                    fotoDAO.removeFoto(plantid, eigenschap);
+            //ArrayList<String> hulp = fotoDAO.getFotos(plantid);
+            for(int i = 0; i<eigenschappen.size();i++){
+                if(eigenschappen.get(i).matches(s)){
+                    b=true;
+                    h = i;
                 }
             }
+            if(b){
+                files.remove(h);
+                figuren.remove(h);
+                paden.remove(h);
+                eigenschappen.remove(h);
+            }
+            lvAfbeeldingTv.getItems().remove(lvAfbeeldingTv.getSelectionModel().getSelectedItem());
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error");
@@ -869,6 +898,12 @@ public class ControllerPlantToevoegen {
         String eigenschap = lvAfbeeldingTv.getSelectionModel().getSelectedItem().toString().split(" ")[0];
         for(int i=0;i<3;i++){ if(foto_eigenschaps.get(i).getEigenschap().matches(eigenschap)){ plaats = i; }}
         foto_eigenschaps.remove(plaats);*/
+    }
+
+    public void voegSelectieAfbeeldingToe(){
+        cbFotoEigenschapTv.getItems().add("habitus");
+        cbFotoEigenschapTv.getItems().add("blad");
+        cbFotoEigenschapTv.getItems().add("bloei");
     }
 }
 

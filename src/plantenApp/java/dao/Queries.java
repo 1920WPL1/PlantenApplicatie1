@@ -288,7 +288,8 @@ public interface Queries {
 
     /*Queries voor foto*/
     //Toevoegen foto
-    String INSERTFOTOAANGEPAST = "insert into " + "foto(foto_id, plant_id, eigenschap, url, figuur)" + "select ?, ?, ?, ?, BulkColumn FROM OPENROWSET(Bulk ?, SINGLE_BLOB) as BLOB";
+    //"insert into " + "foto(foto_id, plant_id, eigenschap, url, figuur)" + "select ?, ?, ?, ?, BulkColumn FROM OPENROWSET(Bulk ?, SINGLE_BLOB) as BLOB"
+    String INSERTFOTOAANGEPAST = "insert into " + "foto(foto_id, plant_id, eigenschap, url, figuur) " + "VALUES(?,?,?,?,?)";
     String INSERTFOTO = "insert into " + "foto(foto_id, plant_id, eigenschap, url, figuur)" + " VALUES (?, ?, ?, ?, ?)";
     //Ophalen ID's foto
     String GETMAXIDFOTO = "select Max(foto_id) from foto";
