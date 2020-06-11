@@ -1271,7 +1271,10 @@ public class ControllerWijzigen {
         //Listview opvullen
         for(int i = 0; i < ControllerPlantToevoegen.abiotischmulti.size();i++)
         {
-            lvHabitatWz.getItems().add(i,ControllerPlantToevoegen.abiotischmulti.get(i).getValue());
+            if(abiotischmulti.get(i).getNaam()=="Habitat")
+            {
+                lvHabitatWz.getItems().add(i,ControllerPlantToevoegen.abiotischmulti.get(i).getValue());
+            }
         }
     }
     public void click_toevoegenHabitat(MouseEvent mouseEvent) {
