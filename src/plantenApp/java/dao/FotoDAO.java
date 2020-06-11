@@ -17,6 +17,8 @@ public class FotoDAO implements Queries {
     //statements voor getmaxid en createFoto in deze klasse
     private PreparedStatement stmtGetMaxId;
     private PreparedStatement stmtInsertFoto;
+    private PreparedStatement stmtInsertFotoAangepast;
+    private PreparedStatement stmtRemoveFoto;
 
     public FotoDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
@@ -25,6 +27,9 @@ public class FotoDAO implements Queries {
 
         stmtGetMaxId = dbConnection.prepareStatement(GETMAXIDFOTO);
         stmtInsertFoto = dbConnection.prepareStatement(INSERTFOTO);
+        stmtInsertFotoAangepast = dbConnection.prepareStatement(INSERTFOTOAANGEPAST);
+        System.out.println(INSERTFOTOAANGEPAST);
+        stmtRemoveFoto = dbConnection.prepareStatement(REMOVEFOTO);
     }
 
     //region GET
@@ -56,11 +61,12 @@ public class FotoDAO implements Queries {
      * @param id -> plant_id
      * @return -> fotos van de specifieke plant
      */
-    private ArrayList<Foto_Eigenschap> getFotos(int id) throws SQLException {
+    public ArrayList<Foto_Eigenschap> getFotos(int id) throws SQLException {
         //Dao
 
         //Items
-        ArrayList<Foto_Eigenschap> fotos = null;
+        //ArrayList<Foto_Eigenschap> fotos = null;
+        ArrayList<Foto_Eigenschap> fotos = new ArrayList<>();
 
         //SqlCommand
         stmtSelectFotoByID.setInt(1, id);
@@ -68,6 +74,7 @@ public class FotoDAO implements Queries {
         while (rs.next()) {
             Foto_Eigenschap foto = new Foto_Eigenschap(
                     rs.getInt("foto_id"),
+                    //rs.getInt("plant_id"),
                     rs.getString("eigenschap"),
                     rs.getString("url"),
                     rs.getBlob("figuur")
@@ -85,6 +92,25 @@ public class FotoDAO implements Queries {
         rs.next();
         int maxid =rs.getInt(1) ;
         return maxid;
+    }
+
+    //alleen deze wordt gebruikt voor fotos in de databank toe te voegen
+    public void insertFoto(int id, int plant_id, String eigenschap, String url, String urlVoorAfbeelding) throws SQLException {
+        stmtInsertFotoAangepast.setInt(1,id);
+        stmtInsertFotoAangepast.setInt(2,plant_id);
+        stmtInsertFotoAangepast.setString(3,eigenschap);
+        stmtInsertFotoAangepast.setString(4,url);
+        stmtInsertFotoAangepast.setString(5,urlVoorAfbeelding);
+        System.out.println(urlVoorAfbeelding);
+        System.out.println(url);
+        System.out.println(stmtInsertFotoAangepast.toString());
+        stmtInsertFotoAangepast.executeUpdate();
+    }
+
+    public void removeFoto(int plantid, String eigenschap) throws SQLException{
+        stmtRemoveFoto.setInt(1, plantid);
+        stmtRemoveFoto.setString(2, eigenschap);
+        stmtRemoveFoto.executeUpdate();
     }
 
     public void createFoto(Foto foto) throws SQLException {

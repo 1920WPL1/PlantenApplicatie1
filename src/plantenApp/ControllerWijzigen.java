@@ -772,7 +772,7 @@ public class ControllerWijzigen {
     }
     public void LadenFenotype() {
         //Comboboxes laden
-        cbBladgrootteTotWz.getSelectionModel().select(fenotypess.get(0).getBladgrootte());
+        cbBladgrootteTotWz.getSelectionModel().select(String.valueOf(fenotypess.get(0).getBladgrootte()));
         cbBladvormWz.getSelectionModel().select(fenotypess.get(0).getBladvorm());
         cbRatioWz.getSelectionModel().select(fenotypess.get(0).getRatio_bloei_blad());
         cbSpruitfenologieWz.getSelectionModel().select(fenotypess.get(0).getSpruitfenologie());
