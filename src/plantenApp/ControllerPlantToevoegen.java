@@ -7,8 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -201,7 +204,7 @@ public class ControllerPlantToevoegen {
     public ToggleGroup StrategieGroepTv;
     private Connection dbConnection;
     private AbiotischeFactorenDAO abiotischeFactorenDAO;
-    private int plantid;
+    public static int plantid;
     public ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps = new ArrayList<>();
     public static ArrayList<Plant> plantss = new ArrayList<>();
     public static ArrayList<AbiotischeFactoren> abiotischeFactorenn = new ArrayList<>();
@@ -276,13 +279,10 @@ public class ControllerPlantToevoegen {
         cbVoedingsbehoefteTv.getSelectionModel().select(af.getVoedingsbehoefte());
         cbReactieAntaTv.getSelectionModel().select(af.getReactieAntagonistischeOmgeving());
         cbGrondsoortTv.getSelectionModel().select(af.getGrondsoort());
-        int teller = 0;
-        for(int i = 0; i<indexArrays;i++){
-            teller +=ControllerBeheer.AantalPerElAbMulti2.get(i);
-        }
-        int eindplaats = teller + ControllerBeheer.AantalPerElAbMulti2.get(indexArrays);
-        for(int j = teller; j<eindplaats;j++){
-            lvHabitatTv.getItems().add(ControllerBeheer.abiotischmulti2.get(j).getValue());
+
+        for(int i =0; i< ControllerBeheer.abiotischmulti2.size();i++)
+        {
+            lvHabitatTv.getItems().add(ControllerBeheer.abiotischmulti2.get(i).getValue());
         }
 
         //Commensalisme
@@ -293,7 +293,7 @@ public class ControllerPlantToevoegen {
             tellerc +=ControllerBeheer.AantalPerElCommMulti2.get(i);
         }
         int eindplaatsc = tellerc + ControllerBeheer.AantalPerElCommMulti2.get(indexArrays);
-        for(int j = tellerc; j<eindplaatsc;j++){
+        for(int j = tellerc; j<ControllerBeheer.commMulti_eigenschapss2.size();j++){
             if(ControllerBeheer.commMulti_eigenschapss2.get(j).getNaam().matches("sociabiliteit")){
                 if(ControllerBeheer.commMulti_eigenschapss2.get(j).getValue().matches("1")){chkSociabiliteit1Tv.setSelected(true);}
                 if(ControllerBeheer.commMulti_eigenschapss2.get(j).getValue().matches("2")){chkSociabiliteit2Tv.setSelected(true);}
@@ -330,7 +330,7 @@ public class ControllerPlantToevoegen {
 
         //Fenotype
         Fenotype f = ControllerBeheer.fenotypess2.get(indexArrays);
-        cbBladgrootteTotTv.getSelectionModel().select(f.getBladgrootte());
+        cbBladgrootteTotTv.getSelectionModel().select(String.valueOf(f.getBladgrootte()));
         System.out.println("Bladgrootte: " + f.getBladgrootte());
         cbBladvormTv.getSelectionModel().select(f.getBladvorm());
         cbRatioTv.getSelectionModel().select(f.getRatio_bloei_blad());
@@ -698,7 +698,16 @@ public class ControllerPlantToevoegen {
     //als er op planttoevoegen geclicked wordt dan worden alle gegevens in verschillende arrays gestoken
     // op het einde wordt het beheer scherm geopend
     public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws Exception {
-
+        plantss.clear();
+        abiotischeFactorenn.clear();
+        abiotischmulti.clear();
+        fenotypess.clear();
+        fenoMulti_eigenschapss.clear();
+        commensalismes.clear();
+        commMulti_eigenschapss.clear();
+        extrass.clear();
+        beheerss.clear();
+        fotoss.clear();
 
         //alle data doorsturen naar beheer, alle mogelijke errors hier worden in de methodes zelf opgevangen.
         createplant();//ik //done
@@ -719,6 +728,7 @@ public class ControllerPlantToevoegen {
 
     public void AllesInNieuweArrays() {
         //In nieuwe arrays steken
+
         ControllerBeheer.plantss2 = ControllerPlantToevoegen.plantss;
         ControllerBeheer.abiotischeFactorenn2 = ControllerPlantToevoegen.abiotischeFactorenn;
         ControllerBeheer.abiotischmulti2 = ControllerPlantToevoegen.abiotischmulti;
@@ -803,7 +813,7 @@ public class ControllerPlantToevoegen {
         }
         //Controle op ratio
         try{
-            sRatio = cbBladgrootteTotTv.getValue();
+            sRatio = cbRatioTv.getValue();
 
         }catch(Exception ex)
         {
@@ -825,6 +835,7 @@ public class ControllerPlantToevoegen {
         //Aanmaken fenotype + toevoegen aan array
         try{
             Fenotype fenotype = new Fenotype(maxid, plantid, sBladvorm, sLevensvorm, sHabitus, sBloeiwijze, iBladgrootte, sRatio, sSpruitenologie);
+            System.out.println(fenotype.getBladgrootte()+" bladgroote bij jfenotye");
             fenotypess.add(fenotype);
         }
         catch (Exception ex)
@@ -1171,7 +1182,7 @@ public class ControllerPlantToevoegen {
         }
         //Controle op grondsoort
         try {
-            sGrondsoort = cbGrondsoort.getValue();
+            sGrondsoort = cbGrondsoortTv.getValue();
         } catch (Exception ex) {
             ShowError(sTitel, "Er is een fout opgelopen bij grondsoort. ");
             System.out.println(ex);
@@ -1352,7 +1363,7 @@ public class ControllerPlantToevoegen {
         }
         //TODO vlindervriendelijk nog aanpassen + foutafhandeling
 
-        Extra extra = new Extra(maxidextra, plantid, iNectarwaarde, iPollenwaarde, sBijVriendelijk, sEetbaar, sKruidgebruik, sGeurend, sVorstgevoeling, "vlinder");
+        Extra extra = new Extra(maxidextra, plantid, iNectarwaarde, iPollenwaarde, sBijVriendelijk, sEetbaar, sKruidgebruik, sGeurend, sVorstgevoeling, vlindervriendelijkCheck());
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
         extrass.add(extra);
         //ExtraDAO.createExtra(extra);
