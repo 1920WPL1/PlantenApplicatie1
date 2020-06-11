@@ -386,11 +386,11 @@ public class ControllerOverzicht {
         }
     }
 
-    public void opslaanbtn_clicked(MouseEvent mouseEvent) throws SQLException {
+    public void opslaanbtn_clicked(MouseEvent mouseEvent) throws Exception {
         createdatabase(ControllerPlantToevoegen.plantss.get(0),ControllerPlantToevoegen.abiotischeFactorenn.get(0),ControllerPlantToevoegen.fenotypess.get(0),ControllerPlantToevoegen.fenoMulti_eigenschapss,ControllerPlantToevoegen.abiotischmulti,ControllerPlantToevoegen.commensalismes.get(0),ControllerPlantToevoegen.commMulti_eigenschapss,ControllerPlantToevoegen.beheerdaad_eigenschapss,ControllerPlantToevoegen.extrass.get(0));
     }
-    public  void createdatabase(Plant plant , AbiotischeFactoren abiotischeFactoren , Fenotype fenotype , ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschaps , ArrayList<AbioMulti_Eigenschap> abiottisschemulti_eigenschaps,Commensalisme commensalisme, ArrayList<CommMulti_Eigenschap> commMulti_eigenschaps,ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps, Extra extra) throws SQLException {
-
+    public  void createdatabase(Plant plant , AbiotischeFactoren abiotischeFactoren , Fenotype fenotype , ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschaps , ArrayList<AbioMulti_Eigenschap> abiottisschemulti_eigenschaps,Commensalisme commensalisme, ArrayList<CommMulti_Eigenschap> commMulti_eigenschaps,ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps, Extra extra) throws Exception {
+    try {
         PlantDAO plantDAO = new PlantDAO(dbConnection);
         AbiotischeFactorenDAO abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
@@ -417,9 +417,14 @@ public class ControllerOverzicht {
             beheerDAO.createBeheer(beheerdaad_eigenschaps.get(a), plant.getId());
         }
         //lorem ipsumetcetera hablahabla wout komaan zingen gast
-        System.out.println("alles behalve extra");
         extraDAO.createExtra(extra);
-        System.out.println("extra oook nu ");
+    }
+        catch (Exception ex)
+    {
+        ShowError("doorsturen data naar volgend scherm", "Er is een fout opgetreden bij het doorsturen van de data naar het volgend scherm.");
+        System.out.println(ex);
+        throw new Exception();
+    }
     }
     public void createNaam() throws SQLException {
         NaamDao naamDAO = new NaamDao(dbConnection);

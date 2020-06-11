@@ -730,7 +730,9 @@ public class ControllerPlantToevoegen {
         beheerss.clear();
         fotoss.clear();
 
+
         //alle data doorsturen naar beheer, alle mogelijke errors hier worden in de methodes zelf opgevangen.
+        createNaam();
         createplant();//ik //done
         createAbiotischefactoren();//afgewerkt //done
         createAbiotischeMulti();//Mathias //done
@@ -1655,37 +1657,52 @@ public class ControllerPlantToevoegen {
         }
     }
 
-    public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) {
-        System.out.println(cbHabitatTv.getValue());
-        if (!lvHabitatTv.getItems().contains(cbHabitatTv.getValue())) {
-            lvHabitatTv.getItems().add((String) cbHabitatTv.getValue());
+    //Toevoegen van geselecteerde abiotische multi factoren in listview
+    public void ToevoegenAbiotischeMulti(MouseEvent mouseEvent) throws Exception {
+        //Aanmaken variabelen
+        String sHabitat, sTitel = " toevoegen selectie aan listview abiotische multi.";
+        //Controle op habitat
+        try {
+            sHabitat = cbHabitatTv.getValue();
+        } catch (Exception ex) {
+            ShowError(sTitel, "Er is een fout opgetreden bij het invullen van listview habitat.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op dubbele toevoegen
+        if (!lvHabitatTv.getItems().contains(sHabitat)) {
+            lvHabitatTv.getItems().add(sHabitat);
             System.out.println(cbHabitatTv.getValue());
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setContentText("Je kan niet 2 keer hetzelfde item toevoegen");
-            alert.showAndWait().ifPresent(rs -> {
-                if (rs == ButtonType.OK) {
-                    System.out.println("Pressed OK.");
-                }
-            });
+            ShowError(sTitel, "Deze habitat is al toegevoegd.");
         }
     }
+    private void createAbiotischeMulti() throws Exception {
+        //Abiotische multi factoren meegeven naar array vanuit listview.
+        //Aanmaken variabelen
 
-    private void createAbiotischeMulti() throws SQLException {
-        //aantal el toegevoegd in abmulti lijst bijhouden
-        int aantalAbMultiEl = 0;
         AbiotischeFactorenDAO abiotischeMultidao = new AbiotischeFactorenDAO(dbConnection);
-        int maxidcommensalismeMulti = abiotischeMultidao.getMaxIdMulti();
+        String sTitel = " toevoegen habitat.";
+        int aantalAbMulti = 0;
         System.out.println(" " + plantid);
 
-        for (int i = 0; i < lvHabitatTv.getItems().size(); i++) {
-            AbioMulti_Eigenschap abiotisch = new AbioMulti_Eigenschap("Habitat", (String) lvHabitatTv.getItems().get(i));
-            maxidcommensalismeMulti++;
-            abiotischmulti.add(abiotisch);
-            aantalAbMultiEl++;
+        //Controle op toevoegen abiotische multi
+        try {
+            for (int i = 0; i < lvHabitatTv.getItems().size(); i++) {
+                AbioMulti_Eigenschap abiotisch = new AbioMulti_Eigenschap("Habitat", (String) lvHabitatTv.getItems().get(i));
+
+                abiotischmulti.add(abiotisch);
+                aantalAbMulti++;
+            }
+
+            AantalPerElAbMulti.add(aantalAbMulti);
+        } catch (Exception ex) {
+            ShowError(sTitel, "Er is een fout opgetreden bij het aanmaken van fenotype multi eigenschappen.");
+            System.out.println(ex);
+            throw new Exception();
         }
-        AantalPerElAbMulti.add(aantalAbMultiEl);
+
+
     }
 
 
@@ -1718,15 +1735,22 @@ public class ControllerPlantToevoegen {
         extraDAO.createExtra(extra);
     }
 
-    public void createNaam() throws SQLException {
+    public void createNaam() throws Exception {
         NaamDao naamDAO = new NaamDao(dbConnection);
 
         //Conrole op textboxen + dubbele plant is al gebeurd bij controle createplant
-        Plant plant = new Plant(sPlanttype, sFamilie, sGeslacht, sSoort, sVariant);
-        naamDAO.createNaam(plant);
+        try{
+            Plant plant = new Plant(sPlanttype, sFamilie, sGeslacht, sSoort, sVariant);
+            naamDAO.createNaam(plant);
+        }
+        catch (Exception ex)
+        {
+            ShowError("invullen plantnaam", "Er is een fout opgetreden bij het invullen van de plantnaam.");
+            System.out.println(ex);
+            throw new Exception();
+        }
 
     }
-
     public void ShowError(String sTitel, String sMessage) {
         //tonen van error
         JOptionPane.showMessageDialog(null, sMessage, "Fout bij: " + sTitel, JOptionPane.INFORMATION_MESSAGE);
