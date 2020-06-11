@@ -1760,7 +1760,9 @@ public class ControllerPlantToevoegen {
             //kijkt of er al een afbeelding in de databank zit voor de gekozen eigenschap van de nog toe te voegen plant
             //mss komt er een fout door de databank omdat de foto's worden toegevoegd met een plantid dat er nog niet inzit (de plant met plantid wordt pas later toegevoegd)
             ArrayList<Foto_Eigenschap> hulp = fotoDAO.getFotos(plantid);
-            for(int i = 0; i<hulp.size();i++){ if(hulp.get(i).getEigenschap().matches(eigenschap)){ b = true; } }
+            for(int i = 0; i<lvAfbeeldingTv.getItems().size();i++){
+                String s = lvAfbeeldingTv.getItems().get(i).toString().split(" ")[0];
+                if(s.matches(eigenschap)){ b = true; } }
 
             //geeft een alert terug als er al een foto is meegegeven voor de geselecteerde eigenschap anders maakt het een record aan in de tabel foto voor deze eigenschap
             if(!b){
