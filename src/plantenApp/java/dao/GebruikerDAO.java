@@ -28,9 +28,6 @@ public class GebruikerDAO implements Queries {
         stmtSelectRolByEmail = dbConnection.prepareStatement(SELECTGEBRUIKERROLMETEMAIL);
     }
 
-    /**@author Bart Maes
-     * @return alle gebruikers
-     */
     public Integer getIdMetEmail(String sEmail) throws SQLException {
         stmtSelectGebruikerIDByEmail.setString(1,sEmail);
         ResultSet rs = stmtSelectGebruikerIDByEmail.executeQuery();

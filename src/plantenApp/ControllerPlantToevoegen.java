@@ -1040,7 +1040,7 @@ public class ControllerPlantToevoegen {
         maxidextra++;
         System.out.println(maxidextra);
         System.out.println(valuePollenwaarde + " " + valueNectarwaarde);
-        Extra extra = new Extra(maxidextra, plantid, valueNectarwaarde, valuePollenwaarde, bijvriendelijkCheck(), eetbaarCheck(), kruidgebruikCheck(), geurendCheck(), vorstgevoeligCheck(),"vlinder");
+        Extra extra = new Extra(maxidextra, plantid, valueNectarwaarde, valuePollenwaarde, bijvriendelijkCheck(), eetbaarCheck(), kruidgebruikCheck(), geurendCheck(), vorstgevoeligCheck(),);
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
         extrass.add(extra);
         //ExtraDAO.createExtra(extra);
