@@ -14,17 +14,21 @@ public class GebruikerDAO implements Queries {
     private PreparedStatement stmtSelectGebruikerByEmail;
     private PreparedStatement stmtInsertAanvraag;
     private PreparedStatement stmtSelectGebruikerById;
-    /** @Author Jasper */
     private PreparedStatement stmtSelectGebruikersByFullName;
     private PreparedStatement stmtSetGebruikerById;
     private PreparedStatement stmtSetWachtwoordHash;
     private PreparedStatement stmtDeleteGebruikerById;
     private PreparedStatement stmtSetGebruikerAanvraagStatusEnRol;
+    private PreparedStatement stmtSelectGebruikerIDByEmail;
+    private PreparedStatement stmtSelectRolByEmail;
+
 
     public GebruikerDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
         stmtSelectGebruikerById = dbConnection.prepareStatement(GETGEBRUIKERBYID);
-
+        stmtSelectGebruikerByEmail = dbConnection.prepareStatement(GETGEBRUIKERBYEMAILADRES);
+        stmtSelectGebruikerIDByEmail = dbConnection.prepareStatement(SELECTGEBRUIKERIDMETEMAIL);
+        stmtSelectRolByEmail = dbConnection.prepareStatement(SELECTGEBRUIKERROLMETEMAIL);
         stmtSelectGebruikerByEmail = dbConnection.prepareStatement(GETGEBRUIKERBYEMAILADRES);
         stmtSelectGebruikersByFullName = dbConnection.prepareStatement(GETGEBRUIKERSBYFULLNAME);
         stmtSetGebruikerById = dbConnection.prepareStatement(SETGEBRUIKERBYID);
