@@ -308,15 +308,20 @@ public interface Queries {
     //Queries voor toevoegen naam
     String SELECTDUBBELENAAM = "select COUNT(*) from familie f,geslacht g,soort s,variatie v, planttype p " +
             "where p.planttype_naam = ? and f.familie_naam = ? and g.geslacht_naam = ? and s.soort_naam = ? and v.variatie_naam = ? " +
-            "and f.familie_id = g.familie_id and g.geslacht_id = s.geslacht_id and s.soort_id = v.variatie_id and p.planttype_id = f.planttype_id";
-    String SELECTIDPLANTTYPE = "select planttype_id from type where type_naam = ?";
+            "and f.familie_id = g.familie_id and g.geslacht_id = s.geslacht_id";
+    String SELECTIDPLANTTYPE = "select planttype_id from planttype where planttype_naam = ?";
     String INSERTFAMILIE = "insert into familie(familie_naam,planttype_id) values(?,?)";
-    String SELECTIDFAMILIE = "select familie_id from familie where familie_naam = ?";
     String INSERTGESLACHT = "insert into geslacht(geslacht_naam,familie_id) values(?,?)";
-    String SELECTIDGESLACHT = "select geslacht_id from geslacht where geslacht_naam = ?";
     String INSERTSOORT = "insert into soort(soort_naam,geslacht_id) values(?,?)";
-    String SELECTIDSOORT = "select soort_id from soort where soort_naam = ?";
     String INSERTVARIATIE = "insert into variatie(variatie_naam,soort_id) values(?,?)";
+    String SELECTDUBBELEFAMILIE = "if exists (select familie_id from familie where familie_naam = ?) " +
+            "select familie_id from familie where familie_naam = ? else select 0";
+    String SELECTDUBBELEGESLACHT = "if exists (select geslacht_id from geslacht where geslacht_naam = ?) " +
+            "select geslacht_id from geslacht where geslacht_naam = ? else select 0";
+    String SELECTDUBBELESOORT = "if exists (select soort_id from soort where soort_naam = ?) " +
+            "select soort_id from soort where soort_naam = ? else select 0";
+    String SELECTDUBBELEVARIATIE = "if exists (select variatie_id from variatie where variatie_naam = ?) " +
+            "select variatie_id from variatie where variatie_naam = ? else select 0";
 
 
     //endregion

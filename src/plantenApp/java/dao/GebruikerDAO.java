@@ -14,17 +14,21 @@ public class GebruikerDAO implements Queries {
     private PreparedStatement stmtSelectGebruikerByEmail;
     private PreparedStatement stmtInsertAanvraag;
     private PreparedStatement stmtSelectGebruikerById;
-    /** @Author Jasper */
     private PreparedStatement stmtSelectGebruikersByFullName;
     private PreparedStatement stmtSetGebruikerById;
     private PreparedStatement stmtSetWachtwoordHash;
     private PreparedStatement stmtDeleteGebruikerById;
     private PreparedStatement stmtSetGebruikerAanvraagStatusEnRol;
+    private PreparedStatement stmtSelectGebruikerIDByEmail;
+    private PreparedStatement stmtSelectRolByEmail;
+
 
     public GebruikerDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
         stmtSelectGebruikerById = dbConnection.prepareStatement(GETGEBRUIKERBYID);
-
+        stmtSelectGebruikerByEmail = dbConnection.prepareStatement(GETGEBRUIKERBYEMAILADRES);
+        stmtSelectGebruikerIDByEmail = dbConnection.prepareStatement(SELECTGEBRUIKERIDMETEMAIL);
+        stmtSelectRolByEmail = dbConnection.prepareStatement(SELECTGEBRUIKERROLMETEMAIL);
         stmtSelectGebruikerByEmail = dbConnection.prepareStatement(GETGEBRUIKERBYEMAILADRES);
         stmtSelectGebruikersByFullName = dbConnection.prepareStatement(GETGEBRUIKERSBYFULLNAME);
         stmtSetGebruikerById = dbConnection.prepareStatement(SETGEBRUIKERBYID);
@@ -34,9 +38,24 @@ public class GebruikerDAO implements Queries {
         stmtSetGebruikerAanvraagStatusEnRol = dbConnection.prepareStatement(SETGEBRUIKERAANVRAAGSTATUSANDROL);
     }
 
-    /**@author Bart Maes
-     * @return alle gebruikers
-     */
+    public Integer getIdMetEmail(String sEmail) throws SQLException {
+        stmtSelectGebruikerIDByEmail.setString(1,sEmail);
+        ResultSet rs = stmtSelectGebruikerIDByEmail.executeQuery();
+        rs.next();
+        int GebruikerID =rs.getInt(1) ;
+        return GebruikerID;
+
+    }
+
+    public String getRolMetEmail(String sEmail) throws SQLException {
+        stmtSelectRolByEmail.setString(1,sEmail);
+        ResultSet rs = stmtSelectRolByEmail.executeQuery();
+        rs.next();
+        String sRol =rs.getString(1) ;
+        return sRol;
+
+    }
+
     public List<Gebruiker> getAllGebruiker() {
         List<Gebruiker> gebruikersList = new ArrayList<>();
         try {
