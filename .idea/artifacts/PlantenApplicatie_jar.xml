@@ -16,6 +16,8 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/../../../software studenten/programmeren desktop/javafx-sdk-11.0.2/lib/javafx.media.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../../software studenten/programmeren desktop/javafx-sdk-11.0.2/lib/javafx.swing.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/../../../software studenten/programmeren desktop/javafx-sdk-11.0.2/lib/javafx.web.jar" path-in-jar="/" />
+      <element id="library" level="application" name="javafx-swt" />
+      <element id="library" level="project" name="mssql-jdbc-7.4.1.jre11" />
     </root>
   </artifact>
 </component>

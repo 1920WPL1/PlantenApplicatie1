@@ -894,7 +894,7 @@ public class ControllerPlantToevoegen {
         //Controle op variant
         try {
             if (txtVariantTv.getText().length() > 0) {
-                sSoort = txtVariantTv.getText();
+                sVariant = txtVariantTv.getText();
             } else {
                 sVariant = "";
             }
