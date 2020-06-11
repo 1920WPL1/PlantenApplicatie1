@@ -229,18 +229,17 @@ public class ControllerPlantToevoegen {
     public static ArrayList<Integer> AantalPerElBehMulti = new ArrayList<>();
     private String scherm;
     private String sPlanttype = "", sFamilie = "", sGeslacht = "", sSoort = "", sVariant = "", sFgsv = "";
-    private int iGebruikerID;
+    private int iGebruikerID
     //Moet meegekregen worden van login
     private String sEmailadres;
 
     /**
      * @author: Arne Vandenborre
-     * Wout is helemaal NIET veranderd
-     * Kasper eeft MEERDERE vriendinnen dit kan dus helemaal NIET
+     * Wout & Kasper hebben alles gedaan kevin en mathias niets
      * Kevin doet zich voor als een 90's kid klopt NIET
      * Mathias valt NIET  op
      * mvg
-     * Arne xx    <3 *
+     * Arne xx    <3
      */
     //alles nodig voor fotos
     public static ArrayList<Foto> fotoss = new ArrayList<>();//deze objecten bevatten elk meerdere afbeeldingen, elk foto object bevat steeds 3 objecten van Foto_Eigenschap
@@ -1388,7 +1387,6 @@ public class ControllerPlantToevoegen {
             System.out.println(ex);
             throw new Exception();
         }
-        //TODO vlindervriendelijk nog aanpassen + foutafhandeling
 
         Extra extra = new Extra(maxidextra, plantid, iNectarwaarde, iPollenwaarde, sBijVriendelijk, sEetbaar, sKruidgebruik, sGeurend, sVorstgevoeling, vlindervriendelijkCheck());
         //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
