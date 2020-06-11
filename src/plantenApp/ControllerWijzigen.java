@@ -259,7 +259,10 @@ public class ControllerWijzigen {
         //Listview opvullen
         for(int i = 0; i < ControllerPlantToevoegen.commMulti_eigenschapss.size();i++)
         {
-            lvLevensduurWz.getItems().add(i,ControllerPlantToevoegen.commMulti_eigenschapss.get(i).getValue());
+            if(commMulti_eigenschapss.get(i).getNaam() == "levensduur")
+            {
+                lvLevensduurWz.getItems().add(i,ControllerPlantToevoegen.commMulti_eigenschapss.get(i).getValue());
+            }
         }
     }
     //toevoegen items in levensduur/concurrentiekracht listview
@@ -598,7 +601,8 @@ public class ControllerWijzigen {
             if (srolGebruiker.equals("admin") || srolGebruiker.equals("docent"))
             {
                 iStatus = 2;
-                Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv,iStatus, plantss.get(0).getGebruikersID());
+                System.out.println(plantss.get(0).getGebruikersID() + " " + plantss.get(0).getLaatste_update_door());
+                Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv,iStatus, plantss.get(0).getLaatste_update_door());
                 plantss.clear();
                 plantss.add(plant);
             }
@@ -606,7 +610,8 @@ public class ControllerWijzigen {
             else
             {
                 iStatus = 1;
-                Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv,iStatus,plantss.get(0).getGebruikersID());
+                System.out.println(plantss.get(0).getGebruikersID() + " " + plantss.get(0).getLaatste_update_door());
+                Plant plant = new Plant(plantid, sPlanttype, sFamilie, sGeslacht, sSoort, sVariant, x, y, sFgsv,iStatus,plantss.get(0).getLaatste_update_door());
                 plantss.clear();
                 plantss.add(plant);
             }
@@ -988,6 +993,7 @@ public class ControllerWijzigen {
         System.out.println(" " + plantid);
         abiotischmulti.clear();
         for (int i = 0; i < lvHabitatWz.getItems().size(); i++) {
+
             AbioMulti_Eigenschap abiotisch = new AbioMulti_Eigenschap("Habitat", (String) lvHabitatWz.getItems().get(i));
             abiotischmulti.add(abiotisch);
             aantalAbMultiEl++;

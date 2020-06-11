@@ -15,6 +15,8 @@ import plantenApp.java.model.*;
 
 import java.io.File;
 import javax.swing.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -130,16 +132,15 @@ public class ControllerOverzicht {
     public Button WijzigenbtnWz;
     private Connection dbConnection;
 
-    public void initialize() throws SQLException {
+    public void initialize() throws SQLException, FileNotFoundException {
         dbConnection = Database.getInstance().getConnection();
-
         comboaanvullen();
         tonenPlantOpFiche(0);
     }
     public ControllerOverzicht() {
     }
     //indexArrays zegt van welke plaats in de arrays dat de functie een plant moet ophalen, nu is het hardcoded voor de eerste plaats in de arrayLists
-    public void tonenPlantOpFiche(int indexArrays){
+    public void tonenPlantOpFiche(int indexArrays) throws FileNotFoundException {
         Plant p = ControllerPlantToevoegen.plantss.get(indexArrays);
         lblTypeO.setText(p.getPlantType());
         lblFamilieO.setText(p.getFamilie());
@@ -283,13 +284,30 @@ public class ControllerOverzicht {
 
         //dit wordt waarschijnlijk gebruikt voor die details bovenaan het scherm van gedetailleerdefiche
         //Foto fo = ControllerPlantToevoegen.fotoss.get(indexArrays);
-        for(int k = 0; k<ControllerPlantToevoegen.files.size();k++){
+        for(int k = 0; k<ControllerPlantToevoegen.files.size();k++) {
             String h = ControllerPlantToevoegen.eigenschappen.get(k);
-            if(h.matches("habitus")){
+            if (h.matches("habitus")) {
                 File imgFile = ControllerPlantToevoegen.files.get(k);
-                if(imgFile.exists())
-                {
-                    //ivHabitusDetailO.setImage(new Image(ControllerPlantToevoegen.paden.get(k)));
+                if (imgFile.exists()) {
+                    FileInputStream input = new FileInputStream(ControllerPlantToevoegen.paden.get(k));
+                    Image image = new Image(input);
+                    ivHabitusDetailO.setImage(image);
+                }
+            }
+            if (h.matches("blad")) {
+                File imgFile = ControllerPlantToevoegen.files.get(k);
+                if (imgFile.exists()) {
+                    FileInputStream input = new FileInputStream(ControllerPlantToevoegen.paden.get(k));
+                    Image image = new Image(input);
+                    ivBladDetailO.setImage(image);
+                }
+            }
+            if (h.matches("bloei")) {
+                File imgFile = ControllerPlantToevoegen.files.get(k);
+                if (imgFile.exists()) {
+                    FileInputStream input = new FileInputStream(ControllerPlantToevoegen.paden.get(k));
+                    Image image = new Image(input);
+                    ivBloeiDetailO.setImage(image);
                 }
             }
         }
@@ -401,10 +419,12 @@ public class ControllerOverzicht {
     public void opslaanbtn_clicked(MouseEvent mouseEvent) throws SQLException {
         FotoDAO fotoDAO = new FotoDAO(dbConnection);
         createdatabase(ControllerPlantToevoegen.plantss.get(0),ControllerPlantToevoegen.abiotischeFactorenn.get(0),ControllerPlantToevoegen.fenotypess.get(0),ControllerPlantToevoegen.fenoMulti_eigenschapss,ControllerPlantToevoegen.abiotischmulti,ControllerPlantToevoegen.commensalismes.get(0),ControllerPlantToevoegen.commMulti_eigenschapss,ControllerPlantToevoegen.beheerdaad_eigenschapss,ControllerPlantToevoegen.extrass.get(0));
-        int id = fotoDAO.getmaxid() + 1;
+        int id = fotoDAO.getmaxid();
+        id++;
         int plantid = ControllerPlantToevoegen.plantid;
         for(int i = 0; i<ControllerPlantToevoegen.files.size();i++){
             fotoDAO.insertFoto(id, plantid,ControllerPlantToevoegen.eigenschappen.get(i),ControllerPlantToevoegen.paden.get(i),ControllerPlantToevoegen.figuren.get(i));
+            id++;
         }
     }
     public  void createdatabase(Plant plant , AbiotischeFactoren abiotischeFactoren , Fenotype fenotype , ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschaps , ArrayList<AbioMulti_Eigenschap> abiottisschemulti_eigenschaps,Commensalisme commensalisme, ArrayList<CommMulti_Eigenschap> commMulti_eigenschaps,ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschaps, Extra extra) throws SQLException {
@@ -417,7 +437,7 @@ public class ControllerOverzicht {
         BeheerDAO beheerDAO = new BeheerDAO(dbConnection);
         ExtraDAO extraDAO = new ExtraDAO(dbConnection);
         createNaam();
-        System.out.println(plant.getLaatste_update_door());
+        System.out.println(plant.getLaatste_update_door()+"gbruikersid");
         plantDAO.createplant(plant,plant.getStatus(),plant.getLaatste_update_door());
         abiotischeFactorenDAO.CreateAbiostische(abiotischeFactoren);
         fenotypeDAO.createfenotype(fenotype);

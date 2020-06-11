@@ -229,10 +229,10 @@ public class ControllerPlantToevoegen {
     public static ArrayList<Integer> AantalPerElBehMulti = new ArrayList<>();
     private String scherm;
     private String sPlanttype = "", sFamilie = "", sGeslacht = "", sSoort = "", sVariant = "", sFgsv = "";
-    private int iGebruikerID
+    private int iGebruikerID;
     //Moet meegekregen worden van login
     private String sEmailadres;
-
+    private int  maxidfoto;
     /**
      * @author: Arne Vandenborre
      * Wout & Kasper hebben alles gedaan kevin en mathias niets
@@ -250,7 +250,7 @@ public class ControllerPlantToevoegen {
     public static ArrayList<File> files = new ArrayList<>();
     private ArrayList<String> AfbeeldingExtenties;
 
-    public void initialize() throws SQLException {
+    public void initialize() throws Exception {
         voegSelectieAfbeeldingToe();
         AfbeeldingExtenties = new ArrayList<>();
         AfbeeldingExtenties.add("*.jpg");
@@ -258,7 +258,8 @@ public class ControllerPlantToevoegen {
         voegSelectieAfbeeldingToe();
 
         dbConnection = Database.getInstance().getConnection();
-
+        FotoDAO fotoDAO = new FotoDAO(dbConnection);
+        maxidfoto= fotoDAO.getmaxid() + 1;
         // enkele defaults klaarzetten
         Pollenwaarde();
         DefaultRadioButtons();
@@ -279,11 +280,6 @@ public class ControllerPlantToevoegen {
                 System.out.println(ex);
             }
         }
-    }
-    public void voegSelectieAfbeeldingToe(){
-        cbFotoEigenschapTv.getItems().add("habitus");
-        cbFotoEigenschapTv.getItems().add("blad");
-        cbFotoEigenschapTv.getItems().add("bloei");
     }
     public void OpnieuwInladen(int indexArrays) {
         System.out.println("Bezonning: " + ControllerBeheer.abiotischeFactorenn2.get(0).getBezonning());
@@ -1754,7 +1750,7 @@ public class ControllerPlantToevoegen {
 
     public void click_afbeeldingToevoegen(MouseEvent mouseEvent) throws IOException, SQLException {
         FotoDAO fotoDAO= new FotoDAO(dbConnection);
-        int maxidfoto = fotoDAO.getmaxid() + 1;
+        maxidfoto++;
         boolean b = false;
         //kijkt of er een keuze gemaakt is
         if(!cbFotoEigenschapTv.getSelectionModel().isEmpty()){
