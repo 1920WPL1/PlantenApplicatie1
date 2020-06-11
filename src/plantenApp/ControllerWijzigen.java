@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.*;
@@ -28,6 +29,7 @@ import plantenApp.java.model.AbiotischeFactoren;
 import plantenApp.java.model.Commensalisme;
 import plantenApp.java.model.InfoTables;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -90,13 +92,13 @@ public class ControllerWijzigen {
     public ComboBox cbBloeikleurOktWz;
     public ComboBox cbBloeikleurNovTv;
     public ComboBox cbBloeikleurDecTv;
-    public ComboBox cbBezonningWz;
-    public ComboBox cbVoedingsbehoefteWz;
-    public ComboBox cbVochtbehoefteWz;
-    public ComboBox cbReactieAntaWz;
-    public ComboBox cbGrondsoortWz;
+    public ComboBox <String> cbBezonningWz;
+    public ComboBox <String> cbVoedingsbehoefteWz;
+    public ComboBox <String> cbVochtbehoefteWz;
+    public ComboBox <String> cbReactieAntaWz;
+    public ComboBox <String> cbGrondsoortWz;
     public ComboBox cbHabitatWz;
-    public ComboBox cbOntwikkelingssnelheidWz;
+    public ComboBox <String> cbOntwikkelingssnelheidWz;
     public Button btnHabitatWz;
     public Button btnHabitatWzVerwijderen;
     public ListView lvHabitatWz;
@@ -147,10 +149,10 @@ public class ControllerWijzigen {
     public TextField txtVariantWz;
     public TextField txtDichtheidXWz;
     public TextField txtDichtheidYWz;
-    public ComboBox cbBladgrootteTotWz;
-    public ComboBox cbBladvormWz;
-    public ComboBox cbRatioWz;
-    public ComboBox cbSpruitfenologieWz;
+    public ComboBox <String> cbBladgrootteTotWz;
+    public ComboBox <String> cbBladvormWz;
+    public ComboBox <String> cbRatioWz;
+    public ComboBox <String> cbSpruitfenologieWz;
     public RadioButton rbHydro1Wz;
     public RadioButton rbHydro2Wz;
     public RadioButton rbHeloWz;
@@ -389,7 +391,7 @@ public class ControllerWijzigen {
         //Levensduur
         cbLevensduurWz.getItems().addAll(infotables.getConcurentiekrachten());
     }
-        public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws IOException, SQLException {
+        public void Clicked_PlantToevoegen(MouseEvent mouseEvent) throws Exception {
         createplant();//ik //done
         //createNaam();
         createAbiotischefactoren();//afgewerkt //done
@@ -411,15 +413,100 @@ public class ControllerWijzigen {
         window.show();
         window.setMaximized(true);
     }
-    public void createfenotype() throws SQLException {
+    public void createfenotype() throws Exception {
+        //Aanmaken variabelen
         FenotypeDAO fenotypeDAO = new FenotypeDAO(dbConnection);
-        int maxid = fenotypeDAO.getmaxid();
+        int maxid = fenotypeDAO.getmaxid(), iBladgrootte;
         maxid++;
+        String sBladvorm, sLevensvorm, sHabitus, sBloeiwijze, sRatio,sSpruitenologie ="", sTitel = "toevoegen fenotype";
+        //Controle op bladvorm
+        try{
+            sBladvorm = cbBladvormWz.getValue();
+        } catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgelopen bij de bladvorm.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op levensvorm
+        try{
+            sLevensvorm = levensvormCheck();
+        } catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgelopen bij levensvorm. ");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op habitus
+        try{
+            sHabitus = habitusCheck();
+        } catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgelopen bij habitus. ");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op bloeiwijze
+        try{
+            sBloeiwijze = bloeiwijzeCheck();
+        } catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgelopen bij bloeiwijze. ");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op bladgrootte
+        try{
+            iBladgrootte = Integer.parseInt(cbBladgrootteTotWz.getValue());
+
+        }catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgelopen bij bladgrootte.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op ratio
+        try{
+            sRatio = cbRatioWz.getValue();
+
+        }catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgelopen bij ratio.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op spruitfenologie
+        try{
+            sSpruitenologie = cbSpruitfenologieWz.getValue();
+
+        }catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgelopen bij spruitfenologie.");
+            System.out.println(ex);
+            throw new Exception();
+        }
         System.out.println(plantid);
-        Fenotype fenotype = new Fenotype(maxid, plantid, comboboxCheckString(cbBladvormWz.getSelectionModel()), levensvormCheck(), habitusCheck(), bloeiwijzeCheck(), comboboxCheckInteger(cbBladgrootteTotWz.getSelectionModel()), comboboxCheckString(cbRatioWz.getSelectionModel()), comboboxCheckString(cbSpruitfenologieWz.getSelectionModel()));
-        fenotypess.clear();
-        fenotypess.add(fenotype);
+        //Aanmaken fenotype + toevoegen aan array
+        try{
+            Fenotype fenotype = new Fenotype(maxid, plantid, sBladvorm, sLevensvorm, sHabitus, sBloeiwijze, iBladgrootte, sRatio, sSpruitenologie);
+            System.out.println(fenotype.getBladgrootte()+" bladgroote bij jfenotye");
+            fenotypess.add(fenotype);
+        }
+        catch (Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgelopen bij het doorsturen van fenotype gegevens.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+
     }
+
+    public void ShowError(String sTitel, String sMessage) {
+        //tonen van error
+        JOptionPane.showMessageDialog(null, sMessage, "Fout bij: " + sTitel, JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
     public String comboboxCheckString(SingleSelectionModel <String> combobox) {
         if(combobox.isEmpty()) {
             return "";
@@ -542,20 +629,94 @@ public class ControllerWijzigen {
             }
         });
     }
-    public void createAbiotischefactoren() throws SQLException {
+    public void createAbiotischefactoren() throws Exception {
+        //alles van scherm direct naar databank aangezien hier de input enkel kan gekozen worden uit gegeven lijsten
+        //deze functie is afgewerkt
+        //Aanmaken variabelen
+        String sBezonning = "", sGrondsoort = "", sVochtbehoefte = "", sVoedingsbehoefte = "", sReactieAntagonische = "", sTitel = "Abiotische factoren";
         AbiotischeFactorenDAO abiotischeFactorenDAO = new AbiotischeFactorenDAO(dbConnection);
-        int id = abiotischeFactorenDAO.getmaxid();
-        id++;
-        AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(id, plantid, cbBezonningWz.getValue().toString(), cbGrondsoortWz.getValue().toString(), cbVochtbehoefteWz.getValue().toString(), cbVoedingsbehoefteWz.getValue().toString(), cbReactieAntaWz.getValue().toString());
-        abiotischeFactorenn.clear();
-        abiotischeFactorenn.add(abiotischeFactoren);
+        int maxidabio = abiotischeFactorenDAO.getmaxid();
+        //Controle op bezonning
+        try {
+            sBezonning = cbBezonningWz.getValue();
+        } catch (Exception ex) {
+            ShowError(sTitel, "Er is een fout opgelopen bij bezonning. ");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op grondsoort
+        try {
+            sGrondsoort = cbGrondsoortWz.getValue();
+        } catch (Exception ex) {
+            ShowError(sTitel, "Er is een fout opgelopen bij grondsoort. ");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op vochtbehoefte
+        try{
+            sVochtbehoefte = cbVochtbehoefteWz.getValue();
+        } catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgelopen bij vochtbehoefte. ");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op voedingsbehoefte
+        try{
+            sVoedingsbehoefte = cbVoedingsbehoefteWz.getValue();
+        } catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgelopen bij voedingsbehoefte. ");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op reactie antagonistische omgeving
+        try{
+            sReactieAntagonische = cbReactieAntaWz.getValue();
+        } catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgelopen bij reactie antagonistische omgeving. ");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //aanmaken abiotische factoren, en doorgeven naar array
+        try {
+            AbiotischeFactoren abiotischeFactoren = new AbiotischeFactoren(maxidabio + 1, plantid, sBezonning, sGrondsoort, sVochtbehoefte, sVoedingsbehoefte, sReactieAntagonische);
+            abiotischeFactorenn.add(abiotischeFactoren);
+        } catch (Exception ex) {
+            ShowError(sTitel, "Er is een fout gebeurd bij aanmaken abiotische factoren.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+
     }
-    public void createCommensalisme() throws SQLException {
+
+    public void createCommensalisme() throws Exception {
+        //Aanmaken variabelen
         CommensalismeDAO commensalismeDAO = new CommensalismeDAO(dbConnection);
-        int id = commensalismeDAO.getmaxid();
-        id++;
-        Commensalisme commensalisme = new Commensalisme(id, plantid, strategieCheck(), comboboxCheckString(cbOntwikkelingssnelheidWz.getSelectionModel()));
-        commensalismes.clear();
+        int maxidcommensalisme = commensalismeDAO.getmaxid();
+        String sStrategie, sOntwikkelingssnelheid, sTitel = " toevoegen commensalisme";
+
+        //Controle op strategie
+        try{
+            sStrategie = strategieCheck();
+        } catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout gebeurd bij strategie.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op Ontwikkeling
+        try{
+            sOntwikkelingssnelheid = cbOntwikkelingssnelheidWz.getValue();
+        } catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout gebeurd bij strategie.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+
+        Commensalisme commensalisme = new Commensalisme(maxidcommensalisme + 1, plantid, sStrategie, sOntwikkelingssnelheid);
         commensalismes.add(commensalisme);
     }
     public String strategieCheck() {
@@ -584,17 +745,94 @@ public class ControllerWijzigen {
             return "";
         }
     }
-    public void createExtra() throws SQLException {
-        //kan pas volledig gedaan worden wanneer er de kwestie van de eetbaar/kruidgebruik splitsing opgelost is
+    //Toevoegen van extra eigenschappen aan de array.
+    public void createExtra() throws Exception {
+        //Aanmaken variabelen
+        int iNectarwaarde, iPollenwaarde;
+        String sBijVriendelijk,sEetbaar,sKruidgebruik,sGeurend,sVorstgevoeling, sTitel = "toevoegen extra eigenschappen.";
+
         ExtraDAO extraDAO = new ExtraDAO(dbConnection);
-        int id = extraDAO.getmaxid();
-        id++;
-        int valueNectarwaarde = Integer.parseInt(NectarwaardeValueTv.getText());
-        int valuePollenwaarde = Integer.parseInt(PollenValueTv.getText());
-        Extra extra = new Extra(id, plantid, valueNectarwaarde, valuePollenwaarde, bijvriendelijkCheck(), eetbaarCheck(), kruidgebruikCheck(), geurendCheck(), vorstgevoeligCheck(),"vlinder");
+        int maxidextra = extraDAO.getmaxid();
+        maxidextra++;
+
+        //Foutafhandeling
+        //Controle op nectarwaarde
+        try{
+            iNectarwaarde = Integer.parseInt(NectarwaardeValueTv.getText());
+        }
+        catch (Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgetreden bij nectarwaarde.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op pollenwaarde
+        try{
+            iPollenwaarde = Integer.parseInt(PollenValueTv.getText());
+        }
+        catch (Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgetreden bij pollenwaarde.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op bijvriendelijk
+        try{
+            sBijVriendelijk = bijvriendelijkCheck();
+
+        } catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgetreden bij bijvriendelijk.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op eetbaar
+        try{
+            sEetbaar= eetbaarCheck();
+
+        } catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgetreden bij eetbaar.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op kruidgebruik
+        try{
+            sKruidgebruik = kruidgebruikCheck();
+
+        } catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgetreden bij kruidgebruik.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op geurend
+        try{
+            sGeurend = geurendCheck();
+
+        } catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgetreden bij geurend.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        //Controle op vorstgevoelig
+        try{
+            sVorstgevoeling = vorstgevoeligCheck();
+
+        } catch(Exception ex)
+        {
+            ShowError(sTitel, "Er is een fout opgetreden bij vorstgevoelig.");
+            System.out.println(ex);
+            throw new Exception();
+        }
+        Extra extra = new Extra(maxidextra, plantid, iNectarwaarde, iPollenwaarde, sBijVriendelijk, sEetbaar, sKruidgebruik, sGeurend, sVorstgevoeling, vlindervriendelijkCheck());
+        //deze fout van createExtra komt uit extraDAO omdat het niet zeker is hoe eetbaar en kruidgebruik uit de databank gehaald moeten worden
         extrass.clear();
         extrass.add(extra);
+        //ExtraDAO.createExtra(extra);
     }
+
     public String vorstgevoeligCheck() {
         if(rbVorstgevoeligJaWz.isSelected()) {
             return "ja";
@@ -606,6 +844,19 @@ public class ControllerWijzigen {
             return "";
         }
     }
+
+    public String vlindervriendelijkCheck() {
+        if(rbVlindervriendelijkJaWz.isSelected()) {
+            return "ja";
+        }
+        else if (rbVlindervriendelijkNeeWz.isSelected()) {
+            return "nee";
+        }
+        else {
+            return "";
+        }
+    }
+
     public String eetbaarCheck() {
         if(rbEetbaarJaWz.isSelected()) {
             return "ja";

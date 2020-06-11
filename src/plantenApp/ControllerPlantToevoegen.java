@@ -1418,7 +1418,7 @@ public class ControllerPlantToevoegen {
     }
     //ophalen selectie eetbaar
     public String eetbaarCheck() {
-        //foutafhandeling hiervan gebeurd al in overkoepelende method.
+        //foutafhandervreling hiervan gebeurd al in overkoepelende method.
         if (rbEetbaarJaTv.isSelected()) {
             return "ja";
         } else if (rbEetbaarNeeTv.isSelected()) {
@@ -1738,6 +1738,7 @@ public class ControllerPlantToevoegen {
         JOptionPane.showMessageDialog(null, sMessage, "Fout bij: " + sTitel, JOptionPane.INFORMATION_MESSAGE);
 
     }
+
 
     public void click_verwijderenHabitat(MouseEvent mouseEvent) {
         final int selectedIndex = lvHabitatTv.getSelectionModel().getSelectedIndex();
