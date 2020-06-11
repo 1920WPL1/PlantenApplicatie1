@@ -119,6 +119,7 @@ public class NaamDao implements Queries {
             stmtInsertInVariatie.setInt(2, isoortID);
             stmtInsertInVariatie.executeUpdate();
             System.out.println("Toevoegen variatie geslaagd");
+
         }
     }
 

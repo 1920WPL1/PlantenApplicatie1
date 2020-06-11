@@ -11,26 +11,24 @@ import java.util.logging.Logger;
 public class GebruikerDAO implements Queries {
     private Connection dbConnection;
     private PreparedStatement stmtSelectGebruikerByEmail;
-    /** @Author Jasper */
+    private PreparedStatement stmtSelectGebruikerIDByEmail;
     private PreparedStatement stmtSelectGebruikersByFullName;
     private PreparedStatement stmtSetGebruikerById;
     private PreparedStatement stmtSetWachtwoordHash;
-    private PreparedStatement stmtSelectGebruikerIDByEmail;
+
     private PreparedStatement stmtSelectRolByEmail;
 
     public GebruikerDAO(Connection dbConnection) throws SQLException {
         this.dbConnection = dbConnection;
         stmtSelectGebruikerByEmail = dbConnection.prepareStatement(GETGEBRUIKERBYEMAILADRES);
+        stmtSelectGebruikerIDByEmail = dbConnection.prepareStatement(SELECTGEBRUIKERIDMETEMAIL);
         stmtSelectGebruikersByFullName = dbConnection.prepareStatement(GETGEBRUIKERSBYFULLNAME);
         stmtSetGebruikerById = dbConnection.prepareStatement(SETGEBRUIKERBYID);
         stmtSetWachtwoordHash = dbConnection.prepareStatement(SETWACHTWOORDHASH);
-        stmtSelectGebruikerIDByEmail = dbConnection.prepareStatement(SELECTGEBRUIKERIDMETEMAIL);
+
         stmtSelectRolByEmail = dbConnection.prepareStatement(SELECTGEBRUIKERROLMETEMAIL);
     }
 
-    /**@author Bart Maes
-     * @return alle gebruikers
-     */
     public Integer getIdMetEmail(String sEmail) throws SQLException {
         stmtSelectGebruikerIDByEmail.setString(1,sEmail);
         ResultSet rs = stmtSelectGebruikerIDByEmail.executeQuery();
