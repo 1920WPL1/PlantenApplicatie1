@@ -14,11 +14,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import plantenApp.java.dao.*;
 import plantenApp.java.model.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import javax.sound.sampled.Control;
 import java.awt.*;
 import java.lang.Object;
@@ -201,6 +205,10 @@ public class ControllerPlantToevoegen {
     public ToggleGroup bloeiwijzegroepTv;
     public ToggleGroup habitusgroepTv;
     public ToggleGroup lvTv;
+    public Button btnToevoegenAfbTv;
+    public Button btnVerwijderenAfbTv;
+    public ListView lvAfbeeldingTv;
+    public ComboBox cbFotoEigenschapTv;
     public ToggleGroup StrategieGroepTv;
     private Connection dbConnection;
     private AbiotischeFactorenDAO abiotischeFactorenDAO;
@@ -214,7 +222,6 @@ public class ControllerPlantToevoegen {
     public static ArrayList<Extra> extrass = new ArrayList<>();
     public static ArrayList<FenoMulti_Eigenschap> fenoMulti_eigenschapss = new ArrayList<>();
     public static ArrayList<Fenotype> fenotypess = new ArrayList<>();
-    public static ArrayList<Foto> fotoss = new ArrayList<>();
     public static ArrayList<Beheer> beheerss = new ArrayList<>();
     public static ArrayList<Beheerdaad_Eigenschap> beheerdaad_eigenschapss = new ArrayList<>();
     public static ArrayList<Integer> AantalPerElCommMulti = new ArrayList<>();
@@ -235,8 +242,17 @@ public class ControllerPlantToevoegen {
      * mvg
      * Arne xx    <3 *
      */
-    public void initialize() throws Exception {
-        //connectie met database maken
+    //alles nodig voor fotos
+    public static ArrayList<Foto> fotoss = new ArrayList<>();//deze objecten bevatten elk meerdere afbeeldingen, elk foto object bevat steeds 3 objecten van Foto_Eigenschap
+    //gebruik de getFotos() functie om de arraylist van Foto_Eigenschap objecten op te halen
+    public static ArrayList<Foto_Eigenschap> foto_eigenschaps = new ArrayList<>();
+    private ArrayList<String> AfbeeldingExtenties;
+
+    public void initialize() throws SQLException {
+        AfbeeldingExtenties = new ArrayList<>();
+        AfbeeldingExtenties.add("*.jpg");
+        AfbeeldingExtenties.add("*.png");
+
         dbConnection = Database.getInstance().getConnection();
 
         // enkele defaults klaarzetten
@@ -1531,13 +1547,12 @@ public class ControllerPlantToevoegen {
         }
 
     }
-
-    //TODO Kevin nog aanvullen
-    public void createFoto() throws SQLException {
+    public void createFoto() throws SQLException{//deze functie hoeft niet gebruikt te worden
+        ArrayList<Foto_Eigenschap> afbeeldingen = new ArrayList<>();
         FotoDAO fotoDAO = new FotoDAO(dbConnection);
         int maxIdFoto = fotoDAO.getmaxid();
-        Foto foto = new Foto(maxIdFoto + 1, plantid, "a", "b", null);
-        fotoDAO.createFoto(foto);
+        Foto foto = new Foto(plantid,afbeeldingen);
+        fotoss.add(foto);
     }
 
     //Toevoegen fenotyple multi aan array
@@ -1721,6 +1736,118 @@ public class ControllerPlantToevoegen {
     public void click_verwijderenLevensduur(MouseEvent mouseEvent) {
         final int selectedIndex = lvLevensduurTv.getSelectionModel().getSelectedIndex();
         lvLevensduurTv.getItems().remove(selectedIndex);
+    }
+
+    public void click_afbeeldingToevoegen(MouseEvent mouseEvent) throws IOException, SQLException {
+        FotoDAO fotoDAO= new FotoDAO(dbConnection);
+        int maxidfoto = fotoDAO.getmaxid() + 1;
+        boolean b = false;
+        //kijkt of er een keuze gemaakt is
+        if(!cbFotoEigenschapTv.getSelectionModel().isEmpty()){
+            //bewaart de eigenschap waarvoor de foto dient
+            String eigenschap = cbFotoEigenschapTv.getSelectionModel().getSelectedItem().toString();
+
+            //kijkt of er al een afbeelding in de databank zit voor de gekozen eigenschap van de nog toe te voegen plant
+            //mss komt er een fout door de databank omdat de foto's worden toegevoegd met een plantid dat er nog niet inzit (de plant met plantid wordt pas later toegevoegd)
+            ArrayList<Foto_Eigenschap> hulp = fotoDAO.getFotos(plantid);
+            for(int i = 0; i<hulp.size();i++){ if(hulp.get(i).getEigenschap().matches(eigenschap)){ b = true; } }
+
+            //geeft een alert terug als er al een foto is meegegeven voor de geselecteerde eigenschap anders maakt het een record aan in de tabel foto voor deze eigenschap
+            if(!b){
+                //laat de gebruiker een file kiezen
+                FileChooser fc = new FileChooser();
+                fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("afbeeldingen",AfbeeldingExtenties));
+                File f = fc.showOpenDialog(null);
+
+                //neemt de naam van de afbeelding en steekt het in de listview
+                int n = f.getAbsolutePath().lastIndexOf("\\");
+                String naam = eigenschap + " : " + f.getAbsolutePath().substring(n);
+                lvAfbeeldingTv.getItems().add(naam);
+
+                //voegt een record toe in de tabel foto voor de afbeelding
+                fotoDAO.insertFoto(maxidfoto, plantid, eigenschap, f.getAbsolutePath(),f.getAbsolutePath());//de 2 laatste zijn hetzelfde omdat de url ook gebruikt wordt om een blob te maken
+            }else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setContentText("Er is al een afbeelding toegevoegd voor deze eigenschap. Selecteer een andere eigenschap of verwijder de afbeelding van deze eigenschap als je een nieuwe afbeelding wilt toevoegen.");
+                alert.showAndWait().ifPresent(rs -> {
+                    if (rs == ButtonType.OK) {
+                        System.out.println("Pressed OK.");
+                    }
+                });
+            }
+
+            /*Dit hele stuk commentaar is code die overbodig is geworden
+            //verandert de afbeelding in een blob
+            //byte[] is blijkbaar hetzelfde als blob, toch niet wat java betreft want in java moet er toch weer iets extra gebeuren
+            byte[] bytes = new byte[(int) f.length()];
+            FileInputStream fis = null;
+            try{
+                fis = new FileInputStream(f);
+                fis.read(bytes);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }finally{
+                if(fis != null){
+                    fis.close();
+                }
+            }
+            //vanaf nu bevat blob de afbeelding en is alles er om Foto_Eigenschap objecten te maken
+            Blob blob = null; //new javax.sql.rowset.serial.SerialBlob(bytes);
+            for(int i=0;i<3;i++){ if(foto_eigenschaps.get(i).getEigenschap().matches(eigenschap)){ b = true; }}
+            if(!b){
+                Foto_Eigenschap foto_eigenschap = new Foto_Eigenschap(maxidfoto+1,eigenschap,f.getAbsolutePath(),blob);
+                foto_eigenschaps.add(foto_eigenschap);
+            }else{
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setContentText("Er is al een afbeelding toegevoegd voor deze eigenschap. Selecteer een andere eigenschap of verwijder de afbeelding van deze eigenschap als je een nieuwe afbeelding wilt toevoegen.");
+                alert.showAndWait().ifPresent(rs -> {
+                    if (rs == ButtonType.OK) {
+                        System.out.println("Pressed OK.");
+                    }
+                });
+            }*/
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText("Selecteer een eigenschap.");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+        }
+    }
+
+    public void click_afbeeldingVerwijderen(MouseEvent mouseEvent) throws SQLException {
+        FotoDAO fotoDAO= new FotoDAO(dbConnection);
+        boolean b = false;
+        if(!lvAfbeeldingTv.getSelectionModel().isEmpty()){
+            //deze string neemt het eerste deel van het geselecteerde item in de listview van de afbeeldingen
+            String s = lvAfbeeldingTv.getSelectionModel().getSelectedItem().toString().split(" ")[0];
+            ArrayList<Foto_Eigenschap> hulp = fotoDAO.getFotos(plantid);
+            for(int i = 0; i<hulp.size();i++){
+                String eigenschap = hulp.get(i).getEigenschap();
+                if(eigenschap.matches(eigenschap)){
+                    fotoDAO.removeFoto(plantid, eigenschap);
+                }
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText("Selecteer een eigenschap.");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+        }
+        /* dit is ook overbodige code
+        int plaats = 0;
+        String eigenschap = lvAfbeeldingTv.getSelectionModel().getSelectedItem().toString().split(" ")[0];
+        for(int i=0;i<3;i++){ if(foto_eigenschaps.get(i).getEigenschap().matches(eigenschap)){ plaats = i; }}
+        foto_eigenschaps.remove(plaats);*/
     }
 }
 
