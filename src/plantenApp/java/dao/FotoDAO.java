@@ -28,6 +28,7 @@ public class FotoDAO implements Queries {
         stmtGetMaxId = dbConnection.prepareStatement(GETMAXIDFOTO);
         stmtInsertFoto = dbConnection.prepareStatement(INSERTFOTO);
         stmtInsertFotoAangepast = dbConnection.prepareStatement(INSERTFOTOAANGEPAST);
+        System.out.println(INSERTFOTOAANGEPAST);
         stmtRemoveFoto = dbConnection.prepareStatement(REMOVEFOTO);
     }
 
@@ -100,6 +101,9 @@ public class FotoDAO implements Queries {
         stmtInsertFotoAangepast.setString(3,eigenschap);
         stmtInsertFotoAangepast.setString(4,url);
         stmtInsertFotoAangepast.setString(5,urlVoorAfbeelding);
+        System.out.println(urlVoorAfbeelding);
+        System.out.println(url);
+        System.out.println(stmtInsertFotoAangepast.toString());
         stmtInsertFotoAangepast.executeUpdate();
     }
 

@@ -248,10 +248,11 @@ public class ControllerPlantToevoegen {
     public static ArrayList<Foto_Eigenschap> foto_eigenschaps = new ArrayList<>();
     private ArrayList<String> AfbeeldingExtenties;
 
-    public void initialize() throws SQLException {
+    public void initialize() throws Exception {
         AfbeeldingExtenties = new ArrayList<>();
         AfbeeldingExtenties.add("*.jpg");
         AfbeeldingExtenties.add("*.png");
+        voegSelectieAfbeeldingToe();
 
         dbConnection = Database.getInstance().getConnection();
 
@@ -276,7 +277,11 @@ public class ControllerPlantToevoegen {
             }
         }
     }
-
+    public void voegSelectieAfbeeldingToe(){
+        cbFotoEigenschapTv.getItems().add("habitus");
+        cbFotoEigenschapTv.getItems().add("blad");
+        cbFotoEigenschapTv.getItems().add("bloei");
+    }
     public void OpnieuwInladen(int indexArrays) {
         //Plant
         Plant p = ControllerPlantToevoegen.plantss.get(indexArrays);
