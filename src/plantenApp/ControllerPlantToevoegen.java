@@ -233,14 +233,6 @@ public class ControllerPlantToevoegen {
     //Moet meegekregen worden van login
     private String sEmailadres;
     private int  maxidfoto;
-    /**
-     * @author: Arne Vandenborre
-     * Wout & Kasper hebben alles gedaan kevin en mathias niets
-     * Kevin doet zich voor als een 90's kid klopt NIET
-     * Mathias valt NIET  op
-     * mvg
-     * Arne xx    <3
-     */
     //alles nodig voor fotos
     public static ArrayList<Foto> fotoss = new ArrayList<>();//deze objecten bevatten elk meerdere afbeeldingen, elk foto object bevat steeds 3 objecten van Foto_Eigenschap
     //gebruik de getFotos() functie om de arraylist van Foto_Eigenschap objecten op te halen
@@ -255,7 +247,6 @@ public class ControllerPlantToevoegen {
         AfbeeldingExtenties = new ArrayList<>();
         AfbeeldingExtenties.add("*.jpg");
         AfbeeldingExtenties.add("*.png");
-        voegSelectieAfbeeldingToe();
 
         dbConnection = Database.getInstance().getConnection();
         FotoDAO fotoDAO = new FotoDAO(dbConnection);
@@ -1252,8 +1243,6 @@ public class ControllerPlantToevoegen {
         }
 
     }
-
-    //TODO foutafhandeling vervolledigen
     //Invullen van commensalisme gegevens voor array
     public void createCommensalisme() throws Exception {
         //Aanmaken variabelen
@@ -1459,7 +1448,6 @@ public class ControllerPlantToevoegen {
         }
     }
 
-    //TODO foutafhandeling
     //Toevoegen van geselecteerde commmulti in listview
 
     public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) throws Exception {

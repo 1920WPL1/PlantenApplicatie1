@@ -117,7 +117,7 @@
                                                 </VBox>
                                                 <VBox>
                                                    <children>
-                                                      <Label prefHeight="30.0" text="per x jaar">
+                                                      <Label prefHeight="30.0" text="per x maand">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>

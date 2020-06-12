@@ -252,15 +252,10 @@ public class ControllerOverzicht {
         lblVoedingsbehoefteO.setText(af.getVoedingsbehoefte());
         lblReactieO.setText(af.getReactieAntagonistischeOmgeving());
         lblGrondsoortO.setText(af.getGrondsoort());
-        int teller = 0;
-        for(int i = 0; i<indexArrays;i++){
-            teller +=ControllerPlantToevoegen.AantalPerElAbMulti.get(i);
+        for(int h =0; h < ControllerPlantToevoegen.abiotischmulti.size();h++)
+        {
+            lvHabitatO.getItems().add(ControllerPlantToevoegen.abiotischmulti.get(h).getValue());
         }
-        int eindplaats = teller + ControllerPlantToevoegen.AantalPerElAbMulti.get(indexArrays);
-        for(int j = teller; j<eindplaats;j++){
-            lvHabitatO.getItems().add(ControllerPlantToevoegen.abiotischmulti.get(j).getValue());
-        }
-
         Commensalisme c = ControllerPlantToevoegen.commensalismes.get(indexArrays);
         lblOntwikkelingssnelheidO.setText(c.getOntwikkelingssnelheid());
         lblStrategieO.setText(c.getStrategie());
