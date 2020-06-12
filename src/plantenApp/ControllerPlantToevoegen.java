@@ -233,14 +233,6 @@ public class ControllerPlantToevoegen {
     //Moet meegekregen worden van login
     private String sEmailadres;
     private int  maxidfoto;
-    /**
-     * @author: Arne Vandenborre
-     * Wout & Kasper hebben alles gedaan kevin en mathias niets
-     * Kevin doet zich voor als een 90's kid klopt NIET
-     * Mathias valt NIET  op
-     * mvg
-     * Arne xx    <3
-     */
     //alles nodig voor fotos
     public static ArrayList<Foto> fotoss = new ArrayList<>();//deze objecten bevatten elk meerdere afbeeldingen, elk foto object bevat steeds 3 objecten van Foto_Eigenschap
     //gebruik de getFotos() functie om de arraylist van Foto_Eigenschap objecten op te halen
@@ -255,7 +247,6 @@ public class ControllerPlantToevoegen {
         AfbeeldingExtenties = new ArrayList<>();
         AfbeeldingExtenties.add("*.jpg");
         AfbeeldingExtenties.add("*.png");
-        voegSelectieAfbeeldingToe();
 
         dbConnection = Database.getInstance().getConnection();
         FotoDAO fotoDAO = new FotoDAO(dbConnection);
@@ -1252,8 +1243,6 @@ public class ControllerPlantToevoegen {
         }
 
     }
-
-    //TODO foutafhandeling vervolledigen
     //Invullen van commensalisme gegevens voor array
     public void createCommensalisme() throws Exception {
         //Aanmaken variabelen
@@ -1459,7 +1448,6 @@ public class ControllerPlantToevoegen {
         }
     }
 
-    //TODO foutafhandeling
     //Toevoegen van geselecteerde commmulti in listview
 
     public void ToevoegenCommensalismeMulti(MouseEvent mouseEvent) throws Exception {
@@ -1760,7 +1748,9 @@ public class ControllerPlantToevoegen {
             //kijkt of er al een afbeelding in de databank zit voor de gekozen eigenschap van de nog toe te voegen plant
             //mss komt er een fout door de databank omdat de foto's worden toegevoegd met een plantid dat er nog niet inzit (de plant met plantid wordt pas later toegevoegd)
             ArrayList<Foto_Eigenschap> hulp = fotoDAO.getFotos(plantid);
-            for(int i = 0; i<hulp.size();i++){ if(hulp.get(i).getEigenschap().matches(eigenschap)){ b = true; } }
+            for(int i = 0; i<lvAfbeeldingTv.getItems().size();i++){
+                String s = lvAfbeeldingTv.getItems().get(i).toString().split(" ")[0];
+                if(s.matches(eigenschap)){ b = true; } }
 
             //geeft een alert terug als er al een foto is meegegeven voor de geselecteerde eigenschap anders maakt het een record aan in de tabel foto voor deze eigenschap
             if(!b){
